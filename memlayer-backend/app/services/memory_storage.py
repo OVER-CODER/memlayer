@@ -27,13 +27,31 @@ class MemoryStorageService:
         summary: Optional[str] = None,
         importance_score: float = 0.5,
         metadata: Optional[dict] = None,
+        generated_from_message_id: Optional[str] = None,
+        generated_by_provider: Optional[str] = None,
+        source_memory_ids: Optional[List[str]] = None,
     ) -> Memory:
-        """Create and store a new semantic memory."""
+        """Create and store a new semantic memory with lineage tracking.
+
+        Args:
+            workspace_id: Workspace this memory belongs to
+            raw_content: Raw content to be remembered
+            source_type: Type of source (user_message, assistant_response, etc)
+            summary: Optional summary (auto-generated if not provided)
+            importance_score: Importance score (0-1)
+            metadata: Additional metadata
+            generated_from_message_id: ID of the message that generated this memory
+            generated_by_provider: Provider that generated this memory
+            source_memory_ids: IDs of memories that were used to create this
+
+        Returns:
+            Created Memory object
+        """
 
         # Generate embedding
         embedding = self.embedding_service.embed(raw_content)
 
-        # Create memory object
+        # Create memory object with lineage tracking
         memory = Memory(
             id=str(uuid.uuid4()),
             workspace_id=workspace_id,
@@ -44,6 +62,9 @@ class MemoryStorageService:
             importance_score=importance_score,
             metadata=metadata or {},
             timestamp=datetime.utcnow(),
+            generated_from_message_id=generated_from_message_id,
+            generated_by_provider=generated_by_provider,
+            source_memory_ids=source_memory_ids or [],
         )
 
         # Save to database

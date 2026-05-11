@@ -85,6 +85,10 @@ class ChatQueryRequest(BaseModel):
     query: str
     top_k_memories: int = 5
     similarity_threshold: float = 0.3
+    provider: Optional[str] = (
+        None  # Optional provider override (gemini, openai, claude)
+    )
+    model: Optional[str] = None  # Optional model override
 
 
 class RetrievedMemory(BaseModel):
@@ -100,6 +104,10 @@ class RetrievedMemory(BaseModel):
 class ChatQueryResponse(BaseModel):
     message_id: str
     response: str
+    provider_used: str  # Provider that was used
+    model_used: str  # Model that was used
+    tokens_used: int  # Tokens used by generation
+    latency_ms: float  # Generation latency
     retrieved_memories: List[RetrievedMemory]
     context_metadata: dict
 

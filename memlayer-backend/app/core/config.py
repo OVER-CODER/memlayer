@@ -16,9 +16,14 @@ class Settings(BaseSettings):
     embedding_model: str = "all-MiniLM-L6-v2"
     embedding_dim: int = 384
 
-    # LLM
+    # LLM Providers
     gemini_api_key: Optional[str] = None
-    gemini_model: str = "gemini-pro"
+    openai_api_key: Optional[str] = None
+    anthropic_api_key: Optional[str] = None
+
+    # Default provider and model
+    default_provider: str = "gemini"
+    default_model: str = "gemini-pro"
 
     # Memory
     memory_chunk_size: int = 500

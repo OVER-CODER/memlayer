@@ -42,6 +42,8 @@ def query_chat(
             query=request.query,
             top_k_memories=request.top_k_memories,
             similarity_threshold=request.similarity_threshold,
+            provider=request.provider,
+            model=request.model,
         )
         return result
     except Exception as e:
