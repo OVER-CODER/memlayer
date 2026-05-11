@@ -3,8 +3,9 @@
 import { useEffect, useState, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { workspacesAPI, chatsAPI, memoriesAPI } from '@/lib/api';
-import { Workspace, Chat, Message, ChatQueryResponse } from '@/types';
+import { Workspace, Chat, Message, ChatQueryResponse, RetrievedMemory } from '@/types';
 import Link from 'next/link';
+import { MemoryVisualizer } from '@/components/MemoryVisualizer';
 
 export default function WorkspacePage() {
   const params = useParams();
@@ -19,6 +20,7 @@ export default function WorkspacePage() {
   const [sending, setSending] = useState(false);
   const [input, setInput] = useState('');
   const [showMemories, setShowMemories] = useState(false);
+  const [retrievedMemories, setRetrievedMemories] = useState<RetrievedMemory[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -124,6 +126,7 @@ export default function WorkspacePage() {
 
       // Show memory preview
       if (result.retrieved_memories.length > 0) {
+        setRetrievedMemories(result.retrieved_memories);
         setShowMemories(true);
       }
     } catch (error) {
@@ -168,6 +171,13 @@ export default function WorkspacePage() {
           </Link>
           <h2 className="text-lg font-semibold mt-4">{workspace.name}</h2>
           <p className="text-xs text-gray-600 mt-1">{workspace.description}</p>
+          
+          <Link 
+            href={`/workspace/${workspaceId}/memories`}
+            className="block mt-4 text-sm text-purple-600 hover:text-purple-700 font-medium"
+          >
+            📊 Memory Inspector
+          </Link>
         </div>
 
         <div className="flex-1 overflow-y-auto p-4">
@@ -236,13 +246,12 @@ export default function WorkspacePage() {
 
         {/* Memory Inspector Toggle */}
         {showMemories && (
-          <div className="border-t border-gray-300 p-4 bg-gray-50">
-            <button
-              onClick={() => setShowMemories(false)}
-              className="text-sm text-blue-600 hover:text-blue-700"
-            >
-              ✕ Close Memory Inspector
-            </button>
+          <div className="border-t border-gray-300 bg-gray-50">
+            <MemoryVisualizer 
+              memories={retrievedMemories}
+              isOpen={showMemories}
+              onClose={() => setShowMemories(false)}
+            />
           </div>
         )}
 
