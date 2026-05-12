@@ -27,6 +27,7 @@ from .stress_harness import (
     StressScenario,
     StressTestRun,
     get_stress_harness,
+    create_standard_stress_scenarios,
 )
 
 from .workspace_simulator import (
@@ -80,6 +81,7 @@ __all__ = [
     "StressScenario",
     "StressTestRun",
     "get_stress_harness",
+    "create_standard_stress_scenarios",
     # Workspace Simulator
     "WorkspaceSimulator",
     "SimulatedWorkspace",
