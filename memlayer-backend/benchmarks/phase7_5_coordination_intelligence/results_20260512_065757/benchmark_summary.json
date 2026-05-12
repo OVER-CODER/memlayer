@@ -1,0 +1,29 @@
+{
+  "benchmark_run_at": "2026-05-12T06:57:57.864345+00:00",
+  "delegation": {
+    "total_evaluations": 80,
+    "approval_rate": 0.7,
+    "avg_top_score": 0.656
+  },
+  "provider_routing": {
+    "total_decisions": 60,
+    "provider_distribution": {
+      "claude": 60
+    }
+  },
+  "projection_refresh": {
+    "total_evaluations": 30,
+    "reuse_ratio": 0.8333333333333334,
+    "total_tokens_saved": 5000
+  },
+  "budget_optimization": {
+    "total_plans": 15,
+    "avg_efficiency": 0.7561,
+    "savings_ratio": 0.7561
+  },
+  "determinism": {
+    "repeats": 5,
+    "is_deterministic": true,
+    "unique_logs": 1
+  }
+}

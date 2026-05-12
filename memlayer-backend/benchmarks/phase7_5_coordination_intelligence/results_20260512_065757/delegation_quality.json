@@ -1,0 +1,722 @@
+[
+  {
+    "cycle": 0,
+    "source": "research",
+    "selected_target": "drafter",
+    "top_score": 0.83,
+    "policy_outcome": "allow",
+    "token_pressure": 0.0,
+    "delegation_depth": 0
+  },
+  {
+    "cycle": 0,
+    "source": "drafter",
+    "selected_target": "critic",
+    "top_score": 0.71,
+    "policy_outcome": "allow",
+    "token_pressure": 0.0,
+    "delegation_depth": 0
+  },
+  {
+    "cycle": 0,
+    "source": "tool_agent",
+    "selected_target": "critic",
+    "top_score": 0.63,
+    "policy_outcome": "allow",
+    "token_pressure": 0.0,
+    "delegation_depth": 0
+  },
+  {
+    "cycle": 0,
+    "source": "critic",
+    "selected_target": "drafter",
+    "top_score": 0.79,
+    "policy_outcome": "allow",
+    "token_pressure": 0.0,
+    "delegation_depth": 0
+  },
+  {
+    "cycle": 1,
+    "source": "research",
+    "selected_target": "critic",
+    "top_score": 0.69,
+    "policy_outcome": "allow",
+    "token_pressure": 0.05,
+    "delegation_depth": 1
+  },
+  {
+    "cycle": 1,
+    "source": "drafter",
+    "selected_target": "critic",
+    "top_score": 0.77,
+    "policy_outcome": "allow",
+    "token_pressure": 0.05,
+    "delegation_depth": 1
+  },
+  {
+    "cycle": 1,
+    "source": "tool_agent",
+    "selected_target": "critic",
+    "top_score": 0.69,
+    "policy_outcome": "allow",
+    "token_pressure": 0.05,
+    "delegation_depth": 1
+  },
+  {
+    "cycle": 1,
+    "source": "critic",
+    "selected_target": "research",
+    "top_score": 0.6,
+    "policy_outcome": "allow",
+    "token_pressure": 0.05,
+    "delegation_depth": 1
+  },
+  {
+    "cycle": 2,
+    "source": "research",
+    "selected_target": "drafter",
+    "top_score": 0.65,
+    "policy_outcome": "allow",
+    "token_pressure": 0.1,
+    "delegation_depth": 2
+  },
+  {
+    "cycle": 2,
+    "source": "drafter",
+    "selected_target": "critic",
+    "top_score": 0.65,
+    "policy_outcome": "allow",
+    "token_pressure": 0.1,
+    "delegation_depth": 2
+  },
+  {
+    "cycle": 2,
+    "source": "tool_agent",
+    "selected_target": "critic",
+    "top_score": 0.57,
+    "policy_outcome": "allow",
+    "token_pressure": 0.1,
+    "delegation_depth": 2
+  },
+  {
+    "cycle": 2,
+    "source": "critic",
+    "selected_target": "drafter",
+    "top_score": 0.61,
+    "policy_outcome": "allow",
+    "token_pressure": 0.1,
+    "delegation_depth": 2
+  },
+  {
+    "cycle": 3,
+    "source": "research",
+    "selected_target": "drafter",
+    "top_score": 0.74,
+    "policy_outcome": "allow",
+    "token_pressure": 0.15000000000000002,
+    "delegation_depth": 3
+  },
+  {
+    "cycle": 3,
+    "source": "drafter",
+    "selected_target": "critic",
+    "top_score": 0.62,
+    "policy_outcome": "allow",
+    "token_pressure": 0.15000000000000002,
+    "delegation_depth": 3
+  },
+  {
+    "cycle": 3,
+    "source": "tool_agent",
+    "selected_target": "critic",
+    "top_score": 0.54,
+    "policy_outcome": "allow",
+    "token_pressure": 0.15000000000000002,
+    "delegation_depth": 3
+  },
+  {
+    "cycle": 3,
+    "source": "critic",
+    "selected_target": "drafter",
+    "top_score": 0.7,
+    "policy_outcome": "allow",
+    "token_pressure": 0.15000000000000002,
+    "delegation_depth": 3
+  },
+  {
+    "cycle": 4,
+    "source": "research",
+    "selected_target": "critic",
+    "top_score": 0.6,
+    "policy_outcome": "deny",
+    "token_pressure": 0.2,
+    "delegation_depth": 4
+  },
+  {
+    "cycle": 4,
+    "source": "drafter",
+    "selected_target": "critic",
+    "top_score": 0.68,
+    "policy_outcome": "deny",
+    "token_pressure": 0.2,
+    "delegation_depth": 4
+  },
+  {
+    "cycle": 4,
+    "source": "tool_agent",
+    "selected_target": "critic",
+    "top_score": 0.6,
+    "policy_outcome": "deny",
+    "token_pressure": 0.2,
+    "delegation_depth": 4
+  },
+  {
+    "cycle": 4,
+    "source": "critic",
+    "selected_target": "research",
+    "top_score": 0.51,
+    "policy_outcome": "deny",
+    "token_pressure": 0.2,
+    "delegation_depth": 4
+  },
+  {
+    "cycle": 5,
+    "source": "research",
+    "selected_target": "drafter",
+    "top_score": 0.71,
+    "policy_outcome": "allow",
+    "token_pressure": 0.25,
+    "delegation_depth": 0
+  },
+  {
+    "cycle": 5,
+    "source": "drafter",
+    "selected_target": "critic",
+    "top_score": 0.71,
+    "policy_outcome": "allow",
+    "token_pressure": 0.25,
+    "delegation_depth": 0
+  },
+  {
+    "cycle": 5,
+    "source": "tool_agent",
+    "selected_target": "critic",
+    "top_score": 0.63,
+    "policy_outcome": "allow",
+    "token_pressure": 0.25,
+    "delegation_depth": 0
+  },
+  {
+    "cycle": 5,
+    "source": "critic",
+    "selected_target": "drafter",
+    "top_score": 0.67,
+    "policy_outcome": "allow",
+    "token_pressure": 0.25,
+    "delegation_depth": 0
+  },
+  {
+    "cycle": 6,
+    "source": "research",
+    "selected_target": "drafter",
+    "top_score": 0.8,
+    "policy_outcome": "allow",
+    "token_pressure": 0.30000000000000004,
+    "delegation_depth": 1
+  },
+  {
+    "cycle": 6,
+    "source": "drafter",
+    "selected_target": "critic",
+    "top_score": 0.68,
+    "policy_outcome": "allow",
+    "token_pressure": 0.30000000000000004,
+    "delegation_depth": 1
+  },
+  {
+    "cycle": 6,
+    "source": "tool_agent",
+    "selected_target": "critic",
+    "top_score": 0.6,
+    "policy_outcome": "allow",
+    "token_pressure": 0.30000000000000004,
+    "delegation_depth": 1
+  },
+  {
+    "cycle": 6,
+    "source": "critic",
+    "selected_target": "drafter",
+    "top_score": 0.76,
+    "policy_outcome": "allow",
+    "token_pressure": 0.30000000000000004,
+    "delegation_depth": 1
+  },
+  {
+    "cycle": 7,
+    "source": "research",
+    "selected_target": "critic",
+    "top_score": 0.66,
+    "policy_outcome": "allow",
+    "token_pressure": 0.35000000000000003,
+    "delegation_depth": 2
+  },
+  {
+    "cycle": 7,
+    "source": "drafter",
+    "selected_target": "critic",
+    "top_score": 0.74,
+    "policy_outcome": "allow",
+    "token_pressure": 0.35000000000000003,
+    "delegation_depth": 2
+  },
+  {
+    "cycle": 7,
+    "source": "tool_agent",
+    "selected_target": "critic",
+    "top_score": 0.66,
+    "policy_outcome": "allow",
+    "token_pressure": 0.35000000000000003,
+    "delegation_depth": 2
+  },
+  {
+    "cycle": 7,
+    "source": "critic",
+    "selected_target": "research",
+    "top_score": 0.57,
+    "policy_outcome": "allow",
+    "token_pressure": 0.35000000000000003,
+    "delegation_depth": 2
+  },
+  {
+    "cycle": 8,
+    "source": "research",
+    "selected_target": "drafter",
+    "top_score": 0.62,
+    "policy_outcome": "allow",
+    "token_pressure": 0.4,
+    "delegation_depth": 3
+  },
+  {
+    "cycle": 8,
+    "source": "drafter",
+    "selected_target": "critic",
+    "top_score": 0.62,
+    "policy_outcome": "allow",
+    "token_pressure": 0.4,
+    "delegation_depth": 3
+  },
+  {
+    "cycle": 8,
+    "source": "tool_agent",
+    "selected_target": "critic",
+    "top_score": 0.54,
+    "policy_outcome": "allow",
+    "token_pressure": 0.4,
+    "delegation_depth": 3
+  },
+  {
+    "cycle": 8,
+    "source": "critic",
+    "selected_target": "drafter",
+    "top_score": 0.58,
+    "policy_outcome": "allow",
+    "token_pressure": 0.4,
+    "delegation_depth": 3
+  },
+  {
+    "cycle": 9,
+    "source": "research",
+    "selected_target": "drafter",
+    "top_score": 0.71,
+    "policy_outcome": "deny",
+    "token_pressure": 0.45,
+    "delegation_depth": 4
+  },
+  {
+    "cycle": 9,
+    "source": "drafter",
+    "selected_target": "critic",
+    "top_score": 0.59,
+    "policy_outcome": "deny",
+    "token_pressure": 0.45,
+    "delegation_depth": 4
+  },
+  {
+    "cycle": 9,
+    "source": "tool_agent",
+    "selected_target": "critic",
+    "top_score": 0.51,
+    "policy_outcome": "deny",
+    "token_pressure": 0.45,
+    "delegation_depth": 4
+  },
+  {
+    "cycle": 9,
+    "source": "critic",
+    "selected_target": "drafter",
+    "top_score": 0.67,
+    "policy_outcome": "deny",
+    "token_pressure": 0.45,
+    "delegation_depth": 4
+  },
+  {
+    "cycle": 10,
+    "source": "research",
+    "selected_target": "critic",
+    "top_score": 0.72,
+    "policy_outcome": "allow",
+    "token_pressure": 0.5,
+    "delegation_depth": 0
+  },
+  {
+    "cycle": 10,
+    "source": "drafter",
+    "selected_target": "critic",
+    "top_score": 0.8,
+    "policy_outcome": "allow",
+    "token_pressure": 0.5,
+    "delegation_depth": 0
+  },
+  {
+    "cycle": 10,
+    "source": "tool_agent",
+    "selected_target": "critic",
+    "top_score": 0.72,
+    "policy_outcome": "allow",
+    "token_pressure": 0.5,
+    "delegation_depth": 0
+  },
+  {
+    "cycle": 10,
+    "source": "critic",
+    "selected_target": "research",
+    "top_score": 0.63,
+    "policy_outcome": "allow",
+    "token_pressure": 0.5,
+    "delegation_depth": 0
+  },
+  {
+    "cycle": 11,
+    "source": "research",
+    "selected_target": "drafter",
+    "top_score": 0.68,
+    "policy_outcome": "allow",
+    "token_pressure": 0.55,
+    "delegation_depth": 1
+  },
+  {
+    "cycle": 11,
+    "source": "drafter",
+    "selected_target": "critic",
+    "top_score": 0.68,
+    "policy_outcome": "allow",
+    "token_pressure": 0.55,
+    "delegation_depth": 1
+  },
+  {
+    "cycle": 11,
+    "source": "tool_agent",
+    "selected_target": "critic",
+    "top_score": 0.6,
+    "policy_outcome": "allow",
+    "token_pressure": 0.55,
+    "delegation_depth": 1
+  },
+  {
+    "cycle": 11,
+    "source": "critic",
+    "selected_target": "drafter",
+    "top_score": 0.64,
+    "policy_outcome": "allow",
+    "token_pressure": 0.55,
+    "delegation_depth": 1
+  },
+  {
+    "cycle": 12,
+    "source": "research",
+    "selected_target": "drafter",
+    "top_score": 0.77,
+    "policy_outcome": "allow",
+    "token_pressure": 0.6000000000000001,
+    "delegation_depth": 2
+  },
+  {
+    "cycle": 12,
+    "source": "drafter",
+    "selected_target": "critic",
+    "top_score": 0.65,
+    "policy_outcome": "allow",
+    "token_pressure": 0.6000000000000001,
+    "delegation_depth": 2
+  },
+  {
+    "cycle": 12,
+    "source": "tool_agent",
+    "selected_target": "critic",
+    "top_score": 0.57,
+    "policy_outcome": "allow",
+    "token_pressure": 0.6000000000000001,
+    "delegation_depth": 2
+  },
+  {
+    "cycle": 12,
+    "source": "critic",
+    "selected_target": "drafter",
+    "top_score": 0.73,
+    "policy_outcome": "allow",
+    "token_pressure": 0.6000000000000001,
+    "delegation_depth": 2
+  },
+  {
+    "cycle": 13,
+    "source": "research",
+    "selected_target": "critic",
+    "top_score": 0.63,
+    "policy_outcome": "allow",
+    "token_pressure": 0.65,
+    "delegation_depth": 3
+  },
+  {
+    "cycle": 13,
+    "source": "drafter",
+    "selected_target": "critic",
+    "top_score": 0.71,
+    "policy_outcome": "allow",
+    "token_pressure": 0.65,
+    "delegation_depth": 3
+  },
+  {
+    "cycle": 13,
+    "source": "tool_agent",
+    "selected_target": "critic",
+    "top_score": 0.63,
+    "policy_outcome": "allow",
+    "token_pressure": 0.65,
+    "delegation_depth": 3
+  },
+  {
+    "cycle": 13,
+    "source": "critic",
+    "selected_target": "research",
+    "top_score": 0.54,
+    "policy_outcome": "allow",
+    "token_pressure": 0.65,
+    "delegation_depth": 3
+  },
+  {
+    "cycle": 14,
+    "source": "research",
+    "selected_target": "drafter",
+    "top_score": 0.605,
+    "policy_outcome": "deny",
+    "token_pressure": 0.7000000000000001,
+    "delegation_depth": 4
+  },
+  {
+    "cycle": 14,
+    "source": "drafter",
+    "selected_target": "critic",
+    "top_score": 0.59,
+    "policy_outcome": "deny",
+    "token_pressure": 0.7000000000000001,
+    "delegation_depth": 4
+  },
+  {
+    "cycle": 14,
+    "source": "tool_agent",
+    "selected_target": "critic",
+    "top_score": 0.51,
+    "policy_outcome": "deny",
+    "token_pressure": 0.7000000000000001,
+    "delegation_depth": 4
+  },
+  {
+    "cycle": 14,
+    "source": "critic",
+    "selected_target": "drafter",
+    "top_score": 0.565,
+    "policy_outcome": "deny",
+    "token_pressure": 0.7000000000000001,
+    "delegation_depth": 4
+  },
+  {
+    "cycle": 15,
+    "source": "research",
+    "selected_target": "drafter",
+    "top_score": 0.845,
+    "policy_outcome": "allow",
+    "token_pressure": 0.75,
+    "delegation_depth": 0
+  },
+  {
+    "cycle": 15,
+    "source": "drafter",
+    "selected_target": "critic",
+    "top_score": 0.71,
+    "policy_outcome": "allow",
+    "token_pressure": 0.75,
+    "delegation_depth": 0
+  },
+  {
+    "cycle": 15,
+    "source": "tool_agent",
+    "selected_target": "drafter",
+    "top_score": 0.645,
+    "policy_outcome": "allow",
+    "token_pressure": 0.75,
+    "delegation_depth": 0
+  },
+  {
+    "cycle": 15,
+    "source": "critic",
+    "selected_target": "drafter",
+    "top_score": 0.805,
+    "policy_outcome": "allow",
+    "token_pressure": 0.75,
+    "delegation_depth": 0
+  },
+  {
+    "cycle": 16,
+    "source": "research",
+    "selected_target": "critic",
+    "top_score": 0.69,
+    "policy_outcome": "allow",
+    "token_pressure": 0.8,
+    "delegation_depth": 1
+  },
+  {
+    "cycle": 16,
+    "source": "drafter",
+    "selected_target": "critic",
+    "top_score": 0.77,
+    "policy_outcome": "allow",
+    "token_pressure": 0.8,
+    "delegation_depth": 1
+  },
+  {
+    "cycle": 16,
+    "source": "tool_agent",
+    "selected_target": "critic",
+    "top_score": 0.69,
+    "policy_outcome": "allow",
+    "token_pressure": 0.8,
+    "delegation_depth": 1
+  },
+  {
+    "cycle": 16,
+    "source": "critic",
+    "selected_target": "research",
+    "top_score": 0.6,
+    "policy_outcome": "allow",
+    "token_pressure": 0.8,
+    "delegation_depth": 1
+  },
+  {
+    "cycle": 17,
+    "source": "research",
+    "selected_target": "drafter",
+    "top_score": 0.665,
+    "policy_outcome": "defer",
+    "token_pressure": 0.8500000000000001,
+    "delegation_depth": 2
+  },
+  {
+    "cycle": 17,
+    "source": "drafter",
+    "selected_target": "critic",
+    "top_score": 0.65,
+    "policy_outcome": "defer",
+    "token_pressure": 0.8500000000000001,
+    "delegation_depth": 2
+  },
+  {
+    "cycle": 17,
+    "source": "tool_agent",
+    "selected_target": "critic",
+    "top_score": 0.57,
+    "policy_outcome": "defer",
+    "token_pressure": 0.8500000000000001,
+    "delegation_depth": 2
+  },
+  {
+    "cycle": 17,
+    "source": "critic",
+    "selected_target": "drafter",
+    "top_score": 0.625,
+    "policy_outcome": "defer",
+    "token_pressure": 0.8500000000000001,
+    "delegation_depth": 2
+  },
+  {
+    "cycle": 18,
+    "source": "research",
+    "selected_target": "drafter",
+    "top_score": 0.755,
+    "policy_outcome": "defer",
+    "token_pressure": 0.9,
+    "delegation_depth": 3
+  },
+  {
+    "cycle": 18,
+    "source": "drafter",
+    "selected_target": "critic",
+    "top_score": 0.62,
+    "policy_outcome": "defer",
+    "token_pressure": 0.9,
+    "delegation_depth": 3
+  },
+  {
+    "cycle": 18,
+    "source": "tool_agent",
+    "selected_target": "drafter",
+    "top_score": 0.555,
+    "policy_outcome": "defer",
+    "token_pressure": 0.9,
+    "delegation_depth": 3
+  },
+  {
+    "cycle": 18,
+    "source": "critic",
+    "selected_target": "drafter",
+    "top_score": 0.715,
+    "policy_outcome": "defer",
+    "token_pressure": 0.9,
+    "delegation_depth": 3
+  },
+  {
+    "cycle": 19,
+    "source": "research",
+    "selected_target": "critic",
+    "top_score": 0.6,
+    "policy_outcome": "deny",
+    "token_pressure": 0.9500000000000001,
+    "delegation_depth": 4
+  },
+  {
+    "cycle": 19,
+    "source": "drafter",
+    "selected_target": "critic",
+    "top_score": 0.68,
+    "policy_outcome": "deny",
+    "token_pressure": 0.9500000000000001,
+    "delegation_depth": 4
+  },
+  {
+    "cycle": 19,
+    "source": "tool_agent",
+    "selected_target": "critic",
+    "top_score": 0.6,
+    "policy_outcome": "deny",
+    "token_pressure": 0.9500000000000001,
+    "delegation_depth": 4
+  },
+  {
+    "cycle": 19,
+    "source": "critic",
+    "selected_target": "research",
+    "top_score": 0.51,
+    "policy_outcome": "deny",
+    "token_pressure": 0.9500000000000001,
+    "delegation_depth": 4
+  }
+]

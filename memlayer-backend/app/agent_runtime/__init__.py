@@ -50,6 +50,38 @@ from .runtime_kernel import (
     CoordinatedExecutionReport,
 )
 
+# Phase 7.5 — Coordination Intelligence
+from .coordination_policy import (
+    CoordinationPolicyEngine,
+    CoordinationPolicy,
+    PolicyDecision,
+    PolicyType,
+    PolicyEffectivenessReport,
+)
+
+from .adaptive_delegation import (
+    AdaptiveDelegationEngine,
+    AdaptiveDelegationResult,
+    DelegationCandidate,
+)
+
+from .provider_routing import (
+    ProviderRoutingIntelligence,
+    ProviderRoutingResult,
+)
+
+from .projection_refresh import (
+    ProjectionRefreshManager,
+    RefreshDecision,
+    ProjectionFreshnessRecord,
+)
+
+from .budget_optimizer import (
+    CoordinationBudgetOptimizer,
+    CoordinationBudgetPlan,
+    BudgetAllocation,
+)
+
 __all__ = [
     # Agent Types
     "AgentType",
@@ -82,4 +114,21 @@ __all__ = [
     "SharedAgentRuntime",
     "CoordinatedExecutionPlan",
     "CoordinatedExecutionReport",
+    # Phase 7.5 — Coordination Intelligence
+    "CoordinationPolicyEngine",
+    "CoordinationPolicy",
+    "PolicyDecision",
+    "PolicyType",
+    "PolicyEffectivenessReport",
+    "AdaptiveDelegationEngine",
+    "AdaptiveDelegationResult",
+    "DelegationCandidate",
+    "ProviderRoutingIntelligence",
+    "ProviderRoutingResult",
+    "ProjectionRefreshManager",
+    "RefreshDecision",
+    "ProjectionFreshnessRecord",
+    "CoordinationBudgetOptimizer",
+    "CoordinationBudgetPlan",
+    "BudgetAllocation",
 ]
