@@ -1,39 +1,39 @@
 # Render Blueprint Configuration for MemLayer Backend
-# Use: render blueprint create --file render.yaml
+# ⚠️ IMPORTANT: Never commit actual API keys - use environment variables in Render dashboard
 
 services:
   # MemLayer Backend Service
   - name: memlayer-backend
-    type: web
+    type: web_service
     region: oregon
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
-      # Database (PostgreSQL - Supabase)
+      # Database (PostgreSQL - Supabase) - Set in Render dashboard
       - key: DATABASE_URL
         sync: false
-        value: "postgresql+asyncpg://postgres.memlayer:Aryanpandit@2373@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres"
+        value: "postgresql+asyncpg://postgres.memlayer:YOUR_PASSWORD@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres"
       
       - key: ASYNC_DATABASE_URL
         sync: false
-        value: "postgresql+asyncpg://postgres.memlayer:Aryanpandit@2373@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres"
+        value: "postgresql+asyncpg://postgres.memlayer:YOUR_PASSWORD@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres"
       
-      # Redis (Upstash)
+      # Redis (Upstash) - Set in Render dashboard
       - key: REDIS_HOST
         sync: false
-        value: "pleased-pig-121933.upstash.io"
+        value: "YOUR_UPSTASH_HOST"
       
       - key: REDIS_PORT
         value: "6379"
       
       - key: REDIS_PASSWORD
         sync: false
-        value: "gQAAAAAAAdxNAAIgcDFkOWRiN2RhODkxMTY0MTBiOGQ1Zjc0OThiOWNhYWJjNA"
+        value: "YOUR_UPSTASH_PASSWORD"
       
-      # Security
+      # Security - Set in Render dashboard
       - key: SECRET_KEY
         sync: false
-        value: "PlEZVYgLfdt-IjuYVZyR1pSlBMxFqdHV4FB2FUkdWac"
+        value: "YOUR_SECRET_KEY"
       
       - key: SECURITY_ENABLED
         value: "true"
@@ -48,10 +48,10 @@ services:
       - key: DETERMINISTIC_MODE
         value: "true"
       
-      # LLM Provider (Gemini)
+      # LLM Provider (Gemini) - Set in Render dashboard
       - key: GEMINI_API_KEY
         sync: false
-        value: "AIzaSyAvuFbsaFT2jkyQnM6yDjRF80i31YOfBJw"
+        value: "YOUR_GEMINI_API_KEY"
       
       # Embedding
       - key: EMBEDDING_MODEL
