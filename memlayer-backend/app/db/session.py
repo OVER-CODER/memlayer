@@ -27,8 +27,9 @@ def _clean_dsn_for_asyncpg(dsn: str) -> str:
         query_parts = parsed.query.split("&") if parsed.query else []
         query_parts = [q for q in query_parts if not q.startswith("sslmode=")]
         new_query = "&".join(query_parts)
+        # urlunparse needs 6 parts: scheme, netloc, path, params, query, fragment
         result = urlunparse(
-            (parsed.scheme, parsed.netloc, parsed.path, new_query, parsed.fragment)
+            (parsed.scheme, parsed.netloc, parsed.path, "", new_query, "")
         )
         return result
     except Exception:
