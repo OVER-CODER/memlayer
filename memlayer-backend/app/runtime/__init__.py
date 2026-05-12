@@ -49,6 +49,15 @@ from .evolution_tracker import (
     get_evolution_tracker,
 )
 
+from .dataset_generator import (
+    RuntimeIntelligenceDatasetGenerator,
+    RuntimeIntelligenceDataset,
+    DatasetSample,
+    DatasetPartition,
+    DatasetType,
+    get_dataset_generator,
+)
+
 __all__ = [
     # Integrated Runtime
     "IntegratedRuntimeSystem",
@@ -87,4 +96,11 @@ __all__ = [
     "EvolutionPeriod",
     "EvolutionMetric",
     "get_evolution_tracker",
+    # Dataset Generator
+    "RuntimeIntelligenceDatasetGenerator",
+    "RuntimeIntelligenceDataset",
+    "DatasetSample",
+    "DatasetPartition",
+    "DatasetType",
+    "get_dataset_generator",
 ]
