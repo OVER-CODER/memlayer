@@ -49,6 +49,7 @@ class RuntimeDiagnosticsSnapshot:
     context_evolution_timeline: List[Dict[str, Any]] = field(default_factory=list)
     stress_validation: Dict[str, Any] = field(default_factory=dict)
     cognition_stability: Dict[str, Any] = field(default_factory=dict)
+    view_engine_diagnostics: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary."""
@@ -66,6 +67,7 @@ class RuntimeDiagnosticsSnapshot:
             "context_evolution_timeline": self.context_evolution_timeline,
             "stress_validation": self.stress_validation,
             "cognition_stability": self.cognition_stability,
+            "view_engine_diagnostics": self.view_engine_diagnostics,
         }
 
 
@@ -86,6 +88,7 @@ class RuntimeDiagnosticsDashboard:
         failure_detector: Optional[EmergentFailureDetector] = None,
         evolution_tracker: Optional[RuntimeEvolutionTracker] = None,
         stress_harness: Optional[LongHorizonStressHarness] = None,
+        view_diagnostics_dashboard: Optional[Any] = None,
     ):
         self.integrated_runtime = integrated_runtime
         self.trace_service = trace_service or get_trace_service()
@@ -97,6 +100,7 @@ class RuntimeDiagnosticsDashboard:
         self.failure_detector = failure_detector or get_failure_detector()
         self.evolution_tracker = evolution_tracker or get_evolution_tracker()
         self.stress_harness = stress_harness
+        self.view_diagnostics_dashboard = view_diagnostics_dashboard
         self.snapshots: List[RuntimeDiagnosticsSnapshot] = []
 
     def capture_snapshot(
@@ -126,6 +130,7 @@ class RuntimeDiagnosticsDashboard:
         )
         snapshot.stress_validation = self._build_stress_validation()
         snapshot.cognition_stability = self._build_cognition_stability(snapshot)
+        snapshot.view_engine_diagnostics = self._build_view_engine_diagnostics()
 
         self.snapshots.append(snapshot)
         return snapshot
@@ -167,6 +172,14 @@ class RuntimeDiagnosticsDashboard:
             f"Stability Score: {stability.get('stability_score', 0.0):.2f}",
             f"Stability Class: {stability.get('stability_classification', 'unknown')}",
             f"Failure Pressure: {stability.get('failure_pressure', 0.0):.3f}",
+            "",
+            "[View Engine]",
+            f"View Snapshot: {snapshot.view_engine_diagnostics.get('snapshot_id', 'none')}",
+            f"Views Compiled: {snapshot.view_engine_diagnostics.get('total_views_compiled', 0)}",
+            (
+                "View Avg Quality: "
+                f"{snapshot.view_engine_diagnostics.get('avg_view_quality', 0.0):.3f}"
+            ),
             "=" * 88,
         ]
         return "\n".join(lines)
@@ -294,6 +307,27 @@ class RuntimeDiagnosticsDashboard:
         if self.stress_harness is None:
             return {"message": "Stress harness not attached"}
         return self.stress_harness.get_stress_report()
+
+    def _build_view_engine_diagnostics(self) -> Dict[str, Any]:
+        """Attach optional Phase 6 view diagnostics into runtime snapshot."""
+        if self.view_diagnostics_dashboard is None:
+            return {"message": "View diagnostics not attached"}
+
+        snapshot = self.view_diagnostics_dashboard.capture_snapshot()
+        if hasattr(snapshot, "to_dict"):
+            snapshot_payload = snapshot.to_dict()
+        elif isinstance(snapshot, dict):
+            snapshot_payload = snapshot
+        else:
+            snapshot_payload = {}
+        quality_summary = snapshot_payload.get("quality_summary", {})
+        total_views = snapshot_payload.get("view_counts", {})
+
+        return {
+            **snapshot_payload,
+            "total_views_compiled": sum(total_views.values()) if isinstance(total_views, dict) else 0,
+            "avg_view_quality": float(quality_summary.get("avg_quality", 0.0)),
+        }
 
     def _build_cognition_stability(
         self, snapshot: RuntimeDiagnosticsSnapshot

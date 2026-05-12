@@ -21,6 +21,15 @@ from app.telemetry import (
 )
 
 
+class FakeViewSnapshot:
+    def to_dict(self):
+        return {
+            "snapshot_id": "view-snapshot-1",
+            "view_counts": {"research": 2, "drafter": 1},
+            "quality_summary": {"avg_quality": 0.77},
+        }
+
+
 def test_capture_snapshot_and_render_console():
     # Build local telemetry/runtime services with deterministic data.
     trace_service = RuntimeTraceService()
@@ -185,3 +194,29 @@ def test_capture_snapshot_and_render_console():
     assert snapshot.failure_propagation["total_failures"] >= 1
     assert len(snapshot.context_evolution_timeline) == 1
     assert "MEMLAYER RUNTIME DIAGNOSTICS CONSOLE" in console
+
+
+def test_capture_snapshot_includes_view_engine_diagnostics():
+    runtime = Mock()
+    runtime.get_runtime_statistics.return_value = {
+        "total_executions": 1,
+        "success_rate": 1.0,
+        "avg_quality_score": 0.9,
+        "avg_semantic_retention": 0.88,
+        "avg_token_efficiency": 0.85,
+        "avg_duration_ms": 60.0,
+    }
+
+    mock_view_dashboard = Mock()
+    mock_view_dashboard.capture_snapshot.return_value = FakeViewSnapshot()
+
+    dashboard = RuntimeDiagnosticsDashboard(
+        integrated_runtime=runtime,
+        view_diagnostics_dashboard=mock_view_dashboard,
+    )
+
+    snapshot = dashboard.capture_snapshot(snapshot_id="diag-with-view")
+
+    assert snapshot.view_engine_diagnostics["snapshot_id"] == "view-snapshot-1"
+    assert snapshot.view_engine_diagnostics["total_views_compiled"] == 3
+    assert snapshot.view_engine_diagnostics["avg_view_quality"] == 0.77
