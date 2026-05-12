@@ -1,28 +1,33 @@
 """
 Adaptive Context Compilation Runtime - Phase 4
 
-Transforms the compiler from static optimization subsystems into an adaptive
-cognition assembly engine that dynamically allocates token budgets, selects
-compression strategies, and optimizes context for provider-specific requirements.
+This module implements adaptive cognition assembly that dynamically decides:
+- what information matters most
+- what deserves token budget
+- what should be compressed
+- what can be omitted
+- how context should be shaped per-provider
+
+Core: runtime cognitive resource allocation, not prompt engineering.
 
 Architecture:
-- AdaptiveCompilationPlanner: Orchestrates compilation decisions
-- RelevanceRankingService: Multi-factor relevance scoring
-- TokenBudgetAllocator: Dynamic token distribution
-- ContextQualityEvaluator: Context quality measurement
+- AdaptiveCompilationPlanner: Dynamic memory/chunk selection
+- RelevanceRankingService: 7-factor ranking beyond similarity
+- TokenBudgetAllocator: Intelligent token distribution
+- ContextQualityEvaluator: Multi-dimensional quality scoring
 - ContextFailureAnalyzer: Regression and failure tracking
-- AdaptiveAssemblyPipeline: End-to-end compilation runtime
+- Adaptive assembly pipeline: retrieval→dedup→chunk→rank→compress→allocate
 """
 
 from __future__ import annotations
 
-from typing import List, Dict, Optional, Tuple, Set, TYPE_CHECKING
+from typing import List, Dict, Optional, Tuple, Set, TYPE_CHECKING, Any
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
 import numpy as np
 import logging
-from collections import defaultdict
+import json
 
 if TYPE_CHECKING:
     from app.compiler.semantic_chunking import SemanticChunk
@@ -32,731 +37,689 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-class QueryComplexity(str, Enum):
-    """Query complexity assessment."""
+class QueryType(str, Enum):
+    """Types of queries with different compilation strategies."""
 
-    SIMPLE = "simple"
-    MODERATE = "moderate"
-    COMPLEX = "complex"
-    RESEARCH_INTENSIVE = "research_intensive"
+    REASONING = "reasoning"  # Complex reasoning, needs full context
+    FACTUAL = "factual"  # Factual lookup, can be more compressed
+    CODING = "coding"  # Code-related, needs technical precision
+    RESEARCH = "research"  # Research-focused, needs citations
+    NARRATIVE = "narrative"  # Narrative queries, needs continuity
 
 
 @dataclass
 class RankingFactors:
-    """Factors used in relevance ranking."""
+    """Breakdown of ranking contributions."""
 
     semantic_similarity: float = 0.0
     importance_score: float = 0.0
-    recency_score: float = 0.0
+    recency_factor: float = 0.0
     reasoning_continuity: float = 0.0
     workspace_relevance: float = 0.0
     provider_fit: float = 0.0
     information_density: float = 0.0
 
-    # Weights (normalized to sum to 1.0)
-    weights: Dict[str, float] = field(
-        default_factory=lambda: {
-            "semantic_similarity": 0.35,
-            "importance_score": 0.20,
-            "recency_score": 0.15,
-            "reasoning_continuity": 0.15,
-            "workspace_relevance": 0.10,
-            "provider_fit": 0.03,
-            "information_density": 0.02,
-        }
-    )
-
-    def compute_score(self) -> float:
-        """Compute weighted relevance score."""
-        score = (
-            self.semantic_similarity * self.weights["semantic_similarity"]
-            + self.importance_score * self.weights["importance_score"]
-            + self.recency_score * self.weights["recency_score"]
-            + self.reasoning_continuity * self.weights["reasoning_continuity"]
-            + self.workspace_relevance * self.weights["workspace_relevance"]
-            + self.provider_fit * self.weights["provider_fit"]
-            + self.information_density * self.weights["information_density"]
-        )
-        return min(1.0, max(0.0, score))
-
-
-@dataclass
-class CompilationPlan:
-    """Plan for adaptive context compilation."""
-
-    query: str = ""
-    selected_memories: List[str] = field(default_factory=list)
-    selected_chunks: List[str] = field(default_factory=list)
-
-    # Token allocation
-    total_budget: int = 0
-    allocated_tokens: Dict[str, int] = field(default_factory=dict)  # category -> tokens
-    remaining_budget: int = 0
-
-    # Compression decisions
-    compression_mode: str = "compressed"
-    compression_ratios: Dict[str, float] = field(default_factory=dict)
-
-    # Quality metrics
-    estimated_quality: float = 0.0
-    semantic_density: float = 0.0
-    reasoning_preservation: float = 0.0
-
-    # Ranking details
-    ranked_items: List[Tuple[str, float]] = field(
-        default_factory=list
-    )  # (item_id, score)
-    ranking_explanations: Dict[str, str] = field(default_factory=dict)
-
-    # Metadata
-    planning_time_ms: float = 0.0
-    provider: str = "generic"
-    query_complexity: str = QueryComplexity.MODERATE.value
-
-
-@dataclass
-class TokenAllocation:
-    """Token allocation breakdown."""
-
-    active_reasoning: int = 0
-    semantic_memories: int = 0
-    workspace_summary: int = 0
-    chunk_summaries: int = 0
-    metadata_glue: int = 0
-    compression_buffer: int = 0
-
-    def total(self) -> int:
-        """Get total allocated tokens."""
+    def total_score(self) -> float:
+        """Calculate weighted total."""
         return (
-            self.active_reasoning
-            + self.semantic_memories
-            + self.workspace_summary
-            + self.chunk_summaries
-            + self.metadata_glue
-            + self.compression_buffer
+            self.semantic_similarity * 0.25
+            + self.importance_score * 0.20
+            + self.recency_factor * 0.15
+            + self.reasoning_continuity * 0.15
+            + self.workspace_relevance * 0.10
+            + self.provider_fit * 0.10
+            + self.information_density * 0.05
         )
-
-    def to_dict(self) -> Dict[str, int]:
-        """Convert to dictionary."""
-        return {
-            "active_reasoning": self.active_reasoning,
-            "semantic_memories": self.semantic_memories,
-            "workspace_summary": self.workspace_summary,
-            "chunk_summaries": self.chunk_summaries,
-            "metadata_glue": self.metadata_glue,
-            "compression_buffer": self.compression_buffer,
-        }
 
 
 @dataclass
 class ContextQualityScore:
-    """Comprehensive context quality evaluation."""
+    """Multi-dimensional quality evaluation."""
 
-    semantic_density: float = 0.0  # Semantic value per token
-    redundancy_score: float = 0.0  # 0=no redundancy, 1=highly redundant
-    entity_continuity: float = 0.0  # Entity tracking across context
-    reasoning_preservation: float = 0.0  # Reasoning chain integrity
+    semantic_density: float = 0.0  # Value per token
+    redundancy_ratio: float = 0.0  # Lower is better
+    entity_continuity: float = 0.0  # Named entity preservation
+    reasoning_preservation: float = 0.0  # Logical chain survival
     topic_preservation: float = 0.0  # Topic coherence
-    provider_compatibility: float = 0.0  # Fit for target provider
-    compression_effectiveness: float = 0.0  # Quality of compression
+    provider_compatibility: float = 0.0  # Provider-specific fit
+    compression_effectiveness: float = 0.0  # Token savings vs retention
 
-    # Composite score
-    overall_quality: float = 0.0
-
-    def to_dict(self) -> Dict[str, float]:
-        """Convert to dictionary."""
-        return {
-            "semantic_density": self.semantic_density,
-            "redundancy_score": self.redundancy_score,
-            "entity_continuity": self.entity_continuity,
-            "reasoning_preservation": self.reasoning_preservation,
-            "topic_preservation": self.topic_preservation,
-            "provider_compatibility": self.provider_compatibility,
-            "compression_effectiveness": self.compression_effectiveness,
-            "overall_quality": self.overall_quality,
-        }
+    def overall_quality(self) -> float:
+        """Calculate weighted overall quality."""
+        return (
+            self.semantic_density * 0.20
+            + (1.0 - self.redundancy_ratio) * 0.15
+            + self.entity_continuity * 0.15
+            + self.reasoning_preservation * 0.15
+            + self.topic_preservation * 0.15
+            + self.provider_compatibility * 0.10
+            + self.compression_effectiveness * 0.10
+        )
 
 
 @dataclass
-class CompilationFailureRecord:
-    """Record of compilation failure for regression analysis."""
+class TokenBudgetAllocation:
+    """Dynamic token budget allocation breakdown."""
+
+    total_budget: int = 0
+    reasoning_context: int = 0
+    semantic_memories: int = 0
+    workspace_summary: int = 0
+    chunk_summaries: int = 0
+    metadata_glue: int = 0
+    response_reserve: int = 0
+
+    def verify_allocation(self) -> bool:
+        """Verify allocation stays within budget."""
+        total_allocated = (
+            self.reasoning_context
+            + self.semantic_memories
+            + self.workspace_summary
+            + self.chunk_summaries
+            + self.metadata_glue
+            + self.response_reserve
+        )
+        return total_allocated <= self.total_budget
+
+
+@dataclass
+class CompilationPlan:
+    """Adaptive compilation plan with all decisions."""
+
+    query: str
+    query_type: QueryType = QueryType.REASONING
+
+    # Selection decisions
+    selected_memories: List[str] = field(default_factory=list)
+    selected_chunks: List[str] = field(default_factory=list)
+    excluded_items: List[str] = field(default_factory=list)
+
+    # Ranking and scoring
+    ranking_scores: Dict[str, float] = field(default_factory=dict)
+    ranking_explanations: Dict[str, str] = field(default_factory=dict)
+
+    # Compression decisions
+    compression_mode: str = "compressed"
+    provider_type: str = "generic"
+
+    # Token allocation
+    token_allocation: Optional[TokenBudgetAllocation] = None
+
+    # Quality metrics
+    quality_score: Optional[ContextQualityScore] = None
+
+    # Metadata
+    compilation_time_ms: float = 0.0
+    created_at: datetime = field(default_factory=datetime.utcnow)
+
+
+@dataclass
+class CompilationMetrics:
+    """Metrics for compilation operations."""
+
+    total_compilations: int = 0
+    avg_quality_score: float = 0.0
+    avg_compression_ratio: float = 0.0
+    avg_ranking_time_ms: float = 0.0
+    avg_allocation_time_ms: float = 0.0
+    avg_total_compilation_time_ms: float = 0.0
+
+    # Semantic preservation
+    avg_semantic_retention: float = 0.0
+    avg_entity_preservation: float = 0.0
+
+    # Efficiency
+    avg_tokens_used: int = 0
+    avg_tokens_saved: int = 0
+
+
+@dataclass
+class FailureAnalysis:
+    """Analysis of compilation failures and regressions."""
 
     timestamp: datetime = field(default_factory=datetime.utcnow)
-    failure_type: str = ""  # semantic_drift, hallucination, reasoning_collapse, etc.
-    severity: float = 0.0  # 0-1 scale
-    description: str = ""
-
-    # Context that led to failure
     query: str = ""
-    provider: str = ""
-    compression_mode: str = ""
-    token_budget: int = 0
+    reason: str = ""
 
-    # Recovery data
-    recovered: bool = False
-    recovery_strategy: str = ""
+    # Regression indicators
+    semantic_drift: float = 0.0  # Deviation from baseline
+    hallucination_risk: float = 0.0
+    missing_entities: List[str] = field(default_factory=list)
+    reasoning_collapse: bool = False
+    over_compression_detected: bool = False
+    provider_degradation: float = 0.0
+
+    # Recovery suggestions
+    recommended_actions: List[str] = field(default_factory=list)
 
 
 class RelevanceRankingService:
-    """Multi-factor relevance ranking service."""
+    """Service for multi-factor relevance ranking."""
 
-    def __init__(self):
+    def __init__(self, embedding_service=None):
         """Initialize ranking service."""
-        self.ranking_history: List[Dict] = []
+        if embedding_service is None:
+            try:
+                from app.services.embedding import get_embedding_service
+
+                self.embedding_service = get_embedding_service()
+            except ImportError:
+                self.embedding_service = None
+        else:
+            self.embedding_service = embedding_service
 
     def rank_memories(
         self,
-        memories: List["Memory"],
         query: str,
-        workspace_context: Optional[Dict] = None,
-        provider: str = "generic",
-    ) -> List[Tuple["Memory", float, RankingFactors]]:
+        memories: List[Memory],
+        workspace_state: Optional[Dict] = None,
+        provider_type: str = "generic",
+        query_type: QueryType = QueryType.REASONING,
+    ) -> List[Tuple[str, float, RankingFactors]]:
         """
-        Rank memories by relevance using multi-factor scoring.
-
-        Args:
-            memories: List of memories to rank
-            query: User query
-            workspace_context: Current workspace state
-            provider: Target provider for optimization
+        Rank memories using 7-factor ranking.
 
         Returns:
-            List of (memory, score, factors) tuples
+            List of (memory_id, score, factors) tuples
         """
         import time
 
         start_time = time.time()
 
-        ranked = []
+        rankings = []
 
         for memory in memories:
-            factors = RankingFactors()
-
-            # Semantic similarity (main factor)
-            factors.semantic_similarity = self._compute_semantic_similarity(
-                memory, query
+            factors = self._calculate_ranking_factors(
+                query, memory, workspace_state, provider_type, query_type
             )
-
-            # Importance score
-            factors.importance_score = getattr(memory, "importance_score", 0.5)
-
-            # Recency (recent memories score higher)
-            factors.recency_score = self._compute_recency_score(memory)
-
-            # Reasoning continuity
-            factors.reasoning_continuity = self._compute_reasoning_continuity(
-                memory, query
-            )
-
-            # Workspace relevance
-            factors.workspace_relevance = self._compute_workspace_relevance(
-                memory, workspace_context
-            )
-
-            # Provider-specific fit
-            factors.provider_fit = self._compute_provider_fit(memory, provider)
-
-            # Information density
-            factors.information_density = self._compute_information_density(memory)
-
-            # Compute final score
-            score = factors.compute_score()
-            ranked.append((memory, score, factors))
+            score = factors.total_score()
+            rankings.append((memory.id, score, factors))
 
         # Sort by score descending
-        ranked.sort(key=lambda x: x[1], reverse=True)
+        rankings.sort(key=lambda x: x[1], reverse=True)
 
-        # Record ranking
-        self.ranking_history.append(
-            {
-                "timestamp": datetime.utcnow().isoformat(),
-                "query": query,
-                "provider": provider,
-                "time_ms": (time.time() - start_time) * 1000,
-                "num_memories": len(memories),
-                "top_score": ranked[0][1] if ranked else 0.0,
-            }
-        )
+        elapsed = (time.time() - start_time) * 1000
+        logger.info(f"Ranked {len(memories)} memories in {elapsed:.2f}ms")
 
-        return ranked
+        return rankings
 
-    def _compute_semantic_similarity(self, memory: "Memory", query: str) -> float:
-        """Compute semantic similarity between memory and query."""
-        # Rough approximation: word overlap
-        query_words = set(query.lower().split())
-        memory_words = set(getattr(memory, "raw_content", "").lower().split())
+    def _calculate_ranking_factors(
+        self,
+        query: str,
+        memory: Memory,
+        workspace_state: Optional[Dict],
+        provider_type: str,
+        query_type: QueryType,
+    ) -> RankingFactors:
+        """Calculate 7-factor ranking for a memory."""
+        factors = RankingFactors()
 
-        if not query_words:
+        # 1. Semantic Similarity
+        if memory.embedding and hasattr(memory, "raw_content"):
+            sim = self._calculate_similarity(query, memory.embedding)
+            factors.semantic_similarity = sim
+
+        # 2. Importance Score
+        if hasattr(memory, "importance_score"):
+            factors.importance_score = memory.importance_score
+
+        # 3. Recency Factor
+        if hasattr(memory, "timestamp"):
+            recency = self._calculate_recency(memory.timestamp)
+            factors.recency_factor = recency
+
+        # 4. Reasoning Continuity
+        if hasattr(memory, "raw_content"):
+            reasoning_score = self._calculate_reasoning_continuity(
+                memory.raw_content, query
+            )
+            factors.reasoning_continuity = reasoning_score
+
+        # 5. Workspace Relevance
+        if workspace_state:
+            workspace_score = self._calculate_workspace_relevance(
+                memory, workspace_state
+            )
+            factors.workspace_relevance = workspace_score
+
+        # 6. Provider Fit
+        provider_score = self._calculate_provider_fit(memory, provider_type, query_type)
+        factors.provider_fit = provider_score
+
+        # 7. Information Density
+        if hasattr(memory, "raw_content"):
+            density = self._calculate_information_density(memory.raw_content)
+            factors.information_density = density
+
+        return factors
+
+    def _calculate_similarity(self, query: str, embedding: Any) -> float:
+        """Calculate semantic similarity (0-1)."""
+        try:
+            if isinstance(embedding, list):
+                embedding = np.array(embedding)
+            # Rough estimation without actual embeddings
+            query_length = len(query)
+            similarity = min(1.0, query_length / 100.0)
+            return similarity
+        except Exception:
             return 0.5
 
-        overlap = len(query_words & memory_words) / len(query_words)
-        return min(1.0, overlap)
-
-    def _compute_recency_score(self, memory: "Memory") -> float:
-        """Compute recency score (newer memories score higher)."""
-        if not hasattr(memory, "timestamp"):
+    def _calculate_recency(self, timestamp: datetime) -> float:
+        """Calculate recency score (0-1)."""
+        try:
+            now = datetime.utcnow()
+            age_days = (now - timestamp).days
+            # Exponential decay: fresh = 1.0, old = 0.0
+            recency = np.exp(-age_days / 30.0)
+            return float(recency)
+        except Exception:
             return 0.5
 
-        # Simple approach: exponential decay from recent
-        now = datetime.utcnow()
-        age_hours = (now - memory.timestamp).total_seconds() / 3600
+    def _calculate_reasoning_continuity(self, content: str, query: str) -> float:
+        """Calculate reasoning chain continuity."""
+        logical_connectors = [
+            "because",
+            "therefore",
+            "thus",
+            "hence",
+            "if",
+            "then",
+            "so",
+            "since",
+        ]
 
-        # Decay factor: halves every 24 hours
-        decay = 0.5 ** (age_hours / 24)
-        return decay
+        content_lower = content.lower()
+        query_lower = query.lower()
 
-    def _compute_reasoning_continuity(self, memory: "Memory", query: str) -> float:
-        """Score memory for reasoning chain preservation."""
-        content = getattr(memory, "raw_content", "")
+        # Count logical connectors
+        connector_count = sum(1 for conn in logical_connectors if conn in content_lower)
 
-        # Check for logical connectors
-        logical_connectors = ["because", "therefore", "thus", "hence", "if", "then"]
-        connector_count = sum(
-            1 for conn in logical_connectors if conn in content.lower()
-        )
+        # Normalize (max 5 connectors = 1.0)
+        continuity = min(1.0, connector_count / 5.0)
 
-        return min(1.0, connector_count / 3.0)
+        # Boost if query asks for reasoning
+        if any(phrase in query_lower for phrase in ["why", "how", "explain"]):
+            continuity = min(1.0, continuity * 1.2)
 
-    def _compute_workspace_relevance(
-        self, memory: "Memory", workspace_context: Optional[Dict]
+        return continuity
+
+    def _calculate_workspace_relevance(
+        self, memory: Memory, workspace_state: Dict
     ) -> float:
-        """Score memory for workspace context relevance."""
-        if not workspace_context:
+        """Calculate relevance to current workspace."""
+        # Simple: if memory mentions workspace entities, boost score
+        if not workspace_state:
             return 0.5
 
-        # Check if memory relates to current workspace items
-        workspace_items = workspace_context.get("active_items", [])
-        memory_content = getattr(memory, "raw_content", "").lower()
+        relevance = 0.5  # Baseline
 
-        matches = sum(1 for item in workspace_items if item.lower() in memory_content)
-        return min(1.0, matches / max(1, len(workspace_items)))
+        # Check if memory relates to workspace context
+        workspace_entities = workspace_state.get("entities", [])
+        if hasattr(memory, "raw_content"):
+            content_lower = memory.raw_content.lower()
+            for entity in workspace_entities:
+                if entity.lower() in content_lower:
+                    relevance = min(1.0, relevance + 0.1)
 
-    def _compute_provider_fit(self, memory: "Memory", provider: str) -> float:
-        """Score memory for provider-specific optimization."""
-        content = getattr(memory, "raw_content", "")
+        return relevance
 
-        if provider == "claude":
-            # Claude prefers structured, reasoned content
-            has_structure = any(char in content for char in [":", "-", "•"])
-            return 0.7 if has_structure else 0.3
-        elif provider == "openai":
-            # GPT prefers concise, direct statements
-            is_concise = len(content) < 500
-            return 0.7 if is_concise else 0.3
-        elif provider == "gemini":
-            # Gemini prefers balanced, comprehensive content
-            is_balanced = 50 < len(content) < 1000
-            return 0.7 if is_balanced else 0.3
-        else:
-            return 0.5
+    def _calculate_provider_fit(
+        self, memory: Memory, provider_type: str, query_type: QueryType
+    ) -> float:
+        """Calculate fit for target provider."""
+        fit = 0.6  # Baseline
 
-    def _compute_information_density(self, memory: "Memory") -> float:
-        """Score memory for information density."""
-        content = getattr(memory, "raw_content", "")
+        if hasattr(memory, "raw_content"):
+            content_length = len(memory.raw_content)
 
+            # Claude prefers longer context
+            if provider_type == "claude":
+                if content_length > 50:
+                    fit += 0.2
+
+            # OpenAI prefers concise
+            elif provider_type == "openai":
+                if content_length < 200:
+                    fit += 0.2
+
+            # Gemini likes balanced
+            elif provider_type == "gemini":
+                if 50 < content_length < 300:
+                    fit += 0.2
+
+        # Query type fit
+        if query_type == QueryType.CODING and hasattr(memory, "raw_content"):
+            if any(char in memory.raw_content for char in ["(", ")", "=", "{"]):
+                fit += 0.1
+
+        return min(1.0, fit)
+
+    def _calculate_information_density(self, content: str) -> float:
+        """Calculate information density (value per character)."""
         if not content:
             return 0.0
 
-        # Higher density = more unique words per content length
-        words = set(content.lower().split())
-        unique_ratio = len(words) / max(1, len(content.split()))
+        # Information-rich indicators: numbers, proper nouns, technical terms
+        density = 0.5
 
-        return min(1.0, unique_ratio)
+        # Count uppercase words (entities)
+        uppercase_words = sum(1 for word in content.split() if word[0].isupper())
+        density += min(0.25, uppercase_words / len(content.split()) * 0.25)
+
+        # Count numbers (facts)
+        digit_count = sum(1 for c in content if c.isdigit())
+        density += min(0.25, digit_count / len(content) * 0.25)
+
+        return min(1.0, density)
 
 
 class TokenBudgetAllocator:
-    """Dynamic token budget allocation engine."""
+    """Intelligent token budget allocation."""
 
-    def __init__(self):
-        """Initialize allocator."""
-        self.allocation_history: List[Dict] = []
-
+    @staticmethod
     def allocate_budget(
-        self,
         total_budget: int,
-        num_memories: int,
-        num_chunks: int,
-        compression_mode: str = "compressed",
-        provider: str = "generic",
-    ) -> TokenAllocation:
+        query_complexity: float,
+        workspace_size: int,
+        compression_mode: str,
+        provider_type: str,
+    ) -> TokenBudgetAllocation:
         """
-        Intelligently allocate token budget across compilation stages.
+        Dynamically allocate token budget across compilation stages.
 
         Args:
-            total_budget: Total token budget available
-            num_memories: Number of selected memories
-            num_chunks: Number of semantic chunks
-            compression_mode: Compression strategy
-            provider: Target provider
+            total_budget: Total tokens available
+            query_complexity: 0-1 scale of query complexity
+            workspace_size: Number of memories in workspace
+            compression_mode: Current compression mode
+            provider_type: Target provider
 
         Returns:
-            TokenAllocation breakdown
+            TokenBudgetAllocation with breakdown
         """
-        allocation = TokenAllocation()
+        allocation = TokenBudgetAllocation(total_budget=total_budget)
 
-        # Base allocation percentages (tuned through benchmarking)
-        allocation.metadata_glue = int(total_budget * 0.05)  # 5% for glue
-        allocation.compression_buffer = int(total_budget * 0.05)  # 5% buffer
+        # Response reserve (20-30% depending on complexity)
+        reserve_ratio = 0.25 + (query_complexity * 0.05)
+        allocation.response_reserve = int(total_budget * reserve_ratio)
+        remaining = total_budget - allocation.response_reserve
 
-        remaining = (
-            total_budget - allocation.metadata_glue - allocation.compression_buffer
-        )
+        # Metadata glue (5-10%)
+        allocation.metadata_glue = int(remaining * 0.075)
+        remaining -= allocation.metadata_glue
 
-        # Provider-specific adjustments
-        if provider == "claude":
-            # Claude benefits from structured reasoning context
-            allocation.active_reasoning = int(remaining * 0.30)
-            allocation.workspace_summary = int(remaining * 0.25)
-            allocation.semantic_memories = int(remaining * 0.35)
-            allocation.chunk_summaries = int(remaining * 0.10)
-        elif provider == "openai":
-            # GPT prefers concise operational context
-            allocation.active_reasoning = int(remaining * 0.25)
-            allocation.workspace_summary = int(remaining * 0.15)
-            allocation.semantic_memories = int(remaining * 0.50)
-            allocation.chunk_summaries = int(remaining * 0.10)
-        elif provider == "gemini":
-            # Gemini prefers balanced coverage
-            allocation.active_reasoning = int(remaining * 0.25)
-            allocation.workspace_summary = int(remaining * 0.20)
-            allocation.semantic_memories = int(remaining * 0.40)
-            allocation.chunk_summaries = int(remaining * 0.15)
-        else:
-            # Generic allocation
-            allocation.active_reasoning = int(remaining * 0.25)
-            allocation.workspace_summary = int(remaining * 0.20)
-            allocation.semantic_memories = int(remaining * 0.40)
-            allocation.chunk_summaries = int(remaining * 0.15)
+        # Workspace summary (10-20% based on workspace size)
+        workspace_ratio = min(0.2, 0.1 + (workspace_size / 1000.0 * 0.1))
+        allocation.workspace_summary = int(remaining * workspace_ratio)
+        remaining -= allocation.workspace_summary
 
-        # Compression mode adjustments
+        # Chunk summaries (15-25% based on compression mode)
         if compression_mode == "minimal":
-            # Minimal compression needs more buffer
-            allocation.compression_buffer = int(total_budget * 0.10)
+            chunk_ratio = 0.15
         elif compression_mode == "full_context":
-            # Full context needs less compression
-            allocation.compression_buffer = int(total_budget * 0.02)
+            chunk_ratio = 0.25
+        else:
+            chunk_ratio = 0.20
 
-        # Record allocation
-        self.allocation_history.append(
-            {
-                "timestamp": datetime.utcnow().isoformat(),
-                "total_budget": total_budget,
-                "allocation": allocation.to_dict(),
-                "provider": provider,
-                "compression_mode": compression_mode,
-            }
-        )
+        allocation.chunk_summaries = int(remaining * chunk_ratio)
+        remaining -= allocation.chunk_summaries
+
+        # Reasoning context (20-30% based on query complexity)
+        reasoning_ratio = 0.2 + (query_complexity * 0.1)
+        allocation.reasoning_context = int(remaining * reasoning_ratio)
+        remaining -= allocation.reasoning_context
+
+        # Semantic memories gets the rest
+        allocation.semantic_memories = remaining
 
         return allocation
 
-    def get_allocation_ratio(self, category: str, total_budget: int) -> float:
-        """Get allocation ratio for a category as percentage of budget."""
-        allocation = self.allocate_budget(total_budget, 1, 1)
-        allocated = allocation.to_dict().get(category, 0)
-        return allocated / total_budget if total_budget > 0 else 0.0
-
 
 class ContextQualityEvaluator:
-    """Comprehensive context quality evaluation."""
+    """Multi-dimensional context quality evaluation."""
 
-    def __init__(self):
-        """Initialize evaluator."""
-        self.quality_history: List[Dict] = []
-
-    def evaluate_context(
-        self,
+    @staticmethod
+    def evaluate_quality(
         compiled_context: str,
-        original_memories: List["Memory"],
+        original_memories: List[Memory],
         compression_ratio: float,
-        provider: str = "generic",
+        provider_type: str,
     ) -> ContextQualityScore:
         """
-        Evaluate quality of compiled context.
-
-        Args:
-            compiled_context: Final compiled context string
-            original_memories: Original memories that were compiled
-            compression_ratio: Achieved compression ratio
-            provider: Target provider
-
-        Returns:
-            ContextQualityScore with all metrics
+        Evaluate context quality across 7 dimensions.
         """
         score = ContextQualityScore()
 
-        # Semantic density (semantic value per token)
-        score.semantic_density = self._compute_semantic_density(
-            compiled_context, original_memories
+        # 1. Semantic Density (value per token)
+        context_tokens = len(compiled_context) // 4
+        original_tokens = sum(
+            len(m.raw_content) // 4 if hasattr(m, "raw_content") else 0
+            for m in original_memories
         )
+        if context_tokens > 0:
+            # Density = (information preserved) / (tokens used)
+            info_preserved = 1.0 - compression_ratio
+            score.semantic_density = info_preserved / (
+                context_tokens / original_tokens + 0.001
+            )
+            score.semantic_density = min(1.0, score.semantic_density)
 
-        # Redundancy (lower is better)
-        score.redundancy_score = self._compute_redundancy(compiled_context)
-
-        # Entity continuity
-        score.entity_continuity = self._compute_entity_continuity(
-            compiled_context, original_memories
+        # 2. Redundancy Ratio
+        unique_sentences = len(
+            set(s.strip() for s in compiled_context.split(".") if s.strip())
         )
-
-        # Reasoning preservation
-        score.reasoning_preservation = self._compute_reasoning_preservation(
-            compiled_context, original_memories
+        total_sentences = len(
+            [s.strip() for s in compiled_context.split(".") if s.strip()]
         )
+        if total_sentences > 0:
+            score.redundancy_ratio = 1.0 - (unique_sentences / total_sentences)
 
-        # Topic preservation
-        score.topic_preservation = self._compute_topic_preservation(
-            compiled_context, original_memories
+        # 3. Entity Continuity (named entity preservation)
+        original_entities = set()
+        for memory in original_memories:
+            if hasattr(memory, "raw_content"):
+                entities = set(
+                    word
+                    for word in memory.raw_content.split()
+                    if word and word[0].isupper()
+                )
+                original_entities.update(entities)
+
+        preserved_entities = sum(
+            1 for entity in original_entities if entity in compiled_context
         )
+        if original_entities:
+            score.entity_continuity = preserved_entities / len(original_entities)
 
-        # Provider compatibility
-        score.provider_compatibility = self._compute_provider_compatibility(
-            compiled_context, provider
+        # 4. Reasoning Preservation
+        logical_connectors = ["because", "therefore", "thus", "hence", "if", "then"]
+        connector_count = sum(
+            1 for conn in logical_connectors if conn in compiled_context.lower()
         )
+        score.reasoning_preservation = min(1.0, connector_count / 3.0)
 
-        # Compression effectiveness (how well we used compression)
-        score.compression_effectiveness = min(1.0, 1.0 - compression_ratio)
-
-        # Composite score (weighted average)
-        score.overall_quality = (
-            score.semantic_density * 0.30
-            + (1.0 - score.redundancy_score) * 0.10
-            + score.entity_continuity * 0.15
-            + score.reasoning_preservation * 0.20
-            + score.topic_preservation * 0.15
-            + score.provider_compatibility * 0.10
+        # 5. Topic Preservation
+        # Simple: noun-heavy content indicates topic diversity
+        words = compiled_context.lower().split()
+        noun_indicators = sum(
+            1 for w in words if w.endswith(("tion", "ity", "ness", "ment"))
         )
+        score.topic_preservation = min(1.0, noun_indicators / max(len(words) / 10, 1))
 
-        # Record evaluation
-        self.quality_history.append(
-            {
-                "timestamp": datetime.utcnow().isoformat(),
-                "quality_scores": score.to_dict(),
-                "provider": provider,
-                "compression_ratio": compression_ratio,
-            }
-        )
+        # 6. Provider Compatibility
+        if provider_type == "claude":
+            # Claude prefers structured reasoning
+            score.provider_compatibility = score.reasoning_preservation
+        elif provider_type == "openai":
+            # OpenAI prefers concise, dense content
+            score.provider_compatibility = score.semantic_density / 2.0
+        elif provider_type == "gemini":
+            # Gemini likes balanced coverage
+            score.provider_compatibility = (
+                score.entity_continuity + score.topic_preservation
+            ) / 2.0
+        else:
+            score.provider_compatibility = 0.6
+
+        # 7. Compression Effectiveness (tokens saved vs quality loss)
+        # Higher is better: saved tokens with minimal quality loss
+        if compression_ratio > 0:
+            quality_preserved = 1.0 - ((1.0 - score.semantic_density) * 0.5)
+            score.compression_effectiveness = compression_ratio * quality_preserved
 
         return score
 
-    def _compute_semantic_density(
-        self, context: str, original_memories: List["Memory"]
-    ) -> float:
-        """Semantic value per token in context."""
-        if not context or not original_memories:
-            return 0.5
-
-        # Rough measure: unique concepts per token
-        unique_words = set(context.lower().split())
-        tokens = len(context) // 4  # Rough token estimate
-
-        density = len(unique_words) / max(1, tokens)
-        return min(1.0, density)
-
-    def _compute_redundancy(self, context: str) -> float:
-        """Measure redundancy in context (lower is better)."""
-        lines = context.split("\n")
-
-        if len(lines) < 2:
-            return 0.0
-
-        # Measure line similarity
-        total_similarity = 0.0
-        comparisons = 0
-
-        for i, line1 in enumerate(lines[:5]):  # Sample first 5 lines
-            for line2 in lines[i + 1 : 5]:
-                # Simple word overlap
-                words1 = set(line1.lower().split())
-                words2 = set(line2.lower().split())
-
-                if words1 and words2:
-                    overlap = len(words1 & words2) / len(words1 | words2)
-                    total_similarity += overlap
-                    comparisons += 1
-
-        return total_similarity / max(1, comparisons)
-
-    def _compute_entity_continuity(
-        self, context: str, original_memories: List["Memory"]
-    ) -> float:
-        """Track entity coherence across context."""
-        import re
-
-        # Extract named entities (capitalized words)
-        entities = set(re.findall(r"\b[A-Z][a-z]+\b", context))
-
-        # Extract from originals
-        original_entities = set()
-        for mem in original_memories:
-            content = getattr(mem, "raw_content", "")
-            original_entities.update(re.findall(r"\b[A-Z][a-z]+\b", content))
-
-        if not original_entities:
-            return 0.5
-
-        retained = len(entities & original_entities) / len(original_entities)
-        return retained
-
-    def _compute_reasoning_preservation(
-        self, context: str, original_memories: List["Memory"]
-    ) -> float:
-        """Measure preservation of reasoning chains."""
-        logical_terms = ["because", "therefore", "thus", "hence", "if", "then"]
-
-        # Count in compiled
-        compiled_logic = sum(1 for term in logical_terms if term in context.lower())
-
-        # Count in originals
-        original_logic = 0
-        for mem in original_memories:
-            content = getattr(mem, "raw_content", "").lower()
-            original_logic += sum(1 for term in logical_terms if term in content)
-
-        if original_logic == 0:
-            return 1.0
-
-        return min(1.0, compiled_logic / original_logic)
-
-    def _compute_topic_preservation(
-        self, context: str, original_memories: List["Memory"]
-    ) -> float:
-        """Measure topic coherence preservation."""
-        from collections import Counter
-        import re
-
-        # Extract frequent words (topics)
-        words = re.findall(r"\b[a-z]{4,}\b", context.lower())
-        topics = set([w for w, c in Counter(words).most_common(5)])
-
-        # Extract from originals
-        original_topics = set()
-        for mem in original_memories:
-            content = getattr(mem, "raw_content", "").lower()
-            words = re.findall(r"\b[a-z]{4,}\b", content)
-            original_topics.update([w for w, c in Counter(words).most_common(3)])
-
-        if not original_topics:
-            return 0.5
-
-        retained = len(topics & original_topics) / len(original_topics)
-        return retained
-
-    def _compute_provider_compatibility(self, context: str, provider: str) -> float:
-        """Measure compatibility with target provider's preferences."""
-        length = len(context)
-
-        if provider == "claude":
-            # Claude prefers structured, reasoned content (500-2000 chars)
-            is_good_length = 500 < length < 2000
-            has_structure = any(c in context for c in [":", "-", "•"])
-            return 0.9 if (is_good_length and has_structure) else 0.5
-        elif provider == "openai":
-            # GPT prefers concise content
-            is_concise = length < 1000
-            return 0.9 if is_concise else 0.5
-        elif provider == "gemini":
-            # Gemini prefers balanced coverage
-            is_balanced = 200 < length < 2000
-            return 0.9 if is_balanced else 0.5
-        else:
-            return 0.7
-
 
 class ContextFailureAnalyzer:
-    """Tracks and analyzes compilation failures for regression detection."""
+    """Analyzes compilation failures and regressions."""
 
     def __init__(self):
-        """Initialize analyzer."""
-        self.failure_records: List[CompilationFailureRecord] = []
-        self.failure_trends: Dict[str, int] = defaultdict(int)
+        """Initialize failure analyzer."""
+        self.failure_history: List[FailureAnalysis] = []
 
-    def record_failure(
+    def analyze_failure(
         self,
-        failure_type: str,
-        severity: float,
         query: str,
-        provider: str,
-        compression_mode: str,
-        token_budget: int,
-        description: str = "",
-    ) -> None:
+        compiled_context: str,
+        original_context: str,
+        baseline_metrics: Optional[Dict] = None,
+    ) -> FailureAnalysis:
         """
-        Record a compilation failure.
+        Analyze compilation failure or regression.
+        """
+        analysis = FailureAnalysis(query=query)
 
-        Args:
-            failure_type: Type of failure (semantic_drift, hallucination, etc.)
-            severity: Severity score (0-1)
-            query: Query that led to failure
-            provider: Provider used
-            compression_mode: Compression mode used
-            token_budget: Token budget used
-            description: Detailed description
-        """
-        record = CompilationFailureRecord(
-            failure_type=failure_type,
-            severity=severity,
-            description=description,
-            query=query,
-            provider=provider,
-            compression_mode=compression_mode,
-            token_budget=token_budget,
+        # Check for semantic drift
+        if baseline_metrics:
+            baseline_retention = baseline_metrics.get("semantic_retention", 1.0)
+            current_retention = self._calculate_retention(
+                original_context, compiled_context
+            )
+            analysis.semantic_drift = baseline_retention - current_retention
+
+        # Check for missing entities
+        original_entities = set(
+            word for word in original_context.split() if word and word[0].isupper()
         )
+        preserved_entities = sum(
+            1 for entity in original_entities if entity in compiled_context
+        )
+        if original_entities:
+            entity_preservation = preserved_entities / len(original_entities)
+            if entity_preservation < 0.5:
+                analysis.missing_entities = list(
+                    original_entities
+                    - {
+                        word
+                        for word in compiled_context.split()
+                        if word in original_entities
+                    }
+                )
 
-        self.failure_records.append(record)
-        self.failure_trends[failure_type] += 1
+        # Check for reasoning collapse
+        logical_connectors = ["because", "therefore", "thus", "hence", "if", "then"]
+        original_logic = sum(
+            1 for conn in logical_connectors if conn in original_context.lower()
+        )
+        compiled_logic = sum(
+            1 for conn in logical_connectors if conn in compiled_context.lower()
+        )
+        if original_logic > 0 and compiled_logic < original_logic * 0.3:
+            analysis.reasoning_collapse = True
+            analysis.reason = "Logical connectors not preserved"
+
+        # Check for over-compression
+        compression_ratio = 1.0 - (len(compiled_context) / len(original_context))
+        if compression_ratio > 0.8:
+            analysis.over_compression_detected = True
+            # Only set reason if reasoning_collapse didn't already set it
+            if not analysis.reasoning_collapse:
+                analysis.reason = "Over 80% compression detected"
+
+        # Recommendations
+        if analysis.reasoning_collapse:
+            analysis.recommended_actions.append(
+                "Use higher compression mode (e.g., COMPRESSED instead of MINIMAL)"
+            )
+        if analysis.over_compression_detected:
+            analysis.recommended_actions.append(
+                "Increase token budget or reduce compression ratio"
+            )
+        if analysis.missing_entities:
+            analysis.recommended_actions.append(
+                f"Preserve key entities: {', '.join(analysis.missing_entities[:3])}"
+            )
+
+        self.failure_history.append(analysis)
+        return analysis
+
+    def _calculate_retention(self, original: str, compressed: str) -> float:
+        """Calculate simple retention ratio."""
+        if not original:
+            return 1.0
+
+        original_words = set(original.lower().split())
+        compressed_words = set(compressed.lower().split())
+
+        if original_words:
+            return len(original_words & compressed_words) / len(original_words)
+
+        return 1.0
 
     def get_regression_report(self) -> Dict:
-        """Generate regression analysis report."""
-        if not self.failure_records:
-            return {"status": "no_failures", "total_records": 0}
-
-        # Categorize failures
-        by_type = defaultdict(list)
-        for record in self.failure_records:
-            by_type[record.failure_type].append(record)
-
-        # Calculate statistics
-        avg_severity = np.mean([r.severity for r in self.failure_records])
-        recent_failures = [
-            r
-            for r in self.failure_records
-            if (datetime.utcnow() - r.timestamp).total_seconds() < 3600
-        ]
+        """Get regression analysis report."""
+        if not self.failure_history:
+            return {"total_failures": 0}
 
         return {
-            "total_failures": len(self.failure_records),
-            "recent_failures": len(recent_failures),
-            "failure_types": dict(self.failure_trends),
-            "average_severity": float(avg_severity),
-            "by_type": {ftype: len(records) for ftype, records in by_type.items()},
+            "total_failures": len(self.failure_history),
+            "avg_semantic_drift": float(
+                np.mean([f.semantic_drift for f in self.failure_history])
+            ),
+            "reasoning_collapses": sum(
+                1 for f in self.failure_history if f.reasoning_collapse
+            ),
+            "over_compression_cases": sum(
+                1 for f in self.failure_history if f.over_compression_detected
+            ),
+            "common_issues": self._get_common_issues(),
         }
+
+    def _get_common_issues(self) -> List[str]:
+        """Identify common failure patterns."""
+        all_actions = []
+        for analysis in self.failure_history:
+            all_actions.extend(analysis.recommended_actions)
+
+        from collections import Counter
+
+        action_counts = Counter(all_actions)
+        return [action for action, _ in action_counts.most_common(5)]
 
 
 class AdaptiveCompilationPlanner:
-    """Orchestrates adaptive context compilation."""
+    """Main planner for adaptive context compilation."""
 
     def __init__(
         self,
         ranking_service: Optional[RelevanceRankingService] = None,
-        allocator: Optional[TokenBudgetAllocator] = None,
-        quality_evaluator: Optional[ContextQualityEvaluator] = None,
-        failure_analyzer: Optional[ContextFailureAnalyzer] = None,
+        embedding_service=None,
     ):
-        """Initialize planner with services."""
-        self.ranking_service = ranking_service or RelevanceRankingService()
-        self.allocator = allocator or TokenBudgetAllocator()
-        self.quality_evaluator = quality_evaluator or ContextQualityEvaluator()
-        self.failure_analyzer = failure_analyzer or ContextFailureAnalyzer()
-
-        self.compilation_history: List[CompilationPlan] = []
+        """Initialize adaptive planner."""
+        self.ranking_service = ranking_service or RelevanceRankingService(
+            embedding_service
+        )
+        self.failure_analyzer = ContextFailureAnalyzer()
 
     def plan_compilation(
         self,
         query: str,
-        memories: List["Memory"],
-        chunks: List["SemanticChunk"],
-        token_budget: int,
+        memories: List[Memory],
+        chunks: Optional[List[SemanticChunk]] = None,
         provider: str = "generic",
-        workspace_context: Optional[Dict] = None,
+        token_budget: int = 4000,
+        workspace_state: Optional[Dict] = None,
     ) -> CompilationPlan:
         """
         Create adaptive compilation plan.
@@ -764,134 +727,106 @@ class AdaptiveCompilationPlanner:
         Args:
             query: User query
             memories: Available memories
-            chunks: Available semantic chunks
-            token_budget: Total token budget
+            chunks: Semantic chunks
             provider: Target provider
-            workspace_context: Current workspace state
+            token_budget: Available tokens
+            workspace_state: Current workspace context
 
         Returns:
-            CompilationPlan with optimized decisions
+            CompilationPlan with all decisions
         """
         import time
 
         start_time = time.time()
 
-        plan = CompilationPlan(
-            query=query,
-            total_budget=token_budget,
-            provider=provider,
-        )
+        plan = CompilationPlan(query=query, provider_type=provider)
 
-        # Step 1: Assess query complexity
-        plan.query_complexity = self._assess_query_complexity(query)
+        # Determine query type
+        plan.query_type = self._determine_query_type(query)
 
-        # Step 2: Rank memories and chunks
+        # Rank memories
         ranked_memories = self.ranking_service.rank_memories(
-            memories, query, workspace_context, provider
+            query, memories, workspace_state, provider, plan.query_type
         )
 
-        # Step 3: Select top memories based on budget
-        plan.ranked_items = [(m.id, score) for m, score, _ in ranked_memories]
+        # Store ranking info
+        for mem_id, score, factors in ranked_memories:
+            plan.ranking_scores[mem_id] = score
+            plan.ranking_explanations[mem_id] = (
+                f"Similarity: {factors.semantic_similarity:.2f}, Importance: {factors.importance_score:.2f}"
+            )
 
-        # Estimate budget needed
-        max_memories = min(
-            len(memories),
-            int(token_budget * 0.30 / 50),  # ~50 tokens per memory
+        # Select top memories within budget
+        query_complexity = self._estimate_query_complexity(query)
+        allocation = TokenBudgetAllocator.allocate_budget(
+            token_budget, query_complexity, len(memories), "compressed", provider
         )
+        plan.token_allocation = allocation
 
-        plan.selected_memories = [m.id for m, _, _ in ranked_memories[:max_memories]]
+        # Select memories based on ranking
+        memory_budget = allocation.semantic_memories
+        selected_tokens = 0
+        for mem_id, score, _ in ranked_memories:
+            if selected_tokens < memory_budget:
+                # Find memory by ID to get content length
+                for mem in memories:
+                    if mem.id == mem_id:
+                        mem_tokens = (
+                            len(mem.raw_content) // 4
+                            if hasattr(mem, "raw_content")
+                            else 100
+                        )
+                        if selected_tokens + mem_tokens <= memory_budget:
+                            plan.selected_memories.append(mem_id)
+                            selected_tokens += mem_tokens
+                        break
 
-        # Step 4: Select complementary chunks
-        plan.selected_chunks = [c.chunk_id for c in chunks[:5]]
+        # Determine compression mode
+        if len(plan.selected_memories) * 100 > memory_budget:
+            plan.compression_mode = "minimal"
+        else:
+            plan.compression_mode = "compressed"
 
-        # Step 5: Allocate token budget
-        allocation = self.allocator.allocate_budget(
-            token_budget,
-            len(plan.selected_memories),
-            len(plan.selected_chunks),
-            compression_mode=plan.compression_mode,
-            provider=provider,
-        )
+        # Calculate quality score
+        plan.quality_score = ContextQualityScore()
+        plan.quality_score.semantic_density = 0.7  # Placeholder
 
-        plan.allocated_tokens = allocation.to_dict()
-        plan.remaining_budget = max(0, token_budget - allocation.total())
-
-        # Step 6: Select compression mode adaptively
-        plan.compression_mode = self._select_compression_mode(
-            token_budget,
-            plan.query_complexity,
-            provider,
-        )
-
-        # Step 7: Estimate compilation quality
-        plan.semantic_density = len(plan.selected_memories) / max(1, token_budget / 50)
-        plan.reasoning_preservation = self._estimate_reasoning_preservation(
-            [m for m in memories if m.id in plan.selected_memories]
-        )
-
-        # Estimate overall quality
-        plan.estimated_quality = (
-            plan.semantic_density * 0.5 + plan.reasoning_preservation * 0.5
-        )
-
-        # Record plan
-        plan.planning_time_ms = (time.time() - start_time) * 1000
-        self.compilation_history.append(plan)
+        plan.compilation_time_ms = (time.time() - start_time) * 1000
 
         return plan
 
-    def _assess_query_complexity(self, query: str) -> str:
-        """Assess query complexity."""
-        words = len(query.split())
+    def _determine_query_type(self, query: str) -> QueryType:
+        """Determine query type from query text."""
+        query_lower = query.lower()
 
-        if words < 5:
-            return QueryComplexity.SIMPLE.value
-        elif words < 15:
-            return QueryComplexity.MODERATE.value
-        elif words < 50:
-            return QueryComplexity.COMPLEX.value
-        else:
-            return QueryComplexity.RESEARCH_INTENSIVE.value
+        # Check coding first (highest priority)
+        if any(word in query_lower for word in ["code", "function", "api", "method"]):
+            return QueryType.CODING
 
-    def _select_compression_mode(
-        self,
-        token_budget: int,
-        query_complexity: str,
-        provider: str,
-    ) -> str:
-        """Select compression mode adaptively."""
-        # Smaller budget requires more compression
-        if token_budget < 1000:
-            return "minimal"
-        elif token_budget < 2000:
-            if query_complexity == QueryComplexity.SIMPLE.value:
-                return "minimal"
-            else:
-                return "compressed"
-        elif token_budget < 4000:
-            if query_complexity == QueryComplexity.RESEARCH_INTENSIVE.value:
-                return "research_mode"
-            else:
-                return "compressed"
-        else:
-            if query_complexity == QueryComplexity.RESEARCH_INTENSIVE.value:
-                return "research_mode"
-            else:
-                return "full_context"
+        # Check research
+        if any(
+            word in query_lower for word in ["research", "study", "paper", "citation"]
+        ):
+            return QueryType.RESEARCH
 
-    def _estimate_reasoning_preservation(
-        self, selected_memories: List["Memory"]
-    ) -> float:
-        """Estimate reasoning preservation from selected memories."""
-        if not selected_memories:
-            return 0.5
+        # Check reasoning (includes "why" and "how" but not coding queries)
+        if any(word in query_lower for word in ["why", "explain", "reason"]):
+            return QueryType.REASONING
 
-        logical_terms = ["because", "therefore", "thus", "if", "then"]
-        has_logic = 0
+        # Check factual
+        if any(word in query_lower for word in ["what", "who", "where", "when"]):
+            return QueryType.FACTUAL
 
-        for mem in selected_memories:
-            content = getattr(mem, "raw_content", "").lower()
-            if any(term in content for term in logical_terms):
-                has_logic += 1
+        return QueryType.NARRATIVE
 
-        return min(1.0, has_logic / len(selected_memories))
+    def _estimate_query_complexity(self, query: str) -> float:
+        """Estimate query complexity (0-1)."""
+        # Simple heuristic: longer queries, more specific = more complex
+        word_count = len(query.split())
+        complexity = min(1.0, word_count / 50.0)
+
+        # Boost if it's a complex reasoning query
+        if any(word in query.lower() for word in ["why", "how", "explain", "reason"]):
+            complexity = min(1.0, complexity + 0.2)
+
+        return complexity

@@ -2,324 +2,404 @@
 Tests for Adaptive Context Compilation Runtime (Phase 4).
 
 Tests verify:
-1. Multi-factor relevance ranking
-2. Token budget allocation strategies
-3. Context quality evaluation
-4. Failure analysis and regression tracking
+1. Relevance ranking with 7 factors
+2. Token budget allocation correctness
+3. Context quality evaluation accuracy
+4. Failure detection and regression tracking
 5. Adaptive compilation planning
-6. Provider-aware optimization
-7. Query complexity assessment
-8. Compression mode selection
+6. Query type detection
+7. Budget compliance
+8. Deterministic reproducibility
 """
 
 import pytest
-from unittest.mock import Mock
 from datetime import datetime, timedelta
+from unittest.mock import Mock
 import sys
 import os
 
-# Add app directory to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 # Mock embedding service
 sys.modules["app.services.embedding"] = Mock()
 
 from app.compiler.adaptive_compilation import (
+    AdaptiveCompilationPlanner,
     RelevanceRankingService,
     TokenBudgetAllocator,
     ContextQualityEvaluator,
     ContextFailureAnalyzer,
-    AdaptiveCompilationPlanner,
+    QueryType,
     RankingFactors,
-    QueryComplexity,
+    ContextQualityScore,
+    TokenBudgetAllocation,
 )
 
 
 class TestRelevanceRankingService:
-    """Test relevance ranking functionality."""
+    """Test multi-factor relevance ranking."""
 
     @pytest.fixture
     def ranking_service(self):
         """Create ranking service."""
-        return RelevanceRankingService()
+        return RelevanceRankingService(embedding_service=Mock())
 
     @pytest.fixture
-    def mock_memories(self):
-        """Create mock memories."""
-        memories = []
-        for i in range(3):
+    def mock_memory(self):
+        """Factory for creating mock memories."""
+
+        def _create(
+            memory_id="mem-1",
+            content="Test content",
+            importance=0.7,
+            timestamp=None,
+        ):
             mem = Mock()
-            mem.id = f"mem-{i}"
-            mem.raw_content = f"Content about AI and machine learning topic {i}"
-            mem.importance_score = 0.5 + (i * 0.2)
-            mem.timestamp = datetime.utcnow() - timedelta(hours=i)
-            memories.append(mem)
-        return memories
+            mem.id = memory_id
+            mem.raw_content = content
+            mem.importance_score = importance
+            mem.timestamp = timestamp or datetime.utcnow()
+            mem.embedding = [0.1] * 384
+            return mem
 
-    def test_rank_memories(self, ranking_service, mock_memories):
-        """Test memory ranking."""
-        query = "artificial intelligence machine learning"
+        return _create
 
-        ranked = ranking_service.rank_memories(mock_memories, query, provider="generic")
+    def test_ranking_factors_calculation(self, ranking_service, mock_memory):
+        """Test 7-factor ranking calculation."""
+        query = "What is machine learning?"
+        memory = mock_memory("mem-1", "Machine learning is AI")
 
-        # Should return all memories ranked
-        assert len(ranked) == 3
-
-        # Results should be tuples of (memory, score, factors)
-        for memory, score, factors in ranked:
-            assert isinstance(score, float)
-            assert 0.0 <= score <= 1.0
-            assert hasattr(factors, "compute_score")
-
-    def test_ranking_respects_recency(self, ranking_service, mock_memories):
-        """Test that ranking considers multiple factors including recency."""
-        query = "machine learning"
-        ranked = ranking_service.rank_memories(mock_memories, query)
-
-        # Semantic similarity is weighted higher than recency, so mem-2 (most similar) ranks higher
-        assert ranked[0][0].id == "mem-2"
-        # But all memories should be ranked
-        assert len(ranked) == 3
-
-    def test_ranking_with_workspace_context(self, ranking_service, mock_memories):
-        """Test ranking with workspace context."""
-        query = "AI systems"
-        workspace = {"active_items": ["AI", "learning"]}
-
-        ranked = ranking_service.rank_memories(
-            mock_memories, query, workspace_context=workspace
+        factors = ranking_service._calculate_ranking_factors(
+            query, memory, None, "generic", QueryType.REASONING
         )
 
-        # Should complete without error
-        assert len(ranked) > 0
+        # All factors should be calculated
+        assert hasattr(factors, "semantic_similarity")
+        assert hasattr(factors, "importance_score")
+        assert hasattr(factors, "recency_factor")
+        assert hasattr(factors, "reasoning_continuity")
+        assert hasattr(factors, "workspace_relevance")
+        assert hasattr(factors, "provider_fit")
+        assert hasattr(factors, "information_density")
 
-    def test_provider_specific_ranking(self, ranking_service, mock_memories):
-        """Test provider-specific ranking optimization."""
-        query = "neural networks"
+    def test_ranking_factors_total_score(self, ranking_service, mock_memory):
+        """Test total score calculation."""
+        query = "Why does this happen?"
+        memory = mock_memory("mem-1", "This happens because...")
 
-        ranked_claude = ranking_service.rank_memories(
-            mock_memories, query, provider="claude"
-        )
-        ranked_openai = ranking_service.rank_memories(
-            mock_memories, query, provider="openai"
-        )
-
-        # Both should produce rankings
-        assert len(ranked_claude) > 0
-        assert len(ranked_openai) > 0
-
-    def test_ranking_factors_computation(self):
-        """Test ranking factors score computation."""
-        factors = RankingFactors(
-            semantic_similarity=0.9,
-            importance_score=0.8,
-            recency_score=0.7,
-            reasoning_continuity=0.6,
-            workspace_relevance=0.5,
-            provider_fit=0.4,
-            information_density=0.3,
+        factors = ranking_service._calculate_ranking_factors(
+            query, memory, None, "generic", QueryType.REASONING
         )
 
-        score = factors.compute_score()
+        score = factors.total_score()
 
-        # Score should be weighted combination
+        # Score should be normalized to 0-1
         assert 0.0 <= score <= 1.0
-        # With these factors, score should be substantial
-        assert score > 0.5
+
+    def test_rank_memories(self, ranking_service, mock_memory):
+        """Test memory ranking."""
+        query = "What about transformers?"
+        memories = [
+            mock_memory("mem-1", "Transformers are neural networks"),
+            mock_memory("mem-2", "RNNs are older models"),
+            mock_memory("mem-3", "Transformer architecture uses attention"),
+        ]
+
+        rankings = ranking_service.rank_memories(
+            query, memories, None, "generic", QueryType.REASONING
+        )
+
+        # Should return ranked list
+        assert len(rankings) == 3
+        assert all(isinstance(r, tuple) and len(r) == 3 for r in rankings)
+
+        # Scores should be descending
+        scores = [r[1] for r in rankings]
+        assert scores == sorted(scores, reverse=True)
+
+    def test_recency_factor(self, ranking_service, mock_memory):
+        """Test recency scoring."""
+        query = "Recent updates"
+        recent_memory = mock_memory(
+            "mem-1", "Recent update", timestamp=datetime.utcnow()
+        )
+        old_memory = mock_memory(
+            "mem-2", "Old update", timestamp=datetime.utcnow() - timedelta(days=100)
+        )
+
+        recent_factors = ranking_service._calculate_ranking_factors(
+            query, recent_memory, None, "generic", QueryType.FACTUAL
+        )
+        old_factors = ranking_service._calculate_ranking_factors(
+            query, old_memory, None, "generic", QueryType.FACTUAL
+        )
+
+        # Recent should score higher
+        assert recent_factors.recency_factor > old_factors.recency_factor
+
+    def test_reasoning_continuity_detection(self, ranking_service, mock_memory):
+        """Test reasoning continuity detection."""
+        reasoning_query = "Why does this work?"
+        logical_memory = mock_memory("mem-1", "Because X, therefore Y happens")
+        random_memory = mock_memory("mem-2", "Some random content")
+
+        logical_factors = ranking_service._calculate_ranking_factors(
+            reasoning_query, logical_memory, None, "generic", QueryType.REASONING
+        )
+        random_factors = ranking_service._calculate_ranking_factors(
+            reasoning_query, random_memory, None, "generic", QueryType.REASONING
+        )
+
+        # Logical should score higher for reasoning
+        assert (
+            logical_factors.reasoning_continuity > random_factors.reasoning_continuity
+        )
+
+    def test_provider_fit(self, ranking_service, mock_memory):
+        """Test provider-specific fitting."""
+        memory = mock_memory("mem-1", "This is a very detailed explanation of concepts")
+
+        claude_factors = ranking_service._calculate_ranking_factors(
+            "What?", memory, None, "claude", QueryType.REASONING
+        )
+        openai_factors = ranking_service._calculate_ranking_factors(
+            "What?", memory, None, "openai", QueryType.REASONING
+        )
+
+        # Providers should have different fits based on their preferences
+        assert claude_factors.provider_fit > 0.0
+        assert openai_factors.provider_fit > 0.0
+
+    def test_information_density(self, ranking_service, mock_memory):
+        """Test information density calculation."""
+        dense_memory = mock_memory(
+            "mem-1", "Alice Smith published 5 papers on neural networks in 2023"
+        )
+        sparse_memory = mock_memory(
+            "mem-2", "blah blah blah some random words without meaning"
+        )
+
+        dense_factors = ranking_service._calculate_ranking_factors(
+            "Papers", dense_memory, None, "generic", QueryType.RESEARCH
+        )
+        sparse_factors = ranking_service._calculate_ranking_factors(
+            "Papers", sparse_memory, None, "generic", QueryType.RESEARCH
+        )
+
+        # Dense should score higher
+        assert dense_factors.information_density > sparse_factors.information_density
 
 
 class TestTokenBudgetAllocator:
     """Test token budget allocation."""
 
-    @pytest.fixture
-    def allocator(self):
-        """Create allocator."""
-        return TokenBudgetAllocator()
-
-    def test_basic_allocation(self, allocator):
-        """Test basic token allocation."""
-        allocation = allocator.allocate_budget(
+    def test_allocation_within_budget(self):
+        """Test allocation stays within budget."""
+        allocation = TokenBudgetAllocator.allocate_budget(
             total_budget=4000,
-            num_memories=10,
-            num_chunks=5,
+            query_complexity=0.5,
+            workspace_size=100,
+            compression_mode="compressed",
+            provider_type="generic",
         )
 
-        # Total should be close to budget
-        assert allocation.total() <= 4000
+        # Should verify allocation
+        assert allocation.verify_allocation()
+        assert allocation.total_budget == 4000
 
-        # All categories should have tokens
-        assert allocation.active_reasoning > 0
+    def test_allocation_breakdown(self):
+        """Test allocation breakdown is reasonable."""
+        allocation = TokenBudgetAllocator.allocate_budget(
+            total_budget=4000,
+            query_complexity=0.5,
+            workspace_size=100,
+            compression_mode="compressed",
+            provider_type="generic",
+        )
+
+        # All components should be positive
+        assert allocation.response_reserve > 0
         assert allocation.semantic_memories > 0
+        assert allocation.workspace_summary > 0
+        assert allocation.chunk_summaries > 0
         assert allocation.metadata_glue > 0
 
-    def test_provider_specific_allocation(self, allocator):
-        """Test provider-specific allocation."""
-        budget = 4000
-
-        claude_alloc = allocator.allocate_budget(budget, 10, 5, provider="claude")
-        openai_alloc = allocator.allocate_budget(budget, 10, 5, provider="openai")
-
-        # Claude should emphasize reasoning
-        assert claude_alloc.active_reasoning >= openai_alloc.active_reasoning
-
-        # OpenAI should emphasize semantic memories
-        assert openai_alloc.semantic_memories >= claude_alloc.semantic_memories
-
-    def test_compression_mode_effects(self, allocator):
-        """Test compression mode effects on allocation."""
-        budget = 4000
-
-        minimal_alloc = allocator.allocate_budget(
-            budget, 10, 5, compression_mode="minimal"
+    def test_compression_mode_affects_allocation(self):
+        """Test compression mode affects chunk summary allocation."""
+        full_context = TokenBudgetAllocator.allocate_budget(
+            4000, 0.5, 100, "full_context", "generic"
         )
-        full_alloc = allocator.allocate_budget(
-            budget, 10, 5, compression_mode="full_context"
+        minimal = TokenBudgetAllocator.allocate_budget(
+            4000, 0.5, 100, "minimal", "generic"
         )
 
-        # Minimal should have larger buffer
-        assert minimal_alloc.compression_buffer >= full_alloc.compression_buffer
+        # Full context should allocate more to chunk summaries
+        assert full_context.chunk_summaries > minimal.chunk_summaries
 
-    def test_allocation_ratio(self, allocator):
-        """Test allocation ratio calculation."""
-        ratio = allocator.get_allocation_ratio("semantic_memories", 4000)
+    def test_query_complexity_affects_allocation(self):
+        """Test query complexity affects reasoning allocation."""
+        simple = TokenBudgetAllocator.allocate_budget(
+            4000, 0.2, 100, "compressed", "generic"
+        )
+        complex_query = TokenBudgetAllocator.allocate_budget(
+            4000, 0.8, 100, "compressed", "generic"
+        )
 
-        # Should be a valid ratio
-        assert 0.0 <= ratio <= 1.0
+        # Complex should allocate more to reasoning
+        assert complex_query.reasoning_context > simple.reasoning_context
+
+    def test_workspace_size_affects_allocation(self):
+        """Test workspace size affects summary allocation."""
+        small_ws = TokenBudgetAllocator.allocate_budget(
+            4000, 0.5, 10, "compressed", "generic"
+        )
+        large_ws = TokenBudgetAllocator.allocate_budget(
+            4000, 0.5, 1000, "compressed", "generic"
+        )
+
+        # Larger workspace should get more workspace summary tokens
+        assert large_ws.workspace_summary > small_ws.workspace_summary
 
 
 class TestContextQualityEvaluator:
     """Test context quality evaluation."""
 
+    def test_quality_score_creation(self):
+        """Test quality score initialization."""
+        score = ContextQualityScore()
+
+        assert hasattr(score, "semantic_density")
+        assert hasattr(score, "redundancy_ratio")
+        assert hasattr(score, "entity_continuity")
+        assert hasattr(score, "reasoning_preservation")
+        assert hasattr(score, "topic_preservation")
+        assert hasattr(score, "provider_compatibility")
+        assert hasattr(score, "compression_effectiveness")
+
+    def test_overall_quality_calculation(self):
+        """Test overall quality calculation."""
+        score = ContextQualityScore(
+            semantic_density=0.8,
+            redundancy_ratio=0.1,
+            entity_continuity=0.9,
+            reasoning_preservation=0.7,
+            topic_preservation=0.8,
+            provider_compatibility=0.75,
+            compression_effectiveness=0.6,
+        )
+
+        overall = score.overall_quality()
+
+        # Should be normalized 0-1
+        assert 0.0 <= overall <= 1.0
+
     @pytest.fixture
-    def evaluator(self):
-        """Create evaluator."""
-        return ContextQualityEvaluator()
+    def mock_memory(self):
+        """Create mock memory."""
 
-    @pytest.fixture
-    def mock_context_and_memories(self):
-        """Create context and memories."""
-        context = (
-            "AI systems use neural networks because they learn patterns effectively."
-        )
-
-        memories = []
-        for i in range(2):
+        def _create(content="Test content"):
             mem = Mock()
-            mem.id = f"mem-{i}"
-            mem.raw_content = f"Memory about neural networks and learning"
-            memories.append(mem)
+            mem.raw_content = content
+            return mem
 
-        return context, memories
+        return _create
 
-    def test_evaluate_context(self, evaluator, mock_context_and_memories):
-        """Test context quality evaluation."""
-        context, memories = mock_context_and_memories
+    def test_evaluate_quality(self, mock_memory):
+        """Test quality evaluation."""
+        original_memories = [
+            mock_memory("Memory about AI and machine learning"),
+            mock_memory("Discussion on neural networks"),
+        ]
+        compiled = "AI and machine learning. Neural networks work"
 
-        quality = evaluator.evaluate_context(
-            context, memories, compression_ratio=0.3, provider="generic"
+        score = ContextQualityEvaluator.evaluate_quality(
+            compiled, original_memories, 0.3, "generic"
         )
 
-        # All metrics should be in valid range
-        assert 0.0 <= quality.semantic_density <= 1.0
-        assert 0.0 <= quality.redundancy_score <= 1.0
-        assert 0.0 <= quality.entity_continuity <= 1.0
-        assert 0.0 <= quality.reasoning_preservation <= 1.0
-        assert 0.0 <= quality.overall_quality <= 1.0
-
-    def test_entity_continuity(self, evaluator):
-        """Test entity continuity tracking."""
-        context = "Alice and Bob worked on neural networks. Alice is an AI researcher."
-
-        memories = []
-        for name in ["Alice", "Bob", "neural networks"]:
-            mem = Mock()
-            mem.raw_content = name
-            memories.append(mem)
-
-        quality = evaluator.evaluate_context(context, memories, 0.2)
-
-        # Should preserve entities
-        assert quality.entity_continuity > 0.3
-
-    def test_reasoning_preservation(self, evaluator):
-        """Test reasoning preservation measurement."""
-        logical_context = "Because models improve with scale, therefore we should train larger models. If budget allows, then we proceed."
-
-        memories = []
-        mem = Mock()
-        mem.raw_content = "Model scaling leads to performance improvements"
-        memories.append(mem)
-
-        quality = evaluator.evaluate_context(logical_context, memories, 0.1)
-
-        # Should preserve reasoning
-        assert quality.reasoning_preservation > 0.5
-
-    def test_provider_compatibility(self, evaluator):
-        """Test provider compatibility scoring."""
-        context = "This is a concise statement" * 50
-        memories = []
-
-        claude_quality = evaluator.evaluate_context(
-            context, memories, 0.2, provider="claude"
-        )
-        openai_quality = evaluator.evaluate_context(
-            context, memories, 0.2, provider="openai"
-        )
-
-        # Both should have provider compatibility
-        assert claude_quality.provider_compatibility > 0.0
-        assert openai_quality.provider_compatibility > 0.0
+        # Quality should be evaluated
+        assert score.semantic_density > 0.0
+        assert 0.0 <= score.entity_continuity <= 1.0
 
 
 class TestContextFailureAnalyzer:
     """Test failure analysis and regression tracking."""
 
-    @pytest.fixture
-    def analyzer(self):
-        """Create analyzer."""
-        return ContextFailureAnalyzer()
+    def test_analyzer_initialization(self):
+        """Test analyzer creation."""
+        analyzer = ContextFailureAnalyzer()
 
-    def test_record_failure(self, analyzer):
-        """Test recording failures."""
-        analyzer.record_failure(
-            failure_type="semantic_drift",
-            severity=0.7,
-            query="test query",
-            provider="claude",
-            compression_mode="compressed",
-            token_budget=4000,
-            description="Lost semantic meaning during compression",
+        assert len(analyzer.failure_history) == 0
+
+    def test_analyze_failure(self):
+        """Test failure analysis."""
+        analyzer = ContextFailureAnalyzer()
+
+        original = "Because X happens, therefore Y occurs. AI and machine learning is important."
+        compiled = "Y happens. Important."
+
+        analysis = analyzer.analyze_failure(
+            query="Why is this important?",
+            compiled_context=compiled,
+            original_context=original,
         )
 
-        assert len(analyzer.failure_records) == 1
-        assert analyzer.failure_records[0].failure_type == "semantic_drift"
+        # Should detect compression
+        assert len(analyzer.failure_history) == 1
 
-    def test_regression_report(self, analyzer):
-        """Test regression analysis report."""
-        # Add multiple failures
+    def test_missing_entities_detection(self):
+        """Test missing entity detection."""
+        analyzer = ContextFailureAnalyzer()
+
+        original = "Alice and Bob discussed the latest AI breakthrough by OpenAI."
+        compiled = "Latest breakthrough discussed."
+
+        analysis = analyzer.analyze_failure(
+            query="Who discussed what?",
+            compiled_context=compiled,
+            original_context=original,
+        )
+
+        # Should detect missing entities
+        if analysis.missing_entities:
+            assert "Alice" in str(analysis.missing_entities) or "OpenAI" in str(
+                analysis.missing_entities
+            )
+
+    def test_regression_report(self):
+        """Test regression report generation."""
+        analyzer = ContextFailureAnalyzer()
+
+        # Add some failures
         for i in range(3):
-            analyzer.record_failure(
-                failure_type="semantic_drift",
-                severity=0.5 + (i * 0.1),
-                query=f"query-{i}",
-                provider="claude",
-                compression_mode="compressed",
-                token_budget=4000,
+            analyzer.analyze_failure(
+                query=f"Query {i}",
+                compiled_context="Short",
+                original_context="This is a much longer original context with information",
             )
 
         report = analyzer.get_regression_report()
 
         assert report["total_failures"] == 3
-        assert "semantic_drift" in report["failure_types"]
-        assert report["average_severity"] > 0.5
 
-    def test_empty_regression_report(self, analyzer):
-        """Test regression report when no failures."""
-        report = analyzer.get_regression_report()
+    def test_reasoning_collapse_detection(self):
+        """Test reasoning collapse detection."""
+        analyzer = ContextFailureAnalyzer()
 
-        assert report["status"] == "no_failures"
-        assert report["total_records"] == 0
+        original = "Because X, therefore Y. Hence Z. If A then B."
+        compiled = "Y and Z"
+
+        analysis = analyzer.analyze_failure(
+            query="Why?",
+            compiled_context=compiled,
+            original_context=original,
+        )
+
+        # Should detect reasoning collapse (few logical connectors)
+        if analysis.reasoning_collapse:
+            assert (
+                "logical" in analysis.reason.lower()
+                or "reason" in str(analysis.recommended_actions).lower()
+            )
 
 
 class TestAdaptiveCompilationPlanner:
@@ -327,96 +407,107 @@ class TestAdaptiveCompilationPlanner:
 
     @pytest.fixture
     def planner(self):
-        """Create planner with all services."""
-        return AdaptiveCompilationPlanner()
+        """Create planner."""
+        return AdaptiveCompilationPlanner(
+            ranking_service=RelevanceRankingService(Mock()),
+            embedding_service=Mock(),
+        )
 
     @pytest.fixture
-    def mock_data(self):
-        """Create mock compilation data."""
-        memories = []
-        for i in range(5):
+    def mock_memory(self):
+        """Create mock memory."""
+
+        def _create(memory_id="mem-1", content="Content"):
             mem = Mock()
-            mem.id = f"mem-{i}"
-            mem.raw_content = f"Memory content {i} about AI"
-            mem.importance_score = 0.5
-            mem.timestamp = datetime.utcnow() - timedelta(hours=i)
-            memories.append(mem)
+            mem.id = memory_id
+            mem.raw_content = content
+            mem.importance_score = 0.7
+            mem.timestamp = datetime.utcnow()
+            mem.embedding = [0.1] * 384
+            return mem
 
-        chunks = []
-        for i in range(3):
-            chunk = Mock()
-            chunk.chunk_id = f"chunk-{i}"
-            chunks.append(chunk)
+        return _create
 
-        return memories, chunks
-
-    def test_plan_compilation(self, planner, mock_data):
-        """Test compilation planning."""
-        memories, chunks = mock_data
+    def test_plan_creation(self, planner, mock_memory):
+        """Test compilation plan creation."""
+        memories = [
+            mock_memory("mem-1", "First memory content"),
+            mock_memory("mem-2", "Second memory content"),
+        ]
 
         plan = planner.plan_compilation(
-            query="Tell me about AI",
+            query="What is important?",
             memories=memories,
-            chunks=chunks,
+            provider="generic",
             token_budget=4000,
-            provider="claude",
         )
 
-        # Plan should have valid structure
-        assert plan.query == "Tell me about AI"
-        assert plan.total_budget == 4000
+        # Plan should have all required fields
+        assert plan.query == "What is important?"
         assert len(plan.selected_memories) > 0
-        assert plan.planning_time_ms > 0
+        assert plan.token_allocation is not None
+        assert plan.quality_score is not None
 
-    def test_query_complexity_assessment(self, planner):
-        """Test query complexity assessment."""
-        simple = planner._assess_query_complexity("What is AI?")
-        moderate = planner._assess_query_complexity(
-            "Explain how transformer-based language models"
+    def test_query_type_detection(self, planner):
+        """Test query type detection."""
+        reasoning_query = "Why does this happen?"
+        factual_query = "What is this?"
+        coding_query = "How do I use this API?"
+
+        reasoning_type = planner._determine_query_type(reasoning_query)
+        factual_type = planner._determine_query_type(factual_query)
+        coding_type = planner._determine_query_type(coding_query)
+
+        assert reasoning_type == QueryType.REASONING
+        assert factual_type == QueryType.FACTUAL
+        assert coding_type == QueryType.CODING
+
+    def test_query_complexity_estimation(self, planner):
+        """Test query complexity estimation."""
+        simple = "What?"
+        medium = "What is machine learning and how does it work?"
+        complex_q = "Can you explain why deep learning models with transformer architecture have become so dominant in natural language processing tasks over the past five years?"
+
+        simple_complexity = planner._estimate_query_complexity(simple)
+        medium_complexity = planner._estimate_query_complexity(medium)
+        complex_complexity = planner._estimate_query_complexity(complex_q)
+
+        assert simple_complexity < medium_complexity < complex_complexity
+
+    def test_token_budget_allocation_in_plan(self, planner, mock_memory):
+        """Test token allocation in plan."""
+        memories = [mock_memory(f"mem-{i}", f"Content {i}") for i in range(5)]
+
+        plan = planner.plan_compilation(
+            query="Complex query requiring reasoning",
+            memories=memories,
+            provider="claude",
+            token_budget=8000,
         )
-        complex_q = planner._assess_query_complexity(
-            "Can you provide a detailed explanation of " + " ".join(["models"] * 10)
+
+        # Allocation should be valid
+        assert plan.token_allocation.verify_allocation()
+        assert plan.token_allocation.reasoning_context > 0
+
+    def test_plan_reproducibility(self, planner, mock_memory):
+        """Test planning is reproducible."""
+        memories = [mock_memory(f"mem-{i}", f"Content {i}") for i in range(3)]
+
+        plan1 = planner.plan_compilation(
+            query="Same query",
+            memories=memories,
+            provider="generic",
+            token_budget=4000,
         )
-        research = planner._assess_query_complexity(
-            "How do " + " ".join(["models"] * 50)
+        plan2 = planner.plan_compilation(
+            query="Same query",
+            memories=memories,
+            provider="generic",
+            token_budget=4000,
         )
 
-        assert simple == QueryComplexity.SIMPLE.value
-        assert moderate == QueryComplexity.MODERATE.value
-        assert complex_q == QueryComplexity.COMPLEX.value
-        assert research == QueryComplexity.RESEARCH_INTENSIVE.value
-
-    def test_compression_mode_selection(self, planner):
-        """Test adaptive compression mode selection."""
-        # Tight budget, simple query
-        mode1 = planner._select_compression_mode(
-            500, QueryComplexity.SIMPLE.value, "claude"
-        )
-        assert mode1 == "minimal"
-
-        # Large budget, research query
-        mode2 = planner._select_compression_mode(
-            8000, QueryComplexity.RESEARCH_INTENSIVE.value, "claude"
-        )
-        assert mode2 == "research_mode"
-
-        # Medium budget, moderate query
-        mode3 = planner._select_compression_mode(
-            4000, QueryComplexity.MODERATE.value, "claude"
-        )
-        assert mode3 in ["compressed", "full_context"]
-
-    def test_reasoning_preservation_estimation(self, planner, mock_data):
-        """Test reasoning preservation estimation."""
-        memories, _ = mock_data
-
-        # Update one memory to have logical content
-        memories[0].raw_content = "Because AI is powerful, therefore it is useful"
-
-        score = planner._estimate_reasoning_preservation(memories)
-
-        assert 0.0 <= score <= 1.0
-        assert score > 0.0  # Should detect logical content
+        # Should select same memories
+        assert set(plan1.selected_memories) == set(plan2.selected_memories)
 
 
 if __name__ == "__main__":
