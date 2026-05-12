@@ -10,7 +10,7 @@ import json
 from typing import Dict, Any, List
 from datetime import datetime
 
-from helpers import TestResult
+from helpers import TestResult, get_auth_headers
 
 
 async def test_partial_failure_recovery(base_url: str) -> TestResult:
@@ -26,19 +26,20 @@ async def test_partial_failure_recovery(base_url: str) -> TestResult:
     start_time = time.time()
     errors: List[str] = []
     metrics: Dict[str, Any] = {}
+    tenant_id = "partial-fail-test-tenant"
 
     async with httpx.AsyncClient(timeout=120.0) as client:
         # Create workspace
         print("  Creating workspace for partial failure test...")
 
         response = await client.post(
-            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={"name": f"partial-fail-test-{int(time.time())}"},
+            headers=get_auth_headers(tenant_id),
         )
 
         if response.status_code != 200:
-            errors.append(f"Failed to create workspace: {response.status_code}")
+            errors.append(f"Failed to create workspace: {response.status_code} {response.text}")
             return TestResult(
                 test_name="test_partial_failure_recovery",
                 status="ERROR",
@@ -57,13 +58,13 @@ async def test_partial_failure_recovery(base_url: str) -> TestResult:
         for i in range(10):
             try:
                 response = await client.post(
-            headers=get_auth_headers(),
                     f"{base_url}/api/memories",
                     params={
                         "workspace_id": workspace_id,
                         "content": f"Batch message {i}",
                         "memory_type": "conversation",
                     },
+                    headers=get_auth_headers(tenant_id),
                 )
                 results.append(
                     {
@@ -87,7 +88,10 @@ async def test_partial_failure_recovery(base_url: str) -> TestResult:
         # Test 2: Verify no orphan data
         print("  Checking for orphan lineage...")
 
-        response = await client.get(f"{base_url}/api/workspaces/{workspace_id}")
+        response = await client.get(
+            f"{base_url}/api/workspaces/{workspace_id}",
+            headers=get_auth_headers(tenant_id),
+        )
 
         # Verify workspace has consistent state
         state = response.json() if response.status_code == 200 else {}
@@ -104,13 +108,13 @@ async def test_partial_failure_recovery(base_url: str) -> TestResult:
         retry_results = []
         for i in range(3):
             response = await client.post(
-            headers=get_auth_headers(),
                 f"{base_url}/api/memories",
                 params={
                     "workspace_id": workspace_id,
                     "content": f"Retry test {i}",
                     "memory_type": "conversation",
                 },
+                headers=get_auth_headers(tenant_id),
             )
             retry_results.append(response.status_code == 200)
 
@@ -121,9 +125,9 @@ async def test_partial_failure_recovery(base_url: str) -> TestResult:
 
         # Create another workspace and add data
         response = await client.post(
-            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={"name": f"atomicity-test-{int(time.time())}"},
+            headers=get_auth_headers(tenant_id),
         )
 
         ws2_id = response.json().get("id") if response.status_code == 200 else None
@@ -138,10 +142,14 @@ async def test_partial_failure_recovery(base_url: str) -> TestResult:
                         "content": f"Atomic test {i}",
                         "memory_type": "conversation",
                     },
+                    headers=get_auth_headers(tenant_id),
                 )
 
         # Verify all or nothing
-        response = await client.get(f"{base_url}/api/workspaces/{ws2_id}")
+        response = await client.get(
+            f"{base_url}/api/workspaces/{ws2_id}",
+            headers=get_auth_headers(tenant_id),
+        )
         atomic = response.status_code == 200
 
         metrics["atomicity"] = {"verified": atomic}

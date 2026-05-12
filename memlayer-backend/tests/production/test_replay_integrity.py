@@ -11,7 +11,7 @@ import hashlib
 from typing import Dict, Any, List
 from datetime import datetime
 
-from helpers import TestResult
+from helpers import TestResult, get_auth_headers
 
 
 def compute_canonical_hash(data: Dict) -> str:
@@ -32,22 +32,23 @@ async def test_replay_integrity(base_url: str) -> TestResult:
     start_time = time.time()
     errors: List[str] = []
     metrics: Dict[str, Any] = {}
+    tenant_id = "replay-test-tenant"
 
     async with httpx.AsyncClient(timeout=120.0) as client:
         # Create workspace with known state
         print("  Creating test workspace...")
 
         response = await client.post(
-            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={
                 "name": f"replay-test-{int(time.time())}",
                 "description": "Replay determinism test",
             },
+            headers=get_auth_headers(tenant_id),
         )
 
         if response.status_code != 200:
-            errors.append(f"Failed to create workspace: {response.status_code}")
+            errors.append(f"Failed to create workspace: {response.status_code} {response.text}")
             return TestResult(
                 test_name="test_replay_integrity",
                 status="ERROR",
@@ -71,32 +72,41 @@ async def test_replay_integrity(base_url: str) -> TestResult:
         print(f"  Ingesting {len(test_messages)} messages...")
 
         for msg in test_messages:
-            response = await client.post(
-            headers=get_auth_headers(),
+            await client.post(
                 f"{base_url}/api/memories",
                 params={
                     "workspace_id": workspace_id,
                     "content": msg,
                     "memory_type": "conversation",
                 },
+                headers=get_auth_headers(tenant_id),
             )
 
         # Generate first replay trace
         print("  Generating initial replay trace...")
 
-        response1 = await client.get(f"{base_url}/api/workspaces/{workspace_id}")
+        response1 = await client.get(
+            f"{base_url}/api/workspaces/{workspace_id}",
+            headers=get_auth_headers(tenant_id),
+        )
         state1 = response1.json() if response1.status_code == 200 else {}
         hash1 = compute_canonical_hash(state1)
 
         # Generate second replay trace (should be identical)
         print("  Generating second replay trace...")
 
-        response2 = await client.get(f"{base_url}/api/workspaces/{workspace_id}")
+        response2 = await client.get(
+            f"{base_url}/api/workspaces/{workspace_id}",
+            headers=get_auth_headers(tenant_id),
+        )
         state2 = response2.json() if response2.status_code == 200 else {}
         hash2 = compute_canonical_hash(state2)
 
         # Generate third replay trace
-        response3 = await client.get(f"{base_url}/api/workspaces/{workspace_id}")
+        response3 = await client.get(
+            f"{base_url}/api/workspaces/{workspace_id}",
+            headers=get_auth_headers(tenant_id),
+        )
         state3 = response3.json() if response3.status_code == 200 else {}
         hash3 = compute_canonical_hash(state3)
 
@@ -119,7 +129,10 @@ async def test_replay_integrity(base_url: str) -> TestResult:
         print("  Testing cross-session replay...")
 
         # Simulate new session by fetching workspace again
-        response_new = await client.get(f"{base_url}/api/workspaces/{workspace_id}")
+        response_new = await client.get(
+            f"{base_url}/api/workspaces/{workspace_id}",
+            headers=get_auth_headers(tenant_id),
+        )
         state_new = response_new.json() if response_new.status_code == 200 else {}
         hash_new = compute_canonical_hash(state_new)
 
@@ -135,7 +148,10 @@ async def test_replay_integrity(base_url: str) -> TestResult:
 
         retrieval_hashes = []
         for _ in range(3):
-            response = await client.get(f"{base_url}/api/workspaces/{workspace_id}")
+            response = await client.get(
+                f"{base_url}/api/workspaces/{workspace_id}",
+                headers=get_auth_headers(tenant_id),
+            )
             data = response.json() if response.status_code == 200 else {}
             retrieval_hashes.append(compute_canonical_hash(data))
 

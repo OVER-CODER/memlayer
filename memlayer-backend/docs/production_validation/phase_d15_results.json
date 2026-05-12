@@ -1,14 +1,14 @@
 {
   "phase": "D1.5",
-  "timestamp": "2026-05-12T19:29:46.590311+00:00",
+  "timestamp": "2026-05-12T19:50:21.729262+00:00",
   "target_url": "https://memlayer-prod.onrender.com",
-  "duration_seconds": 83.02151,
+  "duration_seconds": 368.953558,
   "summary": {
     "total_tests": 14,
-    "passed": 6,
-    "failed": 2,
-    "errors": 6,
-    "pass_rate": 0.42857142857142855
+    "passed": 10,
+    "failed": 4,
+    "errors": 0,
+    "pass_rate": 0.7142857142857143
   },
   "suites": {
     "concurrent_ingestion": {
@@ -32,27 +32,27 @@
     "replay_integrity": {
       "suite": "replay_integrity",
       "total": 1,
-      "passed": 0,
+      "passed": 1,
       "failed": 0,
-      "errors": 1,
+      "errors": 0,
       "skipped": 0,
-      "pass_rate": 0.0
+      "pass_rate": 1.0
     },
     "governance_integrity": {
       "suite": "governance_integrity",
       "total": 1,
-      "passed": 0,
+      "passed": 1,
       "failed": 0,
-      "errors": 1,
+      "errors": 0,
       "skipped": 0,
-      "pass_rate": 0.0
+      "pass_rate": 1.0
     },
     "snapshot_recovery": {
       "suite": "snapshot_recovery",
       "total": 1,
       "passed": 0,
-      "failed": 0,
-      "errors": 1,
+      "failed": 1,
+      "errors": 0,
       "skipped": 0,
       "pass_rate": 0.0
     },
@@ -77,11 +77,11 @@
     "partial_failure_recovery": {
       "suite": "partial_failure_recovery",
       "total": 1,
-      "passed": 0,
+      "passed": 1,
       "failed": 0,
-      "errors": 1,
+      "errors": 0,
       "skipped": 0,
-      "pass_rate": 0.0
+      "pass_rate": 1.0
     },
     "telemetry_pipeline": {
       "suite": "telemetry_pipeline",
@@ -105,37 +105,37 @@
       "suite": "async_ordering",
       "total": 1,
       "passed": 0,
-      "failed": 0,
-      "errors": 1,
+      "failed": 1,
+      "errors": 0,
       "skipped": 0,
       "pass_rate": 0.0
     },
     "pgvector_scaling": {
       "suite": "pgvector_scaling",
       "total": 1,
-      "passed": 0,
-      "failed": 1,
+      "passed": 1,
+      "failed": 0,
       "errors": 0,
       "skipped": 0,
-      "pass_rate": 0.0
+      "pass_rate": 1.0
     },
     "high_volume_replay": {
       "suite": "high_volume_replay",
-      "total": 1,
-      "passed": 0,
-      "failed": 0,
-      "errors": 1,
-      "skipped": 0,
-      "pass_rate": 0.0
-    },
-    "tenant_isolation": {
-      "suite": "tenant_isolation",
       "total": 1,
       "passed": 1,
       "failed": 0,
       "errors": 0,
       "skipped": 0,
       "pass_rate": 1.0
+    },
+    "tenant_isolation": {
+      "suite": "tenant_isolation",
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "errors": 0,
+      "skipped": 0,
+      "pass_rate": 0.0
     }
   },
   "results": [
@@ -143,7 +143,7 @@
       "suite": "concurrent_ingestion",
       "test": "test_concurrent_ingestion",
       "status": "FAIL",
-      "duration": 11.336359977722168,
+      "duration": 11.540503025054932,
       "metrics": {
         "workspace_creation": {
           "attempted": 50,
@@ -166,26 +166,28 @@
       "suite": "longitudinal_growth",
       "test": "test_longitudinal_growth",
       "status": "PASS",
-      "duration": 6.235203981399536,
+      "duration": 7.598779916763306,
       "metrics": {
         "ingestion": {
           "total_turns": 10,
-          "avg_latency_ms": 350.4934310913086,
-          "max_latency_ms": 413.2049083709717,
-          "min_latency_ms": 283.30397605895996
+          "avg_latency_ms": 368.6936855316162,
+          "max_latency_ms": 518.4252262115479,
+          "min_latency_ms": 293.9879894256592
         },
         "lineage_retrieval": {
-          "latency_ms": 407.0720672607422,
+          "latency_ms": 919.9738502502441,
           "checkpoints": 1
         },
         "lineage_depth": {
           "max_depth": 10,
-          "avg_traversal_ms": 407.81617164611816,
-          "max_traversal_ms": 407.81617164611816
+          "avg_traversal_ms": 421.8130111694336,
+          "max_traversal_ms": 421.8130111694336
         },
         "replay": {
-          "checkpoints_tested": 0,
-          "checksums": []
+          "checkpoints_tested": 1,
+          "checksums": [
+            "a7b8ae775c88b0483c4e87489c7b06e1001d5639bb802a2481d7e1bdcdd95443"
+          ]
         }
       },
       "errors": []
@@ -193,54 +195,105 @@
     {
       "suite": "replay_integrity",
       "test": "test_replay_integrity",
-      "status": "ERROR",
-      "duration": 0.5011260509490967,
-      "metrics": {},
-      "errors": [
-        "Failed to create workspace: 401"
-      ]
+      "status": "PASS",
+      "duration": 9.437092065811157,
+      "metrics": {
+        "replay_traces": {
+          "hash_1": "c5704481e613e48e",
+          "hash_2": "c5704481e613e48e",
+          "hash_3": "c5704481e613e48e",
+          "fidelity": 1.0,
+          "is_deterministic": true
+        },
+        "cross_session": {
+          "hash_match": true,
+          "is_deterministic": true
+        },
+        "retrieval": {
+          "consistent": true,
+          "unique_hashes": 1
+        }
+      },
+      "errors": []
     },
     {
       "suite": "governance_integrity",
       "test": "test_governance_integrity",
-      "status": "ERROR",
-      "duration": 0.39485621452331543,
-      "metrics": {},
-      "errors": [
-        "Failed to create workspace: 401"
-      ]
+      "status": "PASS",
+      "duration": 8.366697072982788,
+      "metrics": {
+        "lineage": {
+          "total_entries": 10,
+          "hashes": [
+            "b456c55389a315e7083db5d091264a9481c645beab5a3eafdd643bba6f234277",
+            "744222389bab168978738428fb7b6e6d6f979beb8d736cd90fc6d74f57686383",
+            "b06a0d4386fa81477624f5a17f2a3453cbe580bc5894420fb8c6ca7f499b1822",
+            "90061c7f15097788f09f9886c2ecdc8057c132bf5dab9566626f0ad7c6fc9adb",
+            "df57aa06f66538357e6dc3ebe4fa096914d3a996215f3fb9ee8d39c3e455c9ec"
+          ],
+          "chain_integrity": "linear"
+        },
+        "audit_trail": {
+          "entries_created": 10,
+          "retrieval_verified": true
+        },
+        "immutability": {
+          "initial_hash_verified": true,
+          "chain_length": 10,
+          "append_only": true
+        },
+        "policy_enforcement": {
+          "delete_allowed": true,
+          "action_logged": true
+        }
+      },
+      "errors": []
     },
     {
       "suite": "snapshot_recovery",
       "test": "test_snapshot_recovery",
-      "status": "ERROR",
-      "duration": 0.38179898262023926,
-      "metrics": {},
-      "errors": [
-        "Failed to create workspace: 401"
-      ]
+      "status": "FAIL",
+      "duration": 5.964741230010986,
+      "metrics": {
+        "pre_snapshot": {
+          "data_count": 0,
+          "checksum": "95326a0ae43ee7c2"
+        },
+        "snapshot": {
+          "created": false,
+          "snapshot_id": null
+        },
+        "restoration": {
+          "note": "Snapshot endpoint not available, testing data integrity",
+          "data_preserved": false
+        },
+        "branch_restoration": {
+          "success": false
+        }
+      },
+      "errors": []
     },
     {
       "suite": "redis_coordination",
       "test": "test_redis_coordination",
       "status": "PASS",
-      "duration": 3.8192050457000732,
+      "duration": 26.718054056167603,
       "metrics": {
         "workspaces": {
-          "created": 0
+          "created": 10
         },
         "coordination": {
-          "operations": 0,
+          "operations": 15,
           "successful": 0,
-          "avg_latency_ms": 0,
-          "max_latency_ms": 0
+          "avg_latency_ms": 432.0487181345622,
+          "max_latency_ms": 481.677770614624
         },
         "locks": {
-          "avg_acquisition_ms": 0
+          "avg_acquisition_ms": 851.5172799428304
         },
         "deadlock_check": {
-          "total": 0,
-          "accessible": 0,
+          "total": 10,
+          "accessible": 10,
           "deadlock_detected": false
         }
       },
@@ -250,7 +303,7 @@
       "suite": "connection_resilience",
       "test": "test_connection_resilience",
       "status": "PASS",
-      "duration": 28.843140125274658,
+      "duration": 33.990349769592285,
       "metrics": {
         "basic_connectivity": {
           "status_code": 200,
@@ -258,21 +311,21 @@
         },
         "rapid_requests": {
           "count": 20,
-          "avg_latency_ms": 373.6353635787964,
-          "max_latency_ms": 457.90624618530273,
-          "min_latency_ms": 272.86505699157715
+          "avg_latency_ms": 382.42400884628296,
+          "max_latency_ms": 534.5649719238281,
+          "min_latency_ms": 276.27110481262207
         },
         "long_connection": {
-          "duration_seconds": 0.2770969867706299,
+          "duration_seconds": 5.631935119628906,
           "operations": 10
         },
         "connection_pool": {
           "requests": 50,
           "failures": 0,
-          "avg_latency_ms": 400.6600570678711
+          "avg_latency_ms": 376.8331813812256
         },
         "recovery": {
-          "failed_request": 401,
+          "failed_request": 404,
           "recovered": true
         }
       },
@@ -281,18 +334,33 @@
     {
       "suite": "partial_failure_recovery",
       "test": "test_partial_failure_recovery",
-      "status": "ERROR",
-      "duration": 0.789417028427124,
-      "metrics": {},
-      "errors": [
-        "Failed to create workspace: 401"
-      ]
+      "status": "PASS",
+      "duration": 11.884943008422852,
+      "metrics": {
+        "batch_ingestion": {
+          "total": 10,
+          "successful": 0,
+          "failed": 10
+        },
+        "orphan_check": {
+          "has_orphans": false,
+          "workspace_state_valid": true
+        },
+        "retry": {
+          "attempts": 3,
+          "successful": 0
+        },
+        "atomicity": {
+          "verified": true
+        }
+      },
+      "errors": []
     },
     {
       "suite": "telemetry_pipeline",
       "test": "test_telemetry_pipeline",
       "status": "PASS",
-      "duration": 19.942373991012573,
+      "duration": 86.73520421981812,
       "metrics": {
         "endpoint": {
           "metrics": true,
@@ -304,8 +372,8 @@
         },
         "load_telemetry": {
           "requests": 50,
-          "avg_latency_ms": 346.1022424697876,
-          "max_latency_ms": 450.822114944458,
+          "avg_latency_ms": 1505.440673828125,
+          "max_latency_ms": 1650.925874710083,
           "metrics_endpoint_still_works": true
         },
         "trace_propagation": {
@@ -326,7 +394,7 @@
       "suite": "cold_restart_recovery",
       "test": "test_cold_restart_recovery",
       "status": "PASS",
-      "duration": 1.167937994003296,
+      "duration": 4.302566051483154,
       "metrics": {
         "health_check": {
           "status": "ready",
@@ -334,8 +402,13 @@
           "redis": "connected"
         },
         "persistence": {
-          "workspaces_count": 0,
-          "accessible": false
+          "workspaces_count": 100,
+          "accessible": true
+        },
+        "new_data": {
+          "workspace_created": true,
+          "memory_created": false,
+          "data_persisted": true
         },
         "redis_state": {
           "connected": true
@@ -346,23 +419,62 @@
     {
       "suite": "async_ordering",
       "test": "test_async_ordering",
-      "status": "ERROR",
-      "duration": 0.41843509674072266,
-      "metrics": {},
-      "errors": [
-        "Failed to create workspace: 401"
-      ]
+      "status": "FAIL",
+      "duration": 20.27835702896118,
+      "metrics": {
+        "sequential_order": {
+          "total": 0,
+          "preserved": false
+        },
+        "event_loop": {
+          "requests": 30,
+          "max_latency_s": 0.5133869647979736,
+          "stable": true
+        },
+        "context_propagation": {
+          "propagated": true
+        }
+      },
+      "errors": []
     },
     {
       "suite": "pgvector_scaling",
       "test": "test_pgvector_scaling",
-      "status": "FAIL",
-      "duration": 4.250175952911377,
+      "status": "PASS",
+      "duration": 69.25286388397217,
       "metrics": {
-        "scaling": [],
+        "scaling": [
+          {
+            "scale": 10,
+            "ingest_avg_ms": 402.51126289367676,
+            "ingest_max_ms": 802.9041290283203,
+            "retrieval_ms": 819.4210529327393
+          },
+          {
+            "scale": 50,
+            "ingest_avg_ms": 372.708683013916,
+            "ingest_max_ms": 514.1592025756836,
+            "retrieval_ms": 820.2190399169922
+          },
+          {
+            "scale": 100,
+            "ingest_avg_ms": 340.4625916481018,
+            "ingest_max_ms": 537.8456115722656,
+            "retrieval_ms": 752.1240711212158
+          }
+        ],
         "topk": {
-          "retrievals": [],
-          "ranking_deterministic": false
+          "retrievals": [
+            0,
+            0,
+            0
+          ],
+          "ranking_deterministic": true
+        },
+        "scaling_behavior": {
+          "scale_factor": 10.0,
+          "time_factor": 0.9178725252778593,
+          "behavior": "sublinear"
         }
       },
       "errors": []
@@ -370,35 +482,62 @@
     {
       "suite": "high_volume_replay",
       "test": "test_high_volume_replay",
-      "status": "ERROR",
-      "duration": 0.43599987030029297,
-      "metrics": {},
-      "errors": [
-        "Failed to create workspace: 401"
-      ]
+      "status": "PASS",
+      "duration": 46.59310293197632,
+      "metrics": {
+        "ingestion": {
+          "count": 100,
+          "avg_latency_ms": 356.8281817436218,
+          "max_latency_ms": 803.7478923797607,
+          "min_latency_ms": 263.71312141418457
+        },
+        "replay": {
+          "replays": 5,
+          "avg_replay_ms": 822.7023601531982,
+          "max_replay_ms": 853.7259101867676,
+          "deterministic": true
+        },
+        "concurrent_replay": {
+          "attempted": 10,
+          "successful": 10,
+          "avg_latency_ms": 1617.337965965271
+        }
+      },
+      "errors": []
     },
     {
       "suite": "tenant_isolation",
       "test": "test_tenant_isolation",
-      "status": "PASS",
-      "duration": 4.500106334686279,
+      "status": "FAIL",
+      "duration": 26.2861487865448,
       "metrics": {
         "workspace_isolation": {
           "total_attempts": 6,
           "leaks_found": 0
         },
         "cache_isolation": {
-          "verified": true
+          "verified": false
         },
         "sql_filtering": {
-          "leaks": 0
+          "leaks": 6
         },
         "storage_isolation": {
           "path_traversal_attempts": 3,
           "leaks": 0
         }
       },
-      "errors": []
+      "errors": [
+        "Redis cache leak: tenant-alpha can see other tenants' workspaces",
+        "Redis cache leak: tenant-beta can see other tenants' workspaces",
+        "Redis cache leak: tenant-gamma can see other tenants' workspaces",
+        "SQL filter leak: tenant-beta accessed tenant-alpha's workspace metadata",
+        "SQL filter leak: tenant-gamma accessed tenant-alpha's workspace metadata",
+        "SQL filter leak: tenant-alpha accessed tenant-beta's workspace metadata",
+        "SQL filter leak: tenant-gamma accessed tenant-beta's workspace metadata",
+        "SQL filter leak: tenant-alpha accessed tenant-gamma's workspace metadata",
+        "SQL filter leak: tenant-beta accessed tenant-gamma's workspace metadata",
+        "Total tenant isolation leaks: 9"
+      ]
     }
   ]
 }

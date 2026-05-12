@@ -11,7 +11,7 @@ import hashlib
 from typing import Dict, Any, List
 from datetime import datetime
 
-from helpers import TestResult
+from helpers import TestResult, get_auth_headers
 
 
 async def test_snapshot_recovery(base_url: str) -> TestResult:
@@ -27,22 +27,23 @@ async def test_snapshot_recovery(base_url: str) -> TestResult:
     start_time = time.time()
     errors: List[str] = []
     metrics: Dict[str, Any] = {}
+    tenant_id = "snapshot-test-tenant"
 
     async with httpx.AsyncClient(timeout=180.0) as client:
         # Create workspace with data
         print("  Creating workspace for snapshot test...")
 
         response = await client.post(
-            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={
                 "name": f"snapshot-test-{int(time.time())}",
                 "description": "Snapshot and recovery test",
             },
+            headers=get_auth_headers(tenant_id),
         )
 
         if response.status_code != 200:
-            errors.append(f"Failed to create workspace: {response.status_code}")
+            errors.append(f"Failed to create workspace: {response.status_code} {response.text}")
             return TestResult(
                 test_name="test_snapshot_recovery",
                 status="ERROR",
@@ -59,19 +60,22 @@ async def test_snapshot_recovery(base_url: str) -> TestResult:
         for i in range(5):
             content = f"Pre-snapshot message {i}"
             response = await client.post(
-            headers=get_auth_headers(),
                 f"{base_url}/api/memories",
                 params={
                     "workspace_id": workspace_id,
                     "content": content,
                     "memory_type": "conversation",
                 },
+                headers=get_auth_headers(tenant_id),
             )
             if response.status_code == 200:
                 pre_snapshot_data.append(response.json())
 
         # Get workspace state before snapshot
-        response = await client.get(f"{base_url}/api/workspaces/{workspace_id}")
+        response = await client.get(
+            f"{base_url}/api/workspaces/{workspace_id}",
+            headers=get_auth_headers(tenant_id),
+        )
         pre_snapshot_state = response.json() if response.status_code == 200 else {}
         pre_snapshot_checksum = hashlib.sha256(
             json.dumps(pre_snapshot_state, sort_keys=True).encode()
@@ -87,9 +91,9 @@ async def test_snapshot_recovery(base_url: str) -> TestResult:
 
         # Try snapshot endpoint if it exists
         snapshot_response = await client.post(
-            headers=get_auth_headers(),
             f"{base_url}/api/workspaces/{workspace_id}/snapshot",
             params={"name": f"snapshot-{int(time.time())}"},
+            headers=get_auth_headers(tenant_id),
         )
 
         snapshot_created = snapshot_response.status_code == 200
@@ -109,6 +113,7 @@ async def test_snapshot_recovery(base_url: str) -> TestResult:
                     "content": content,
                     "memory_type": "conversation",
                 },
+                headers=get_auth_headers(tenant_id),
             )
 
         # Test restoration
@@ -116,14 +121,17 @@ async def test_snapshot_recovery(base_url: str) -> TestResult:
 
         if snapshot_id:
             restore_response = await client.post(
-            headers=get_auth_headers(),
                 f"{base_url}/api/workspaces/{workspace_id}/restore",
                 params={"snapshot_id": snapshot_id},
+                headers=get_auth_headers(tenant_id),
             )
             restored = restore_response.status_code == 200
 
             # Get restored state
-            response = await client.get(f"{base_url}/api/workspaces/{workspace_id}")
+            response = await client.get(
+                f"{base_url}/api/workspaces/{workspace_id}",
+                headers=get_auth_headers(tenant_id),
+            )
             restored_state = response.json() if response.status_code == 200 else {}
             restored_checksum = hashlib.sha256(
                 json.dumps(restored_state, sort_keys=True).encode()
@@ -150,9 +158,9 @@ async def test_snapshot_recovery(base_url: str) -> TestResult:
         print("  Testing branch restoration...")
 
         branch_response = await client.post(
-            headers=get_auth_headers(),
             f"{base_url}/api/workspaces/{workspace_id}/branch",
             params={"name": f"branch-{int(time.time())}"},
+            headers=get_auth_headers(tenant_id),
         )
 
         branch_created = branch_response.status_code == 200

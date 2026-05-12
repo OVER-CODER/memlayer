@@ -10,7 +10,7 @@ import json
 from typing import Dict, Any, List
 from datetime import datetime
 
-from helpers import TestResult
+from helpers import TestResult, get_auth_headers
 
 
 async def test_telemetry_pipeline(base_url: str) -> TestResult:
@@ -26,6 +26,7 @@ async def test_telemetry_pipeline(base_url: str) -> TestResult:
     start_time = time.time()
     errors: List[str] = []
     metrics: Dict[str, Any] = {}
+    tenant_id = "telemetry-test-tenant"
 
     async with httpx.AsyncClient(timeout=120.0) as client:
         # Test 1: Basic metrics endpoint
@@ -59,9 +60,9 @@ async def test_telemetry_pipeline(base_url: str) -> TestResult:
 
             # Create workspace (generates telemetry)
             response = await client.post(
-            headers=get_auth_headers(),
                 f"{base_url}/api/workspaces",
                 params={"name": f"telemetry-test-{i}-{int(time.time())}"},
+                headers=get_auth_headers(tenant_id),
             )
 
             latency = time.time() - start
@@ -97,9 +98,9 @@ async def test_telemetry_pipeline(base_url: str) -> TestResult:
 
         # Create workspace with many operations
         response = await client.post(
-            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={"name": f"async-telemetry-{int(time.time())}"},
+            headers=get_auth_headers(tenant_id),
         )
 
         ws_id = response.json().get("id") if response.status_code == 200 else None
@@ -114,6 +115,7 @@ async def test_telemetry_pipeline(base_url: str) -> TestResult:
                         "content": f"Async telemetry test {i}",
                         "memory_type": "conversation",
                     },
+                    headers=get_auth_headers(tenant_id),
                 )
 
         # Check metrics stability

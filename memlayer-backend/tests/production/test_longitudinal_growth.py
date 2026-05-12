@@ -11,7 +11,7 @@ import hashlib
 from typing import Dict, Any, List
 from datetime import datetime
 
-from helpers import TestResult, JWT_TOKEN, get_auth_headers
+from helpers import TestResult, get_auth_headers
 
 
 async def test_longitudinal_growth(base_url: str) -> TestResult:
@@ -26,6 +26,7 @@ async def test_longitudinal_growth(base_url: str) -> TestResult:
     start_time = time.time()
     errors: List[str] = []
     metrics: Dict[str, Any] = {}
+    tenant_id = "locomo-test-tenant"
 
     # Load LoCoMo dataset
     locomo_path = "/Users/overcoder/Code/memlayer/Dataset/locomo10.json"
@@ -50,17 +51,16 @@ async def test_longitudinal_growth(base_url: str) -> TestResult:
         print(f"  Creating workspace with {num_turns} conversation turns...")
 
         response = await client.post(
-            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={
                 "name": f"locomo-test-{int(time.time())}",
                 "description": "LoCoMo longitudinal test",
             },
-            headers=get_auth_headers(),
+            headers=get_auth_headers(tenant_id),
         )
 
         if response.status_code != 200:
-            errors.append(f"Failed to create workspace: {response.status_code}")
+            errors.append(f"Failed to create workspace: {response.status_code} {response.text}")
             return TestResult(
                 test_name="test_longitudinal_growth",
                 status="ERROR",
@@ -80,14 +80,14 @@ async def test_longitudinal_growth(base_url: str) -> TestResult:
             turn_start = time.time()
 
             content = turn.get("content", f"Turn {i}")
-            response = await client.post(
-            headers=get_auth_headers(),
+            await client.post(
                 f"{base_url}/api/memories",
                 params={
                     "workspace_id": workspace_id,
                     "content": content,
                     "memory_type": "conversation",
                 },
+                headers=get_auth_headers(tenant_id),
             )
 
             turn_latency = time.time() - turn_start
@@ -113,7 +113,10 @@ async def test_longitudinal_growth(base_url: str) -> TestResult:
         print("  Testing lineage retrieval...")
         lineage_start = time.time()
 
-        response = await client.get(f"{base_url}/api/workspaces/{workspace_id}")
+        response = await client.get(
+            f"{base_url}/api/workspaces/{workspace_id}",
+            headers=get_auth_headers(tenant_id),
+        )
 
         lineage_latency = time.time() - lineage_start
         metrics["lineage_retrieval"] = {
@@ -133,6 +136,7 @@ async def test_longitudinal_growth(base_url: str) -> TestResult:
             response = await client.get(
                 f"{base_url}/api/workspaces/{workspace_id}/history",
                 params={"limit": checkpoint["turn"]},
+                headers=get_auth_headers(tenant_id),
             )
             depth_latency = time.time() - depth_start
             depth_latencies.append(depth_latency)
@@ -152,7 +156,10 @@ async def test_longitudinal_growth(base_url: str) -> TestResult:
         replay_checksums = []
         for checkpoint in lineage_checkpoints[:5]:  # Test first 5 checkpoints
             # Simulate replay - fetch workspace at checkpoint
-            response = await client.get(f"{base_url}/api/workspaces/{workspace_id}")
+            response = await client.get(
+                f"{base_url}/api/workspaces/{workspace_id}",
+                headers=get_auth_headers(tenant_id),
+            )
             if response.status_code == 200:
                 ws_data = response.json()
                 checksum = hashlib.sha256(

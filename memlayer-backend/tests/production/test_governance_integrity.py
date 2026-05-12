@@ -11,7 +11,7 @@ import hashlib
 from typing import Dict, Any, List
 from datetime import datetime
 
-from helpers import TestResult
+from helpers import TestResult, get_auth_headers
 
 
 async def test_governance_integrity(base_url: str) -> TestResult:
@@ -25,22 +25,23 @@ async def test_governance_integrity(base_url: str) -> TestResult:
     start_time = time.time()
     errors: List[str] = []
     metrics: Dict[str, Any] = {}
+    tenant_id = "governance-test-tenant"
 
     async with httpx.AsyncClient(timeout=120.0) as client:
         # Create workspace
         print("  Creating workspace with governance tracking...")
 
         response = await client.post(
-            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={
                 "name": f"governance-test-{int(time.time())}",
                 "description": "Governance integrity test",
             },
+            headers=get_auth_headers(tenant_id),
         )
 
         if response.status_code != 200:
-            errors.append(f"Failed to create workspace: {response.status_code}")
+            errors.append(f"Failed to create workspace: {response.status_code} {response.text}")
             return TestResult(
                 test_name="test_governance_integrity",
                 status="ERROR",
@@ -59,14 +60,14 @@ async def test_governance_integrity(base_url: str) -> TestResult:
         for i in range(10):
             content = f"Governance test message {i}"
 
-            response = await client.post(
-            headers=get_auth_headers(),
+            await client.post(
                 f"{base_url}/api/memories",
                 params={
                     "workspace_id": workspace_id,
                     "content": content,
                     "memory_type": "conversation",
                 },
+                headers=get_auth_headers(tenant_id),
             )
 
             # Record lineage hash
@@ -93,7 +94,10 @@ async def test_governance_integrity(base_url: str) -> TestResult:
         print("  Testing audit trail retrieval...")
 
         # Try to get governance data if endpoint exists
-        response = await client.get(f"{base_url}/api/workspaces/{workspace_id}")
+        response = await client.get(
+            f"{base_url}/api/workspaces/{workspace_id}",
+            headers=get_auth_headers(tenant_id),
+        )
 
         audit_verified = response.status_code == 200
 
@@ -106,7 +110,10 @@ async def test_governance_integrity(base_url: str) -> TestResult:
         print("  Verifying lineage immutability...")
 
         # Retrieve workspace and verify hashes haven't changed
-        response = await client.get(f"{base_url}/api/workspaces/{workspace_id}")
+        response = await client.get(
+            f"{base_url}/api/workspaces/{workspace_id}",
+            headers=get_auth_headers(tenant_id),
+        )
 
         # Verify chain is still valid (first hash is correct starting point)
         initial_hash_correct = lineage_hashes[0] is not None
@@ -122,7 +129,8 @@ async def test_governance_integrity(base_url: str) -> TestResult:
 
         # Try to delete workspace (should be logged if allowed)
         delete_response = await client.delete(
-            f"{base_url}/api/workspaces/{workspace_id}"
+            f"{base_url}/api/workspaces/{workspace_id}",
+            headers=get_auth_headers(tenant_id),
         )
 
         metrics["policy_enforcement"] = {

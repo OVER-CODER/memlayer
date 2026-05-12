@@ -11,7 +11,7 @@ import hashlib
 from typing import Dict, Any, List
 from datetime import datetime
 
-from helpers import TestResult
+from helpers import TestResult, get_auth_headers
 
 
 async def test_redis_coordination(base_url: str) -> TestResult:
@@ -26,6 +26,7 @@ async def test_redis_coordination(base_url: str) -> TestResult:
     start_time = time.time()
     errors: List[str] = []
     metrics: Dict[str, Any] = {}
+    tenant_id = "redis-test-tenant"
 
     async with httpx.AsyncClient(timeout=120.0) as client:
         # Create multiple workspaces for lock testing
@@ -34,12 +35,14 @@ async def test_redis_coordination(base_url: str) -> TestResult:
         workspaces = []
         for i in range(10):
             response = await client.post(
-            headers=get_auth_headers(),
                 f"{base_url}/api/workspaces",
                 params={"name": f"redis-test-{i}-{int(time.time())}"},
+                headers=get_auth_headers(tenant_id),
             )
             if response.status_code == 200:
                 workspaces.append(response.json())
+            else:
+                errors.append(f"Failed to create workspace {i}: {response.status_code} {response.text}")
 
         metrics["workspaces"] = {"created": len(workspaces)}
 
@@ -48,17 +51,20 @@ async def test_redis_coordination(base_url: str) -> TestResult:
 
         async def add_memory_with_timing(ws_id: str, index: int):
             start = time.time()
-            response = await client.post(
-            headers=get_auth_headers(),
-                f"{base_url}/api/memories",
-                params={
-                    "workspace_id": ws_id,
-                    "content": f"Coordination test message {index}",
-                    "memory_type": "conversation",
-                },
-            )
-            latency = time.time() - start
-            return {"success": response.status_code == 200, "latency": latency}
+            try:
+                response = await client.post(
+                    f"{base_url}/api/memories",
+                    params={
+                        "workspace_id": ws_id,
+                        "content": f"Coordination test message {index}",
+                        "memory_type": "conversation",
+                    },
+                    headers=get_auth_headers(tenant_id),
+                )
+                latency = time.time() - start
+                return {"success": response.status_code == 200, "latency": latency}
+            except Exception as e:
+                return {"success": False, "error": str(e), "latency": time.time() - start}
 
         # Run concurrent operations
         tasks = []
@@ -87,7 +93,10 @@ async def test_redis_coordination(base_url: str) -> TestResult:
         for ws in workspaces[:3]:
             start = time.time()
             # Trigger a locked operation
-            response = await client.get(f"{base_url}/api/workspaces/{ws['id']}")
+            response = await client.get(
+                f"{base_url}/api/workspaces/{ws['id']}",
+                headers=get_auth_headers(tenant_id),
+            )
             lock_latency = time.time() - start
             lock_latencies.append(lock_latency)
 
@@ -102,7 +111,10 @@ async def test_redis_coordination(base_url: str) -> TestResult:
 
         accessible = 0
         for ws in workspaces:
-            response = await client.get(f"{base_url}/api/workspaces/{ws['id']}")
+            response = await client.get(
+                f"{base_url}/api/workspaces/{ws['id']}",
+                headers=get_auth_headers(tenant_id),
+            )
             if response.status_code == 200:
                 accessible += 1
 

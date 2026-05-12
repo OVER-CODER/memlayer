@@ -10,7 +10,7 @@ import json
 from typing import Dict, Any, List
 from datetime import datetime
 
-from helpers import TestResult
+from helpers import TestResult, get_auth_headers
 
 
 async def test_tenant_isolation(base_url: str) -> TestResult:
@@ -35,19 +35,23 @@ async def test_tenant_isolation(base_url: str) -> TestResult:
         tenant_workspaces = {}
 
         for tenant_id in tenant_ids:
+            # Combine auth headers with tenant ID
+            headers = get_auth_headers(tenant_id)
+
             response = await client.post(
-            headers=get_auth_headers(),
                 f"{base_url}/api/workspaces",
                 params={
                     "name": f"workspace-{tenant_id}-{int(time.time())}",
                     "description": f"Exclusive workspace for {tenant_id}",
                 },
-                headers={"X-Tenant-ID": tenant_id},
+                headers=headers,
             )
 
             if response.status_code == 200:
                 workspace = response.json()
                 tenant_workspaces[tenant_id] = workspace
+            else:
+                errors.append(f"Failed to create workspace for {tenant_id}: {response.status_code} {response.text}")
 
         # Add tenant-specific data
         print("  Adding tenant-specific data...")
@@ -64,7 +68,7 @@ async def test_tenant_isolation(base_url: str) -> TestResult:
                         "content": f"CONFIDENTIAL {tenant_id} data {i}",
                         "memory_type": "conversation",
                     },
-                    headers={"X-Tenant-ID": tenant_id},
+                    headers=get_auth_headers(tenant_id),
                 )
 
         # Test 1: Cross-tenant workspace access
@@ -80,21 +84,24 @@ async def test_tenant_isolation(base_url: str) -> TestResult:
                 if other_tenant != tenant_id:
                     response = await client.get(
                         f"{base_url}/api/workspaces/{ws_id}",
-                        headers={"X-Tenant-ID": other_tenant},
+                        headers=get_auth_headers(other_tenant),
                     )
 
-                    # Should either be rejected or show filtered data
+                    # Should either be rejected (404/403) or show filtered data
                     if response.status_code == 200:
                         data = response.json()
+                        # If the API is correctly filtered, it should NOT return the workspace of another tenant
+                        # Or if it does, it should have NO memories.
+                        # Actually, our architecture should return 404/403 for cross-tenant access.
+                        # Let's check if it leaked.
                         memories = data.get("memories", [])
-
-                        # Check if we can see other tenant's data
                         for memory in memories:
                             content = memory.get("content", "")
-                            if f"CONFIDENTIAL {other_tenant}" in content:
+                            if f"CONFIDENTIAL {tenant_id}" in content:
                                 cross_tenant_leaks.append(
                                     {
                                         "requested_tenant": other_tenant,
+                                        "target_tenant": tenant_id,
                                         "accessed_workspace": ws_id,
                                         "leaked_content": content[:50],
                                     }
@@ -115,37 +122,31 @@ async def test_tenant_isolation(base_url: str) -> TestResult:
 
         # Create separate workspaces and verify cache doesn't leak
         for tenant_id in tenant_ids:
-            response = await client.post(
-            headers=get_auth_headers(),
+            await client.post(
                 f"{base_url}/api/workspaces",
                 params={"name": f"cache-test-{tenant_id}"},
-                headers={"X-Tenant-ID": tenant_id},
+                headers=get_auth_headers(tenant_id),
             )
 
         # Check if workspaces list shows only tenant's workspaces
         for tenant_id in tenant_ids:
             response = await client.get(
-                f"{base_url}/api/workspaces", headers={"X-Tenant-ID": tenant_id}
+                f"{base_url}/api/workspaces", headers=get_auth_headers(tenant_id)
             )
 
             workspaces = response.json() if response.status_code == 200 else []
-
-            # Count workspaces that belong to this tenant
-            tenant_workspace_count = len(
-                [ws for ws in workspaces if ws.get("tenant_id") == tenant_id]
-            )
 
             # Verify only tenant's workspaces are visible
             all_tenants_visible = any(
                 ws.get("tenant_id") != tenant_id for ws in workspaces
             )
 
-            if all_tenants_visible and len(workspaces) > 1:
+            if all_tenants_visible and len(workspaces) > 0:
                 errors.append(
                     f"Redis cache leak: {tenant_id} can see other tenants' workspaces"
                 )
 
-        metrics["cache_isolation"] = {"verified": len(errors) == 0}
+        metrics["cache_isolation"] = {"verified": len([e for e in errors if "cache" in e.lower()]) == 0}
 
         # Test 3: SQL query tenant filtering
         print("  Testing SQL query filtering...")
@@ -159,17 +160,16 @@ async def test_tenant_isolation(base_url: str) -> TestResult:
                 if other_tenant != tenant_id:
                     response = await client.get(
                         f"{base_url}/api/workspaces/{ws_id}",
-                        headers={"X-Tenant-ID": other_tenant},
+                        headers=get_auth_headers(other_tenant),
                     )
 
                     # Should be 403 Forbidden or 404 Not Found, not 200 with data
                     if response.status_code == 200:
+                        # If it returned 200, check if it's the wrong workspace
                         data = response.json()
-                        has_data = len(data.get("memories", [])) > 0
-
-                        if has_data:
-                            errors.append(
-                                f"SQL filter leak: {other_tenant} accessed {tenant_id}'s data"
+                        if data.get("id") == ws_id and data.get("tenant_id") != other_tenant:
+                             errors.append(
+                                f"SQL filter leak: {other_tenant} accessed {tenant_id}'s workspace metadata"
                             )
 
         metrics["sql_filtering"] = {"leaks": len([e for e in errors if "SQL" in e])}
@@ -184,7 +184,7 @@ async def test_tenant_isolation(base_url: str) -> TestResult:
         for path in malicious_paths:
             response = await client.get(
                 f"{base_url}/api/workspaces/{path}",
-                headers={"X-Tenant-ID": "tenant-alpha"},
+                headers=get_auth_headers("tenant-alpha"),
             )
 
             if response.status_code == 200:

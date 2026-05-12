@@ -10,7 +10,7 @@ import json
 from typing import Dict, Any, List
 from datetime import datetime
 
-from helpers import TestResult
+from helpers import TestResult, get_auth_headers
 
 
 async def test_connection_resilience(base_url: str) -> TestResult:
@@ -25,6 +25,7 @@ async def test_connection_resilience(base_url: str) -> TestResult:
     start_time = time.time()
     errors: List[str] = []
     metrics: Dict[str, Any] = {}
+    tenant_id = "resilience-test-tenant"
 
     async with httpx.AsyncClient(timeout=30.0) as client:
         # Test 1: Basic connectivity
@@ -62,9 +63,9 @@ async def test_connection_resilience(base_url: str) -> TestResult:
 
         # Create workspace and add multiple memories
         response = await client.post(
-            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={"name": f"resilience-test-{int(time.time())}"},
+            headers=get_auth_headers(tenant_id),
         )
 
         workspace_id = (
@@ -80,6 +81,7 @@ async def test_connection_resilience(base_url: str) -> TestResult:
                         "content": f"Long connection test {i}",
                         "memory_type": "conversation",
                     },
+                    headers=get_auth_headers(tenant_id),
                 )
 
         connection_duration = time.time() - connection_start
@@ -114,7 +116,8 @@ async def test_connection_resilience(base_url: str) -> TestResult:
 
         # Send a request that might fail (invalid workspace)
         fail_response = await client.get(
-            f"{base_url}/api/workspaces/invalid-workspace-12345"
+            f"{base_url}/api/workspaces/invalid-workspace-12345",
+            headers=get_auth_headers(tenant_id),
         )
 
         # Then send a valid request

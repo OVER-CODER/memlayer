@@ -10,7 +10,7 @@ import json
 from typing import Dict, Any, List
 from datetime import datetime
 
-from helpers import TestResult
+from helpers import TestResult, get_auth_headers
 
 
 async def test_pgvector_scaling(base_url: str) -> TestResult:
@@ -25,6 +25,7 @@ async def test_pgvector_scaling(base_url: str) -> TestResult:
     start_time = time.time()
     errors: List[str] = []
     metrics: Dict[str, Any] = {}
+    tenant_id = "vector-test-tenant"
 
     async with httpx.AsyncClient(timeout=180.0) as client:
         # Test with different memory scales
@@ -37,12 +38,13 @@ async def test_pgvector_scaling(base_url: str) -> TestResult:
 
             # Create workspace
             response = await client.post(
-            headers=get_auth_headers(),
                 f"{base_url}/api/workspaces",
                 params={"name": f"vector-scale-{scale}-{int(time.time())}"},
+                headers=get_auth_headers(tenant_id),
             )
 
             if response.status_code != 200:
+                errors.append(f"Failed to create workspace for scale {scale}: {response.text}")
                 continue
 
             workspace = response.json()
@@ -54,13 +56,13 @@ async def test_pgvector_scaling(base_url: str) -> TestResult:
                 start = time.time()
 
                 response = await client.post(
-            headers=get_auth_headers(),
                     f"{base_url}/api/memories",
                     params={
                         "workspace_id": workspace_id,
                         "content": f"Vector test memory number {i} with some additional context for embedding",
                         "memory_type": "conversation",
                     },
+                    headers=get_auth_headers(tenant_id),
                 )
 
                 latency = time.time() - start
@@ -68,7 +70,10 @@ async def test_pgvector_scaling(base_url: str) -> TestResult:
 
             # Test retrieval
             retrieval_start = time.time()
-            response = await client.get(f"{base_url}/api/workspaces/{workspace_id}")
+            response = await client.get(
+                f"{base_url}/api/workspaces/{workspace_id}",
+                headers=get_auth_headers(tenant_id),
+            )
             retrieval_time = time.time() - retrieval_start
 
             scale_results.append(
@@ -87,9 +92,9 @@ async def test_pgvector_scaling(base_url: str) -> TestResult:
 
         # Create workspace with known memories
         response = await client.post(
-            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={"name": f"topk-test-{int(time.time())}"},
+            headers=get_auth_headers(tenant_id),
         )
 
         workspace = response.json()
@@ -112,12 +117,16 @@ async def test_pgvector_scaling(base_url: str) -> TestResult:
                     "content": content,
                     "memory_type": "conversation",
                 },
+                headers=get_auth_headers(tenant_id),
             )
 
         # Test multiple retrievals
         retrieval_results = []
         for _ in range(3):
-            response = await client.get(f"{base_url}/api/workspaces/{workspace_id}")
+            response = await client.get(
+                f"{base_url}/api/workspaces/{workspace_id}",
+                headers=get_auth_headers(tenant_id),
+            )
             if response.status_code == 200:
                 data = response.json()
                 retrieval_results.append(len(data.get("memories", [])))

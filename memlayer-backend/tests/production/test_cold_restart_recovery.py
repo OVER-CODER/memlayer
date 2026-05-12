@@ -10,7 +10,7 @@ import json
 from typing import Dict, Any, List
 from datetime import datetime
 
-from helpers import TestResult
+from helpers import TestResult, get_auth_headers
 
 
 async def test_cold_restart_recovery(base_url: str) -> TestResult:
@@ -24,6 +24,7 @@ async def test_cold_restart_recovery(base_url: str) -> TestResult:
     start_time = time.time()
     errors: List[str] = []
     metrics: Dict[str, Any] = {}
+    tenant_id = "restart-test-tenant"
 
     # Note: This test validates the system state assuming the service stays up.
     # True cold restart testing would require stopping/starting the service.
@@ -45,7 +46,13 @@ async def test_cold_restart_recovery(base_url: str) -> TestResult:
         # Test 2: Verify database persistence
         print("  Verifying database persistence...")
 
-        response = await client.get(f"{base_url}/api/workspaces")
+        # Test 2: Verify database persistence
+        print("  Verifying database persistence...")
+
+        response = await client.get(
+            f"{base_url}/api/workspaces",
+            headers=get_auth_headers(tenant_id),
+        )
         workspaces = response.json() if response.status_code == 200 else []
 
         metrics["persistence"] = {
@@ -57,9 +64,9 @@ async def test_cold_restart_recovery(base_url: str) -> TestResult:
         print("  Testing new data persistence...")
 
         response = await client.post(
-            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={"name": f"restart-test-{int(time.time())}"},
+            headers=get_auth_headers(tenant_id),
         )
 
         new_workspace = response.json() if response.status_code == 200 else {}
@@ -68,19 +75,22 @@ async def test_cold_restart_recovery(base_url: str) -> TestResult:
         # Add memory
         if new_ws_id:
             response = await client.post(
-            headers=get_auth_headers(),
                 f"{base_url}/api/memories",
                 params={
                     "workspace_id": new_ws_id,
                     "content": "Persistence test message",
                     "memory_type": "conversation",
                 },
+                headers=get_auth_headers(tenant_id),
             )
 
             memory_created = response.status_code == 200
 
             # Verify it's persisted
-            response = await client.get(f"{base_url}/api/workspaces/{new_ws_id}")
+            response = await client.get(
+                f"{base_url}/api/workspaces/{new_ws_id}",
+                headers=get_auth_headers(tenant_id),
+            )
             data_persisted = response.status_code == 200
 
             metrics["new_data"] = {

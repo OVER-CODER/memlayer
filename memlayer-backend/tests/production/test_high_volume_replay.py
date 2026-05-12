@@ -11,7 +11,7 @@ import hashlib
 from typing import Dict, Any, List
 from datetime import datetime
 
-from helpers import TestResult
+from helpers import TestResult, get_auth_headers
 
 
 async def test_high_volume_replay(base_url: str) -> TestResult:
@@ -25,19 +25,20 @@ async def test_high_volume_replay(base_url: str) -> TestResult:
     start_time = time.time()
     errors: List[str] = []
     metrics: Dict[str, Any] = {}
+    tenant_id = "high-volume-test-tenant"
 
     async with httpx.AsyncClient(timeout=300.0) as client:
         # Create workspace with high volume of memories
         print("  Creating workspace with high memory volume...")
 
         response = await client.post(
-            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={"name": f"high-volume-{int(time.time())}"},
+            headers=get_auth_headers(tenant_id),
         )
 
         if response.status_code != 200:
-            errors.append(f"Failed to create workspace: {response.status_code}")
+            errors.append(f"Failed to create workspace: {response.status_code} {response.text}")
             return TestResult(
                 test_name="test_high_volume_replay",
                 status="ERROR",
@@ -59,13 +60,13 @@ async def test_high_volume_replay(base_url: str) -> TestResult:
             start = time.time()
 
             response = await client.post(
-            headers=get_auth_headers(),
                 f"{base_url}/api/memories",
                 params={
                     "workspace_id": workspace_id,
                     "content": f"High volume memory {i} with some additional content to make each memory distinct and test the system's ability to handle large volumes of data efficiently",
                     "memory_type": "conversation",
                 },
+                headers=get_auth_headers(tenant_id),
             )
 
             latency = time.time() - start
@@ -85,14 +86,20 @@ async def test_high_volume_replay(base_url: str) -> TestResult:
         for _ in range(5):
             start = time.time()
 
-            response = await client.get(f"{base_url}/api/workspaces/{workspace_id}")
+            response = await client.get(
+                f"{base_url}/api/workspaces/{workspace_id}",
+                headers=get_auth_headers(tenant_id),
+            )
 
             replay_time = time.time() - start
             replay_times.append(replay_time)
 
         replay_checksums = []
         for _ in range(3):
-            response = await client.get(f"{base_url}/api/workspaces/{workspace_id}")
+            response = await client.get(
+                f"{base_url}/api/workspaces/{workspace_id}",
+                headers=get_auth_headers(tenant_id),
+            )
             if response.status_code == 200:
                 data = response.json()
                 checksum = hashlib.sha256(
@@ -115,7 +122,10 @@ async def test_high_volume_replay(base_url: str) -> TestResult:
 
         async def concurrent_replay():
             start = time.time()
-            response = await client.get(f"{base_url}/api/workspaces/{workspace_id}")
+            response = await client.get(
+                f"{base_url}/api/workspaces/{workspace_id}",
+                headers=get_auth_headers(tenant_id),
+            )
             return time.time() - start, response.status_code
 
         concurrent_results = await asyncio.gather(

@@ -10,7 +10,7 @@ from typing import List, Any
 
 # JWT Token for authenticated API requests (generated with production secret key)
 # Production uses the default dev secret key from config
-JWT_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0LXVzZXIiLCJ0ZW5hbnRfaWQiOiJ0ZXN0LXRlbmFudCIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTc3ODcwMDQ4NCwiaWF0IjoxNzc4NjE0MDg0fQ.7zoUZ8STuwHJ4maF_ZNAXFAW1euDT0SGc74_TVdCSOI"
+JWT_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0LXVzZXIiLCJ0ZW5hbnRfaWQiOiJ0ZXN0LXRlbmFudCIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTc3OTIxOTgzOCwiaWF0IjoxNzc4NjE1MDM4fQ.zPEiUAsoAexJMvWEMCJS_Bw1ukevnjFCAMiFRGfmeow"
 
 
 @dataclass
