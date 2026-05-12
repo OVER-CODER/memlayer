@@ -15,15 +15,31 @@ logging.basicConfig(level=logging.INFO, format="%(name)s - %(levelname)s - %(mes
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-# Use direct URLs
+# Use direct URLs - remove query params that asyncpg doesn't support
+from urllib.parse import urlparse, urlunparse
+
+
+def _clean_dsn_for_asyncpg(dsn: str) -> str:
+    """Remove sslmode from DSN as asyncpg handles SSL differently."""
+    try:
+        parsed = urlparse(dsn)
+        # Remove sslmode from query
+        query_parts = parsed.query.split("&") if parsed.query else []
+        query_parts = [q for q in query_parts if not q.startswith("sslmode=")]
+        new_query = "&".join(query_parts)
+        result = urlunparse(
+            (parsed.scheme, parsed.netloc, parsed.path, new_query, parsed.fragment)
+        )
+        return result
+    except Exception:
+        return dsn
+
+
 _db_url = settings.database_url
-_async_db_url = settings.async_database_url
+_async_db_url = _clean_dsn_for_asyncpg(settings.async_database_url)
 
 logger.info(f"Database URL: {_db_url}")
-logger.info(f"Async Database URL: {_async_db_url}")
-
-logger.info(f"Database URL: {_db_url}")
-logger.info(f"Async Database URL: {_async_db_url}")
+logger.info(f"Async Database URL (cleaned): {_async_db_url}")
 
 # Synchronous Engine (Legacy/Background)
 engine = create_engine(
@@ -34,13 +50,14 @@ engine = create_engine(
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Asynchronous Engine (Production Runtime)
+# Pass ssl as connect_arg since asyncpg handles it differently
 async_engine = create_async_engine(
     _async_db_url,
     echo=settings.debug,
     pool_pre_ping=True,
-    # Standard settings for async drivers
-    pool_size=20,
-    max_overflow=10,
+    connect_args={"ssl": "require"},
+    pool_size=5,
+    max_overflow=5,
     pool_timeout=30,
 )
 AsyncSessionLocal = async_sessionmaker(
