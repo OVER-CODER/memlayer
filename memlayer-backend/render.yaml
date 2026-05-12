@@ -4,35 +4,31 @@
 services:
   # MemLayer Backend Service
   - name: memlayer-backend
-    type: web_service
+    type: web
     region: oregon
+    runtime: python
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
-      # Database (PostgreSQL - Supabase) - Set in Render dashboard
+      # Database (PostgreSQL - Supabase)
       - key: DATABASE_URL
-        sync: false
-        value: "postgresql+asyncpg://postgres.memlayer:memlayer@2373@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres"
+        value: "postgresql+asyncpg://postgres.memlayer:memlayer%402373@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres"
       
       - key: ASYNC_DATABASE_URL
-        sync: false
-        value: "postgresql+asyncpg://postgres.memlayer:memlayer@2373@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres"
+        value: "postgresql+asyncpg://postgres.memlayer:memlayer%402373@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres"
       
-      # Redis (Upstash) - Set in Render dashboard
+      # Redis (Upstash)
       - key: REDIS_HOST
-        sync: false
         value: "pleased-pig-121933.upstash.io"
       
       - key: REDIS_PORT
         value: "6379"
       
       - key: REDIS_PASSWORD
-        sync: false
         value: "gQAAAAAAAdxNAAIgcDFkOWRiN2RhODkxMTY0MTBiOGQ1Zjc0OThiOWNhYWJjNA"
       
-      # Security - Set in Render dashboard
+      # Security
       - key: SECRET_KEY
-        sync: false
         value: "memlayer-prod-secret-key-2026"
       
       - key: SECURITY_ENABLED
@@ -48,9 +44,8 @@ services:
       - key: DETERMINISTIC_MODE
         value: "true"
       
-      # LLM Provider (Gemini) - Set in Render dashboard
+      # LLM Provider (Gemini)
       - key: GEMINI_API_KEY
-        sync: false
         value: "AIzaSyAvuFbsaFT2jkyQnM6yDjRF80i31YOfBJw"
       
       # Embedding
@@ -70,20 +65,3 @@ services:
       # Storage
       - key: STORAGE_PROVIDER
         value: "local"
-    
-    # Health check configuration
-    healthCheck:
-      path: /health/ready
-      interval: 30
-      timeout: 10
-      retries: 3
-      startPeriod: 60
-    
-    # Auto-deploy from branch
-    autoDeployBranch: deploy/render-prod
-    
-    # Instance settings
-    instances: 1
-    
-    # Plan (free for initial testing)
-    plan: free
