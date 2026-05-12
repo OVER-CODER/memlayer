@@ -59,6 +59,28 @@ from .dataset_generator import (
     get_dataset_generator,
 )
 
+from .regression_comparison import (
+    RegressionDetector,
+    CrossVersionComparator,
+    RegressionHistoryTracker,
+    RegressionEvent,
+    CrossVersionComparison,
+    ProviderVersionAnalysis,
+    RegressionType,
+    RegressionSeverity,
+)
+
+from .regression_suite import (
+    RegressionReplaySuite,
+    RegressionReplayReport,
+    VersionedTraceSet,
+)
+
+from .diagnostics_dashboard import (
+    RuntimeDiagnosticsDashboard,
+    RuntimeDiagnosticsSnapshot,
+)
+
 __all__ = [
     # Integrated Runtime
     "IntegratedRuntimeSystem",
@@ -105,4 +127,20 @@ __all__ = [
     "DatasetPartition",
     "DatasetType",
     "get_dataset_generator",
+    # Regression & Comparison
+    "RegressionDetector",
+    "CrossVersionComparator",
+    "RegressionHistoryTracker",
+    "RegressionEvent",
+    "CrossVersionComparison",
+    "ProviderVersionAnalysis",
+    "RegressionType",
+    "RegressionSeverity",
+    # Regression Replay Suite
+    "RegressionReplaySuite",
+    "RegressionReplayReport",
+    "VersionedTraceSet",
+    # Runtime Diagnostics Dashboard
+    "RuntimeDiagnosticsDashboard",
+    "RuntimeDiagnosticsSnapshot",
 ]

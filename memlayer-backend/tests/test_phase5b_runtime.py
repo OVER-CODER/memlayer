@@ -96,6 +96,8 @@ class TestIntegratedRuntimeSystem:
         assert unified_trace.quality_score > 0
         assert unified_trace.semantic_retention > 0
         assert unified_trace.token_efficiency > 0
+        assert unified_trace.trace_id in runtime.replay_engine.stored_traces
+        assert len(runtime.evolution_tracker.all_data_points) >= 6
 
     def test_runtime_statistics(self):
         """Test runtime statistics calculation."""

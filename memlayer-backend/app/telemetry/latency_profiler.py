@@ -403,7 +403,7 @@ class LatencyProfiler:
                 buckets[bucket_key].append(metric["duration_ms"])
             else:
                 # Group by stage
-                stage_key = f"{bucket_key}:{metric['stage']}"
+                stage_key = f"{bucket_key}|{metric['stage']}"
                 buckets[stage_key].append(metric["duration_ms"])
 
         # Generate heatmap data
@@ -414,8 +414,8 @@ class LatencyProfiler:
             max_val = max(values) if values else 0.0
             min_val = min(values) if values else 0.0
 
-            if ":" in bucket_key:
-                timestamp, stage = bucket_key.split(":")
+            if "|" in bucket_key:
+                timestamp, stage = bucket_key.rsplit("|", 1)
             else:
                 timestamp = bucket_key
                 stage = stage_name or "all"

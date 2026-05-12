@@ -13,6 +13,10 @@ from datetime import datetime
 import logging
 import uuid
 
+from app.runtime.replay_engine import ReplayableTrace, get_replay_engine
+from app.runtime.evolution_tracker import EvolutionMetric, get_evolution_tracker
+from app.runtime.failure_detector import get_failure_detector
+
 from app.compiler.adaptive_assembly_pipeline import (
     AdaptiveAssemblyPipeline,
     AdaptiveAssemblyResult,
@@ -118,10 +122,14 @@ class IntegratedRuntimeSystem:
         self.latency_profiler = get_latency_profiler()
         self.drift_analyzer = get_drift_analyzer()
         self.benchmarking_service = get_benchmarking_service()
+        self.replay_engine = get_replay_engine()
+        self.evolution_tracker = get_evolution_tracker()
+        self.failure_detector = get_failure_detector()
 
         # Execution history
         self.unified_traces: List[UnifiedCognitionTrace] = []
         self.max_history = 10000
+        self.provider_quality_history: Dict[str, List[float]] = {}
 
         logger.info("Integrated Runtime System initialized")
 
@@ -309,6 +317,94 @@ class IntegratedRuntimeSystem:
             unified_trace.semantic_retention = assembly_result.semantic_retention
             unified_trace.token_efficiency = assembly_result.token_efficiency
             unified_trace.success = True
+
+            # Persist deterministic replay trace
+            replayable = ReplayableTrace(
+                trace_id=unified_trace.trace_id,
+                timestamp=unified_trace.timestamp,
+                query=query,
+                query_type=query_type,
+                provider=provider,
+                compression_mode=compression_mode,
+                token_budget=token_budget,
+                memories_count=len(memories),
+                memory_ids=[str(index) for index in range(len(memories))],
+                stage_traces=[
+                    {
+                        "stage": stage.stage.value,
+                        "duration_ms": stage.duration_ms,
+                        "input_count": stage.input_count,
+                        "output_count": stage.output_count,
+                        "notes": stage.notes,
+                    }
+                    for stage in assembly_result.stage_metrics
+                ],
+                token_metrics=token_metrics.to_dict(),
+                latency_metrics=self.latency_profiler.get_profiler_report(),
+                quality_score=unified_trace.quality_score,
+                semantic_retention=unified_trace.semantic_retention,
+                token_efficiency=unified_trace.token_efficiency,
+                total_duration_ms=unified_trace.total_duration_ms,
+            )
+            self.replay_engine.store_trace(replayable)
+
+            # Feed evolution tracker with core runtime metrics
+            compression_ratio = (
+                token_metrics.compressed_tokens_output / token_metrics.raw_tokens_input
+                if token_metrics.raw_tokens_input > 0
+                else 0.0
+            )
+            self.evolution_tracker.record_datapoint(
+                metric=EvolutionMetric.CONTEXT_QUALITY,
+                value=unified_trace.quality_score,
+                provider=provider,
+                domain=query_type,
+            )
+            self.evolution_tracker.record_datapoint(
+                metric=EvolutionMetric.TOKEN_EFFICIENCY,
+                value=unified_trace.token_efficiency,
+                provider=provider,
+                domain=query_type,
+            )
+            self.evolution_tracker.record_datapoint(
+                metric=EvolutionMetric.SEMANTIC_RETENTION,
+                value=unified_trace.semantic_retention,
+                provider=provider,
+                domain=query_type,
+            )
+            self.evolution_tracker.record_datapoint(
+                metric=EvolutionMetric.COMPRESSION_RATIO,
+                value=compression_ratio,
+                provider=provider,
+                domain=query_type,
+            )
+            self.evolution_tracker.record_datapoint(
+                metric=EvolutionMetric.LATENCY,
+                value=unified_trace.total_duration_ms,
+                provider=provider,
+                domain=query_type,
+            )
+            self.evolution_tracker.record_datapoint(
+                metric=EvolutionMetric.PROVIDER_QUALITY,
+                value=unified_trace.quality_score,
+                provider=provider,
+                domain=query_type,
+            )
+
+            provider_history = self.provider_quality_history.setdefault(provider, [])
+            provider_history.append(unified_trace.quality_score)
+            if len(provider_history) > 1000:
+                self.provider_quality_history[provider] = provider_history[-1000:]
+                provider_history = self.provider_quality_history[provider]
+
+            # Detect provider instability after enough executions
+            if len(provider_history) >= 5:
+                self.failure_detector.detect_provider_instability(
+                    failure_id=f"provider-instability-{trace_id[:12]}",
+                    provider=provider,
+                    query_type=query_type,
+                    quality_scores=provider_history[-20:],
+                )
 
             logger.info(
                 f"[{trace_id}] Execution complete: "
