@@ -80,7 +80,7 @@ services:
       startPeriod: 60
     
     # Auto-deploy from branch
-    autoDeployBranch: phase11/frontend-console
+    autoDeployBranch: deploy/render-prod
     
     # Instance settings
     instances: 1
