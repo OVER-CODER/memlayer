@@ -1,0 +1,24 @@
+{
+  "benchmark_run_at": "2026-05-12T07:20:46.176279+00:00",
+  "persistence_integrity": {
+    "all_valid": true,
+    "cycles": 20
+  },
+  "recovery_accuracy": {
+    "all_recovered": true,
+    "cycles": 15
+  },
+  "tenant_isolation": {
+    "intact": true,
+    "violations": 0,
+    "checks": 450
+  },
+  "snapshot_restoration": {
+    "all_restored": true,
+    "cycles": 20
+  },
+  "session_recovery": {
+    "cycles": 10,
+    "all_sessions_recovered": true
+  }
+}

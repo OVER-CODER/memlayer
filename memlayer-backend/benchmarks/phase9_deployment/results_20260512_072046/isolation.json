@@ -1,0 +1,8 @@
+{
+  "tenants": 10,
+  "workspaces_per_tenant": 5,
+  "total_workspaces": 50,
+  "isolation_intact": true,
+  "cross_tenant_checks": 450,
+  "violations": 0
+}

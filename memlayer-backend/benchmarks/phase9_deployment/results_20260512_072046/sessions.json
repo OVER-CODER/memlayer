@@ -1,0 +1,62 @@
+[
+  {
+    "cycle": 0,
+    "workspaces": 3,
+    "all_recovered": true,
+    "all_integrity": true
+  },
+  {
+    "cycle": 1,
+    "workspaces": 3,
+    "all_recovered": true,
+    "all_integrity": true
+  },
+  {
+    "cycle": 2,
+    "workspaces": 3,
+    "all_recovered": true,
+    "all_integrity": true
+  },
+  {
+    "cycle": 3,
+    "workspaces": 3,
+    "all_recovered": true,
+    "all_integrity": true
+  },
+  {
+    "cycle": 4,
+    "workspaces": 3,
+    "all_recovered": true,
+    "all_integrity": true
+  },
+  {
+    "cycle": 5,
+    "workspaces": 3,
+    "all_recovered": true,
+    "all_integrity": true
+  },
+  {
+    "cycle": 6,
+    "workspaces": 3,
+    "all_recovered": true,
+    "all_integrity": true
+  },
+  {
+    "cycle": 7,
+    "workspaces": 3,
+    "all_recovered": true,
+    "all_integrity": true
+  },
+  {
+    "cycle": 8,
+    "workspaces": 3,
+    "all_recovered": true,
+    "all_integrity": true
+  },
+  {
+    "cycle": 9,
+    "workspaces": 3,
+    "all_recovered": true,
+    "all_integrity": true
+  }
+]
