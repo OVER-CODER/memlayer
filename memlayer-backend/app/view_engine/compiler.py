@@ -8,7 +8,7 @@ from typing import Any, Dict, List, Optional
 import hashlib
 import json
 
-from app.runtime.integrated_runtime import IntegratedRuntimeSystem, UnifiedCognitionTrace
+from app.runtime.integrated_runtime import IntegratedRuntimeSystem, UnifiedCognitionTrace  # noqa: direct import avoids circular
 from app.view_engine.definitions import ViewDefinitionFramework, ViewDefinition, ViewType
 from app.view_engine.projection import SemanticProjectionEngine, SemanticProjection
 from app.view_engine.quality import ViewQualityEvaluator, ViewQualityReport

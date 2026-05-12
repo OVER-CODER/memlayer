@@ -13,13 +13,33 @@ from typing import Any, Dict, List, Optional, Tuple
 import json
 import re
 
-from app.view_engine import (
-    CompiledSemanticView,
-    ViewEngineCompiler,
-    ViewReplayEngine,
-    ViewType,
-    WorkspaceSemanticState,
-)
+import typing
+
+if typing.TYPE_CHECKING:
+    from app.view_engine.compiler import (
+        CompiledSemanticView,
+        ViewEngineCompiler,
+        WorkspaceSemanticState,
+    )
+    from app.view_engine.definitions import ViewType
+    from app.view_engine.replay import ViewReplayEngine
+
+
+_view_imports_cache: dict = {}
+
+
+def _get_view_imports():
+    """Lazy import to break circular dependency with view_engine."""
+    if not _view_imports_cache:
+        from app.view_engine.compiler import CompiledSemanticView, ViewEngineCompiler, WorkspaceSemanticState
+        from app.view_engine.definitions import ViewType
+        from app.view_engine.replay import ViewReplayEngine
+        _view_imports_cache["CompiledSemanticView"] = CompiledSemanticView
+        _view_imports_cache["ViewEngineCompiler"] = ViewEngineCompiler
+        _view_imports_cache["WorkspaceSemanticState"] = WorkspaceSemanticState
+        _view_imports_cache["ViewType"] = ViewType
+        _view_imports_cache["ViewReplayEngine"] = ViewReplayEngine
+    return _view_imports_cache
 
 
 @dataclass
@@ -203,10 +223,17 @@ class CrossLayerEvaluationFramework:
         view_replay_engine: Optional[ViewReplayEngine] = None,
         max_reports: int = 1000,
     ):
+        imports = _get_view_imports()
+        _ViewReplayEngine = imports["ViewReplayEngine"]
+
         self.view_compiler = view_compiler
-        self.view_replay_engine = view_replay_engine or ViewReplayEngine(view_compiler)
+        self.view_replay_engine = view_replay_engine or _ViewReplayEngine(view_compiler)
         self.max_reports = max_reports
         self.reports: List[CrossLayerEvaluationReport] = []
+
+        # Cached for runtime use (lazy-loaded to break circular import)
+        self._ViewType = imports["ViewType"]
+        self._WorkspaceSemanticState = imports["WorkspaceSemanticState"]
 
     def evaluate_runtime_stack(
         self,
@@ -444,10 +471,10 @@ class CrossLayerEvaluationFramework:
             provider_checks = 0
             provider_matches = 0
             for view_type in [
-                ViewType.RESEARCH,
-                ViewType.DRAFTER,
-                ViewType.TOOL_AGENT,
-                ViewType.CRITIC,
+                self._ViewType.RESEARCH,
+                self._ViewType.DRAFTER,
+                self._ViewType.TOOL_AGENT,
+                self._ViewType.CRITIC,
             ]:
                 for _ in range(cycles):
                     replay = self.view_replay_engine.replay_view(
@@ -505,7 +532,7 @@ class CrossLayerEvaluationFramework:
         last_quality: Optional[float] = None
 
         for step in range(steps):
-            step_state = WorkspaceSemanticState(
+            step_state = self._WorkspaceSemanticState(
                 workspace_id=semantic_state.workspace_id,
                 query=f"{semantic_state.query} [evolution_step={step}]",
                 memories=semantic_state.memories,
@@ -593,7 +620,7 @@ class CrossLayerEvaluationFramework:
                 [view.quality_report.token_efficiency for view in provider_views]
             )
 
-        for view_type in [view_type.value for view_type in ViewType]:
+        for view_type in [view_type.value for view_type in self._ViewType]:
             typed = [view for view in compiled_views if view.view_type.value == view_type]
             view_token_efficiency[view_type] = self._average(
                 [view.quality_report.token_efficiency for view in typed],
@@ -643,7 +670,7 @@ class CrossLayerEvaluationFramework:
                 for view_name, view in views.items()
             }
 
-        for view_name in [view.value for view in ViewType]:
+        for view_name in [view.value for view in self._ViewType]:
             quality_points: List[float] = []
             for provider in providers:
                 view = compiled_by_provider.get(provider, {}).get(view_name)
