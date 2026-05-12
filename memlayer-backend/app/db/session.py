@@ -3,11 +3,14 @@ Database connection and session management for MemLayer.
 Supports both synchronous (legacy) and asynchronous (production) execution.
 """
 
+import logging
 from sqlalchemy import create_engine
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.orm import sessionmaker, Session
 from app.core.config import settings
 from typing import AsyncGenerator
+
+logger = logging.getLogger(__name__)
 
 # Synchronous Engine (Legacy/Background)
 engine = create_engine(
@@ -25,12 +28,10 @@ async_engine = create_async_engine(
     # Standard settings for async drivers
     pool_size=20,
     max_overflow=10,
+    pool_timeout=30,
 )
 AsyncSessionLocal = async_sessionmaker(
-    autocommit=False, 
-    autoflush=False, 
-    bind=async_engine,
-    class_=AsyncSession
+    autocommit=False, autoflush=False, bind=async_engine, class_=AsyncSession
 )
 
 
@@ -57,4 +58,38 @@ def init_db():
     from app.db.models import Base
 
     Base.metadata.create_all(bind=engine)
-    print("✓ Database tables created")
+    logger.info("✓ Database tables created (sync)")
+
+
+async def init_async_db():
+    """Initialize the database asynchronously with connection verification."""
+    from app.db.models import Base
+
+    max_retries = 5
+    retry_delay = 2
+
+    for attempt in range(max_retries):
+        try:
+            # Test connection
+            async with async_engine.connect() as conn:
+                await conn.execute("SELECT 1")
+
+            # Create tables
+            async with async_engine.begin() as conn:
+                await conn.run_sync(Base.metadata.create_all)
+
+            logger.info("✓ Database initialized and verified (async)")
+            return
+
+        except Exception as e:
+            logger.warning(
+                f"Database init attempt {attempt + 1}/{max_retries} failed: {e}"
+            )
+            if attempt < max_retries - 1:
+                import asyncio
+
+                await asyncio.sleep(retry_delay)
+            else:
+                raise Exception(
+                    f"Failed to initialize database after {max_retries} attempts: {e}"
+                )

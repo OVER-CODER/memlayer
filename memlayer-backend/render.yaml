@@ -1,0 +1,103 @@
+# Render Blueprint Configuration for MemLayer Backend
+# Use: render blueprint create --file render.yaml
+
+services:
+  # MemLayer Backend Service
+  - name: memlayer-backend
+    type: web
+    region: oregon
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      # Database (PostgreSQL - Supabase)
+      - key: DATABASE_URL
+        sync: false
+        # Format: postgresql+asyncpg://postgres.[project]:[password]@aws-0-[region].pooler.supabase.com:6543/postgres
+        # Replace with your actual Supabase connection string
+        value: "REPLACE_WITH_YOUR_SUPABASE_DATABASE_URL"
+      
+      - key: ASYNC_DATABASE_URL
+        sync: false
+        value: "REPLACE_WITH_YOUR_SUPABASE_DATABASE_URL"
+      
+      # Redis (Upstash)
+      - key: REDIS_HOST
+        sync: false
+        value: "REPLACE_WITH_YOUR_UPSTASH_HOST"
+      
+      - key: REDIS_PORT
+        value: "6379"
+      
+      - key: REDIS_PASSWORD
+        sync: false
+        value: "REPLACE_WITH_YOUR_UPSTASH_PASSWORD"
+      
+      # Security
+      - key: SECRET_KEY
+        sync: false
+        value: "REPLACE_WITH_GENERATED_SECRET_KEY"
+      
+      - key: SECURITY_ENABLED
+        value: "true"
+      
+      # Runtime
+      - key: DEBUG
+        value: "false"
+      
+      - key: LOG_LEVEL
+        value: "INFO"
+      
+      - key: DETERMINISTIC_MODE
+        value: "true"
+      
+      # LLM Provider (Gemini)
+      - key: GEMINI_API_KEY
+        sync: false
+        value: "REPLACE_WITH_YOUR_GEMINI_API_KEY"
+      
+      # Embedding
+      - key: EMBEDDING_MODEL
+        value: "all-MiniLM-L6-v2"
+      
+      - key: EMBEDDING_DIM
+        value: "384"
+      
+      # Memory
+      - key: TOP_K_MEMORIES
+        value: "5"
+      
+      - key: MEMORY_RETRIEVAL_THRESHOLD
+        value: "0.3"
+      
+      # Storage
+      - key: STORAGE_PROVIDER
+        value: "local"
+    
+    # Health check configuration
+    healthCheck:
+      path: /health/ready
+      interval: 30
+      timeout: 10
+      retries: 3
+      startPeriod: 60
+    
+    # Auto-deploy from branch
+    autoDeployBranch: phase11/frontend-console
+    
+    # Instance settings
+    instances: 1
+    
+    # Plan (shared is sufficient for initial testing)
+    plan: free
+
+# Database (using Supabase - external, not managed by Render)
+# Supabase provides:
+# - PostgreSQL with pgvector support
+# - Connection pooling
+# - Automatic backups
+
+# Redis (using Upstash - external, not managed by Render)
+# Upstash provides:
+# - Redis API compatible
+# - Serverless plan available
+# - Global replication option

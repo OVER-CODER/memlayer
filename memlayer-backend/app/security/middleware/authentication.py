@@ -10,6 +10,18 @@ from app.security.jwt_manager import get_jwt_manager
 from app.security.api_keys import get_api_key_manager
 from app.security.authentication import AuthContext
 
+# Paths that don't require authentication
+PUBLIC_PATHS = [
+    "/health",
+    "/health/ready",
+    "/metrics",
+    "/api/config",
+    "/docs",
+    "/openapi.json",
+    "/redoc",
+]
+
+
 class AuthenticationMiddleware(BaseHTTPMiddleware):
     """
     Middleware to resolve AuthContext for every request.
@@ -17,8 +29,8 @@ class AuthenticationMiddleware(BaseHTTPMiddleware):
     """
 
     async def dispatch(self, request: Request, call_next):
-        # Expose health and config endpoints
-        if request.url.path in ["/health", "/api/config", "/docs", "/openapi.json"]:
+        # Expose health and config endpoints (no auth required)
+        if request.url.path in PUBLIC_PATHS:
             return await call_next(request)
 
         auth_header = request.headers.get("Authorization")
@@ -35,7 +47,7 @@ class AuthenticationMiddleware(BaseHTTPMiddleware):
                     subject=payload["sub"],
                     tenant_id=payload["tenant_id"],
                     role=payload["role"],
-                    auth_type="jwt"
+                    auth_type="jwt",
                 )
 
         # 2. Try API Key (Simplified for Phase C, would normally check DB)
@@ -47,18 +59,19 @@ class AuthenticationMiddleware(BaseHTTPMiddleware):
                     subject="dev_agent",
                     tenant_id="default",
                     role="developer",
-                    auth_type="api_key"
+                    auth_type="api_key",
                 )
 
         if not auth_context:
             from fastapi.responses import JSONResponse
+
             return JSONResponse(
                 status_code=status.HTTP_401_UNAUTHORIZED,
-                content={"detail": "Missing or invalid authentication"}
+                content={"detail": "Missing or invalid authentication"},
             )
 
         # Attach to request state
         request.state.auth = auth_context
-        
+
         response = await call_next(request)
         return response
