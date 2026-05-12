@@ -759,7 +759,8 @@ class TestRegressionComparison:
         for i in range(len(versions) - 1):
             comparison = CrossVersionComparison(
                 comparison_id=f"cmp_{i}",
-                timestamp=datetime.utcnow() - timedelta(hours=len(versions) - i - 1),
+                timestamp=datetime.now(timezone.utc)
+                - timedelta(hours=len(versions) - i - 1),
                 baseline_version=versions[i],
                 comparison_version=versions[i + 1],
                 baseline_traces=100,
