@@ -15,7 +15,7 @@ from __future__ import annotations
 
 from typing import List, Tuple, Dict, Optional, Set, TYPE_CHECKING
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 import numpy as np
 from enum import Enum
 import logging
@@ -50,7 +50,7 @@ class DuplicateGroup:
 class DeduplicationMetrics:
     """Metrics tracking deduplication effectiveness."""
 
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     total_memories_input: int = 0
     total_memories_after: int = 0
     duplicate_groups_found: int = 0

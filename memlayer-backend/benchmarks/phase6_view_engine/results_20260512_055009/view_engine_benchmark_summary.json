@@ -1,0 +1,283 @@
+{
+  "generated_at": "2026-05-12T05:50:10.003863",
+  "output_dir": "/Users/overcoder/Code/memlayer/memlayer-backend/benchmarks/phase6_view_engine/results_20260512_055009",
+  "rows": 48,
+  "providers": [
+    "claude",
+    "openai",
+    "gemini"
+  ],
+  "workloads": [
+    "research",
+    "drafting",
+    "tooling",
+    "critique"
+  ],
+  "avg_quality": 0.5787332383015711,
+  "avg_token_efficiency": 0.09011016079348809,
+  "replay_statistics": {
+    "total_replays": 51,
+    "by_view": {
+      "research": 12,
+      "drafter": 12,
+      "tool_agent": 15,
+      "critic": 12
+    },
+    "by_provider": {
+      "claude": 19,
+      "openai": 16,
+      "gemini": 16
+    },
+    "determinism_comparisons": 2,
+    "determinism_mismatches": 0,
+    "determinism_rate": 1.0
+  },
+  "determinism_checks": [
+    {
+      "deterministic_match": true,
+      "projection_checksum": "dddaf6e20000f9353f986195"
+    },
+    {
+      "deterministic_match": true,
+      "projection_checksum": "dddaf6e20000f9353f986195"
+    },
+    {
+      "deterministic_match": true,
+      "projection_checksum": "dddaf6e20000f9353f986195"
+    }
+  ],
+  "diagnostics_snapshot": {
+    "snapshot_id": "phase6-benchmark",
+    "generated_at": "2026-05-12T05:50:10.003814",
+    "view_counts": {
+      "research": 12,
+      "drafter": 12,
+      "tool_agent": 15,
+      "critic": 12
+    },
+    "provider_distribution": {
+      "claude": 19,
+      "openai": 16,
+      "gemini": 16
+    },
+    "quality_summary": {
+      "count": 51,
+      "avg_quality": 0.58176211190947,
+      "min_quality": 0.5474626865671642,
+      "max_quality": 0.6316391461941201
+    },
+    "projection_comparison": {
+      "projection_report": {
+        "projection_count": 4,
+        "pairwise_comparisons": [
+          {
+            "projection_a": "proj-research-487ff29f",
+            "projection_b": "proj-drafter-7ac5c047",
+            "jaccard_overlap": 0.803921568627451,
+            "semantic_divergence": 0.196078431372549,
+            "shared_tokens": 41,
+            "projection_a_tokens": 287,
+            "projection_b_tokens": 287,
+            "section_overlap": {
+              "facts": 1.0,
+              "reasoning": 0.6923076923076923,
+              "body": 0.7959183673469388
+            }
+          },
+          {
+            "projection_a": "proj-research-487ff29f",
+            "projection_b": "proj-tool_agent-c4dfe94f",
+            "jaccard_overlap": 0.4838709677419355,
+            "semantic_divergence": 0.5161290322580645,
+            "shared_tokens": 30,
+            "projection_a_tokens": 287,
+            "projection_b_tokens": 283,
+            "section_overlap": {
+              "facts": 0.9047619047619048,
+              "actions": 0.0,
+              "reasoning": 0.0,
+              "body": 0.4745762711864407
+            }
+          },
+          {
+            "projection_a": "proj-research-487ff29f",
+            "projection_b": "proj-critic-17761f9b",
+            "jaccard_overlap": 0.7547169811320755,
+            "semantic_divergence": 0.24528301886792447,
+            "shared_tokens": 40,
+            "projection_a_tokens": 287,
+            "projection_b_tokens": 287,
+            "section_overlap": {
+              "facts": 1.0,
+              "reasoning": 0.6071428571428571,
+              "body": 0.7450980392156863
+            }
+          },
+          {
+            "projection_a": "proj-drafter-7ac5c047",
+            "projection_b": "proj-tool_agent-c4dfe94f",
+            "jaccard_overlap": 0.5333333333333333,
+            "semantic_divergence": 0.4666666666666667,
+            "shared_tokens": 32,
+            "projection_a_tokens": 287,
+            "projection_b_tokens": 283,
+            "section_overlap": {
+              "facts": 0.9047619047619048,
+              "actions": 0.0,
+              "reasoning": 0.0,
+              "body": 0.5263157894736842
+            }
+          },
+          {
+            "projection_a": "proj-drafter-7ac5c047",
+            "projection_b": "proj-critic-17761f9b",
+            "jaccard_overlap": 0.7547169811320755,
+            "semantic_divergence": 0.24528301886792447,
+            "shared_tokens": 40,
+            "projection_a_tokens": 287,
+            "projection_b_tokens": 287,
+            "section_overlap": {
+              "facts": 1.0,
+              "reasoning": 0.6071428571428571,
+              "body": 0.7450980392156863
+            }
+          },
+          {
+            "projection_a": "proj-tool_agent-c4dfe94f",
+            "projection_b": "proj-critic-17761f9b",
+            "jaccard_overlap": 0.5,
+            "semantic_divergence": 0.5,
+            "shared_tokens": 31,
+            "projection_a_tokens": 283,
+            "projection_b_tokens": 287,
+            "section_overlap": {
+              "reasoning": 0.0,
+              "facts": 0.9047619047619048,
+              "body": 0.4915254237288136,
+              "actions": 0.0
+            }
+          }
+        ],
+        "avg_semantic_divergence": 0.3615733613388548,
+        "avg_semantic_overlap": 0.6384266386611451
+      },
+      "quality_report": {
+        "research": {
+          "view_type": "research",
+          "provider": "gemini",
+          "semantic_preservation": 1.0,
+          "reasoning_continuity": 0.0,
+          "specialization_effectiveness": 0.6,
+          "token_efficiency": 0.08190639269406393,
+          "projection_fidelity": 0.6,
+          "semantic_overlap_with_base": 1.0,
+          "provider_compatibility": 1.0,
+          "overall_quality": 0.5881906392694064
+        },
+        "drafter": {
+          "view_type": "drafter",
+          "provider": "gemini",
+          "semantic_preservation": 1.0,
+          "reasoning_continuity": 0.0,
+          "specialization_effectiveness": 0.4,
+          "token_efficiency": 0.10116320056397603,
+          "projection_fidelity": 0.6,
+          "semantic_overlap_with_base": 1.0,
+          "provider_compatibility": 1.0,
+          "overall_quality": 0.5501163200563977
+        },
+        "tool_agent": {
+          "view_type": "tool_agent",
+          "provider": "claude",
+          "semantic_preservation": 1.0,
+          "reasoning_continuity": 0.0,
+          "specialization_effectiveness": 0.8,
+          "token_efficiency": 0.11890756302521008,
+          "projection_fidelity": 0.6,
+          "semantic_overlap_with_base": 1.0,
+          "provider_compatibility": 0.9833333333333334,
+          "overall_quality": 0.6302240896358544
+        },
+        "critic": {
+          "view_type": "critic",
+          "provider": "gemini",
+          "semantic_preservation": 1.0,
+          "reasoning_continuity": 0.0,
+          "specialization_effectiveness": 0.4,
+          "token_efficiency": 0.08374671724540414,
+          "projection_fidelity": 0.6,
+          "semantic_overlap_with_base": 1.0,
+          "provider_compatibility": 1.0,
+          "overall_quality": 0.5483746717245405
+        }
+      },
+      "views": [
+        {
+          "view_id": "view-research-487ff29f",
+          "view_type": "research",
+          "provider": "gemini",
+          "token_budget_used": 3504,
+          "selected_memory_count": 104,
+          "selection_ratio": 0.9454545454545454,
+          "runtime_trace_id": "487ff29f-53be-4d4a-bf49-da6364dd3899",
+          "projection_checksum": "e4de6197783655c992cbc216",
+          "semantic_divergence_from_base": 0.0,
+          "compiled_at": "2026-05-12T05:50:09.998948"
+        },
+        {
+          "view_id": "view-drafter-7ac5c047",
+          "view_type": "drafter",
+          "provider": "gemini",
+          "token_budget_used": 2837,
+          "selected_memory_count": 82,
+          "selection_ratio": 0.7454545454545455,
+          "runtime_trace_id": "7ac5c047-92af-4d9b-994c-0f283e6a5e71",
+          "projection_checksum": "ac66a520b9d25422c1afff72",
+          "semantic_divergence_from_base": 0.0,
+          "compiled_at": "2026-05-12T05:50:09.999589"
+        },
+        {
+          "view_id": "view-tool_agent-c4dfe94f",
+          "view_type": "tool_agent",
+          "provider": "claude",
+          "token_budget_used": 2380,
+          "selected_memory_count": 52,
+          "selection_ratio": 0.65,
+          "runtime_trace_id": "c4dfe94f-b79f-4143-b45c-1163fb31efec",
+          "projection_checksum": "dddaf6e20000f9353f986195",
+          "semantic_divergence_from_base": 0.0,
+          "compiled_at": "2026-05-12T05:50:10.002918"
+        },
+        {
+          "view_id": "view-critic-17761f9b",
+          "view_type": "critic",
+          "provider": "gemini",
+          "token_budget_used": 3427,
+          "selected_memory_count": 93,
+          "selection_ratio": 0.8454545454545455,
+          "runtime_trace_id": "17761f9b-3941-42e0-99db-7719d3bd75d6",
+          "projection_checksum": "53b7b1b38917b8af702030d5",
+          "semantic_divergence_from_base": 0.0,
+          "compiled_at": "2026-05-12T05:50:10.000884"
+        }
+      ]
+    },
+    "replay_summary": {
+      "total_replays": 51,
+      "by_view": {
+        "research": 12,
+        "drafter": 12,
+        "tool_agent": 15,
+        "critic": 12
+      },
+      "by_provider": {
+        "claude": 19,
+        "openai": 16,
+        "gemini": 16
+      },
+      "determinism_comparisons": 2,
+      "determinism_mismatches": 0,
+      "determinism_rate": 1.0
+    }
+  }
+}

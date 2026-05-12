@@ -1,0 +1,109 @@
+{
+  "dataset_a": {
+    "dataset_id": "dataset-compression-3324033b",
+    "dataset_type": "compression_decisions",
+    "version": "1.0",
+    "source": "validation",
+    "total_samples": 250,
+    "created_at": "2026-05-12T05:19:13.506273",
+    "deterministic_seed": 42,
+    "replay_compatible": true,
+    "train_samples": 175,
+    "validation_samples": 37,
+    "test_samples": 38,
+    "statistics": {
+      "domains": {
+        "analysis": 55,
+        "business": 55,
+        "design": 45,
+        "research": 56,
+        "code": 39
+      },
+      "providers": {
+        "gemini": 81,
+        "claude": 89,
+        "openai": 80
+      },
+      "compression_modes": {
+        "balanced": 83,
+        "aggressive": 72,
+        "conservative": 95
+      },
+      "complexity": {
+        "simple": 59,
+        "very_complex": 74,
+        "complex": 58,
+        "moderate": 59
+      }
+    }
+  },
+  "dataset_b": {
+    "dataset_id": "dataset-compression-e65b165f",
+    "dataset_type": "compression_decisions",
+    "version": "1.0",
+    "source": "validation",
+    "total_samples": 250,
+    "created_at": "2026-05-12T05:19:13.507431",
+    "deterministic_seed": 42,
+    "replay_compatible": true,
+    "train_samples": 175,
+    "validation_samples": 37,
+    "test_samples": 38,
+    "statistics": {
+      "domains": {
+        "analysis": 55,
+        "business": 55,
+        "design": 45,
+        "research": 56,
+        "code": 39
+      },
+      "providers": {
+        "gemini": 81,
+        "claude": 89,
+        "openai": 80
+      },
+      "compression_modes": {
+        "balanced": 83,
+        "aggressive": 72,
+        "conservative": 95
+      },
+      "complexity": {
+        "simple": 59,
+        "very_complex": 74,
+        "complex": 58,
+        "moderate": 59
+      }
+    }
+  },
+  "checksum_validation": {
+    "generator_checksum_a": "5f1734e97db43a1766f37ac84597a54c425bcf4ea09bf9660b53c7ab8513e054",
+    "generator_checksum_b": "22611c403b32205419449050fcdb3fecdd876a8d79d20424b53fcde09f0bd233",
+    "stable_feature_checksum_a": "c94a30ab6bd0beae",
+    "stable_feature_checksum_b": "c94a30ab6bd0beae",
+    "stable_checksum_match": true
+  },
+  "generator_summary_a": {
+    "total_datasets": 1,
+    "datasets": [
+      {
+        "dataset_id": "dataset-compression-3324033b",
+        "type": "compression_decisions",
+        "total_samples": 250,
+        "source": "validation",
+        "checksum": "5f1734e97db43a1766f37ac84597a54c425bcf4ea09bf9660b53c7ab8513e054"
+      }
+    ]
+  },
+  "generator_summary_b": {
+    "total_datasets": 1,
+    "datasets": [
+      {
+        "dataset_id": "dataset-compression-e65b165f",
+        "type": "compression_decisions",
+        "total_samples": 250,
+        "source": "validation",
+        "checksum": "22611c403b32205419449050fcdb3fecdd876a8d79d20424b53fcde09f0bd233"
+      }
+    ]
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "provider_stats": {
+    "claude": {
+      "runs": 438,
+      "avg_latency_ms": 0.7963681329875232,
+      "max_latency_ms": 1.9257068634033203,
+      "latency_variance": 0.08254299412473515,
+      "avg_quality_score": 0.6486746853769908,
+      "avg_semantic_retention": 1.0,
+      "avg_token_efficiency": 0.10629442088859897
+    },
+    "openai": {
+      "runs": 475,
+      "avg_latency_ms": 0.7783182043778268,
+      "max_latency_ms": 2.2420883178710938,
+      "latency_variance": 0.07753424295243194,
+      "avg_quality_score": 0.6991527599486522,
+      "avg_semantic_retention": 1.0,
+      "avg_token_efficiency": 0.10361133667502088
+    },
+    "gemini": {
+      "runs": 435,
+      "avg_latency_ms": 0.7913638805520946,
+      "max_latency_ms": 1.4820098876953125,
+      "latency_variance": 0.07250430042521848,
+      "avg_quality_score": 0.7386038687973088,
+      "avg_semantic_retention": 1.0,
+      "avg_token_efficiency": 0.10667576172231344
+    }
+  },
+  "robustness_ranking": [
+    "gemini",
+    "openai",
+    "claude"
+  ],
+  "benchmark_report": {
+    "total_benchmarks": 1348,
+    "providers": [
+      "claude",
+      "openai",
+      "gemini"
+    ],
+    "compression_modes": [
+      "balanced"
+    ],
+    "query_complexities": [
+      "moderate",
+      "simple"
+    ],
+    "provider_profiles": {
+      "claude": {
+        "provider": "claude",
+        "total_benchmarks": 438,
+        "by_compression_mode": {
+          "balanced": {
+            "benchmarks": 438,
+            "avg_score": 76.46466067297588,
+            "success_rate": 1.0,
+            "avg_compression_ratio": 0.2780489373640059,
+            "avg_latency_ms": 0.7963681329875232
+          }
+        }
+      },
+      "openai": {
+        "provider": "openai",
+        "total_benchmarks": 475,
+        "by_compression_mode": {
+          "balanced": {
+            "benchmarks": 475,
+            "avg_score": 76.41483069327096,
+            "success_rate": 1.0,
+            "avg_compression_ratio": 0.28214363531205633,
+            "avg_latency_ms": 0.7783182043778268
+          }
+        }
+      },
+      "gemini": {
+        "provider": "gemini",
+        "total_benchmarks": 435,
+        "by_compression_mode": {
+          "balanced": {
+            "benchmarks": 435,
+            "avg_score": 76.45676822637222,
+            "success_rate": 1.0,
+            "avg_compression_ratio": 0.27871035860691035,
+            "avg_latency_ms": 0.7913638805520946
+          }
+        }
+      }
+    },
+    "total_comparisons": 0
+  }
+}

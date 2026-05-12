@@ -5,7 +5,7 @@ Tests the end-to-end context compilation pipeline integrating all Phase 4 compon
 """
 
 import pytest
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from unittest.mock import Mock
 import numpy as np
 
@@ -28,7 +28,7 @@ def mock_memory():
         mem.id = mem_id
         mem.raw_content = content
         mem.importance_score = importance
-        mem.timestamp = timestamp or datetime.utcnow()
+        mem.timestamp = timestamp or datetime.now(timezone.utc)
         mem.embedding = np.random.random(768).tolist()
         return mem
 

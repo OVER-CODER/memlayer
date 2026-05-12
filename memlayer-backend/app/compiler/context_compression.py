@@ -17,7 +17,7 @@ from __future__ import annotations
 
 from typing import List, Dict, Optional, Tuple, Set, TYPE_CHECKING
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 import numpy as np
 import logging

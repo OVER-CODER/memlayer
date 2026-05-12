@@ -1,0 +1,242 @@
+[
+  {
+    "cycle": 0,
+    "cache_key": "proj-0",
+    "action": "refresh",
+    "rationale": "high_semantic_drift",
+    "tokens_saved": 0,
+    "projection_age": 1e-05
+  },
+  {
+    "cycle": 1,
+    "cache_key": "proj-1",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 2e-05
+  },
+  {
+    "cycle": 2,
+    "cache_key": "proj-2",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 2.4e-05
+  },
+  {
+    "cycle": 3,
+    "cache_key": "proj-3",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 2.7e-05
+  },
+  {
+    "cycle": 4,
+    "cache_key": "proj-4",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 2.9e-05
+  },
+  {
+    "cycle": 5,
+    "cache_key": "proj-5",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 3.1e-05
+  },
+  {
+    "cycle": 6,
+    "cache_key": "proj-6",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 3.4e-05
+  },
+  {
+    "cycle": 7,
+    "cache_key": "proj-7",
+    "action": "refresh",
+    "rationale": "high_semantic_drift",
+    "tokens_saved": 0,
+    "projection_age": 3.6e-05
+  },
+  {
+    "cycle": 8,
+    "cache_key": "proj-0",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 3e-05
+  },
+  {
+    "cycle": 9,
+    "cache_key": "proj-1",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 4.8e-05
+  },
+  {
+    "cycle": 10,
+    "cache_key": "proj-2",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 5e-05
+  },
+  {
+    "cycle": 11,
+    "cache_key": "proj-3",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 5.1e-05
+  },
+  {
+    "cycle": 12,
+    "cache_key": "proj-4",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 5.3e-05
+  },
+  {
+    "cycle": 13,
+    "cache_key": "proj-5",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 5.5e-05
+  },
+  {
+    "cycle": 14,
+    "cache_key": "proj-6",
+    "action": "refresh",
+    "rationale": "high_semantic_drift",
+    "tokens_saved": 0,
+    "projection_age": 5.7e-05
+  },
+  {
+    "cycle": 15,
+    "cache_key": "proj-7",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 2.1e-05
+  },
+  {
+    "cycle": 16,
+    "cache_key": "proj-0",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 5.2e-05
+  },
+  {
+    "cycle": 17,
+    "cache_key": "proj-1",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 7e-05
+  },
+  {
+    "cycle": 18,
+    "cache_key": "proj-2",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 7.1e-05
+  },
+  {
+    "cycle": 19,
+    "cache_key": "proj-3",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 7.3e-05
+  },
+  {
+    "cycle": 20,
+    "cache_key": "proj-4",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 7.4e-05
+  },
+  {
+    "cycle": 21,
+    "cache_key": "proj-5",
+    "action": "refresh",
+    "rationale": "high_semantic_drift",
+    "tokens_saved": 0,
+    "projection_age": 7.6e-05
+  },
+  {
+    "cycle": 22,
+    "cache_key": "proj-6",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 2e-05
+  },
+  {
+    "cycle": 23,
+    "cache_key": "proj-7",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 4.2e-05
+  },
+  {
+    "cycle": 24,
+    "cache_key": "proj-0",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 7.3e-05
+  },
+  {
+    "cycle": 25,
+    "cache_key": "proj-1",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 9.1e-05
+  },
+  {
+    "cycle": 26,
+    "cache_key": "proj-2",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 9.2e-05
+  },
+  {
+    "cycle": 27,
+    "cache_key": "proj-3",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 9.4e-05
+  },
+  {
+    "cycle": 28,
+    "cache_key": "proj-4",
+    "action": "refresh",
+    "rationale": "high_semantic_drift",
+    "tokens_saved": 0,
+    "projection_age": 9.6e-05
+  },
+  {
+    "cycle": 29,
+    "cache_key": "proj-5",
+    "action": "reuse",
+    "rationale": "projection_fresh",
+    "tokens_saved": 200,
+    "projection_age": 1.9e-05
+  }
+]

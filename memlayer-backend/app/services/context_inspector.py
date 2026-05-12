@@ -7,7 +7,7 @@ retrieved, and used by different providers.
 
 from typing import Optional, Dict, Any
 from app.schemas.context import ContextLayers, ContextDebugInfo
-from datetime import datetime
+from datetime import datetime, timezone
 import json
 import logging
 
@@ -196,7 +196,7 @@ class ContextInspector:
             JSON string
         """
         debug_data = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "metadata": {
                 "provider": context.metadata.provider,
                 "model": context.metadata.model,

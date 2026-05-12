@@ -1,0 +1,34 @@
+[
+  {
+    "workload": "research",
+    "semantic_preservation": 1.0,
+    "determinism_rate": 1.0,
+    "avg_view_divergence": 0.18143892593630445,
+    "semantic_value_per_token": 0.0020919036341417213,
+    "top_provider": "gemini"
+  },
+  {
+    "workload": "drafting",
+    "semantic_preservation": 1.0,
+    "determinism_rate": 1.0,
+    "avg_view_divergence": 0.20471489591271808,
+    "semantic_value_per_token": 0.002085299833862063,
+    "top_provider": "gemini"
+  },
+  {
+    "workload": "tooling",
+    "semantic_preservation": 1.0,
+    "determinism_rate": 1.0,
+    "avg_view_divergence": 0.20120004212101783,
+    "semantic_value_per_token": 0.002054147185886985,
+    "top_provider": "gemini"
+  },
+  {
+    "workload": "critique",
+    "semantic_preservation": 1.0,
+    "determinism_rate": 1.0,
+    "avg_view_divergence": 0.20835478145419667,
+    "semantic_value_per_token": 0.0020668508280829623,
+    "top_provider": "gemini"
+  }
+]

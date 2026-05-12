@@ -1,0 +1,482 @@
+[
+  {
+    "workload": "research",
+    "provider": "claude",
+    "view_type": "research",
+    "quality": 0.5860825180774138,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.06082518077413866,
+    "projection_checksum": "98256a69bae778fdebd49b89",
+    "runtime_trace_id": "b148e417-33fc-4965-9426-6c71710a5643"
+  },
+  {
+    "workload": "research",
+    "provider": "claude",
+    "view_type": "drafter",
+    "quality": 0.5482754629629629,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.08275462962962964,
+    "projection_checksum": "bd403735af565dd0d96bf49e",
+    "runtime_trace_id": "d519dbb6-6894-4a1d-a803-8888f7b24fe1"
+  },
+  {
+    "workload": "research",
+    "provider": "claude",
+    "view_type": "tool_agent",
+    "quality": 0.6288480392156863,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.10514705882352941,
+    "projection_checksum": "1c25dfe7a110af48d7b1d5ed",
+    "runtime_trace_id": "f2a7b3e3-716b-49bc-afd8-60911851e313"
+  },
+  {
+    "workload": "research",
+    "provider": "claude",
+    "view_type": "critic",
+    "quality": 0.5474888714323122,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.07488871432312123,
+    "projection_checksum": "dd69d442bc47d453d722a7d1",
+    "runtime_trace_id": "6b9effec-0e0c-402c-9781-77489b740bc2"
+  },
+  {
+    "workload": "research",
+    "provider": "openai",
+    "view_type": "research",
+    "quality": 0.5874035723530935,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.0740357235309345,
+    "projection_checksum": "7c7efda6852806d69283763e",
+    "runtime_trace_id": "a08dc1c3-2141-4f65-9030-f86c9fe00489"
+  },
+  {
+    "workload": "research",
+    "provider": "openai",
+    "view_type": "drafter",
+    "quality": 0.5492258064516129,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.09225806451612903,
+    "projection_checksum": "fcf29b26a93d0be55e3dfda7",
+    "runtime_trace_id": "bba5777f-705b-4fb2-80d6-6fa756ac738b"
+  },
+  {
+    "workload": "research",
+    "provider": "openai",
+    "view_type": "tool_agent",
+    "quality": 0.6315183246073298,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.11518324607329843,
+    "projection_checksum": "20ac8a31b62f0a4bd36e8a04",
+    "runtime_trace_id": "68d15f6f-99d3-4642-bc27-f2dea2bb602a"
+  },
+  {
+    "workload": "research",
+    "provider": "openai",
+    "view_type": "critic",
+    "quality": 0.5485119047619048,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.08511904761904762,
+    "projection_checksum": "32b4d92cd8868b3ceb66db55",
+    "runtime_trace_id": "006e2eec-8124-4370-bbaa-46ca2c9f297a"
+  },
+  {
+    "workload": "research",
+    "provider": "gemini",
+    "view_type": "research",
+    "quality": 0.588162100456621,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.08162100456621005,
+    "projection_checksum": "75134e6ad99e199e2c9775a1",
+    "runtime_trace_id": "4e1a0fad-67db-4904-a896-10521c7981b4"
+  },
+  {
+    "workload": "research",
+    "provider": "gemini",
+    "view_type": "drafter",
+    "quality": 0.550081071554459,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.10081071554458935,
+    "projection_checksum": "9f4a5efbe84a0871f6129358",
+    "runtime_trace_id": "da7b489e-c073-46d9-a6a3-1f58206917d2"
+  },
+  {
+    "workload": "research",
+    "provider": "gemini",
+    "view_type": "tool_agent",
+    "quality": 0.6305087271179226,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.12175393784589186,
+    "projection_checksum": "7a9460cf7635aaba2fcd86d5",
+    "runtime_trace_id": "2b94d52d-011f-48f0-b594-2b107e5f910e"
+  },
+  {
+    "workload": "research",
+    "provider": "gemini",
+    "view_type": "critic",
+    "quality": 0.5483454916836884,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.08345491683688357,
+    "projection_checksum": "006cb0cd778203e19e44cc54",
+    "runtime_trace_id": "600195eb-6163-4681-8341-155bddbf3fb9"
+  },
+  {
+    "workload": "drafting",
+    "provider": "claude",
+    "view_type": "research",
+    "quality": 0.5860612505316887,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.06061250531688643,
+    "projection_checksum": "3bbc12d606fffbdf99253bd3",
+    "runtime_trace_id": "07733bd9-f8b4-48af-ae47-7c5c9f30015a"
+  },
+  {
+    "workload": "drafting",
+    "provider": "claude",
+    "view_type": "drafter",
+    "quality": 0.5482465277777778,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.08246527777777778,
+    "projection_checksum": "5f17c5422aa9f320cb023ead",
+    "runtime_trace_id": "46abb7fe-5078-4b19-91cd-da5230f7c8a9"
+  },
+  {
+    "workload": "drafting",
+    "provider": "claude",
+    "view_type": "tool_agent",
+    "quality": 0.628811274509804,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.10477941176470588,
+    "projection_checksum": "9403c11f763713652a7414fa",
+    "runtime_trace_id": "9fbc505c-7f74-4acb-b7ec-5af520ef5bbd"
+  },
+  {
+    "workload": "drafting",
+    "provider": "claude",
+    "view_type": "critic",
+    "quality": 0.5474626865671642,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.07462686567164178,
+    "projection_checksum": "edd2328ba2d720ce32b5c25e",
+    "runtime_trace_id": "46e9104f-b005-489f-9757-1e887a219fd8"
+  },
+  {
+    "workload": "drafting",
+    "provider": "openai",
+    "view_type": "research",
+    "quality": 0.5873776857364742,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.07377685736474243,
+    "projection_checksum": "76ba54f1d07ce017dfaaf657",
+    "runtime_trace_id": "092ff8b3-5106-45a2-8dce-db40d93af349"
+  },
+  {
+    "workload": "drafting",
+    "provider": "openai",
+    "view_type": "drafter",
+    "quality": 0.5491935483870968,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.09193548387096774,
+    "projection_checksum": "72515daef9ab574ccea9f194",
+    "runtime_trace_id": "ceebcf8d-ee52-48e6-9320-6d2024c9b48c"
+  },
+  {
+    "workload": "drafting",
+    "provider": "openai",
+    "view_type": "tool_agent",
+    "quality": 0.6314780507450665,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.11478050745066452,
+    "projection_checksum": "d598e3f55474e3673a75e2db",
+    "runtime_trace_id": "c64008c7-08bf-4069-81cb-3a8526afad69"
+  },
+  {
+    "workload": "drafting",
+    "provider": "openai",
+    "view_type": "critic",
+    "quality": 0.5484821428571429,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.08482142857142858,
+    "projection_checksum": "cae551dd2463e6fdb63d17d3",
+    "runtime_trace_id": "29b3d92a-8738-4e08-9287-7970ccea25a7"
+  },
+  {
+    "workload": "drafting",
+    "provider": "gemini",
+    "view_type": "research",
+    "quality": 0.5881335616438356,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.08133561643835617,
+    "projection_checksum": "716a010018de7e3d1c44c32a",
+    "runtime_trace_id": "080a8e39-f05e-48cd-b808-18066f58a620"
+  },
+  {
+    "workload": "drafting",
+    "provider": "gemini",
+    "view_type": "drafter",
+    "quality": 0.5500458230525203,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.10045823052520268,
+    "projection_checksum": "6fbe85a5a0760484e218e452",
+    "runtime_trace_id": "933e35e3-ff86-4373-9cb4-219e99c83f21"
+  },
+  {
+    "workload": "drafting",
+    "provider": "gemini",
+    "view_type": "tool_agent",
+    "quality": 0.6304661558109835,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.12132822477650064,
+    "projection_checksum": "f820eb290044005146f9a199",
+    "runtime_trace_id": "646f0bb5-767c-4df4-9663-a0b9c5522254"
+  },
+  {
+    "workload": "drafting",
+    "provider": "gemini",
+    "view_type": "critic",
+    "quality": 0.5483163116428363,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.083163116428363,
+    "projection_checksum": "08e3cbec4ea6df545e428cc1",
+    "runtime_trace_id": "91dda43f-7b61-4479-9c77-63908dbe29b6"
+  },
+  {
+    "workload": "tooling",
+    "provider": "claude",
+    "view_type": "research",
+    "quality": 0.5861675882603148,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.061675882603147596,
+    "projection_checksum": "28f0a3f47a7bd7b4f868c577",
+    "runtime_trace_id": "1487b796-00ef-47a6-a022-d7fe011f3fee"
+  },
+  {
+    "workload": "tooling",
+    "provider": "claude",
+    "view_type": "drafter",
+    "quality": 0.5483912037037038,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.08391203703703703,
+    "projection_checksum": "c710224ad73b21181c60fa37",
+    "runtime_trace_id": "c7ca3a3b-c495-4ffa-82ed-05f58bf58859"
+  },
+  {
+    "workload": "tooling",
+    "provider": "claude",
+    "view_type": "tool_agent",
+    "quality": 0.6289583333333334,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.10625,
+    "projection_checksum": "a9022001d83193576db215f3",
+    "runtime_trace_id": "ddab0855-5428-4381-b265-6128f323cedf"
+  },
+  {
+    "workload": "tooling",
+    "provider": "claude",
+    "view_type": "critic",
+    "quality": 0.5475936108929039,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.07593610892903901,
+    "projection_checksum": "30df3baa8ad55f7c01f727ed",
+    "runtime_trace_id": "a4b46f07-b4be-404f-b9ce-d3e19e0f1ab0"
+  },
+  {
+    "workload": "tooling",
+    "provider": "openai",
+    "view_type": "research",
+    "quality": 0.5875071188195703,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.07507118819570283,
+    "projection_checksum": "ba74db21656833b0a56ef629",
+    "runtime_trace_id": "9ac9599e-177d-4f9e-8d41-e70c75733041"
+  },
+  {
+    "workload": "tooling",
+    "provider": "openai",
+    "view_type": "drafter",
+    "quality": 0.5493548387096774,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.0935483870967742,
+    "projection_checksum": "38690f21496e8e0748f86c95",
+    "runtime_trace_id": "61ea0552-5d11-4b36-bda9-7da09aeaa001"
+  },
+  {
+    "workload": "tooling",
+    "provider": "openai",
+    "view_type": "tool_agent",
+    "quality": 0.6316391461941201,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.11639146194120016,
+    "projection_checksum": "5351a6de3c00a092e1e4f0ef",
+    "runtime_trace_id": "3280ddd7-656c-4153-b3fe-86721dfef228"
+  },
+  {
+    "workload": "tooling",
+    "provider": "openai",
+    "view_type": "critic",
+    "quality": 0.5486309523809524,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.08630952380952381,
+    "projection_checksum": "bc0b18d8ef339c811dc4c676",
+    "runtime_trace_id": "1aaaa278-caa3-4992-aa0d-554a4fdb2eb8"
+  },
+  {
+    "workload": "tooling",
+    "provider": "gemini",
+    "view_type": "research",
+    "quality": 0.5882762557077625,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.08276255707762557,
+    "projection_checksum": "daa9d807df1b7d007f0df2d4",
+    "runtime_trace_id": "64029031-89a8-4afa-a00b-82b460d66977"
+  },
+  {
+    "workload": "tooling",
+    "provider": "gemini",
+    "view_type": "drafter",
+    "quality": 0.5502220655622136,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.10222065562213606,
+    "projection_checksum": "793e7512efbe2d6a930849b8",
+    "runtime_trace_id": "0a70f140-9539-4c44-8287-464d4a5b7c13"
+  },
+  {
+    "workload": "tooling",
+    "provider": "gemini",
+    "view_type": "tool_agent",
+    "quality": 0.63063644103874,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.12303107705406556,
+    "projection_checksum": "96fd5eab49c16e3b9f3e1984",
+    "runtime_trace_id": "e04467c7-333b-4ee0-86c5-ea0f3b3ff666"
+  },
+  {
+    "workload": "tooling",
+    "provider": "gemini",
+    "view_type": "critic",
+    "quality": 0.5484622118470966,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.08462211847096586,
+    "projection_checksum": "e60977df4d7e2893fa7b8bc5",
+    "runtime_trace_id": "02a8ac44-b9a3-4b67-ba1f-7ee866339fec"
+  },
+  {
+    "workload": "critique",
+    "provider": "claude",
+    "view_type": "research",
+    "quality": 0.586103785623139,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.0610378562313909,
+    "projection_checksum": "b06287db979d5e1a7c3ad6e5",
+    "runtime_trace_id": "291d02c2-4963-4174-81b0-44a670b4c978"
+  },
+  {
+    "workload": "critique",
+    "provider": "claude",
+    "view_type": "drafter",
+    "quality": 0.5483043981481481,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.08304398148148148,
+    "projection_checksum": "7909671de0b229664af8be67",
+    "runtime_trace_id": "0dfa5a03-16b3-400a-911f-acd344141d95"
+  },
+  {
+    "workload": "critique",
+    "provider": "claude",
+    "view_type": "tool_agent",
+    "quality": 0.6288848039215688,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.10551470588235294,
+    "projection_checksum": "d7d67b8b0b0880b0b76122e6",
+    "runtime_trace_id": "f77d6c80-ad4a-4ddb-8a69-8efb3a8726df"
+  },
+  {
+    "workload": "critique",
+    "provider": "claude",
+    "view_type": "critic",
+    "quality": 0.5475150562974601,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.07515056297460068,
+    "projection_checksum": "b3da22ca0523dc08e87ade1d",
+    "runtime_trace_id": "5ebd2fea-256b-4ab0-a1ab-ef20be1b6f26"
+  },
+  {
+    "workload": "critique",
+    "provider": "openai",
+    "view_type": "research",
+    "quality": 0.5874294589697127,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.07429458969712659,
+    "projection_checksum": "c4529bbc023a6e64d89d8afd",
+    "runtime_trace_id": "bf28c18f-1289-44e5-8b4b-ceebe27c0eba"
+  },
+  {
+    "workload": "critique",
+    "provider": "openai",
+    "view_type": "drafter",
+    "quality": 0.549258064516129,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.09258064516129032,
+    "projection_checksum": "95fe9cb5b6d57158d44fefd3",
+    "runtime_trace_id": "7ade86f8-c0f9-4a9b-ae75-a74c7988b5bd"
+  },
+  {
+    "workload": "critique",
+    "provider": "openai",
+    "view_type": "tool_agent",
+    "quality": 0.6315585984695933,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.11558598469593234,
+    "projection_checksum": "9b4b078ade5b4146022b4bb1",
+    "runtime_trace_id": "411ce545-de7b-48ea-86e5-f8677fb8f3df"
+  },
+  {
+    "workload": "critique",
+    "provider": "openai",
+    "view_type": "critic",
+    "quality": 0.5485416666666667,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.08541666666666667,
+    "projection_checksum": "064418a5960a1b8589108a2c",
+    "runtime_trace_id": "c092d734-c804-49d6-b3e4-89df684c6da3"
+  },
+  {
+    "workload": "critique",
+    "provider": "gemini",
+    "view_type": "research",
+    "quality": 0.5881906392694064,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.08190639269406393,
+    "projection_checksum": "e4de6197783655c992cbc216",
+    "runtime_trace_id": "487ff29f-53be-4d4a-bf49-da6364dd3899"
+  },
+  {
+    "workload": "critique",
+    "provider": "gemini",
+    "view_type": "drafter",
+    "quality": 0.5501163200563977,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.10116320056397603,
+    "projection_checksum": "ac66a520b9d25422c1afff72",
+    "runtime_trace_id": "7ac5c047-92af-4d9b-994c-0f283e6a5e71"
+  },
+  {
+    "workload": "critique",
+    "provider": "gemini",
+    "view_type": "tool_agent",
+    "quality": 0.6305512984248618,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.1221796509152831,
+    "projection_checksum": "e595c74877d7bcd52fd8b5dc",
+    "runtime_trace_id": "e441e52a-117e-4210-a735-28e48902c222"
+  },
+  {
+    "workload": "critique",
+    "provider": "gemini",
+    "view_type": "critic",
+    "quality": 0.5483746717245405,
+    "semantic_preservation": 1.0,
+    "token_efficiency": 0.08374671724540414,
+    "projection_checksum": "53b7b1b38917b8af702030d5",
+    "runtime_trace_id": "17761f9b-3941-42e0-99db-7719d3bd75d6"
+  }
+]

@@ -13,7 +13,7 @@ Tests verify:
 """
 
 import pytest
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from unittest.mock import Mock
 import sys
 import os
@@ -58,7 +58,7 @@ class TestRelevanceRankingService:
             mem.id = memory_id
             mem.raw_content = content
             mem.importance_score = importance
-            mem.timestamp = timestamp or datetime.utcnow()
+            mem.timestamp = timestamp or datetime.now(timezone.utc)
             mem.embedding = [0.1] * 384
             return mem
 
@@ -121,10 +121,10 @@ class TestRelevanceRankingService:
         """Test recency scoring."""
         query = "Recent updates"
         recent_memory = mock_memory(
-            "mem-1", "Recent update", timestamp=datetime.utcnow()
+            "mem-1", "Recent update", timestamp=datetime.now(timezone.utc)
         )
         old_memory = mock_memory(
-            "mem-2", "Old update", timestamp=datetime.utcnow() - timedelta(days=100)
+            "mem-2", "Old update", timestamp=datetime.now(timezone.utc) - timedelta(days=100)
         )
 
         recent_factors = ranking_service._calculate_ranking_factors(
@@ -422,7 +422,7 @@ class TestAdaptiveCompilationPlanner:
             mem.id = memory_id
             mem.raw_content = content
             mem.importance_score = 0.7
-            mem.timestamp = datetime.utcnow()
+            mem.timestamp = datetime.now(timezone.utc)
             mem.embedding = [0.1] * 384
             return mem
 

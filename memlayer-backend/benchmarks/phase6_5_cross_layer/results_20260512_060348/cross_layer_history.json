@@ -1,0 +1,2789 @@
+{
+  "exported_at": "2026-05-12T06:03:48.770483",
+  "total_reports": 4,
+  "reports": [
+    {
+      "report_id": "xlayer-research",
+      "workspace_id": "ws-research",
+      "generated_at": "2026-05-12T06:03:48.549670",
+      "providers_evaluated": [
+        "claude",
+        "openai",
+        "gemini"
+      ],
+      "view_count": 12,
+      "semantic_fidelity": {
+        "semantic_preservation": 1.0,
+        "reasoning_continuity": 0.3333333333333333,
+        "entity_preservation": 1.0,
+        "context_integrity": 1.0,
+        "degradation_index": 0.16666666666666663
+      },
+      "cross_view_consistency": {
+        "avg_overlap": 0.8185610740636955,
+        "avg_divergence": 0.18143892593630445,
+        "overlap_matrix": {
+          "claude:proj-research-c457c2ff": {
+            "claude:proj-drafter-47213fd2": 0.8703703703703703,
+            "claude:proj-tool_agent-180562c2": 0.8363636363636363,
+            "claude:proj-critic-7cfead59": 0.7894736842105263
+          },
+          "claude:proj-drafter-47213fd2": {
+            "claude:proj-research-c457c2ff": 0.8703703703703703,
+            "claude:proj-tool_agent-180562c2": 0.8545454545454545,
+            "claude:proj-critic-7cfead59": 0.7758620689655172
+          },
+          "claude:proj-tool_agent-180562c2": {
+            "claude:proj-research-c457c2ff": 0.8363636363636363,
+            "claude:proj-drafter-47213fd2": 0.8545454545454545,
+            "claude:proj-critic-7cfead59": 0.8070175438596491
+          },
+          "claude:proj-critic-7cfead59": {
+            "claude:proj-research-c457c2ff": 0.7894736842105263,
+            "claude:proj-drafter-47213fd2": 0.7758620689655172,
+            "claude:proj-tool_agent-180562c2": 0.8070175438596491
+          },
+          "openai:proj-research-35d3152e": {
+            "openai:proj-drafter-5a50d1f9": 0.8703703703703703,
+            "openai:proj-tool_agent-9c6bae6c": 0.8363636363636363,
+            "openai:proj-critic-e7de8e27": 0.7894736842105263
+          },
+          "openai:proj-drafter-5a50d1f9": {
+            "openai:proj-research-35d3152e": 0.8703703703703703,
+            "openai:proj-tool_agent-9c6bae6c": 0.8545454545454545,
+            "openai:proj-critic-e7de8e27": 0.7758620689655172
+          },
+          "openai:proj-tool_agent-9c6bae6c": {
+            "openai:proj-research-35d3152e": 0.8363636363636363,
+            "openai:proj-drafter-5a50d1f9": 0.8545454545454545,
+            "openai:proj-critic-e7de8e27": 0.8070175438596491
+          },
+          "openai:proj-critic-e7de8e27": {
+            "openai:proj-research-35d3152e": 0.7894736842105263,
+            "openai:proj-drafter-5a50d1f9": 0.7758620689655172,
+            "openai:proj-tool_agent-9c6bae6c": 0.8070175438596491
+          },
+          "gemini:proj-research-35c4f559": {
+            "gemini:proj-drafter-e898bd43": 0.8363636363636363,
+            "gemini:proj-tool_agent-0668ba8f": 0.8035714285714286,
+            "gemini:proj-critic-1847fb1b": 0.7894736842105263
+          },
+          "gemini:proj-drafter-e898bd43": {
+            "gemini:proj-research-35c4f559": 0.8363636363636363,
+            "gemini:proj-tool_agent-0668ba8f": 0.8545454545454545,
+            "gemini:proj-critic-1847fb1b": 0.7758620689655172
+          },
+          "gemini:proj-tool_agent-0668ba8f": {
+            "gemini:proj-research-35c4f559": 0.8035714285714286,
+            "gemini:proj-drafter-e898bd43": 0.8545454545454545,
+            "gemini:proj-critic-1847fb1b": 0.8070175438596491
+          },
+          "gemini:proj-critic-1847fb1b": {
+            "gemini:proj-research-35c4f559": 0.7894736842105263,
+            "gemini:proj-drafter-e898bd43": 0.7758620689655172,
+            "gemini:proj-tool_agent-0668ba8f": 0.8070175438596491
+          }
+        },
+        "divergence_matrix": {
+          "claude:proj-research-c457c2ff": {
+            "claude:proj-drafter-47213fd2": 0.12962962962962965,
+            "claude:proj-tool_agent-180562c2": 0.1636363636363637,
+            "claude:proj-critic-7cfead59": 0.21052631578947367
+          },
+          "claude:proj-drafter-47213fd2": {
+            "claude:proj-research-c457c2ff": 0.12962962962962965,
+            "claude:proj-tool_agent-180562c2": 0.1454545454545455,
+            "claude:proj-critic-7cfead59": 0.22413793103448276
+          },
+          "claude:proj-tool_agent-180562c2": {
+            "claude:proj-research-c457c2ff": 0.1636363636363637,
+            "claude:proj-drafter-47213fd2": 0.1454545454545455,
+            "claude:proj-critic-7cfead59": 0.19298245614035092
+          },
+          "claude:proj-critic-7cfead59": {
+            "claude:proj-research-c457c2ff": 0.21052631578947367,
+            "claude:proj-drafter-47213fd2": 0.22413793103448276,
+            "claude:proj-tool_agent-180562c2": 0.19298245614035092
+          },
+          "openai:proj-research-35d3152e": {
+            "openai:proj-drafter-5a50d1f9": 0.12962962962962965,
+            "openai:proj-tool_agent-9c6bae6c": 0.1636363636363637,
+            "openai:proj-critic-e7de8e27": 0.21052631578947367
+          },
+          "openai:proj-drafter-5a50d1f9": {
+            "openai:proj-research-35d3152e": 0.12962962962962965,
+            "openai:proj-tool_agent-9c6bae6c": 0.1454545454545455,
+            "openai:proj-critic-e7de8e27": 0.22413793103448276
+          },
+          "openai:proj-tool_agent-9c6bae6c": {
+            "openai:proj-research-35d3152e": 0.1636363636363637,
+            "openai:proj-drafter-5a50d1f9": 0.1454545454545455,
+            "openai:proj-critic-e7de8e27": 0.19298245614035092
+          },
+          "openai:proj-critic-e7de8e27": {
+            "openai:proj-research-35d3152e": 0.21052631578947367,
+            "openai:proj-drafter-5a50d1f9": 0.22413793103448276,
+            "openai:proj-tool_agent-9c6bae6c": 0.19298245614035092
+          },
+          "gemini:proj-research-35c4f559": {
+            "gemini:proj-drafter-e898bd43": 0.1636363636363637,
+            "gemini:proj-tool_agent-0668ba8f": 0.1964285714285714,
+            "gemini:proj-critic-1847fb1b": 0.21052631578947367
+          },
+          "gemini:proj-drafter-e898bd43": {
+            "gemini:proj-research-35c4f559": 0.1636363636363637,
+            "gemini:proj-tool_agent-0668ba8f": 0.1454545454545455,
+            "gemini:proj-critic-1847fb1b": 0.22413793103448276
+          },
+          "gemini:proj-tool_agent-0668ba8f": {
+            "gemini:proj-research-35c4f559": 0.1964285714285714,
+            "gemini:proj-drafter-e898bd43": 0.1454545454545455,
+            "gemini:proj-critic-1847fb1b": 0.19298245614035092
+          },
+          "gemini:proj-critic-1847fb1b": {
+            "gemini:proj-research-35c4f559": 0.21052631578947367,
+            "gemini:proj-drafter-e898bd43": 0.22413793103448276,
+            "gemini:proj-tool_agent-0668ba8f": 0.19298245614035092
+          }
+        },
+        "over_divergence_detected": false,
+        "over_redundancy_detected": false,
+        "context_fragmentation_risk": 0.0
+      },
+      "replay_integrity": {
+        "total_checks": 24,
+        "deterministic_matches": 24,
+        "deterministic_mismatches": 0,
+        "determinism_rate": 1.0,
+        "provider_breakdown": {
+          "claude": {
+            "total_checks": 8,
+            "matches": 8,
+            "mismatches": 0,
+            "determinism_rate": 1.0
+          },
+          "openai": {
+            "total_checks": 8,
+            "matches": 8,
+            "mismatches": 0,
+            "determinism_rate": 1.0
+          },
+          "gemini": {
+            "total_checks": 8,
+            "matches": 8,
+            "mismatches": 0,
+            "determinism_rate": 1.0
+          }
+        },
+        "drift_alerts": []
+      },
+      "projection_evolution": {
+        "timeline": [
+          {
+            "step": 0,
+            "provider": "claude",
+            "view_type": "research",
+            "quality": 0.7066351606805293,
+            "token_efficiency": 0.066351606805293,
+            "projection_checksum": "8124edee477777d33b104e2a",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "claude",
+            "view_type": "drafter",
+            "quality": 0.6290277777777777,
+            "token_efficiency": 0.09027777777777778,
+            "projection_checksum": "9149463c947f5d5cb870c4c8",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "claude",
+            "view_type": "tool_agent",
+            "quality": 0.7098039215686275,
+            "token_efficiency": 0.11470588235294117,
+            "projection_checksum": "3e7e61e9d0901ff710af8a34",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "claude",
+            "view_type": "critic",
+            "quality": 0.6281684896439376,
+            "token_efficiency": 0.0816848964393763,
+            "projection_checksum": "344f49b5f1068f4c4d40fae7",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "openai",
+            "view_type": "research",
+            "quality": 0.7080745341614907,
+            "token_efficiency": 0.08074534161490683,
+            "projection_checksum": "1bba48615dcf2c65e3dd76eb",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "openai",
+            "view_type": "drafter",
+            "quality": 0.6300630733944954,
+            "token_efficiency": 0.10063073394495413,
+            "projection_checksum": "ad05402df26d5af77b237d18",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "openai",
+            "view_type": "tool_agent",
+            "quality": 0.7125671321160043,
+            "token_efficiency": 0.12567132116004295,
+            "projection_checksum": "29f1d74f496610ed67a49d71",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "openai",
+            "view_type": "critic",
+            "quality": 0.6292857142857142,
+            "token_efficiency": 0.09285714285714286,
+            "projection_checksum": "451b5908657863e0a48e932a",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "gemini",
+            "view_type": "research",
+            "quality": 0.708904109589041,
+            "token_efficiency": 0.08904109589041095,
+            "projection_checksum": "2a67ab7d29d0be7a6a78c726",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "gemini",
+            "view_type": "drafter",
+            "quality": 0.6309962406015037,
+            "token_efficiency": 0.1099624060150376,
+            "projection_checksum": "2efa31e69a9ef5d56eda1bf6",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "gemini",
+            "view_type": "tool_agent",
+            "quality": 0.7116187231895029,
+            "token_efficiency": 0.1328538985616957,
+            "projection_checksum": "5e819d83e52ea8644c456e30",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "gemini",
+            "view_type": "critic",
+            "quality": 0.6291050583657587,
+            "token_efficiency": 0.09105058365758754,
+            "projection_checksum": "d8202e33f63bffb349c1cfc2",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 1,
+            "provider": "claude",
+            "view_type": "research",
+            "quality": 0.7066351606805293,
+            "token_efficiency": 0.066351606805293,
+            "projection_checksum": "9b069330c482de617e97c529",
+            "drift_from_previous": 0.019230769230769273
+          },
+          {
+            "step": 1,
+            "provider": "claude",
+            "view_type": "drafter",
+            "quality": 0.6290277777777777,
+            "token_efficiency": 0.09027777777777778,
+            "projection_checksum": "517c7ef38bac8d903380b295",
+            "drift_from_previous": 0.018867924528301883
+          },
+          {
+            "step": 1,
+            "provider": "claude",
+            "view_type": "tool_agent",
+            "quality": 0.7098039215686275,
+            "token_efficiency": 0.11470588235294117,
+            "projection_checksum": "a5e5c7e7f80b3064f79add6c",
+            "drift_from_previous": 0.018867924528301883
+          },
+          {
+            "step": 1,
+            "provider": "claude",
+            "view_type": "critic",
+            "quality": 0.6281684896439376,
+            "token_efficiency": 0.0816848964393763,
+            "projection_checksum": "e88ef95383cb395710e01061",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 1,
+            "provider": "openai",
+            "view_type": "research",
+            "quality": 0.7080745341614907,
+            "token_efficiency": 0.08074534161490683,
+            "projection_checksum": "add4643f89744186bef96d72",
+            "drift_from_previous": 0.019230769230769273
+          },
+          {
+            "step": 1,
+            "provider": "openai",
+            "view_type": "drafter",
+            "quality": 0.6300630733944954,
+            "token_efficiency": 0.10063073394495413,
+            "projection_checksum": "9314af536c191b3dcf4826ea",
+            "drift_from_previous": 0.018867924528301883
+          },
+          {
+            "step": 1,
+            "provider": "openai",
+            "view_type": "tool_agent",
+            "quality": 0.7125671321160043,
+            "token_efficiency": 0.12567132116004295,
+            "projection_checksum": "6e1a0a769dd9039a12efae29",
+            "drift_from_previous": 0.018867924528301883
+          },
+          {
+            "step": 1,
+            "provider": "openai",
+            "view_type": "critic",
+            "quality": 0.6292857142857142,
+            "token_efficiency": 0.09285714285714286,
+            "projection_checksum": "b4eb2b1b8c18d0227b31e082",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 1,
+            "provider": "gemini",
+            "view_type": "research",
+            "quality": 0.708904109589041,
+            "token_efficiency": 0.08904109589041095,
+            "projection_checksum": "cd5fda2d01c50e1a0f3cfa17",
+            "drift_from_previous": 0.019230769230769273
+          },
+          {
+            "step": 1,
+            "provider": "gemini",
+            "view_type": "drafter",
+            "quality": 0.6309962406015037,
+            "token_efficiency": 0.1099624060150376,
+            "projection_checksum": "3f0fc797a4b8bd077f1eea16",
+            "drift_from_previous": 0.018867924528301883
+          },
+          {
+            "step": 1,
+            "provider": "gemini",
+            "view_type": "tool_agent",
+            "quality": 0.7116187231895029,
+            "token_efficiency": 0.1328538985616957,
+            "projection_checksum": "f7f75fee33d892b994be4801",
+            "drift_from_previous": 0.018867924528301883
+          },
+          {
+            "step": 1,
+            "provider": "gemini",
+            "view_type": "critic",
+            "quality": 0.6291050583657587,
+            "token_efficiency": 0.09105058365758754,
+            "projection_checksum": "5b76b5da4379ac6fde1c61b6",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 2,
+            "provider": "claude",
+            "view_type": "research",
+            "quality": 0.7066351606805293,
+            "token_efficiency": 0.066351606805293,
+            "projection_checksum": "925aa93ffae31bc63c81d15a",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 2,
+            "provider": "claude",
+            "view_type": "drafter",
+            "quality": 0.6290277777777777,
+            "token_efficiency": 0.09027777777777778,
+            "projection_checksum": "748d85aba68fbe43bfb35e47",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 2,
+            "provider": "claude",
+            "view_type": "tool_agent",
+            "quality": 0.7098039215686275,
+            "token_efficiency": 0.11470588235294117,
+            "projection_checksum": "cc6f25a10eb3e4e9fd923840",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 2,
+            "provider": "claude",
+            "view_type": "critic",
+            "quality": 0.6281684896439376,
+            "token_efficiency": 0.0816848964393763,
+            "projection_checksum": "235c6089c181f04acd3533fb",
+            "drift_from_previous": 0.01851851851851849
+          },
+          {
+            "step": 2,
+            "provider": "openai",
+            "view_type": "research",
+            "quality": 0.7080745341614907,
+            "token_efficiency": 0.08074534161490683,
+            "projection_checksum": "a2a971df8534c62cc50c99af",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 2,
+            "provider": "openai",
+            "view_type": "drafter",
+            "quality": 0.6300630733944954,
+            "token_efficiency": 0.10063073394495413,
+            "projection_checksum": "559ae175ebc6bf3f6d3a7c7e",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 2,
+            "provider": "openai",
+            "view_type": "tool_agent",
+            "quality": 0.7125671321160043,
+            "token_efficiency": 0.12567132116004295,
+            "projection_checksum": "73e36c72eba2f998413144a7",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 2,
+            "provider": "openai",
+            "view_type": "critic",
+            "quality": 0.6292857142857142,
+            "token_efficiency": 0.09285714285714286,
+            "projection_checksum": "fa684c775b43864df81b667f",
+            "drift_from_previous": 0.01851851851851849
+          },
+          {
+            "step": 2,
+            "provider": "gemini",
+            "view_type": "research",
+            "quality": 0.708904109589041,
+            "token_efficiency": 0.08904109589041095,
+            "projection_checksum": "5127eee9bbd7f7145612fbc9",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 2,
+            "provider": "gemini",
+            "view_type": "drafter",
+            "quality": 0.6309962406015037,
+            "token_efficiency": 0.1099624060150376,
+            "projection_checksum": "bb819713d94a202c04d1710c",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 2,
+            "provider": "gemini",
+            "view_type": "tool_agent",
+            "quality": 0.7116187231895029,
+            "token_efficiency": 0.1328538985616957,
+            "projection_checksum": "43fc0b34c2a7cd6dad98df28",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 2,
+            "provider": "gemini",
+            "view_type": "critic",
+            "quality": 0.6291050583657587,
+            "token_efficiency": 0.09105058365758754,
+            "projection_checksum": "29ea0d44694f9f0e8c821afd",
+            "drift_from_previous": 0.01851851851851849
+          },
+          {
+            "step": 3,
+            "provider": "claude",
+            "view_type": "research",
+            "quality": 0.7066351606805293,
+            "token_efficiency": 0.066351606805293,
+            "projection_checksum": "fbe9519a9d5a9010be56a495",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 3,
+            "provider": "claude",
+            "view_type": "drafter",
+            "quality": 0.6290277777777777,
+            "token_efficiency": 0.09027777777777778,
+            "projection_checksum": "458b8f6391eca873491c359b",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 3,
+            "provider": "claude",
+            "view_type": "tool_agent",
+            "quality": 0.7098039215686275,
+            "token_efficiency": 0.11470588235294117,
+            "projection_checksum": "549736dadb7ee761463b1eb7",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 3,
+            "provider": "claude",
+            "view_type": "critic",
+            "quality": 0.6281684896439376,
+            "token_efficiency": 0.0816848964393763,
+            "projection_checksum": "a0cfc0ee7db61674e5b67168",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 3,
+            "provider": "openai",
+            "view_type": "research",
+            "quality": 0.7080745341614907,
+            "token_efficiency": 0.08074534161490683,
+            "projection_checksum": "55e81ea0eefceb62acee28eb",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 3,
+            "provider": "openai",
+            "view_type": "drafter",
+            "quality": 0.6300630733944954,
+            "token_efficiency": 0.10063073394495413,
+            "projection_checksum": "9b8824e0ebf797d5f2f67db4",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 3,
+            "provider": "openai",
+            "view_type": "tool_agent",
+            "quality": 0.7125671321160043,
+            "token_efficiency": 0.12567132116004295,
+            "projection_checksum": "1e2e8fa553c8eed91564a4f8",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 3,
+            "provider": "openai",
+            "view_type": "critic",
+            "quality": 0.6292857142857142,
+            "token_efficiency": 0.09285714285714286,
+            "projection_checksum": "2519fa064e03485cb1817480",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 3,
+            "provider": "gemini",
+            "view_type": "research",
+            "quality": 0.708904109589041,
+            "token_efficiency": 0.08904109589041095,
+            "projection_checksum": "86069ccfd929794287653400",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 3,
+            "provider": "gemini",
+            "view_type": "drafter",
+            "quality": 0.6309962406015037,
+            "token_efficiency": 0.1099624060150376,
+            "projection_checksum": "5079db9884bc66ccee1c7267",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 3,
+            "provider": "gemini",
+            "view_type": "tool_agent",
+            "quality": 0.7116187231895029,
+            "token_efficiency": 0.1328538985616957,
+            "projection_checksum": "2b6654f8f2e66777b4109070",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 3,
+            "provider": "gemini",
+            "view_type": "critic",
+            "quality": 0.6291050583657587,
+            "token_efficiency": 0.09105058365758754,
+            "projection_checksum": "a5c918021292aa689f442d26",
+            "drift_from_previous": 0.036363636363636376
+          }
+        ],
+        "avg_drift": 0.027955718285906983,
+        "max_drift": 0.037735849056603765,
+        "semantic_erosion": 0.07753010231477064,
+        "token_efficiency_evolution": {
+          "claude": 0.0153332896340833,
+          "openai": 0.012111801242236028,
+          "gemini": 0.0020094877671765904
+        }
+      },
+      "token_economics": {
+        "avg_token_budget_used": 3714.5,
+        "avg_projection_tokens": 320.0,
+        "semantic_value_per_token": 0.0020919036341417213,
+        "provider_token_efficiency": {
+          "claude": 0.08724928539263513,
+          "gemini": 0.10452212997954553,
+          "openai": 0.09883680572167752
+        },
+        "view_token_efficiency": {
+          "research": 0.07781567082220507,
+          "drafter": 0.0991473964435005,
+          "tool_agent": 0.1229925853940303,
+          "critic": 0.0875219754654084
+        },
+        "redundant_projection_overhead": 0.9815081652257445
+      },
+      "provider_divergence": {
+        "divergence_by_view": {
+          "research": 0.002243091940893449,
+          "drafter": 0.0019460301989542295,
+          "tool_agent": 0.0027507143208159723,
+          "critic": 0.001104492737027063
+        },
+        "quality_spread_by_provider": {
+          "claude": 0.08159780117151205,
+          "openai": 0.08324402275530096,
+          "gemini": 0.08246602571844042
+        },
+        "robustness_ranking": [
+          {
+            "provider": "gemini",
+            "score": 0.7690248824319015
+          },
+          {
+            "provider": "openai",
+            "score": 0.7689185764005173
+          },
+          {
+            "provider": "claude",
+            "score": 0.7678157833108177
+          }
+        ],
+        "adaptation_heatmap": {
+          "claude": {
+            "research": 0.8,
+            "drafter": 0.4,
+            "tool_agent": 0.8,
+            "critic": 0.4
+          },
+          "openai": {
+            "research": 0.8,
+            "drafter": 0.4,
+            "tool_agent": 0.8,
+            "critic": 0.4
+          },
+          "gemini": {
+            "research": 0.8,
+            "drafter": 0.4,
+            "tool_agent": 0.8,
+            "critic": 0.4
+          }
+        }
+      },
+      "optimization_recommendations": [
+        "Increase context reuse and deduplicate repeated projection segments to improve token economics.",
+        "Run targeted provider calibration benchmarks for claude across all core views."
+      ]
+    },
+    {
+      "report_id": "xlayer-drafting",
+      "workspace_id": "ws-drafting",
+      "generated_at": "2026-05-12T06:03:48.619763",
+      "providers_evaluated": [
+        "claude",
+        "openai",
+        "gemini"
+      ],
+      "view_count": 12,
+      "semantic_fidelity": {
+        "semantic_preservation": 1.0,
+        "reasoning_continuity": 0.3333333333333333,
+        "entity_preservation": 1.0,
+        "context_integrity": 1.0,
+        "degradation_index": 0.16666666666666663
+      },
+      "cross_view_consistency": {
+        "avg_overlap": 0.7952851040872819,
+        "avg_divergence": 0.20471489591271808,
+        "overlap_matrix": {
+          "claude:proj-research-5a18eb21": {
+            "claude:proj-drafter-e645a1c4": 0.8545454545454545,
+            "claude:proj-tool_agent-2c2832d7": 0.7894736842105263,
+            "claude:proj-critic-37d5cb4d": 0.7758620689655172
+          },
+          "claude:proj-drafter-e645a1c4": {
+            "claude:proj-research-5a18eb21": 0.8545454545454545,
+            "claude:proj-tool_agent-2c2832d7": 0.8214285714285714,
+            "claude:proj-critic-37d5cb4d": 0.7758620689655172
+          },
+          "claude:proj-tool_agent-2c2832d7": {
+            "claude:proj-research-5a18eb21": 0.7894736842105263,
+            "claude:proj-drafter-e645a1c4": 0.8214285714285714,
+            "claude:proj-critic-37d5cb4d": 0.7758620689655172
+          },
+          "claude:proj-critic-37d5cb4d": {
+            "claude:proj-research-5a18eb21": 0.7758620689655172,
+            "claude:proj-drafter-e645a1c4": 0.7758620689655172,
+            "claude:proj-tool_agent-2c2832d7": 0.7758620689655172
+          },
+          "openai:proj-research-46c41981": {
+            "openai:proj-drafter-ecf40f9e": 0.8545454545454545,
+            "openai:proj-tool_agent-aa13ad52": 0.7894736842105263,
+            "openai:proj-critic-6654b628": 0.7758620689655172
+          },
+          "openai:proj-drafter-ecf40f9e": {
+            "openai:proj-research-46c41981": 0.8545454545454545,
+            "openai:proj-tool_agent-aa13ad52": 0.8214285714285714,
+            "openai:proj-critic-6654b628": 0.7758620689655172
+          },
+          "openai:proj-tool_agent-aa13ad52": {
+            "openai:proj-research-46c41981": 0.7894736842105263,
+            "openai:proj-drafter-ecf40f9e": 0.8214285714285714,
+            "openai:proj-critic-6654b628": 0.7758620689655172
+          },
+          "openai:proj-critic-6654b628": {
+            "openai:proj-research-46c41981": 0.7758620689655172,
+            "openai:proj-drafter-ecf40f9e": 0.7758620689655172,
+            "openai:proj-tool_agent-aa13ad52": 0.7758620689655172
+          },
+          "gemini:proj-research-c9ebe69b": {
+            "gemini:proj-drafter-71b6cd72": 0.8214285714285714,
+            "gemini:proj-tool_agent-d25a38bf": 0.7586206896551724,
+            "gemini:proj-critic-6c6241bd": 0.7758620689655172
+          },
+          "gemini:proj-drafter-71b6cd72": {
+            "gemini:proj-research-c9ebe69b": 0.8214285714285714,
+            "gemini:proj-tool_agent-d25a38bf": 0.8214285714285714,
+            "gemini:proj-critic-6c6241bd": 0.7758620689655172
+          },
+          "gemini:proj-tool_agent-d25a38bf": {
+            "gemini:proj-research-c9ebe69b": 0.7586206896551724,
+            "gemini:proj-drafter-71b6cd72": 0.8214285714285714,
+            "gemini:proj-critic-6c6241bd": 0.7758620689655172
+          },
+          "gemini:proj-critic-6c6241bd": {
+            "gemini:proj-research-c9ebe69b": 0.7758620689655172,
+            "gemini:proj-drafter-71b6cd72": 0.7758620689655172,
+            "gemini:proj-tool_agent-d25a38bf": 0.7758620689655172
+          }
+        },
+        "divergence_matrix": {
+          "claude:proj-research-5a18eb21": {
+            "claude:proj-drafter-e645a1c4": 0.1454545454545455,
+            "claude:proj-tool_agent-2c2832d7": 0.21052631578947367,
+            "claude:proj-critic-37d5cb4d": 0.22413793103448276
+          },
+          "claude:proj-drafter-e645a1c4": {
+            "claude:proj-research-5a18eb21": 0.1454545454545455,
+            "claude:proj-tool_agent-2c2832d7": 0.1785714285714286,
+            "claude:proj-critic-37d5cb4d": 0.22413793103448276
+          },
+          "claude:proj-tool_agent-2c2832d7": {
+            "claude:proj-research-5a18eb21": 0.21052631578947367,
+            "claude:proj-drafter-e645a1c4": 0.1785714285714286,
+            "claude:proj-critic-37d5cb4d": 0.22413793103448276
+          },
+          "claude:proj-critic-37d5cb4d": {
+            "claude:proj-research-5a18eb21": 0.22413793103448276,
+            "claude:proj-drafter-e645a1c4": 0.22413793103448276,
+            "claude:proj-tool_agent-2c2832d7": 0.22413793103448276
+          },
+          "openai:proj-research-46c41981": {
+            "openai:proj-drafter-ecf40f9e": 0.1454545454545455,
+            "openai:proj-tool_agent-aa13ad52": 0.21052631578947367,
+            "openai:proj-critic-6654b628": 0.22413793103448276
+          },
+          "openai:proj-drafter-ecf40f9e": {
+            "openai:proj-research-46c41981": 0.1454545454545455,
+            "openai:proj-tool_agent-aa13ad52": 0.1785714285714286,
+            "openai:proj-critic-6654b628": 0.22413793103448276
+          },
+          "openai:proj-tool_agent-aa13ad52": {
+            "openai:proj-research-46c41981": 0.21052631578947367,
+            "openai:proj-drafter-ecf40f9e": 0.1785714285714286,
+            "openai:proj-critic-6654b628": 0.22413793103448276
+          },
+          "openai:proj-critic-6654b628": {
+            "openai:proj-research-46c41981": 0.22413793103448276,
+            "openai:proj-drafter-ecf40f9e": 0.22413793103448276,
+            "openai:proj-tool_agent-aa13ad52": 0.22413793103448276
+          },
+          "gemini:proj-research-c9ebe69b": {
+            "gemini:proj-drafter-71b6cd72": 0.1785714285714286,
+            "gemini:proj-tool_agent-d25a38bf": 0.24137931034482762,
+            "gemini:proj-critic-6c6241bd": 0.22413793103448276
+          },
+          "gemini:proj-drafter-71b6cd72": {
+            "gemini:proj-research-c9ebe69b": 0.1785714285714286,
+            "gemini:proj-tool_agent-d25a38bf": 0.1785714285714286,
+            "gemini:proj-critic-6c6241bd": 0.22413793103448276
+          },
+          "gemini:proj-tool_agent-d25a38bf": {
+            "gemini:proj-research-c9ebe69b": 0.24137931034482762,
+            "gemini:proj-drafter-71b6cd72": 0.1785714285714286,
+            "gemini:proj-critic-6c6241bd": 0.22413793103448276
+          },
+          "gemini:proj-critic-6c6241bd": {
+            "gemini:proj-research-c9ebe69b": 0.22413793103448276,
+            "gemini:proj-drafter-71b6cd72": 0.22413793103448276,
+            "gemini:proj-tool_agent-d25a38bf": 0.22413793103448276
+          }
+        },
+        "over_divergence_detected": false,
+        "over_redundancy_detected": false,
+        "context_fragmentation_risk": 0.0
+      },
+      "replay_integrity": {
+        "total_checks": 24,
+        "deterministic_matches": 24,
+        "deterministic_mismatches": 0,
+        "determinism_rate": 1.0,
+        "provider_breakdown": {
+          "claude": {
+            "total_checks": 8,
+            "matches": 8,
+            "mismatches": 0,
+            "determinism_rate": 1.0
+          },
+          "openai": {
+            "total_checks": 8,
+            "matches": 8,
+            "mismatches": 0,
+            "determinism_rate": 1.0
+          },
+          "gemini": {
+            "total_checks": 8,
+            "matches": 8,
+            "mismatches": 0,
+            "determinism_rate": 1.0
+          }
+        },
+        "drift_alerts": []
+      },
+      "projection_evolution": {
+        "timeline": [
+          {
+            "step": 0,
+            "provider": "claude",
+            "view_type": "research",
+            "quality": 0.6666162570888469,
+            "token_efficiency": 0.0661625708884688,
+            "projection_checksum": "79d708944bace3119be77344",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "claude",
+            "view_type": "drafter",
+            "quality": 0.6690020576131687,
+            "token_efficiency": 0.09002057613168725,
+            "projection_checksum": "f72653115aac2bfa4fa3e4e9",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "claude",
+            "view_type": "tool_agent",
+            "quality": 0.7097712418300655,
+            "token_efficiency": 0.11437908496732026,
+            "projection_checksum": "5bf9c43f567ce983dd1a0ea5",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "claude",
+            "view_type": "critic",
+            "quality": 0.6281452175936699,
+            "token_efficiency": 0.08145217593670002,
+            "projection_checksum": "cef4159fddb8613c31ff9c6f",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "openai",
+            "view_type": "research",
+            "quality": 0.6680515297906602,
+            "token_efficiency": 0.08051529790660225,
+            "projection_checksum": "dae8a1d9b1c3cb2ad3234b82",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "openai",
+            "view_type": "drafter",
+            "quality": 0.6700344036697247,
+            "token_efficiency": 0.1003440366972477,
+            "projection_checksum": "127a438f7df0cd61b8de0500",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "openai",
+            "view_type": "tool_agent",
+            "quality": 0.712531328320802,
+            "token_efficiency": 0.12531328320802004,
+            "projection_checksum": "ff0620f66b27ec5d5a4cce5e",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "openai",
+            "view_type": "critic",
+            "quality": 0.6292592592592592,
+            "token_efficiency": 0.09259259259259259,
+            "projection_checksum": "eba86f1b32440cb06904659f",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "gemini",
+            "view_type": "research",
+            "quality": 0.668878741755454,
+            "token_efficiency": 0.08878741755454084,
+            "projection_checksum": "e892cdaf845d109c72ca0637",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "gemini",
+            "view_type": "drafter",
+            "quality": 0.6709649122807017,
+            "token_efficiency": 0.10964912280701754,
+            "projection_checksum": "6857500943f791df439e062c",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "gemini",
+            "view_type": "tool_agent",
+            "quality": 0.7115808730759526,
+            "token_efficiency": 0.13247539742619227,
+            "projection_checksum": "32416db1bb0a09c533dcd685",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "gemini",
+            "view_type": "critic",
+            "quality": 0.6290791180285343,
+            "token_efficiency": 0.0907911802853437,
+            "projection_checksum": "98115a8d3827696ab9498a43",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 1,
+            "provider": "claude",
+            "view_type": "research",
+            "quality": 0.6666162570888469,
+            "token_efficiency": 0.0661625708884688,
+            "projection_checksum": "0829ac1495eee960cd06f6b3",
+            "drift_from_previous": 0.018867924528301883
+          },
+          {
+            "step": 1,
+            "provider": "claude",
+            "view_type": "drafter",
+            "quality": 0.6690020576131687,
+            "token_efficiency": 0.09002057613168725,
+            "projection_checksum": "5c7e2e42c721af39d2f82de9",
+            "drift_from_previous": 0.018867924528301883
+          },
+          {
+            "step": 1,
+            "provider": "claude",
+            "view_type": "tool_agent",
+            "quality": 0.7097712418300655,
+            "token_efficiency": 0.11437908496732026,
+            "projection_checksum": "444c6abe2194e04e4cca8e10",
+            "drift_from_previous": 0.018867924528301883
+          },
+          {
+            "step": 1,
+            "provider": "claude",
+            "view_type": "critic",
+            "quality": 0.6281452175936699,
+            "token_efficiency": 0.08145217593670002,
+            "projection_checksum": "cf34f5bd79adb0e3f771e6ce",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 1,
+            "provider": "openai",
+            "view_type": "research",
+            "quality": 0.6680515297906602,
+            "token_efficiency": 0.08051529790660225,
+            "projection_checksum": "4465ba765e3e251d4f0a0273",
+            "drift_from_previous": 0.018867924528301883
+          },
+          {
+            "step": 1,
+            "provider": "openai",
+            "view_type": "drafter",
+            "quality": 0.6700344036697247,
+            "token_efficiency": 0.1003440366972477,
+            "projection_checksum": "0c09adebdfbf4e69f31142fb",
+            "drift_from_previous": 0.018867924528301883
+          },
+          {
+            "step": 1,
+            "provider": "openai",
+            "view_type": "tool_agent",
+            "quality": 0.712531328320802,
+            "token_efficiency": 0.12531328320802004,
+            "projection_checksum": "fad451c6a0353e6ae445a324",
+            "drift_from_previous": 0.018867924528301883
+          },
+          {
+            "step": 1,
+            "provider": "openai",
+            "view_type": "critic",
+            "quality": 0.6292592592592592,
+            "token_efficiency": 0.09259259259259259,
+            "projection_checksum": "2c3fcca6d8004d479731baf8",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 1,
+            "provider": "gemini",
+            "view_type": "research",
+            "quality": 0.668878741755454,
+            "token_efficiency": 0.08878741755454084,
+            "projection_checksum": "6aadbf657e3421964b3f0225",
+            "drift_from_previous": 0.018867924528301883
+          },
+          {
+            "step": 1,
+            "provider": "gemini",
+            "view_type": "drafter",
+            "quality": 0.6709649122807017,
+            "token_efficiency": 0.10964912280701754,
+            "projection_checksum": "dabd91d2ba432c2b44d81bfe",
+            "drift_from_previous": 0.018867924528301883
+          },
+          {
+            "step": 1,
+            "provider": "gemini",
+            "view_type": "tool_agent",
+            "quality": 0.7115808730759526,
+            "token_efficiency": 0.13247539742619227,
+            "projection_checksum": "fc21b2eb840dd7a6a64f4bd9",
+            "drift_from_previous": 0.018867924528301883
+          },
+          {
+            "step": 1,
+            "provider": "gemini",
+            "view_type": "critic",
+            "quality": 0.6290791180285343,
+            "token_efficiency": 0.0907911802853437,
+            "projection_checksum": "079f982a690e26c6ad66e391",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 2,
+            "provider": "claude",
+            "view_type": "research",
+            "quality": 0.6666162570888469,
+            "token_efficiency": 0.0661625708884688,
+            "projection_checksum": "b31a10a48f7dbd0572324f60",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 2,
+            "provider": "claude",
+            "view_type": "drafter",
+            "quality": 0.6690020576131687,
+            "token_efficiency": 0.09002057613168725,
+            "projection_checksum": "188da58e0d972daf4e3ff408",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 2,
+            "provider": "claude",
+            "view_type": "tool_agent",
+            "quality": 0.7097712418300655,
+            "token_efficiency": 0.11437908496732026,
+            "projection_checksum": "9df347cd537339143455fd32",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 2,
+            "provider": "claude",
+            "view_type": "critic",
+            "quality": 0.6281452175936699,
+            "token_efficiency": 0.08145217593670002,
+            "projection_checksum": "6aa35cb9317416f0db597b90",
+            "drift_from_previous": 0.01851851851851849
+          },
+          {
+            "step": 2,
+            "provider": "openai",
+            "view_type": "research",
+            "quality": 0.6680515297906602,
+            "token_efficiency": 0.08051529790660225,
+            "projection_checksum": "0c336396951be37064fa731d",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 2,
+            "provider": "openai",
+            "view_type": "drafter",
+            "quality": 0.6700344036697247,
+            "token_efficiency": 0.1003440366972477,
+            "projection_checksum": "e363d5bf602966a2fabc97a7",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 2,
+            "provider": "openai",
+            "view_type": "tool_agent",
+            "quality": 0.712531328320802,
+            "token_efficiency": 0.12531328320802004,
+            "projection_checksum": "23c51a2d3b17e547941a8583",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 2,
+            "provider": "openai",
+            "view_type": "critic",
+            "quality": 0.6292592592592592,
+            "token_efficiency": 0.09259259259259259,
+            "projection_checksum": "d372e105df9424a6c62597e2",
+            "drift_from_previous": 0.01851851851851849
+          },
+          {
+            "step": 2,
+            "provider": "gemini",
+            "view_type": "research",
+            "quality": 0.668878741755454,
+            "token_efficiency": 0.08878741755454084,
+            "projection_checksum": "22f1bfee0105ada49905a1d6",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 2,
+            "provider": "gemini",
+            "view_type": "drafter",
+            "quality": 0.6709649122807017,
+            "token_efficiency": 0.10964912280701754,
+            "projection_checksum": "65ee137317442a9698ed85af",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 2,
+            "provider": "gemini",
+            "view_type": "tool_agent",
+            "quality": 0.7115808730759526,
+            "token_efficiency": 0.13247539742619227,
+            "projection_checksum": "6fa15a3b844f784fa328919f",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 2,
+            "provider": "gemini",
+            "view_type": "critic",
+            "quality": 0.6290791180285343,
+            "token_efficiency": 0.0907911802853437,
+            "projection_checksum": "0b6dd0acaeb561f6e8300d0f",
+            "drift_from_previous": 0.01851851851851849
+          },
+          {
+            "step": 3,
+            "provider": "claude",
+            "view_type": "research",
+            "quality": 0.6666162570888469,
+            "token_efficiency": 0.0661625708884688,
+            "projection_checksum": "950b6aae2c586355b95ab29e",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 3,
+            "provider": "claude",
+            "view_type": "drafter",
+            "quality": 0.6690020576131687,
+            "token_efficiency": 0.09002057613168725,
+            "projection_checksum": "c296aade5690dd4914e3696f",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 3,
+            "provider": "claude",
+            "view_type": "tool_agent",
+            "quality": 0.7097712418300655,
+            "token_efficiency": 0.11437908496732026,
+            "projection_checksum": "253fba7607a4c2de46189685",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 3,
+            "provider": "claude",
+            "view_type": "critic",
+            "quality": 0.6281452175936699,
+            "token_efficiency": 0.08145217593670002,
+            "projection_checksum": "d5a928b11d037860db5f13d2",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 3,
+            "provider": "openai",
+            "view_type": "research",
+            "quality": 0.6680515297906602,
+            "token_efficiency": 0.08051529790660225,
+            "projection_checksum": "003664504d73e1632f1d610b",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 3,
+            "provider": "openai",
+            "view_type": "drafter",
+            "quality": 0.6700344036697247,
+            "token_efficiency": 0.1003440366972477,
+            "projection_checksum": "4e7d31717aee612db8a6f629",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 3,
+            "provider": "openai",
+            "view_type": "tool_agent",
+            "quality": 0.712531328320802,
+            "token_efficiency": 0.12531328320802004,
+            "projection_checksum": "c1cd6ab1752135ca8225bc20",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 3,
+            "provider": "openai",
+            "view_type": "critic",
+            "quality": 0.6292592592592592,
+            "token_efficiency": 0.09259259259259259,
+            "projection_checksum": "b1bea2fb117afe2b268390b8",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 3,
+            "provider": "gemini",
+            "view_type": "research",
+            "quality": 0.668878741755454,
+            "token_efficiency": 0.08878741755454084,
+            "projection_checksum": "07c320897bb60c405e2286d0",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 3,
+            "provider": "gemini",
+            "view_type": "drafter",
+            "quality": 0.6709649122807017,
+            "token_efficiency": 0.10964912280701754,
+            "projection_checksum": "a1d7e32a4cf52f6771effe2c",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 3,
+            "provider": "gemini",
+            "view_type": "tool_agent",
+            "quality": 0.7115808730759526,
+            "token_efficiency": 0.13247539742619227,
+            "projection_checksum": "91bb1fcc551b8e9e480bb196",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 3,
+            "provider": "gemini",
+            "view_type": "critic",
+            "quality": 0.6290791180285343,
+            "token_efficiency": 0.0907911802853437,
+            "projection_checksum": "889cc4219089b2ed1a8e25ab",
+            "drift_from_previous": 0.036363636363636376
+          }
+        ],
+        "avg_drift": 0.027809012557440258,
+        "max_drift": 0.03703703703703709,
+        "semantic_erosion": 0.03753713906031253,
+        "token_efficiency_evolution": {
+          "claude": 0.015289605048231222,
+          "openai": 0.012077294685990336,
+          "gemini": 0.002003762730802869
+        }
+      },
+      "token_economics": {
+        "avg_token_budget_used": 3714.5,
+        "avg_projection_tokens": 321.0,
+        "semantic_value_per_token": 0.002085299833862063,
+        "provider_token_efficiency": {
+          "claude": 0.08699784652983215,
+          "gemini": 0.10422091346663617,
+          "openai": 0.09855197342853148
+        },
+        "view_token_efficiency": {
+          "research": 0.07759141816853878,
+          "drafter": 0.09886166907622816,
+          "tool_agent": 0.12263813990298122,
+          "critic": 0.08726975075225159
+        },
+        "redundant_projection_overhead": 0.9809730250481695
+      },
+      "provider_divergence": {
+        "divergence_by_view": {
+          "research": 0.0022366276989889133,
+          "drafter": 0.0019404220427612362,
+          "tool_agent": 0.0027475902641758143,
+          "critic": 0.0011013097608396638
+        },
+        "quality_spread_by_provider": {
+          "claude": 0.08158839348321756,
+          "openai": 0.08323467398655371,
+          "gemini": 0.08245411594211449
+        },
+        "robustness_ranking": [
+          {
+            "provider": "gemini",
+            "score": 0.7690037972759978
+          },
+          {
+            "provider": "openai",
+            "score": 0.7688986381399971
+          },
+          {
+            "provider": "claude",
+            "score": 0.7677981825904214
+          }
+        ],
+        "adaptation_heatmap": {
+          "claude": {
+            "research": 0.6,
+            "drafter": 0.6,
+            "tool_agent": 0.8,
+            "critic": 0.4
+          },
+          "openai": {
+            "research": 0.6,
+            "drafter": 0.6,
+            "tool_agent": 0.8,
+            "critic": 0.4
+          },
+          "gemini": {
+            "research": 0.6,
+            "drafter": 0.6,
+            "tool_agent": 0.8,
+            "critic": 0.4
+          }
+        }
+      },
+      "optimization_recommendations": [
+        "Increase context reuse and deduplicate repeated projection segments to improve token economics.",
+        "Run targeted provider calibration benchmarks for claude across all core views."
+      ]
+    },
+    {
+      "report_id": "xlayer-tooling",
+      "workspace_id": "ws-tooling",
+      "generated_at": "2026-05-12T06:03:48.688077",
+      "providers_evaluated": [
+        "claude",
+        "openai",
+        "gemini"
+      ],
+      "view_count": 12,
+      "semantic_fidelity": {
+        "semantic_preservation": 1.0,
+        "reasoning_continuity": 0.3333333333333333,
+        "entity_preservation": 1.0,
+        "context_integrity": 1.0,
+        "degradation_index": 0.16666666666666663
+      },
+      "cross_view_consistency": {
+        "avg_overlap": 0.7987999578789822,
+        "avg_divergence": 0.20120004212101783,
+        "overlap_matrix": {
+          "claude:proj-research-f974872e": {
+            "claude:proj-drafter-0cd75ce2": 0.8571428571428571,
+            "claude:proj-tool_agent-694655f2": 0.7931034482758621,
+            "claude:proj-critic-7c841ad2": 0.7796610169491526
+          },
+          "claude:proj-drafter-0cd75ce2": {
+            "claude:proj-research-f974872e": 0.8571428571428571,
+            "claude:proj-tool_agent-694655f2": 0.8245614035087719,
+            "claude:proj-critic-7c841ad2": 0.7796610169491526
+          },
+          "claude:proj-tool_agent-694655f2": {
+            "claude:proj-research-f974872e": 0.7931034482758621,
+            "claude:proj-drafter-0cd75ce2": 0.8245614035087719,
+            "claude:proj-critic-7c841ad2": 0.7796610169491526
+          },
+          "claude:proj-critic-7c841ad2": {
+            "claude:proj-research-f974872e": 0.7796610169491526,
+            "claude:proj-drafter-0cd75ce2": 0.7796610169491526,
+            "claude:proj-tool_agent-694655f2": 0.7796610169491526
+          },
+          "openai:proj-research-457db654": {
+            "openai:proj-drafter-1781c698": 0.8571428571428571,
+            "openai:proj-tool_agent-8544957d": 0.7931034482758621,
+            "openai:proj-critic-2fe4a265": 0.7796610169491526
+          },
+          "openai:proj-drafter-1781c698": {
+            "openai:proj-research-457db654": 0.8571428571428571,
+            "openai:proj-tool_agent-8544957d": 0.8245614035087719,
+            "openai:proj-critic-2fe4a265": 0.7796610169491526
+          },
+          "openai:proj-tool_agent-8544957d": {
+            "openai:proj-research-457db654": 0.7931034482758621,
+            "openai:proj-drafter-1781c698": 0.8245614035087719,
+            "openai:proj-critic-2fe4a265": 0.7796610169491526
+          },
+          "openai:proj-critic-2fe4a265": {
+            "openai:proj-research-457db654": 0.7796610169491526,
+            "openai:proj-drafter-1781c698": 0.7796610169491526,
+            "openai:proj-tool_agent-8544957d": 0.7796610169491526
+          },
+          "gemini:proj-research-d77f1b8e": {
+            "gemini:proj-drafter-a4228b4b": 0.8245614035087719,
+            "gemini:proj-tool_agent-2ed26b34": 0.7627118644067796,
+            "gemini:proj-critic-ecef552c": 0.7796610169491526
+          },
+          "gemini:proj-drafter-a4228b4b": {
+            "gemini:proj-research-d77f1b8e": 0.8245614035087719,
+            "gemini:proj-tool_agent-2ed26b34": 0.8245614035087719,
+            "gemini:proj-critic-ecef552c": 0.7796610169491526
+          },
+          "gemini:proj-tool_agent-2ed26b34": {
+            "gemini:proj-research-d77f1b8e": 0.7627118644067796,
+            "gemini:proj-drafter-a4228b4b": 0.8245614035087719,
+            "gemini:proj-critic-ecef552c": 0.7796610169491526
+          },
+          "gemini:proj-critic-ecef552c": {
+            "gemini:proj-research-d77f1b8e": 0.7796610169491526,
+            "gemini:proj-drafter-a4228b4b": 0.7796610169491526,
+            "gemini:proj-tool_agent-2ed26b34": 0.7796610169491526
+          }
+        },
+        "divergence_matrix": {
+          "claude:proj-research-f974872e": {
+            "claude:proj-drafter-0cd75ce2": 0.1428571428571429,
+            "claude:proj-tool_agent-694655f2": 0.2068965517241379,
+            "claude:proj-critic-7c841ad2": 0.22033898305084743
+          },
+          "claude:proj-drafter-0cd75ce2": {
+            "claude:proj-research-f974872e": 0.1428571428571429,
+            "claude:proj-tool_agent-694655f2": 0.17543859649122806,
+            "claude:proj-critic-7c841ad2": 0.22033898305084743
+          },
+          "claude:proj-tool_agent-694655f2": {
+            "claude:proj-research-f974872e": 0.2068965517241379,
+            "claude:proj-drafter-0cd75ce2": 0.17543859649122806,
+            "claude:proj-critic-7c841ad2": 0.22033898305084743
+          },
+          "claude:proj-critic-7c841ad2": {
+            "claude:proj-research-f974872e": 0.22033898305084743,
+            "claude:proj-drafter-0cd75ce2": 0.22033898305084743,
+            "claude:proj-tool_agent-694655f2": 0.22033898305084743
+          },
+          "openai:proj-research-457db654": {
+            "openai:proj-drafter-1781c698": 0.1428571428571429,
+            "openai:proj-tool_agent-8544957d": 0.2068965517241379,
+            "openai:proj-critic-2fe4a265": 0.22033898305084743
+          },
+          "openai:proj-drafter-1781c698": {
+            "openai:proj-research-457db654": 0.1428571428571429,
+            "openai:proj-tool_agent-8544957d": 0.17543859649122806,
+            "openai:proj-critic-2fe4a265": 0.22033898305084743
+          },
+          "openai:proj-tool_agent-8544957d": {
+            "openai:proj-research-457db654": 0.2068965517241379,
+            "openai:proj-drafter-1781c698": 0.17543859649122806,
+            "openai:proj-critic-2fe4a265": 0.22033898305084743
+          },
+          "openai:proj-critic-2fe4a265": {
+            "openai:proj-research-457db654": 0.22033898305084743,
+            "openai:proj-drafter-1781c698": 0.22033898305084743,
+            "openai:proj-tool_agent-8544957d": 0.22033898305084743
+          },
+          "gemini:proj-research-d77f1b8e": {
+            "gemini:proj-drafter-a4228b4b": 0.17543859649122806,
+            "gemini:proj-tool_agent-2ed26b34": 0.23728813559322037,
+            "gemini:proj-critic-ecef552c": 0.22033898305084743
+          },
+          "gemini:proj-drafter-a4228b4b": {
+            "gemini:proj-research-d77f1b8e": 0.17543859649122806,
+            "gemini:proj-tool_agent-2ed26b34": 0.17543859649122806,
+            "gemini:proj-critic-ecef552c": 0.22033898305084743
+          },
+          "gemini:proj-tool_agent-2ed26b34": {
+            "gemini:proj-research-d77f1b8e": 0.23728813559322037,
+            "gemini:proj-drafter-a4228b4b": 0.17543859649122806,
+            "gemini:proj-critic-ecef552c": 0.22033898305084743
+          },
+          "gemini:proj-critic-ecef552c": {
+            "gemini:proj-research-d77f1b8e": 0.22033898305084743,
+            "gemini:proj-drafter-a4228b4b": 0.22033898305084743,
+            "gemini:proj-tool_agent-2ed26b34": 0.22033898305084743
+          }
+        },
+        "over_divergence_detected": false,
+        "over_redundancy_detected": false,
+        "context_fragmentation_risk": 0.0
+      },
+      "replay_integrity": {
+        "total_checks": 24,
+        "deterministic_matches": 24,
+        "deterministic_mismatches": 0,
+        "determinism_rate": 1.0,
+        "provider_breakdown": {
+          "claude": {
+            "total_checks": 8,
+            "matches": 8,
+            "mismatches": 0,
+            "determinism_rate": 1.0
+          },
+          "openai": {
+            "total_checks": 8,
+            "matches": 8,
+            "mismatches": 0,
+            "determinism_rate": 1.0
+          },
+          "gemini": {
+            "total_checks": 8,
+            "matches": 8,
+            "mismatches": 0,
+            "determinism_rate": 1.0
+          }
+        },
+        "drift_alerts": []
+      },
+      "projection_evolution": {
+        "timeline": [
+          {
+            "step": 0,
+            "provider": "claude",
+            "view_type": "research",
+            "quality": 0.6666162570888469,
+            "token_efficiency": 0.0661625708884688,
+            "projection_checksum": "c019a740b69af02cc53c425e",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "claude",
+            "view_type": "drafter",
+            "quality": 0.6290020576131687,
+            "token_efficiency": 0.09002057613168725,
+            "projection_checksum": "6d4ca469009cb7e5da1cdc90",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "claude",
+            "view_type": "tool_agent",
+            "quality": 0.7097712418300655,
+            "token_efficiency": 0.11437908496732026,
+            "projection_checksum": "1cd663fb05e836b407b90cd2",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "claude",
+            "view_type": "critic",
+            "quality": 0.6281452175936699,
+            "token_efficiency": 0.08145217593670002,
+            "projection_checksum": "a3df0dfc31bf0d483fb00a0f",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "openai",
+            "view_type": "research",
+            "quality": 0.6680515297906602,
+            "token_efficiency": 0.08051529790660225,
+            "projection_checksum": "d6d6bab36827f5a7ef4090b4",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "openai",
+            "view_type": "drafter",
+            "quality": 0.6300344036697247,
+            "token_efficiency": 0.1003440366972477,
+            "projection_checksum": "7eebbab9e7fc7c3b35d51868",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "openai",
+            "view_type": "tool_agent",
+            "quality": 0.712531328320802,
+            "token_efficiency": 0.12531328320802004,
+            "projection_checksum": "dae6eec36e3c1d65166f2859",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "openai",
+            "view_type": "critic",
+            "quality": 0.6292592592592592,
+            "token_efficiency": 0.09259259259259259,
+            "projection_checksum": "c31e36ae1ce1eab74945240e",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "gemini",
+            "view_type": "research",
+            "quality": 0.668878741755454,
+            "token_efficiency": 0.08878741755454084,
+            "projection_checksum": "9a1d4d8b47cc0ff8c2c7c493",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "gemini",
+            "view_type": "drafter",
+            "quality": 0.6309649122807017,
+            "token_efficiency": 0.10964912280701754,
+            "projection_checksum": "711c22c1d00f25474b7d325a",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "gemini",
+            "view_type": "tool_agent",
+            "quality": 0.7115808730759526,
+            "token_efficiency": 0.13247539742619227,
+            "projection_checksum": "ebd7169f9927fb93791055f8",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "gemini",
+            "view_type": "critic",
+            "quality": 0.6290791180285343,
+            "token_efficiency": 0.0907911802853437,
+            "projection_checksum": "ea595d377174dad204fc4c42",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 1,
+            "provider": "claude",
+            "view_type": "research",
+            "quality": 0.6666162570888469,
+            "token_efficiency": 0.0661625708884688,
+            "projection_checksum": "26f194ebe0390234cd52d549",
+            "drift_from_previous": 0.01851851851851849
+          },
+          {
+            "step": 1,
+            "provider": "claude",
+            "view_type": "drafter",
+            "quality": 0.6290020576131687,
+            "token_efficiency": 0.09002057613168725,
+            "projection_checksum": "beb953aa00dfc9ed8ad9b05a",
+            "drift_from_previous": 0.01851851851851849
+          },
+          {
+            "step": 1,
+            "provider": "claude",
+            "view_type": "tool_agent",
+            "quality": 0.7097712418300655,
+            "token_efficiency": 0.11437908496732026,
+            "projection_checksum": "fd67e1499ed24e2e249bd7c3",
+            "drift_from_previous": 0.01851851851851849
+          },
+          {
+            "step": 1,
+            "provider": "claude",
+            "view_type": "critic",
+            "quality": 0.6281452175936699,
+            "token_efficiency": 0.08145217593670002,
+            "projection_checksum": "3c7c43793a077dd308990880",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 1,
+            "provider": "openai",
+            "view_type": "research",
+            "quality": 0.6680515297906602,
+            "token_efficiency": 0.08051529790660225,
+            "projection_checksum": "b66060b3a18e2c887f9fa9bc",
+            "drift_from_previous": 0.01851851851851849
+          },
+          {
+            "step": 1,
+            "provider": "openai",
+            "view_type": "drafter",
+            "quality": 0.6300344036697247,
+            "token_efficiency": 0.1003440366972477,
+            "projection_checksum": "8a45dd404da067ff6132c738",
+            "drift_from_previous": 0.01851851851851849
+          },
+          {
+            "step": 1,
+            "provider": "openai",
+            "view_type": "tool_agent",
+            "quality": 0.712531328320802,
+            "token_efficiency": 0.12531328320802004,
+            "projection_checksum": "bea734b895a2423965d49b06",
+            "drift_from_previous": 0.01851851851851849
+          },
+          {
+            "step": 1,
+            "provider": "openai",
+            "view_type": "critic",
+            "quality": 0.6292592592592592,
+            "token_efficiency": 0.09259259259259259,
+            "projection_checksum": "1c59405f52ed64fbffa11e87",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 1,
+            "provider": "gemini",
+            "view_type": "research",
+            "quality": 0.668878741755454,
+            "token_efficiency": 0.08878741755454084,
+            "projection_checksum": "c6c37e6ada82779a9844147b",
+            "drift_from_previous": 0.01851851851851849
+          },
+          {
+            "step": 1,
+            "provider": "gemini",
+            "view_type": "drafter",
+            "quality": 0.6309649122807017,
+            "token_efficiency": 0.10964912280701754,
+            "projection_checksum": "929b0cbacc6874332a35344d",
+            "drift_from_previous": 0.01851851851851849
+          },
+          {
+            "step": 1,
+            "provider": "gemini",
+            "view_type": "tool_agent",
+            "quality": 0.7115808730759526,
+            "token_efficiency": 0.13247539742619227,
+            "projection_checksum": "a6e5c295f47aaeb36f92df33",
+            "drift_from_previous": 0.01851851851851849
+          },
+          {
+            "step": 1,
+            "provider": "gemini",
+            "view_type": "critic",
+            "quality": 0.6290791180285343,
+            "token_efficiency": 0.0907911802853437,
+            "projection_checksum": "593880393ac2818144e3d50f",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 2,
+            "provider": "claude",
+            "view_type": "research",
+            "quality": 0.6666162570888469,
+            "token_efficiency": 0.0661625708884688,
+            "projection_checksum": "d9ab70580703109bd0980ad6",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 2,
+            "provider": "claude",
+            "view_type": "drafter",
+            "quality": 0.6290020576131687,
+            "token_efficiency": 0.09002057613168725,
+            "projection_checksum": "1ed1760dc2e757e7941be4ea",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 2,
+            "provider": "claude",
+            "view_type": "tool_agent",
+            "quality": 0.7097712418300655,
+            "token_efficiency": 0.11437908496732026,
+            "projection_checksum": "32b21d37acf142cd66fcd5e8",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 2,
+            "provider": "claude",
+            "view_type": "critic",
+            "quality": 0.6281452175936699,
+            "token_efficiency": 0.08145217593670002,
+            "projection_checksum": "204ee52bd2430d8881381552",
+            "drift_from_previous": 0.018181818181818188
+          },
+          {
+            "step": 2,
+            "provider": "openai",
+            "view_type": "research",
+            "quality": 0.6680515297906602,
+            "token_efficiency": 0.08051529790660225,
+            "projection_checksum": "19c87b5af970f528e73f42f4",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 2,
+            "provider": "openai",
+            "view_type": "drafter",
+            "quality": 0.6300344036697247,
+            "token_efficiency": 0.1003440366972477,
+            "projection_checksum": "a697f5612c22ef77b0d18904",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 2,
+            "provider": "openai",
+            "view_type": "tool_agent",
+            "quality": 0.712531328320802,
+            "token_efficiency": 0.12531328320802004,
+            "projection_checksum": "15ba8745fc45365a75ff2598",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 2,
+            "provider": "openai",
+            "view_type": "critic",
+            "quality": 0.6292592592592592,
+            "token_efficiency": 0.09259259259259259,
+            "projection_checksum": "92e287d95bac4aa0ffb46d23",
+            "drift_from_previous": 0.018181818181818188
+          },
+          {
+            "step": 2,
+            "provider": "gemini",
+            "view_type": "research",
+            "quality": 0.668878741755454,
+            "token_efficiency": 0.08878741755454084,
+            "projection_checksum": "da69d095ef5d5ca32a8b6c9a",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 2,
+            "provider": "gemini",
+            "view_type": "drafter",
+            "quality": 0.6309649122807017,
+            "token_efficiency": 0.10964912280701754,
+            "projection_checksum": "a854808388f9725648bf6ddf",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 2,
+            "provider": "gemini",
+            "view_type": "tool_agent",
+            "quality": 0.7115808730759526,
+            "token_efficiency": 0.13247539742619227,
+            "projection_checksum": "a8ee419581bc1dc6511240ab",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 2,
+            "provider": "gemini",
+            "view_type": "critic",
+            "quality": 0.6290791180285343,
+            "token_efficiency": 0.0907911802853437,
+            "projection_checksum": "2014200d97a48ea84a67743a",
+            "drift_from_previous": 0.018181818181818188
+          },
+          {
+            "step": 3,
+            "provider": "claude",
+            "view_type": "research",
+            "quality": 0.6666162570888469,
+            "token_efficiency": 0.0661625708884688,
+            "projection_checksum": "1779f13b4e28e41e8ab87686",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 3,
+            "provider": "claude",
+            "view_type": "drafter",
+            "quality": 0.6290020576131687,
+            "token_efficiency": 0.09002057613168725,
+            "projection_checksum": "5ed90bc35f6569b630f80099",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 3,
+            "provider": "claude",
+            "view_type": "tool_agent",
+            "quality": 0.7097712418300655,
+            "token_efficiency": 0.11437908496732026,
+            "projection_checksum": "f8b5eb916938b1d251d01ff7",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 3,
+            "provider": "claude",
+            "view_type": "critic",
+            "quality": 0.6281452175936699,
+            "token_efficiency": 0.08145217593670002,
+            "projection_checksum": "11ff992faeadfcff635e1bfb",
+            "drift_from_previous": 0.0357142857142857
+          },
+          {
+            "step": 3,
+            "provider": "openai",
+            "view_type": "research",
+            "quality": 0.6680515297906602,
+            "token_efficiency": 0.08051529790660225,
+            "projection_checksum": "69f2bcd0aea66b47d10f06b8",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 3,
+            "provider": "openai",
+            "view_type": "drafter",
+            "quality": 0.6300344036697247,
+            "token_efficiency": 0.1003440366972477,
+            "projection_checksum": "b4b970c373b1151fd9265554",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 3,
+            "provider": "openai",
+            "view_type": "tool_agent",
+            "quality": 0.712531328320802,
+            "token_efficiency": 0.12531328320802004,
+            "projection_checksum": "59ab6e358989646e573f80f2",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 3,
+            "provider": "openai",
+            "view_type": "critic",
+            "quality": 0.6292592592592592,
+            "token_efficiency": 0.09259259259259259,
+            "projection_checksum": "04a52ad37c5930a7cba40e33",
+            "drift_from_previous": 0.0357142857142857
+          },
+          {
+            "step": 3,
+            "provider": "gemini",
+            "view_type": "research",
+            "quality": 0.668878741755454,
+            "token_efficiency": 0.08878741755454084,
+            "projection_checksum": "ef503e9e93908597e4ee33e5",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 3,
+            "provider": "gemini",
+            "view_type": "drafter",
+            "quality": 0.6309649122807017,
+            "token_efficiency": 0.10964912280701754,
+            "projection_checksum": "e1cb4bb341d6066d672f2384",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 3,
+            "provider": "gemini",
+            "view_type": "tool_agent",
+            "quality": 0.7115808730759526,
+            "token_efficiency": 0.13247539742619227,
+            "projection_checksum": "e89d7602bdc2457df78586b2",
+            "drift_from_previous": 0.036363636363636376
+          },
+          {
+            "step": 3,
+            "provider": "gemini",
+            "view_type": "critic",
+            "quality": 0.6290791180285343,
+            "token_efficiency": 0.0907911802853437,
+            "projection_checksum": "b785fd719c11d9941384cc10",
+            "drift_from_previous": 0.0357142857142857
+          }
+        ],
+        "avg_drift": 0.0273027898027898,
+        "max_drift": 0.036363636363636376,
+        "semantic_erosion": 0.03753713906031253,
+        "token_efficiency_evolution": {
+          "claude": 0.015289605048231222,
+          "openai": 0.012077294685990336,
+          "gemini": 0.002003762730802869
+        }
+      },
+      "token_economics": {
+        "avg_token_budget_used": 3714.5,
+        "avg_projection_tokens": 321.0,
+        "semantic_value_per_token": 0.002054147185886985,
+        "provider_token_efficiency": {
+          "claude": 0.08699784652983215,
+          "gemini": 0.10422091346663617,
+          "openai": 0.09855197342853148
+        },
+        "view_token_efficiency": {
+          "research": 0.07759141816853878,
+          "drafter": 0.09886166907622816,
+          "tool_agent": 0.12263813990298122,
+          "critic": 0.08726975075225159
+        },
+        "redundant_projection_overhead": 0.9807321772639692
+      },
+      "provider_divergence": {
+        "divergence_by_view": {
+          "research": 0.0022366276989889133,
+          "drafter": 0.0019404220427612362,
+          "tool_agent": 0.0027475902641758143,
+          "critic": 0.0011013097608396638
+        },
+        "quality_spread_by_provider": {
+          "claude": 0.08158839348321756,
+          "openai": 0.08323467398655371,
+          "gemini": 0.08245411594211449
+        },
+        "robustness_ranking": [
+          {
+            "provider": "gemini",
+            "score": 0.7620037972759978
+          },
+          {
+            "provider": "openai",
+            "score": 0.7618986381399971
+          },
+          {
+            "provider": "claude",
+            "score": 0.7607981825904215
+          }
+        ],
+        "adaptation_heatmap": {
+          "claude": {
+            "research": 0.6,
+            "drafter": 0.4,
+            "tool_agent": 0.8,
+            "critic": 0.4
+          },
+          "openai": {
+            "research": 0.6,
+            "drafter": 0.4,
+            "tool_agent": 0.8,
+            "critic": 0.4
+          },
+          "gemini": {
+            "research": 0.6,
+            "drafter": 0.4,
+            "tool_agent": 0.8,
+            "critic": 0.4
+          }
+        }
+      },
+      "optimization_recommendations": [
+        "Increase context reuse and deduplicate repeated projection segments to improve token economics.",
+        "Run targeted provider calibration benchmarks for claude across all core views."
+      ]
+    },
+    {
+      "report_id": "xlayer-critique",
+      "workspace_id": "ws-critique",
+      "generated_at": "2026-05-12T06:03:48.770386",
+      "providers_evaluated": [
+        "claude",
+        "openai",
+        "gemini"
+      ],
+      "view_count": 12,
+      "semantic_fidelity": {
+        "semantic_preservation": 1.0,
+        "reasoning_continuity": 0.3333333333333333,
+        "entity_preservation": 1.0,
+        "context_integrity": 1.0,
+        "degradation_index": 0.16666666666666663
+      },
+      "cross_view_consistency": {
+        "avg_overlap": 0.7916452185458033,
+        "avg_divergence": 0.20835478145419667,
+        "overlap_matrix": {
+          "claude:proj-research-af725157": {
+            "claude:proj-drafter-f1492883": 0.8518518518518519,
+            "claude:proj-tool_agent-d9f6afbd": 0.7857142857142857,
+            "claude:proj-critic-57981c62": 0.7719298245614035
+          },
+          "claude:proj-drafter-f1492883": {
+            "claude:proj-research-af725157": 0.8518518518518519,
+            "claude:proj-tool_agent-d9f6afbd": 0.8181818181818182,
+            "claude:proj-critic-57981c62": 0.7719298245614035
+          },
+          "claude:proj-tool_agent-d9f6afbd": {
+            "claude:proj-research-af725157": 0.7857142857142857,
+            "claude:proj-drafter-f1492883": 0.8181818181818182,
+            "claude:proj-critic-57981c62": 0.7719298245614035
+          },
+          "claude:proj-critic-57981c62": {
+            "claude:proj-research-af725157": 0.7719298245614035,
+            "claude:proj-drafter-f1492883": 0.7719298245614035,
+            "claude:proj-tool_agent-d9f6afbd": 0.7719298245614035
+          },
+          "openai:proj-research-47da251f": {
+            "openai:proj-drafter-ab7ce0e5": 0.8518518518518519,
+            "openai:proj-tool_agent-941d17ce": 0.7857142857142857,
+            "openai:proj-critic-a7a9dcbc": 0.7719298245614035
+          },
+          "openai:proj-drafter-ab7ce0e5": {
+            "openai:proj-research-47da251f": 0.8518518518518519,
+            "openai:proj-tool_agent-941d17ce": 0.8181818181818182,
+            "openai:proj-critic-a7a9dcbc": 0.7719298245614035
+          },
+          "openai:proj-tool_agent-941d17ce": {
+            "openai:proj-research-47da251f": 0.7857142857142857,
+            "openai:proj-drafter-ab7ce0e5": 0.8181818181818182,
+            "openai:proj-critic-a7a9dcbc": 0.7719298245614035
+          },
+          "openai:proj-critic-a7a9dcbc": {
+            "openai:proj-research-47da251f": 0.7719298245614035,
+            "openai:proj-drafter-ab7ce0e5": 0.7719298245614035,
+            "openai:proj-tool_agent-941d17ce": 0.7719298245614035
+          },
+          "gemini:proj-research-dc0a8329": {
+            "gemini:proj-drafter-8c9d96b9": 0.8181818181818182,
+            "gemini:proj-tool_agent-ed1f7650": 0.7543859649122807,
+            "gemini:proj-critic-33436779": 0.7719298245614035
+          },
+          "gemini:proj-drafter-8c9d96b9": {
+            "gemini:proj-research-dc0a8329": 0.8181818181818182,
+            "gemini:proj-tool_agent-ed1f7650": 0.8181818181818182,
+            "gemini:proj-critic-33436779": 0.7719298245614035
+          },
+          "gemini:proj-tool_agent-ed1f7650": {
+            "gemini:proj-research-dc0a8329": 0.7543859649122807,
+            "gemini:proj-drafter-8c9d96b9": 0.8181818181818182,
+            "gemini:proj-critic-33436779": 0.7719298245614035
+          },
+          "gemini:proj-critic-33436779": {
+            "gemini:proj-research-dc0a8329": 0.7719298245614035,
+            "gemini:proj-drafter-8c9d96b9": 0.7719298245614035,
+            "gemini:proj-tool_agent-ed1f7650": 0.7719298245614035
+          }
+        },
+        "divergence_matrix": {
+          "claude:proj-research-af725157": {
+            "claude:proj-drafter-f1492883": 0.14814814814814814,
+            "claude:proj-tool_agent-d9f6afbd": 0.2142857142857143,
+            "claude:proj-critic-57981c62": 0.22807017543859653
+          },
+          "claude:proj-drafter-f1492883": {
+            "claude:proj-research-af725157": 0.14814814814814814,
+            "claude:proj-tool_agent-d9f6afbd": 0.18181818181818177,
+            "claude:proj-critic-57981c62": 0.22807017543859653
+          },
+          "claude:proj-tool_agent-d9f6afbd": {
+            "claude:proj-research-af725157": 0.2142857142857143,
+            "claude:proj-drafter-f1492883": 0.18181818181818177,
+            "claude:proj-critic-57981c62": 0.22807017543859653
+          },
+          "claude:proj-critic-57981c62": {
+            "claude:proj-research-af725157": 0.22807017543859653,
+            "claude:proj-drafter-f1492883": 0.22807017543859653,
+            "claude:proj-tool_agent-d9f6afbd": 0.22807017543859653
+          },
+          "openai:proj-research-47da251f": {
+            "openai:proj-drafter-ab7ce0e5": 0.14814814814814814,
+            "openai:proj-tool_agent-941d17ce": 0.2142857142857143,
+            "openai:proj-critic-a7a9dcbc": 0.22807017543859653
+          },
+          "openai:proj-drafter-ab7ce0e5": {
+            "openai:proj-research-47da251f": 0.14814814814814814,
+            "openai:proj-tool_agent-941d17ce": 0.18181818181818177,
+            "openai:proj-critic-a7a9dcbc": 0.22807017543859653
+          },
+          "openai:proj-tool_agent-941d17ce": {
+            "openai:proj-research-47da251f": 0.2142857142857143,
+            "openai:proj-drafter-ab7ce0e5": 0.18181818181818177,
+            "openai:proj-critic-a7a9dcbc": 0.22807017543859653
+          },
+          "openai:proj-critic-a7a9dcbc": {
+            "openai:proj-research-47da251f": 0.22807017543859653,
+            "openai:proj-drafter-ab7ce0e5": 0.22807017543859653,
+            "openai:proj-tool_agent-941d17ce": 0.22807017543859653
+          },
+          "gemini:proj-research-dc0a8329": {
+            "gemini:proj-drafter-8c9d96b9": 0.18181818181818177,
+            "gemini:proj-tool_agent-ed1f7650": 0.24561403508771928,
+            "gemini:proj-critic-33436779": 0.22807017543859653
+          },
+          "gemini:proj-drafter-8c9d96b9": {
+            "gemini:proj-research-dc0a8329": 0.18181818181818177,
+            "gemini:proj-tool_agent-ed1f7650": 0.18181818181818177,
+            "gemini:proj-critic-33436779": 0.22807017543859653
+          },
+          "gemini:proj-tool_agent-ed1f7650": {
+            "gemini:proj-research-dc0a8329": 0.24561403508771928,
+            "gemini:proj-drafter-8c9d96b9": 0.18181818181818177,
+            "gemini:proj-critic-33436779": 0.22807017543859653
+          },
+          "gemini:proj-critic-33436779": {
+            "gemini:proj-research-dc0a8329": 0.22807017543859653,
+            "gemini:proj-drafter-8c9d96b9": 0.22807017543859653,
+            "gemini:proj-tool_agent-ed1f7650": 0.22807017543859653
+          }
+        },
+        "over_divergence_detected": false,
+        "over_redundancy_detected": false,
+        "context_fragmentation_risk": 0.0
+      },
+      "replay_integrity": {
+        "total_checks": 24,
+        "deterministic_matches": 24,
+        "deterministic_mismatches": 0,
+        "determinism_rate": 1.0,
+        "provider_breakdown": {
+          "claude": {
+            "total_checks": 8,
+            "matches": 8,
+            "mismatches": 0,
+            "determinism_rate": 1.0
+          },
+          "openai": {
+            "total_checks": 8,
+            "matches": 8,
+            "mismatches": 0,
+            "determinism_rate": 1.0
+          },
+          "gemini": {
+            "total_checks": 8,
+            "matches": 8,
+            "mismatches": 0,
+            "determinism_rate": 1.0
+          }
+        },
+        "drift_alerts": []
+      },
+      "projection_evolution": {
+        "timeline": [
+          {
+            "step": 0,
+            "provider": "claude",
+            "view_type": "research",
+            "quality": 0.666578449905482,
+            "token_efficiency": 0.06578449905482042,
+            "projection_checksum": "379f45ef03d327ed0dda612c",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "claude",
+            "view_type": "drafter",
+            "quality": 0.6289506172839506,
+            "token_efficiency": 0.08950617283950617,
+            "projection_checksum": "28165d66a010610d6321b62f",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "claude",
+            "view_type": "tool_agent",
+            "quality": 0.7097058823529412,
+            "token_efficiency": 0.11372549019607843,
+            "projection_checksum": "5a29f38d865d86ad5d814d62",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "claude",
+            "view_type": "critic",
+            "quality": 0.6280986734931348,
+            "token_efficiency": 0.08098673493134745,
+            "projection_checksum": "690d8b869f2ba520eb2f7dda",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "openai",
+            "view_type": "research",
+            "quality": 0.6680055210489992,
+            "token_efficiency": 0.0800552104899931,
+            "projection_checksum": "8fd20bf7f55b61037296dfe7",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "openai",
+            "view_type": "drafter",
+            "quality": 0.6299770642201834,
+            "token_efficiency": 0.09977064220183486,
+            "projection_checksum": "95368e885f5e52be9bdb4d65",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "openai",
+            "view_type": "tool_agent",
+            "quality": 0.7124597207303974,
+            "token_efficiency": 0.12459720730397422,
+            "projection_checksum": "0ff818307c2d255cb443b07b",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "openai",
+            "view_type": "critic",
+            "quality": 0.6292063492063492,
+            "token_efficiency": 0.09206349206349207,
+            "projection_checksum": "bda21b4fa8133017b870fb46",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "gemini",
+            "view_type": "research",
+            "quality": 0.66882800608828,
+            "token_efficiency": 0.0882800608828006,
+            "projection_checksum": "10b968683b773ad8da0f3f34",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "gemini",
+            "view_type": "drafter",
+            "quality": 0.6309022556390977,
+            "token_efficiency": 0.10902255639097744,
+            "projection_checksum": "7f3aeba572424be17ff2cb83",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "gemini",
+            "view_type": "tool_agent",
+            "quality": 0.711505172848852,
+            "token_efficiency": 0.13171839515518546,
+            "projection_checksum": "51876a1d549fd79070b55a13",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 0,
+            "provider": "gemini",
+            "view_type": "critic",
+            "quality": 0.6290272373540856,
+            "token_efficiency": 0.09027237354085603,
+            "projection_checksum": "7a606d0efe250b7bbaf4b9c4",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 1,
+            "provider": "claude",
+            "view_type": "research",
+            "quality": 0.666578449905482,
+            "token_efficiency": 0.06578449905482042,
+            "projection_checksum": "6a00c4530d63d41854640eb2",
+            "drift_from_previous": 0.019230769230769273
+          },
+          {
+            "step": 1,
+            "provider": "claude",
+            "view_type": "drafter",
+            "quality": 0.6289506172839506,
+            "token_efficiency": 0.08950617283950617,
+            "projection_checksum": "b668b7c2d6a7599647b5efda",
+            "drift_from_previous": 0.019230769230769273
+          },
+          {
+            "step": 1,
+            "provider": "claude",
+            "view_type": "tool_agent",
+            "quality": 0.7097058823529412,
+            "token_efficiency": 0.11372549019607843,
+            "projection_checksum": "0c3f8feb1de85b53f5f8717d",
+            "drift_from_previous": 0.019230769230769273
+          },
+          {
+            "step": 1,
+            "provider": "claude",
+            "view_type": "critic",
+            "quality": 0.6280986734931348,
+            "token_efficiency": 0.08098673493134745,
+            "projection_checksum": "29e06251bb7d77a7e427ff07",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 1,
+            "provider": "openai",
+            "view_type": "research",
+            "quality": 0.6680055210489992,
+            "token_efficiency": 0.0800552104899931,
+            "projection_checksum": "3a4f298f43d74f4e5f8d0ec9",
+            "drift_from_previous": 0.019230769230769273
+          },
+          {
+            "step": 1,
+            "provider": "openai",
+            "view_type": "drafter",
+            "quality": 0.6299770642201834,
+            "token_efficiency": 0.09977064220183486,
+            "projection_checksum": "eb1f8976772cd95759be13d2",
+            "drift_from_previous": 0.019230769230769273
+          },
+          {
+            "step": 1,
+            "provider": "openai",
+            "view_type": "tool_agent",
+            "quality": 0.7124597207303974,
+            "token_efficiency": 0.12459720730397422,
+            "projection_checksum": "d51f2c5b0219a9a3fa3a21d6",
+            "drift_from_previous": 0.019230769230769273
+          },
+          {
+            "step": 1,
+            "provider": "openai",
+            "view_type": "critic",
+            "quality": 0.6292063492063492,
+            "token_efficiency": 0.09206349206349207,
+            "projection_checksum": "9d9134abf3b61e4ffcf839fe",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 1,
+            "provider": "gemini",
+            "view_type": "research",
+            "quality": 0.66882800608828,
+            "token_efficiency": 0.0882800608828006,
+            "projection_checksum": "e0100017956bbd3265de0601",
+            "drift_from_previous": 0.019230769230769273
+          },
+          {
+            "step": 1,
+            "provider": "gemini",
+            "view_type": "drafter",
+            "quality": 0.6309022556390977,
+            "token_efficiency": 0.10902255639097744,
+            "projection_checksum": "378dfb96c3ba5d9be0c8447e",
+            "drift_from_previous": 0.019230769230769273
+          },
+          {
+            "step": 1,
+            "provider": "gemini",
+            "view_type": "tool_agent",
+            "quality": 0.711505172848852,
+            "token_efficiency": 0.13171839515518546,
+            "projection_checksum": "14b14abdbe73532b4fd68cc9",
+            "drift_from_previous": 0.019230769230769273
+          },
+          {
+            "step": 1,
+            "provider": "gemini",
+            "view_type": "critic",
+            "quality": 0.6290272373540856,
+            "token_efficiency": 0.09027237354085603,
+            "projection_checksum": "f9daca55f69fcbaf83530c37",
+            "drift_from_previous": 0.0
+          },
+          {
+            "step": 2,
+            "provider": "claude",
+            "view_type": "research",
+            "quality": 0.666578449905482,
+            "token_efficiency": 0.06578449905482042,
+            "projection_checksum": "992d7514ee05283076996449",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 2,
+            "provider": "claude",
+            "view_type": "drafter",
+            "quality": 0.6289506172839506,
+            "token_efficiency": 0.08950617283950617,
+            "projection_checksum": "570ba1ed1bbef00deb98d833",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 2,
+            "provider": "claude",
+            "view_type": "tool_agent",
+            "quality": 0.7097058823529412,
+            "token_efficiency": 0.11372549019607843,
+            "projection_checksum": "43cc5eb171afc8dc6668cd23",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 2,
+            "provider": "claude",
+            "view_type": "critic",
+            "quality": 0.6280986734931348,
+            "token_efficiency": 0.08098673493134745,
+            "projection_checksum": "5bfdacd02c83eca70c34b6a6",
+            "drift_from_previous": 0.018867924528301883
+          },
+          {
+            "step": 2,
+            "provider": "openai",
+            "view_type": "research",
+            "quality": 0.6680055210489992,
+            "token_efficiency": 0.0800552104899931,
+            "projection_checksum": "8f0c0861fe4aef4b941ac3e4",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 2,
+            "provider": "openai",
+            "view_type": "drafter",
+            "quality": 0.6299770642201834,
+            "token_efficiency": 0.09977064220183486,
+            "projection_checksum": "a1feff50c7936001a92249cf",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 2,
+            "provider": "openai",
+            "view_type": "tool_agent",
+            "quality": 0.7124597207303974,
+            "token_efficiency": 0.12459720730397422,
+            "projection_checksum": "5e18b6b021a23a4fdcdf74b1",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 2,
+            "provider": "openai",
+            "view_type": "critic",
+            "quality": 0.6292063492063492,
+            "token_efficiency": 0.09206349206349207,
+            "projection_checksum": "69f11aeb7443fc86393aa688",
+            "drift_from_previous": 0.018867924528301883
+          },
+          {
+            "step": 2,
+            "provider": "gemini",
+            "view_type": "research",
+            "quality": 0.66882800608828,
+            "token_efficiency": 0.0882800608828006,
+            "projection_checksum": "1c19cd0d55be13cd32431242",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 2,
+            "provider": "gemini",
+            "view_type": "drafter",
+            "quality": 0.6309022556390977,
+            "token_efficiency": 0.10902255639097744,
+            "projection_checksum": "7ee697aa403b98a4f3ed3235",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 2,
+            "provider": "gemini",
+            "view_type": "tool_agent",
+            "quality": 0.711505172848852,
+            "token_efficiency": 0.13171839515518546,
+            "projection_checksum": "4411509c067564d147660609",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 2,
+            "provider": "gemini",
+            "view_type": "critic",
+            "quality": 0.6290272373540856,
+            "token_efficiency": 0.09027237354085603,
+            "projection_checksum": "add6f41c26598b7ac495c5eb",
+            "drift_from_previous": 0.018867924528301883
+          },
+          {
+            "step": 3,
+            "provider": "claude",
+            "view_type": "research",
+            "quality": 0.666578449905482,
+            "token_efficiency": 0.06578449905482042,
+            "projection_checksum": "a11dbc2f25b895e8ee0f1977",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 3,
+            "provider": "claude",
+            "view_type": "drafter",
+            "quality": 0.6289506172839506,
+            "token_efficiency": 0.08950617283950617,
+            "projection_checksum": "c64511a04e38772085baba1f",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 3,
+            "provider": "claude",
+            "view_type": "tool_agent",
+            "quality": 0.7097058823529412,
+            "token_efficiency": 0.11372549019607843,
+            "projection_checksum": "8811bbe6da25d7ddd73de223",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 3,
+            "provider": "claude",
+            "view_type": "critic",
+            "quality": 0.6280986734931348,
+            "token_efficiency": 0.08098673493134745,
+            "projection_checksum": "8fc5d1bdf64d26454fd16c6d",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 3,
+            "provider": "openai",
+            "view_type": "research",
+            "quality": 0.6680055210489992,
+            "token_efficiency": 0.0800552104899931,
+            "projection_checksum": "69a3d6678956e90ebf5e0453",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 3,
+            "provider": "openai",
+            "view_type": "drafter",
+            "quality": 0.6299770642201834,
+            "token_efficiency": 0.09977064220183486,
+            "projection_checksum": "6648855b626e34ec8258beb4",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 3,
+            "provider": "openai",
+            "view_type": "tool_agent",
+            "quality": 0.7124597207303974,
+            "token_efficiency": 0.12459720730397422,
+            "projection_checksum": "9df91e98ec8befcb3edd4c86",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 3,
+            "provider": "openai",
+            "view_type": "critic",
+            "quality": 0.6292063492063492,
+            "token_efficiency": 0.09206349206349207,
+            "projection_checksum": "17a1ff0dd04dd858c0166dc4",
+            "drift_from_previous": 0.03703703703703709
+          },
+          {
+            "step": 3,
+            "provider": "gemini",
+            "view_type": "research",
+            "quality": 0.66882800608828,
+            "token_efficiency": 0.0882800608828006,
+            "projection_checksum": "9ef3236c9d15f0037f430fa1",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 3,
+            "provider": "gemini",
+            "view_type": "drafter",
+            "quality": 0.6309022556390977,
+            "token_efficiency": 0.10902255639097744,
+            "projection_checksum": "41eac11eb2adb249a2691531",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 3,
+            "provider": "gemini",
+            "view_type": "tool_agent",
+            "quality": 0.711505172848852,
+            "token_efficiency": 0.13171839515518546,
+            "projection_checksum": "2f8b66942e896bf3e4326625",
+            "drift_from_previous": 0.037735849056603765
+          },
+          {
+            "step": 3,
+            "provider": "gemini",
+            "view_type": "critic",
+            "quality": 0.6290272373540856,
+            "token_efficiency": 0.09027237354085603,
+            "projection_checksum": "a1726bbf9d14f5967fde7832",
+            "drift_from_previous": 0.03703703703703709
+          }
+        ],
+        "avg_drift": 0.02833436363310578,
+        "max_drift": 0.037735849056603765,
+        "semantic_erosion": 0.037551212551396373,
+        "token_efficiency_evolution": {
+          "claude": 0.015202235876527026,
+          "openai": 0.012008281573498966,
+          "gemini": 0.0019923126580554257
+        }
+      },
+      "token_economics": {
+        "avg_token_budget_used": 3714.5,
+        "avg_projection_tokens": 319.0,
+        "semantic_value_per_token": 0.0020668508280829623,
+        "provider_token_efficiency": {
+          "claude": 0.08649496880422619,
+          "gemini": 0.10361848044081748,
+          "openai": 0.09798230884223938
+        },
+        "view_token_efficiency": {
+          "research": 0.07714291286120618,
+          "drafter": 0.09829021434168349,
+          "tool_agent": 0.12192924892088307,
+          "critic": 0.086765301325938
+        },
+        "redundant_projection_overhead": 0.9811046511627907
+      },
+      "provider_divergence": {
+        "divergence_by_view": {
+          "research": 0.0022236992151796198,
+          "drafter": 0.0019292057303752497,
+          "tool_agent": 0.0027413421508953872,
+          "critic": 0.0010949438084648655
+        },
+        "quality_spread_by_provider": {
+          "claude": 0.08156957810662868,
+          "openai": 0.0832159764490592,
+          "gemini": 0.08243029638946253
+        },
+        "robustness_ranking": [
+          {
+            "provider": "gemini",
+            "score": 0.7619616269641905
+          },
+          {
+            "provider": "openai",
+            "score": 0.7618587616189567
+          },
+          {
+            "provider": "claude",
+            "score": 0.760762981149629
+          }
+        ],
+        "adaptation_heatmap": {
+          "claude": {
+            "research": 0.6,
+            "drafter": 0.4,
+            "tool_agent": 0.8,
+            "critic": 0.4
+          },
+          "openai": {
+            "research": 0.6,
+            "drafter": 0.4,
+            "tool_agent": 0.8,
+            "critic": 0.4
+          },
+          "gemini": {
+            "research": 0.6,
+            "drafter": 0.4,
+            "tool_agent": 0.8,
+            "critic": 0.4
+          }
+        }
+      },
+      "optimization_recommendations": [
+        "Increase context reuse and deduplicate repeated projection segments to improve token economics.",
+        "Run targeted provider calibration benchmarks for claude across all core views."
+      ]
+    }
+  ],
+  "latest_summary": {
+    "latest_report_id": "xlayer-critique",
+    "generated_at": "2026-05-12T06:03:48.770386",
+    "workspace_id": "ws-critique",
+    "providers_evaluated": [
+      "claude",
+      "openai",
+      "gemini"
+    ],
+    "semantic_preservation": 1.0,
+    "determinism_rate": 1.0,
+    "avg_view_divergence": 0.20835478145419667,
+    "provider_robustness_ranking": [
+      {
+        "provider": "gemini",
+        "score": 0.7619616269641905
+      },
+      {
+        "provider": "openai",
+        "score": 0.7618587616189567
+      },
+      {
+        "provider": "claude",
+        "score": 0.760762981149629
+      }
+    ],
+    "recommendations": [
+      "Increase context reuse and deduplicate repeated projection segments to improve token economics.",
+      "Run targeted provider calibration benchmarks for claude across all core views."
+    ]
+  }
+}

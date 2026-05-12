@@ -16,7 +16,7 @@ from app.schemas.context import (
     WorkspaceSummaryLayer,
 )
 from sqlalchemy.orm import Session
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import logging
 import time
 
@@ -200,7 +200,7 @@ class ContextCompilationService:
             return WorkspaceSummaryLayer(
                 summary=summary,
                 key_topics=[],  # TODO: Extract from workspace metadata
-                summary_timestamp=datetime.utcnow(),
+                summary_timestamp=datetime.now(timezone.utc),
             )
 
         return WorkspaceSummaryLayer()

@@ -1,0 +1,37 @@
+[
+  {
+    "cycle": 0,
+    "delegation_count": 3,
+    "avg_semantic_continuity": 0.3333333333333333,
+    "deleg_total_tokens_saved": 351,
+    "success": true
+  },
+  {
+    "cycle": 1,
+    "delegation_count": 3,
+    "avg_semantic_continuity": 0.3333333333333333,
+    "deleg_total_tokens_saved": 702,
+    "success": true
+  },
+  {
+    "cycle": 2,
+    "delegation_count": 3,
+    "avg_semantic_continuity": 0.3333333333333333,
+    "deleg_total_tokens_saved": 1053,
+    "success": true
+  },
+  {
+    "cycle": 3,
+    "delegation_count": 3,
+    "avg_semantic_continuity": 0.3333333333333333,
+    "deleg_total_tokens_saved": 1404,
+    "success": true
+  },
+  {
+    "cycle": 4,
+    "delegation_count": 3,
+    "avg_semantic_continuity": 0.3333333333333333,
+    "deleg_total_tokens_saved": 1755,
+    "success": true
+  }
+]

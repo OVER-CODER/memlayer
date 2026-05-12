@@ -4,7 +4,7 @@ Pydantic schemas for API request/response validation.
 
 from pydantic import BaseModel
 from typing import Optional, List
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 # Workspace Schemas

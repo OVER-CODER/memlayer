@@ -15,7 +15,7 @@ import json
 import numpy as np
 from typing import List, Dict, Tuple
 from dataclasses import dataclass, asdict, field
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from unittest.mock import Mock
 import sys
 import logging
@@ -107,7 +107,7 @@ class AdaptiveCompilationBenchmark:
         mem.id = mem_id
         mem.raw_content = content
         mem.importance_score = importance
-        mem.timestamp = timestamp or datetime.utcnow()
+        mem.timestamp = timestamp or datetime.now(timezone.utc)
         mem.embedding = np.random.random(768).tolist()
         return mem
 
@@ -116,7 +116,7 @@ class AdaptiveCompilationBenchmark:
         logger.info("Starting adaptive compilation benchmarks...")
 
         results = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "benchmarks": {
                 "ranking_effectiveness": self.benchmark_ranking_effectiveness(),
                 "budget_allocation_quality": self.benchmark_budget_allocation(),
@@ -153,7 +153,7 @@ class AdaptiveCompilationBenchmark:
                     f"mem-{i}",
                     f"Memory content {i}: " + " ".join([query] * (i % 5 + 1)),
                     importance=np.random.random(),
-                    timestamp=datetime.utcnow()
+                    timestamp=datetime.now(timezone.utc)
                     - timedelta(days=np.random.randint(0, 100)),
                 )
                 for i in range(20)
@@ -176,7 +176,7 @@ class AdaptiveCompilationBenchmark:
 
             result = BenchmarkResult(
                 benchmark_name=f"ranking_{query_type_str.lower()}",
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(timezone.utc),
                 query_type=query_type_str,
                 query_complexity=0.5,
                 num_memories=len(memories),
@@ -232,7 +232,7 @@ class AdaptiveCompilationBenchmark:
 
             result = BenchmarkResult(
                 benchmark_name=f"allocation_{scenario_name}",
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(timezone.utc),
                 query_type="REASONING",
                 query_complexity=complexity,
                 num_memories=memory_count,
@@ -280,7 +280,7 @@ class AdaptiveCompilationBenchmark:
 
             result = BenchmarkResult(
                 benchmark_name=f"compression_{mode}",
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(timezone.utc),
                 query_type="REASONING",
                 query_complexity=0.5,
                 num_memories=len(memories),
@@ -327,7 +327,7 @@ class AdaptiveCompilationBenchmark:
 
             result = BenchmarkResult(
                 benchmark_name=f"provider_{provider}",
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(timezone.utc),
                 query_type="FACTUAL",
                 query_complexity=0.3,
                 num_memories=len(memories),
@@ -383,7 +383,7 @@ class AdaptiveCompilationBenchmark:
 
             result = BenchmarkResult(
                 benchmark_name=f"retention_{scenario_name}",
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(timezone.utc),
                 query_type="REASONING",
                 query_complexity=0.5,
                 num_memories=memory_count,
@@ -430,7 +430,7 @@ class AdaptiveCompilationBenchmark:
 
             result = BenchmarkResult(
                 benchmark_name=f"scalability_{count}memories",
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(timezone.utc),
                 query_type="REASONING",
                 query_complexity=0.5,
                 num_memories=count,
@@ -478,7 +478,7 @@ class AdaptiveCompilationBenchmark:
         """Save benchmark results to JSON file."""
         if output_file is None:
             output_file = (
-                f"benchmark_adaptive_compilation_{datetime.utcnow().timestamp()}.json"
+                f"benchmark_adaptive_compilation_{datetime.now(timezone.utc).timestamp()}.json"
             )
 
         results = self.run_all_benchmarks()

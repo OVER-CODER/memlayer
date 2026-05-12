@@ -1,0 +1,182 @@
+[
+  {
+    "cycle": 0,
+    "token_pressure": 0.0,
+    "total_allocated": 4129,
+    "efficiency_score": 0.7419375,
+    "allocations": {
+      "research": 1449,
+      "drafter": 950,
+      "tool_agent": 680,
+      "critic": 1050
+    }
+  },
+  {
+    "cycle": 1,
+    "token_pressure": 0.07,
+    "total_allocated": 4129,
+    "efficiency_score": 0.7419375,
+    "allocations": {
+      "research": 1449,
+      "drafter": 950,
+      "tool_agent": 680,
+      "critic": 1050
+    }
+  },
+  {
+    "cycle": 2,
+    "token_pressure": 0.14,
+    "total_allocated": 4129,
+    "efficiency_score": 0.7419375,
+    "allocations": {
+      "research": 1449,
+      "drafter": 950,
+      "tool_agent": 680,
+      "critic": 1050
+    }
+  },
+  {
+    "cycle": 3,
+    "token_pressure": 0.21000000000000002,
+    "total_allocated": 4129,
+    "efficiency_score": 0.7419375,
+    "allocations": {
+      "research": 1449,
+      "drafter": 950,
+      "tool_agent": 680,
+      "critic": 1050
+    }
+  },
+  {
+    "cycle": 4,
+    "token_pressure": 0.28,
+    "total_allocated": 4129,
+    "efficiency_score": 0.7419375,
+    "allocations": {
+      "research": 1449,
+      "drafter": 950,
+      "tool_agent": 680,
+      "critic": 1050
+    }
+  },
+  {
+    "cycle": 5,
+    "token_pressure": 0.35000000000000003,
+    "total_allocated": 4060,
+    "efficiency_score": 0.7462500000000001,
+    "allocations": {
+      "research": 1380,
+      "drafter": 950,
+      "tool_agent": 680,
+      "critic": 1050
+    }
+  },
+  {
+    "cycle": 6,
+    "token_pressure": 0.42000000000000004,
+    "total_allocated": 4060,
+    "efficiency_score": 0.7462500000000001,
+    "allocations": {
+      "research": 1380,
+      "drafter": 950,
+      "tool_agent": 680,
+      "critic": 1050
+    }
+  },
+  {
+    "cycle": 7,
+    "token_pressure": 0.49000000000000005,
+    "total_allocated": 4060,
+    "efficiency_score": 0.7462500000000001,
+    "allocations": {
+      "research": 1380,
+      "drafter": 950,
+      "tool_agent": 680,
+      "critic": 1050
+    }
+  },
+  {
+    "cycle": 8,
+    "token_pressure": 0.56,
+    "total_allocated": 4060,
+    "efficiency_score": 0.7462500000000001,
+    "allocations": {
+      "research": 1380,
+      "drafter": 950,
+      "tool_agent": 680,
+      "critic": 1050
+    }
+  },
+  {
+    "cycle": 9,
+    "token_pressure": 0.6300000000000001,
+    "total_allocated": 4060,
+    "efficiency_score": 0.7462500000000001,
+    "allocations": {
+      "research": 1380,
+      "drafter": 950,
+      "tool_agent": 680,
+      "critic": 1050
+    }
+  },
+  {
+    "cycle": 10,
+    "token_pressure": 0.7000000000000001,
+    "total_allocated": 4056,
+    "efficiency_score": 0.7464999999999999,
+    "allocations": {
+      "research": 1379,
+      "drafter": 949,
+      "tool_agent": 679,
+      "critic": 1049
+    }
+  },
+  {
+    "cycle": 11,
+    "token_pressure": 0.77,
+    "total_allocated": 3818,
+    "efficiency_score": 0.761375,
+    "allocations": {
+      "research": 1283,
+      "drafter": 927,
+      "tool_agent": 632,
+      "critic": 976
+    }
+  },
+  {
+    "cycle": 12,
+    "token_pressure": 0.8400000000000001,
+    "total_allocated": 3529,
+    "efficiency_score": 0.7794375,
+    "allocations": {
+      "research": 1186,
+      "drafter": 857,
+      "tool_agent": 584,
+      "critic": 902
+    }
+  },
+  {
+    "cycle": 13,
+    "token_pressure": 0.9100000000000001,
+    "total_allocated": 3244,
+    "efficiency_score": 0.79725,
+    "allocations": {
+      "research": 1090,
+      "drafter": 788,
+      "tool_agent": 537,
+      "critic": 829
+    }
+  },
+  {
+    "cycle": 14,
+    "token_pressure": 0.9800000000000001,
+    "total_allocated": 2955,
+    "efficiency_score": 0.8153125,
+    "allocations": {
+      "research": 993,
+      "drafter": 718,
+      "tool_agent": 489,
+      "critic": 755
+    }
+  }
+]

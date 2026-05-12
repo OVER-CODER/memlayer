@@ -1,0 +1,367 @@
+{
+  "stress_runs": [
+    {
+      "run_id": "stress-long1000",
+      "scenario": {
+        "scenario_id": "long1000",
+        "scenario_name": "Long Horizon 1000 Turn",
+        "description": "1000-turn recursive validation workload",
+        "num_turns": 1000,
+        "num_memories": 35,
+        "memory_noise_level": 0.15,
+        "recursive_compression_cycles": 5,
+        "provider_switching_frequency": 40,
+        "memory_growth_factor": 1.05,
+        "token_budget": 2500,
+        "token_pressure_level": 0.7,
+        "query_complexity": "complex",
+        "query_diversity": 0.8
+      },
+      "timestamp": "2026-05-12T05:19:09.638927",
+      "total_turns": 1000,
+      "successful_turns": 1000,
+      "failed_turns": 0,
+      "success_rate": 1.0,
+      "avg_quality_score": 0.6939593495934959,
+      "min_quality_score": 0.6469512195121951,
+      "quality_degradation_rate": 0.0,
+      "avg_semantic_retention": 1.0,
+      "semantic_retention_degradation": 0.0,
+      "avg_token_efficiency": 0.0,
+      "max_tokens_used": 123,
+      "crashes_detected": 0,
+      "provider_failures": {},
+      "failure_patterns": [],
+      "avg_latency_ms": 0.6342840194702148,
+      "p95_latency_ms": 0.7030963897705078,
+      "p99_latency_ms": 0.7832050323486328,
+      "recovery_rate": 0.0,
+      "stability_score": 90.81878048780487,
+      "stress_level_tolerated": "high"
+    },
+    {
+      "run_id": "stress-token_pr",
+      "scenario": {
+        "scenario_id": "token_pressure_extreme",
+        "scenario_name": "Extreme Token Pressure",
+        "description": "Aggressive token constraints under noisy memory",
+        "num_turns": 300,
+        "num_memories": 70,
+        "memory_noise_level": 0.3,
+        "recursive_compression_cycles": 4,
+        "provider_switching_frequency": 25,
+        "memory_growth_factor": 1.08,
+        "token_budget": 1200,
+        "token_pressure_level": 0.45,
+        "query_complexity": "very_complex",
+        "query_diversity": 0.85
+      },
+      "timestamp": "2026-05-12T05:19:10.948083",
+      "total_turns": 300,
+      "successful_turns": 300,
+      "failed_turns": 0,
+      "success_rate": 1.0,
+      "avg_quality_score": 0.7188346883468836,
+      "min_quality_score": 0.6719512195121952,
+      "quality_degradation_rate": 0.06925675675675681,
+      "avg_semantic_retention": 1.0,
+      "semantic_retention_degradation": 0.0,
+      "avg_token_efficiency": 0.0,
+      "max_tokens_used": 123,
+      "crashes_detected": 0,
+      "provider_failures": {},
+      "failure_patterns": [],
+      "avg_latency_ms": 1.256550947825114,
+      "p95_latency_ms": 1.3740062713623047,
+      "p99_latency_ms": 1.4958381652832031,
+      "recovery_rate": 0.0,
+      "stability_score": 89.48733794770381,
+      "stress_level_tolerated": "high"
+    }
+  ],
+  "stress_report": {
+    "total_runs": 2,
+    "total_turns_executed": 1300,
+    "overall_success_rate": 1.0,
+    "avg_stability_score": 90.15305921775433,
+    "stress_runs": [
+      {
+        "run_id": "stress-long1000",
+        "scenario": {
+          "scenario_id": "long1000",
+          "scenario_name": "Long Horizon 1000 Turn",
+          "description": "1000-turn recursive validation workload",
+          "num_turns": 1000,
+          "num_memories": 35,
+          "memory_noise_level": 0.15,
+          "recursive_compression_cycles": 5,
+          "provider_switching_frequency": 40,
+          "memory_growth_factor": 1.05,
+          "token_budget": 2500,
+          "token_pressure_level": 0.7,
+          "query_complexity": "complex",
+          "query_diversity": 0.8
+        },
+        "timestamp": "2026-05-12T05:19:09.638927",
+        "total_turns": 1000,
+        "successful_turns": 1000,
+        "failed_turns": 0,
+        "success_rate": 1.0,
+        "avg_quality_score": 0.6939593495934959,
+        "min_quality_score": 0.6469512195121951,
+        "quality_degradation_rate": 0.0,
+        "avg_semantic_retention": 1.0,
+        "semantic_retention_degradation": 0.0,
+        "avg_token_efficiency": 0.0,
+        "max_tokens_used": 123,
+        "crashes_detected": 0,
+        "provider_failures": {},
+        "failure_patterns": [],
+        "avg_latency_ms": 0.6342840194702148,
+        "p95_latency_ms": 0.7030963897705078,
+        "p99_latency_ms": 0.7832050323486328,
+        "recovery_rate": 0.0,
+        "stability_score": 90.81878048780487,
+        "stress_level_tolerated": "high"
+      },
+      {
+        "run_id": "stress-token_pr",
+        "scenario": {
+          "scenario_id": "token_pressure_extreme",
+          "scenario_name": "Extreme Token Pressure",
+          "description": "Aggressive token constraints under noisy memory",
+          "num_turns": 300,
+          "num_memories": 70,
+          "memory_noise_level": 0.3,
+          "recursive_compression_cycles": 4,
+          "provider_switching_frequency": 25,
+          "memory_growth_factor": 1.08,
+          "token_budget": 1200,
+          "token_pressure_level": 0.45,
+          "query_complexity": "very_complex",
+          "query_diversity": 0.85
+        },
+        "timestamp": "2026-05-12T05:19:10.948083",
+        "total_turns": 300,
+        "successful_turns": 300,
+        "failed_turns": 0,
+        "success_rate": 1.0,
+        "avg_quality_score": 0.7188346883468836,
+        "min_quality_score": 0.6719512195121952,
+        "quality_degradation_rate": 0.06925675675675681,
+        "avg_semantic_retention": 1.0,
+        "semantic_retention_degradation": 0.0,
+        "avg_token_efficiency": 0.0,
+        "max_tokens_used": 123,
+        "crashes_detected": 0,
+        "provider_failures": {},
+        "failure_patterns": [],
+        "avg_latency_ms": 1.256550947825114,
+        "p95_latency_ms": 1.3740062713623047,
+        "p99_latency_ms": 1.4958381652832031,
+        "recovery_rate": 0.0,
+        "stability_score": 89.48733794770381,
+        "stress_level_tolerated": "high"
+      }
+    ]
+  },
+  "workspace_runs": [
+    {
+      "run_id": "ws-exec-ws-research-",
+      "workspace": {
+        "workspace_id": "ws-research-d7c85d49",
+        "workspace_type": "research",
+        "description": "Research project workspace with literature review and analysis",
+        "duration_hours": 24,
+        "num_queries": 250,
+        "base_memory_count": 400,
+        "memory_growth_rate": 0.15,
+        "query_pattern_distribution": {
+          "deep_analysis": 0.4,
+          "synthesis": 0.3,
+          "reference_lookup": 0.2,
+          "rapid_exploration": 0.1,
+          "debugging": 0.0
+        },
+        "domain_distribution": {
+          "literature": 0.4,
+          "hypothesis": 0.3,
+          "methodology": 0.2,
+          "data": 0.1
+        }
+      },
+      "timestamp": "2026-05-12T05:19:13.395382",
+      "total_queries": 250,
+      "successful_queries": 233,
+      "success_rate": 0.932,
+      "avg_query_quality": 0.8507261802575107,
+      "avg_memory_relevance": 0.813351787575894,
+      "query_pattern_success_rates": {
+        "deep_analysis": 0.850744827586207,
+        "rapid_exploration": 0.8434857142857143,
+        "reference_lookup": 0.8510800000000001,
+        "synthesis": 0.8534235294117647
+      },
+      "domain_specific_degradation": {
+        "literature": 0.20227772891871354,
+        "hypothesis": 0.21360726765274013,
+        "methodology": 0.18526482327423394,
+        "data": 0.2351181523422627
+      },
+      "workspace_stability_score": 93.2,
+      "cognitive_continuity_score": 85.07261802575107,
+      "sustained_productivity_score": 81.3351787575894
+    },
+    {
+      "run_id": "ws-exec-ws-eng-cccb1",
+      "workspace": {
+        "workspace_id": "ws-eng-cccb10ea",
+        "workspace_type": "software_engineering",
+        "description": "Software engineering workspace with code exploration and debugging",
+        "duration_hours": 24,
+        "num_queries": 250,
+        "base_memory_count": 600,
+        "memory_growth_rate": 0.2,
+        "query_pattern_distribution": {
+          "rapid_exploration": 0.4,
+          "debugging": 0.3,
+          "reference_lookup": 0.2,
+          "synthesis": 0.1,
+          "deep_analysis": 0.0
+        },
+        "domain_distribution": {
+          "code": 0.5,
+          "architecture": 0.2,
+          "dependencies": 0.15,
+          "tests": 0.1,
+          "deployment": 0.05
+        }
+      },
+      "timestamp": "2026-05-12T05:19:13.400174",
+      "total_queries": 250,
+      "successful_queries": 237,
+      "success_rate": 0.948,
+      "avg_query_quality": 0.8526227848101265,
+      "avg_memory_relevance": 0.7915539300971148,
+      "query_pattern_success_rates": {
+        "rapid_exploration": 0.8487381443298969,
+        "reference_lookup": 0.8485230769230768,
+        "synthesis": 0.8380413793103448,
+        "debugging": 0.8697898305084746
+      },
+      "domain_specific_degradation": {
+        "code": 0.08063716878070293,
+        "architecture": 0.23819592132264228,
+        "dependencies": 0.2344598153696245,
+        "tests": 0.08261023969503115,
+        "deployment": 0.12306083467467317
+      },
+      "workspace_stability_score": 94.8,
+      "cognitive_continuity_score": 85.26227848101266,
+      "sustained_productivity_score": 79.15539300971149
+    },
+    {
+      "run_id": "ws-exec-ws-startup-c",
+      "workspace": {
+        "workspace_id": "ws-startup-c95eb64f",
+        "workspace_type": "startup_planning",
+        "description": "Startup planning workspace with market research and strategy",
+        "duration_hours": 48,
+        "num_queries": 250,
+        "base_memory_count": 700,
+        "memory_growth_rate": 0.12,
+        "query_pattern_distribution": {
+          "synthesis": 0.35,
+          "deep_analysis": 0.3,
+          "reference_lookup": 0.2,
+          "rapid_exploration": 0.15,
+          "debugging": 0.0
+        },
+        "domain_distribution": {
+          "market": 0.25,
+          "business_model": 0.25,
+          "technology": 0.2,
+          "funding": 0.15,
+          "pitch": 0.15
+        }
+      },
+      "timestamp": "2026-05-12T05:19:13.402003",
+      "total_queries": 250,
+      "successful_queries": 238,
+      "success_rate": 0.952,
+      "avg_query_quality": 0.8500050420168067,
+      "avg_memory_relevance": 0.7874448748731917,
+      "query_pattern_success_rates": {
+        "deep_analysis": 0.8484281690140845,
+        "rapid_exploration": 0.824683870967742,
+        "reference_lookup": 0.8547733333333333,
+        "synthesis": 0.8575032967032966
+      },
+      "domain_specific_degradation": {
+        "market": 0.20407486738531672,
+        "business_model": 0.1439041571075246,
+        "technology": 0.07512570948504652,
+        "funding": 0.20844860716200048,
+        "pitch": 0.19983726244660693
+      },
+      "workspace_stability_score": 95.19999999999999,
+      "cognitive_continuity_score": 85.00050420168067,
+      "sustained_productivity_score": 78.74448748731918
+    },
+    {
+      "run_id": "ws-exec-ws-doc-189bd",
+      "workspace": {
+        "workspace_id": "ws-doc-189bdf9c",
+        "workspace_type": "document_heavy",
+        "description": "Document-heavy workspace with large knowledge bases",
+        "duration_hours": 72,
+        "num_queries": 250,
+        "base_memory_count": 1200,
+        "memory_growth_rate": 0.25,
+        "query_pattern_distribution": {
+          "reference_lookup": 0.4,
+          "rapid_exploration": 0.3,
+          "synthesis": 0.2,
+          "deep_analysis": 0.1,
+          "debugging": 0.0
+        },
+        "domain_distribution": {
+          "documents": 0.4,
+          "references": 0.3,
+          "summaries": 0.2,
+          "indexes": 0.1
+        }
+      },
+      "timestamp": "2026-05-12T05:19:13.407890",
+      "total_queries": 250,
+      "successful_queries": 234,
+      "success_rate": 0.936,
+      "avg_query_quality": 0.8482153846153847,
+      "avg_memory_relevance": 0.7989258010295389,
+      "query_pattern_success_rates": {
+        "deep_analysis": 0.8263555555555555,
+        "rapid_exploration": 0.8428196721311475,
+        "reference_lookup": 0.8580941176470588,
+        "synthesis": 0.8462090909090908
+      },
+      "domain_specific_degradation": {
+        "documents": 0.11980868308678264,
+        "references": 0.23453632787769346,
+        "summaries": 0.13929643405637415,
+        "indexes": 0.10303926831116486
+      },
+      "workspace_stability_score": 93.60000000000001,
+      "cognitive_continuity_score": 84.82153846153847,
+      "sustained_productivity_score": 79.89258010295389
+    }
+  ],
+  "workspace_statistics": {
+    "total_simulations": 4,
+    "total_queries": 1000,
+    "total_successful": 942,
+    "overall_success_rate": 0.942,
+    "avg_workspace_stability": 94.2,
+    "avg_cognitive_continuity": 85.03923479249572,
+    "avg_sustained_productivity": 79.78190983939349
+  }
+}

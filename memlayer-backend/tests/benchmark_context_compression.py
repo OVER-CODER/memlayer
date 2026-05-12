@@ -14,7 +14,7 @@ import time
 import json
 from typing import List, Dict, Tuple
 from dataclasses import dataclass, asdict
-from datetime import datetime
+from datetime import datetime, timezone
 from unittest.mock import Mock
 import sys
 import os
@@ -83,7 +83,7 @@ class CompressionBenchmark:
         logger.info("Starting compression benchmarks...")
 
         results = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "benchmarks": {
                 "mode_comparison": self.benchmark_mode_comparison(),
                 "provider_comparison": self.benchmark_provider_comparison(),
@@ -132,7 +132,7 @@ class CompressionBenchmark:
 
             result = CompressionBenchmarkResult(
                 benchmark_name=f"mode_{mode.value}",
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(timezone.utc),
                 content_length=len(content),
                 original_tokens=compressed.original_tokens,
                 compression_mode=mode.value,
@@ -173,7 +173,7 @@ class CompressionBenchmark:
 
             result = CompressionBenchmarkResult(
                 benchmark_name=f"provider_{provider.value}",
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(timezone.utc),
                 content_length=len(content),
                 original_tokens=compressed.original_tokens,
                 compression_mode=CompressionMode.COMPRESSED.value,
@@ -225,7 +225,7 @@ class CompressionBenchmark:
 
             result = CompressionBenchmarkResult(
                 benchmark_name=f"budget_{budget}",
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(timezone.utc),
                 content_length=len(content),
                 original_tokens=original_tokens,
                 compression_mode=CompressionMode.MINIMAL.value,
@@ -282,7 +282,7 @@ class CompressionBenchmark:
 
             result = CompressionBenchmarkResult(
                 benchmark_name=f"content_{content_type}",
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(timezone.utc),
                 content_length=len(content),
                 original_tokens=compressed.original_tokens,
                 compression_mode=CompressionMode.COMPRESSED.value,
@@ -331,7 +331,7 @@ class CompressionBenchmark:
 
             result = CompressionBenchmarkResult(
                 benchmark_name=f"size_{size_name}",
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(timezone.utc),
                 content_length=len(content),
                 original_tokens=original_tokens,
                 compression_mode=CompressionMode.COMPRESSED.value,
@@ -356,7 +356,7 @@ class CompressionBenchmark:
     def export_results(self, filepath: str) -> None:
         """Export benchmark results to JSON."""
         export_data = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "total_benchmarks": len(self.results),
             "results": [r.to_dict() for r in self.results],
             "summary": self._generate_summary(),

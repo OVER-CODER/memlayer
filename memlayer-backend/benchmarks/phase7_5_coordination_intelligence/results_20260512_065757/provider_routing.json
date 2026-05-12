@@ -1,0 +1,602 @@
+[
+  {
+    "cycle": 0,
+    "agent_type": "research",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.85,
+      "openai": 0.8,
+      "gemini": 0.75
+    }
+  },
+  {
+    "cycle": 0,
+    "agent_type": "drafter",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.85,
+      "openai": 0.8,
+      "gemini": 0.75
+    }
+  },
+  {
+    "cycle": 0,
+    "agent_type": "tool_agent",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.85,
+      "openai": 0.8,
+      "gemini": 0.75
+    }
+  },
+  {
+    "cycle": 0,
+    "agent_type": "critic",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.85,
+      "openai": 0.8,
+      "gemini": 0.75
+    }
+  },
+  {
+    "cycle": 1,
+    "agent_type": "research",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.865,
+      "openai": 0.81,
+      "gemini": 0.765
+    }
+  },
+  {
+    "cycle": 1,
+    "agent_type": "drafter",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.865,
+      "openai": 0.81,
+      "gemini": 0.765
+    }
+  },
+  {
+    "cycle": 1,
+    "agent_type": "tool_agent",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.865,
+      "openai": 0.81,
+      "gemini": 0.765
+    }
+  },
+  {
+    "cycle": 1,
+    "agent_type": "critic",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.865,
+      "openai": 0.81,
+      "gemini": 0.765
+    }
+  },
+  {
+    "cycle": 2,
+    "agent_type": "research",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.88,
+      "openai": 0.8033333333333333,
+      "gemini": 0.7833333333333333
+    }
+  },
+  {
+    "cycle": 2,
+    "agent_type": "drafter",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.88,
+      "openai": 0.8033333333333333,
+      "gemini": 0.7833333333333333
+    }
+  },
+  {
+    "cycle": 2,
+    "agent_type": "tool_agent",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.88,
+      "openai": 0.8033333333333333,
+      "gemini": 0.7833333333333333
+    }
+  },
+  {
+    "cycle": 2,
+    "agent_type": "critic",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.88,
+      "openai": 0.8033333333333333,
+      "gemini": 0.7833333333333333
+    }
+  },
+  {
+    "cycle": 3,
+    "agent_type": "research",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8775,
+      "openai": 0.805,
+      "gemini": 0.8
+    }
+  },
+  {
+    "cycle": 3,
+    "agent_type": "drafter",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8775,
+      "openai": 0.805,
+      "gemini": 0.8
+    }
+  },
+  {
+    "cycle": 3,
+    "agent_type": "tool_agent",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8775,
+      "openai": 0.805,
+      "gemini": 0.8
+    }
+  },
+  {
+    "cycle": 3,
+    "agent_type": "critic",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8775,
+      "openai": 0.805,
+      "gemini": 0.8
+    }
+  },
+  {
+    "cycle": 4,
+    "agent_type": "research",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8880000000000001,
+      "openai": 0.8099999999999999,
+      "gemini": 0.8160000000000001
+    }
+  },
+  {
+    "cycle": 4,
+    "agent_type": "drafter",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8880000000000001,
+      "openai": 0.8099999999999999,
+      "gemini": 0.8160000000000001
+    }
+  },
+  {
+    "cycle": 4,
+    "agent_type": "tool_agent",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8880000000000001,
+      "openai": 0.8099999999999999,
+      "gemini": 0.8160000000000001
+    }
+  },
+  {
+    "cycle": 4,
+    "agent_type": "critic",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8880000000000001,
+      "openai": 0.8099999999999999,
+      "gemini": 0.8160000000000001
+    }
+  },
+  {
+    "cycle": 5,
+    "agent_type": "research",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8816666666666667,
+      "openai": 0.8083333333333332,
+      "gemini": 0.805
+    }
+  },
+  {
+    "cycle": 5,
+    "agent_type": "drafter",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8816666666666667,
+      "openai": 0.8083333333333332,
+      "gemini": 0.805
+    }
+  },
+  {
+    "cycle": 5,
+    "agent_type": "tool_agent",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8816666666666667,
+      "openai": 0.8083333333333332,
+      "gemini": 0.805
+    }
+  },
+  {
+    "cycle": 5,
+    "agent_type": "critic",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8816666666666667,
+      "openai": 0.8083333333333332,
+      "gemini": 0.805
+    }
+  },
+  {
+    "cycle": 6,
+    "agent_type": "research",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8814285714285715,
+      "openai": 0.8099999999999999,
+      "gemini": 0.8014285714285715
+    }
+  },
+  {
+    "cycle": 6,
+    "agent_type": "drafter",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8814285714285715,
+      "openai": 0.8099999999999999,
+      "gemini": 0.8014285714285715
+    }
+  },
+  {
+    "cycle": 6,
+    "agent_type": "tool_agent",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8814285714285715,
+      "openai": 0.8099999999999999,
+      "gemini": 0.8014285714285715
+    }
+  },
+  {
+    "cycle": 6,
+    "agent_type": "critic",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8814285714285715,
+      "openai": 0.8099999999999999,
+      "gemini": 0.8014285714285715
+    }
+  },
+  {
+    "cycle": 7,
+    "agent_type": "research",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.885,
+      "openai": 0.8075,
+      "gemini": 0.80375
+    }
+  },
+  {
+    "cycle": 7,
+    "agent_type": "drafter",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.885,
+      "openai": 0.8075,
+      "gemini": 0.80375
+    }
+  },
+  {
+    "cycle": 7,
+    "agent_type": "tool_agent",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.885,
+      "openai": 0.8075,
+      "gemini": 0.80375
+    }
+  },
+  {
+    "cycle": 7,
+    "agent_type": "critic",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.885,
+      "openai": 0.8075,
+      "gemini": 0.80375
+    }
+  },
+  {
+    "cycle": 8,
+    "agent_type": "research",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8833333333333333,
+      "openai": 0.8077777777777778,
+      "gemini": 0.8088888888888889
+    }
+  },
+  {
+    "cycle": 8,
+    "agent_type": "drafter",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8833333333333333,
+      "openai": 0.8077777777777778,
+      "gemini": 0.8088888888888889
+    }
+  },
+  {
+    "cycle": 8,
+    "agent_type": "tool_agent",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8833333333333333,
+      "openai": 0.8077777777777778,
+      "gemini": 0.8088888888888889
+    }
+  },
+  {
+    "cycle": 8,
+    "agent_type": "critic",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8833333333333333,
+      "openai": 0.8077777777777778,
+      "gemini": 0.8088888888888889
+    }
+  },
+  {
+    "cycle": 9,
+    "agent_type": "research",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8880000000000001,
+      "openai": 0.8099999999999999,
+      "gemini": 0.8160000000000001
+    }
+  },
+  {
+    "cycle": 9,
+    "agent_type": "drafter",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8880000000000001,
+      "openai": 0.8099999999999999,
+      "gemini": 0.8160000000000001
+    }
+  },
+  {
+    "cycle": 9,
+    "agent_type": "tool_agent",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8880000000000001,
+      "openai": 0.8099999999999999,
+      "gemini": 0.8160000000000001
+    }
+  },
+  {
+    "cycle": 9,
+    "agent_type": "critic",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8880000000000001,
+      "openai": 0.8099999999999999,
+      "gemini": 0.8160000000000001
+    }
+  },
+  {
+    "cycle": 10,
+    "agent_type": "research",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8845454545454546,
+      "openai": 0.8090909090909091,
+      "gemini": 0.81
+    }
+  },
+  {
+    "cycle": 10,
+    "agent_type": "drafter",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8845454545454546,
+      "openai": 0.8090909090909091,
+      "gemini": 0.81
+    }
+  },
+  {
+    "cycle": 10,
+    "agent_type": "tool_agent",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8845454545454546,
+      "openai": 0.8090909090909091,
+      "gemini": 0.81
+    }
+  },
+  {
+    "cycle": 10,
+    "agent_type": "critic",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8845454545454546,
+      "openai": 0.8090909090909091,
+      "gemini": 0.81
+    }
+  },
+  {
+    "cycle": 11,
+    "agent_type": "research",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8841666666666667,
+      "openai": 0.81,
+      "gemini": 0.8075
+    }
+  },
+  {
+    "cycle": 11,
+    "agent_type": "drafter",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8841666666666667,
+      "openai": 0.81,
+      "gemini": 0.8075
+    }
+  },
+  {
+    "cycle": 11,
+    "agent_type": "tool_agent",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8841666666666667,
+      "openai": 0.81,
+      "gemini": 0.8075
+    }
+  },
+  {
+    "cycle": 11,
+    "agent_type": "critic",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8841666666666667,
+      "openai": 0.81,
+      "gemini": 0.8075
+    }
+  },
+  {
+    "cycle": 12,
+    "agent_type": "research",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8861538461538461,
+      "openai": 0.8084615384615385,
+      "gemini": 0.8084615384615385
+    }
+  },
+  {
+    "cycle": 12,
+    "agent_type": "drafter",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8861538461538461,
+      "openai": 0.8084615384615385,
+      "gemini": 0.8084615384615385
+    }
+  },
+  {
+    "cycle": 12,
+    "agent_type": "tool_agent",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8861538461538461,
+      "openai": 0.8084615384615385,
+      "gemini": 0.8084615384615385
+    }
+  },
+  {
+    "cycle": 12,
+    "agent_type": "critic",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.8861538461538461,
+      "openai": 0.8084615384615385,
+      "gemini": 0.8084615384615385
+    }
+  },
+  {
+    "cycle": 13,
+    "agent_type": "research",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.885,
+      "openai": 0.8085714285714286,
+      "gemini": 0.8114285714285714
+    }
+  },
+  {
+    "cycle": 13,
+    "agent_type": "drafter",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.885,
+      "openai": 0.8085714285714286,
+      "gemini": 0.8114285714285714
+    }
+  },
+  {
+    "cycle": 13,
+    "agent_type": "tool_agent",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.885,
+      "openai": 0.8085714285714286,
+      "gemini": 0.8114285714285714
+    }
+  },
+  {
+    "cycle": 13,
+    "agent_type": "critic",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.885,
+      "openai": 0.8085714285714286,
+      "gemini": 0.8114285714285714
+    }
+  },
+  {
+    "cycle": 14,
+    "agent_type": "research",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.888,
+      "openai": 0.81,
+      "gemini": 0.8160000000000001
+    }
+  },
+  {
+    "cycle": 14,
+    "agent_type": "drafter",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.888,
+      "openai": 0.81,
+      "gemini": 0.8160000000000001
+    }
+  },
+  {
+    "cycle": 14,
+    "agent_type": "tool_agent",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.888,
+      "openai": 0.81,
+      "gemini": 0.8160000000000001
+    }
+  },
+  {
+    "cycle": 14,
+    "agent_type": "critic",
+    "selected_provider": "claude",
+    "scores": {
+      "claude": 0.888,
+      "openai": 0.81,
+      "gemini": 0.8160000000000001
+    }
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "benchmark_run_at": "2026-05-12T06:46:11.528149+00:00",
+  "providers": [
+    "claude",
+    "openai",
+    "gemini"
+  ],
+  "avg_context_reuse_ratio": 1.0,
+  "avg_token_savings_ratio": 0.35454545454545455,
+  "all_deterministic": true,
+  "avg_delegation_continuity": 0.3333333333333333,
+  "projection_reuse_ratio": 0.0
+}

@@ -11,7 +11,7 @@ from app.db.models import WorkspaceSummary, Memory, Message, Chat, Workspace
 from app.services.embedding import get_embedding_service
 from app.services.llm import get_llm_service
 from app.services.providers import GenerationConfig
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional, List, Dict
 import logging
 
@@ -74,7 +74,7 @@ class WorkspaceSummaryService:
             return self._create_initial_summary(workspace_id)
 
         # Check if update is needed
-        time_since_last_update = datetime.utcnow() - summary_record.updated_at
+        time_since_last_update = datetime.now(timezone.utc) - summary_record.updated_at
         recent_messages = self._count_recent_messages(
             workspace_id,
             since=summary_record.updated_at,
@@ -175,7 +175,7 @@ class WorkspaceSummaryService:
         current_summary.key_topics = key_topics
         current_summary.generated_from_message_count = recent_messages_count
         current_summary.last_summary_trigger_reason = "periodic_update"
-        current_summary.updated_at = datetime.utcnow()
+        current_summary.updated_at = datetime.now(timezone.utc)
 
         self.db.commit()
         self.db.refresh(current_summary)

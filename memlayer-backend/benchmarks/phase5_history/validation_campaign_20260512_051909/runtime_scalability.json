@@ -1,0 +1,72 @@
+{
+  "scalability_measurements": [
+    {
+      "memory_size": 10,
+      "avg_latency_ms": 0.25839805603027344,
+      "max_latency_ms": 0.2949237823486328,
+      "avg_token_efficiency": 0.051,
+      "avg_semantic_retention": 0.4741262530479545
+    },
+    {
+      "memory_size": 25,
+      "avg_latency_ms": 0.5291938781738281,
+      "max_latency_ms": 0.55694580078125,
+      "avg_token_efficiency": 0.051,
+      "avg_semantic_retention": 1.0
+    },
+    {
+      "memory_size": 50,
+      "avg_latency_ms": 0.9766101837158203,
+      "max_latency_ms": 1.0001659393310547,
+      "avg_token_efficiency": 0.051,
+      "avg_semantic_retention": 1.0
+    },
+    {
+      "memory_size": 100,
+      "avg_latency_ms": 1.9775867462158203,
+      "max_latency_ms": 2.0117759704589844,
+      "avg_token_efficiency": 0.051,
+      "avg_semantic_retention": 1.0
+    },
+    {
+      "memory_size": 200,
+      "avg_latency_ms": 4.11376953125,
+      "max_latency_ms": 4.135847091674805,
+      "avg_token_efficiency": 0.051,
+      "avg_semantic_retention": 1.0
+    },
+    {
+      "memory_size": 400,
+      "avg_latency_ms": 8.896160125732422,
+      "max_latency_ms": 8.948087692260742,
+      "avg_token_efficiency": 0.051,
+      "avg_semantic_retention": 1.0
+    }
+  ],
+  "latency_growth_curve": [
+    {
+      "memory_size": 10,
+      "avg_latency_ms": 0.25839805603027344
+    },
+    {
+      "memory_size": 25,
+      "avg_latency_ms": 0.5291938781738281
+    },
+    {
+      "memory_size": 50,
+      "avg_latency_ms": 0.9766101837158203
+    },
+    {
+      "memory_size": 100,
+      "avg_latency_ms": 1.9775867462158203
+    },
+    {
+      "memory_size": 200,
+      "avg_latency_ms": 4.11376953125
+    },
+    {
+      "memory_size": 400,
+      "avg_latency_ms": 8.896160125732422
+    }
+  ]
+}

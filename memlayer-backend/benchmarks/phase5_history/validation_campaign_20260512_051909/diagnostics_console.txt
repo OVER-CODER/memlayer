@@ -1,0 +1,30 @@
+========================================================================================
+MEMLAYER RUNTIME DIAGNOSTICS CONSOLE
+========================================================================================
+Snapshot: diag-20260512_051909
+Generated: 2026-05-12T05:19:25.299507
+
+[Runtime Overview]
+Executions: 1378
+Success Rate: 100.00%
+Avg Quality: 0.693
+Avg Semantic Retention: 0.998
+Avg Token Efficiency: 0.104
+Avg Duration (ms): 0.83
+
+[Replay & Regression]
+Stored Traces: 1378
+Replay Success Rate: 100.00%
+Average Fidelity: 100.00
+Regressions Detected: 0
+
+[Failure Propagation]
+Total Failures: 5
+Critical+ Errors: 2
+Most Frequent Failure: semantic_collapse
+
+[Cognition Stability]
+Stability Score: 74.25
+Stability Class: monitor
+Failure Pressure: 0.004
+========================================================================================

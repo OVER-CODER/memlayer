@@ -13,7 +13,7 @@ import numpy as np
 from typing import List, Dict, Tuple
 from dataclasses import dataclass, asdict
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from unittest.mock import Mock
 import sys
 import os
@@ -68,7 +68,7 @@ class ChunkingBenchmark:
         logger.info("Starting chunking benchmarks...")
 
         results = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "benchmarks": {
                 "small_dataset": self.benchmark_small_dataset(),
                 "medium_dataset": self.benchmark_medium_dataset(),
@@ -91,7 +91,7 @@ class ChunkingBenchmark:
         mem.id = memory_id
         mem.raw_content = content
         mem.importance_score = importance
-        mem.timestamp = datetime.utcnow()
+        mem.timestamp = datetime.now(timezone.utc)
         if embedding is None:
             mem.embedding = (
                 np.random.rand(384) / np.linalg.norm(np.random.rand(384))
@@ -130,7 +130,7 @@ class ChunkingBenchmark:
 
         result = ChunkingBenchmarkResult(
             benchmark_name="small_dataset",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             num_memories=len(memories),
             chunk_type=ChunkType.TOPICAL.value,
             processing_time_ms=elapsed,
@@ -174,7 +174,7 @@ class ChunkingBenchmark:
 
         result = ChunkingBenchmarkResult(
             benchmark_name="medium_dataset",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             num_memories=len(memories),
             chunk_type=ChunkType.TOPICAL.value,
             processing_time_ms=elapsed,
@@ -218,7 +218,7 @@ class ChunkingBenchmark:
 
         result = ChunkingBenchmarkResult(
             benchmark_name="large_dataset",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             num_memories=len(memories),
             chunk_type=ChunkType.TOPICAL.value,
             processing_time_ms=elapsed,
@@ -267,7 +267,7 @@ class ChunkingBenchmark:
     def export_results(self, filepath: str) -> None:
         """Export benchmark results to JSON file."""
         export_data = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "total_benchmarks": len(self.results),
             "results": [r.to_dict() for r in self.results],
             "summary": self._generate_summary(),

@@ -4,7 +4,7 @@ Main FastAPI application entry point.
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api import workspaces, chats, memories
+from app.api import workspaces, chats, memories, console
 from app.db.session import init_db
 from app.core.config import settings
 
@@ -31,6 +31,7 @@ app.add_middleware(
 app.include_router(workspaces.router)
 app.include_router(chats.router)
 app.include_router(memories.router)
+app.include_router(console.router)
 
 
 @app.get("/health")

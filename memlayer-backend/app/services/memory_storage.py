@@ -9,7 +9,7 @@ from app.services.embedding import get_embedding_service
 from app.schemas.memory import MemoryCreate, MemoryResponse
 from typing import List, Optional
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 class MemoryStorageService:
@@ -61,7 +61,7 @@ class MemoryStorageService:
             embedding=embedding,
             importance_score=importance_score,
             metadata=metadata or {},
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             generated_from_message_id=generated_from_message_id,
             generated_by_provider=generated_by_provider,
             source_memory_ids=source_memory_ids or [],

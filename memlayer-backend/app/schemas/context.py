@@ -5,9 +5,9 @@ Defines the layered context structure that providers receive,
 including chat history, semantic memories, workspace summary, and metadata.
 """
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from typing import List, Optional, Dict, Any
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 
 
@@ -109,8 +109,7 @@ class ContextLayers(BaseModel):
         None, description="Raw compiled prompt (set by compilation service)"
     )
 
-    class Config:
-        use_enum_values = True
+    model_config = ConfigDict(use_enum_values=True)
 
 
 class ContextDebugInfo(BaseModel):
@@ -126,5 +125,4 @@ class ContextDebugInfo(BaseModel):
     tokens_used: int = Field(0, description="Actual tokens used by generation")
     latency_ms: float = Field(0.0, description="Generation latency")
 
-    class Config:
-        use_enum_values = True
+    model_config = ConfigDict(use_enum_values=True)
