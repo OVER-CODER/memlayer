@@ -8,7 +8,7 @@ provider-specific intelligence for optimization.
 
 from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass, field, asdict
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from collections import defaultdict
 from enum import Enum
 import logging
@@ -257,7 +257,7 @@ class ProviderBenchmarkingService:
         result = ProviderBenchmarkResult(
             benchmark_id=benchmark_id,
             provider=provider,
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             compression_mode=compression_mode,
             query_complexity=query_complexity,
             token_budget=token_budget,
@@ -304,7 +304,7 @@ class ProviderBenchmarkingService:
             logger.warning(f"No benchmarks found for comparison {comparison_id}")
             return ProviderComparisonResult(
                 comparison_id=comparison_id,
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(timezone.utc),
                 providers=providers,
             )
 
@@ -339,7 +339,7 @@ class ProviderBenchmarkingService:
 
         result = ProviderComparisonResult(
             comparison_id=comparison_id,
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             providers=providers,
             compression_mode=compression_mode,
             query_complexity=query_complexity,
@@ -662,7 +662,7 @@ class ProviderBenchmarkingService:
     def export_benchmarks(self, output_file: str) -> str:
         """Export benchmarks to JSON file."""
         report = {
-            "exported_at": datetime.utcnow().isoformat(),
+            "exported_at": datetime.now(timezone.utc).isoformat(),
             "total_benchmarks": len(self.benchmarks),
             "benchmarks": [b.to_dict() for b in self.benchmarks[-1000:]],
             "comparisons": [c.to_dict() for c in self.comparisons[-100:]],

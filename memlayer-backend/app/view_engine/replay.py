@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, Any, Optional, List
 import hashlib
 import json
@@ -54,7 +54,7 @@ class ViewReplayEngine:
         replay_trace_id = f"view-replay-{compiled_view.view_id[:16]}"
         trace = ViewReplayTrace(
             replay_trace_id=replay_trace_id,
-            created_at=datetime.utcnow(),
+            created_at=datetime.now(timezone.utc),
             workspace_id=compiled_view.workspace_id,
             view_type=compiled_view.view_type,
             provider=compiled_view.provider,
@@ -168,7 +168,7 @@ class ViewReplayEngine:
 
     def export_replays(self, output_file: str) -> str:
         payload = {
-            "exported_at": datetime.utcnow().isoformat(),
+            "exported_at": datetime.now(timezone.utc).isoformat(),
             "total_replays": len(self.traces),
             "statistics": self.get_replay_statistics(),
             "traces": [trace.to_dict() for trace in self.traces],

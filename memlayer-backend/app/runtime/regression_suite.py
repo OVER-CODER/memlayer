@@ -9,7 +9,7 @@ Builds deterministic cross-version regression intelligence on top of:
 
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 import copy
 import hashlib
 import json
@@ -34,7 +34,7 @@ class VersionedTraceSet:
 
     version: str
     traces: List[Dict[str, Any]]
-    created_at: datetime = field(default_factory=datetime.utcnow)
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     checksum: str = ""
     metadata: Dict[str, Any] = field(default_factory=dict)
 
@@ -63,7 +63,7 @@ class RegressionReplayReport:
     report_id: str
     baseline_version: str
     comparison_version: str
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
     comparison: Optional[CrossVersionComparison] = None
     provider_analysis: List[ProviderVersionAnalysis] = field(default_factory=list)
@@ -229,7 +229,7 @@ class RegressionReplaySuite:
             raise ValueError(f"Report not found: {report_id}")
 
         payload = {
-            "exported_at": datetime.utcnow().isoformat(),
+            "exported_at": datetime.now(timezone.utc).isoformat(),
             "report": report.to_dict(),
         }
         with open(output_file, "w") as file_obj:
@@ -241,7 +241,7 @@ class RegressionReplaySuite:
     def export_suite_history(self, output_file: str) -> str:
         """Export all registered versions and reports to JSON."""
         payload = {
-            "exported_at": datetime.utcnow().isoformat(),
+            "exported_at": datetime.now(timezone.utc).isoformat(),
             "versions": {
                 version: trace_set.to_dict()
                 for version, trace_set in self.versioned_traces.items()

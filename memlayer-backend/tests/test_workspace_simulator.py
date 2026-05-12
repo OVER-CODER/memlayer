@@ -7,7 +7,7 @@ document-heavy workspaces.
 """
 
 import pytest
-from datetime import datetime
+from datetime import datetime, timezone
 from app.runtime import (
     WorkspaceSimulator,
     SimulatedWorkspace,

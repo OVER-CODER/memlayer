@@ -105,7 +105,7 @@ class TestContextLayers:
 
     def test_memory_layer_creation(self):
         """Test creating memory layers."""
-        from datetime import datetime
+        from datetime import datetime, timezone
 
         memory = MemoryLayer(
             id="test-id",
@@ -113,7 +113,7 @@ class TestContextLayers:
             source_type="user_message",
             importance_score=0.8,
             similarity_score=0.9,
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             metadata={"key": "value"},
         )
 

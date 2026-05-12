@@ -7,7 +7,7 @@ efficiency metrics, and generates historical analysis.
 
 from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass, field, asdict
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from collections import defaultdict
 import logging
 import json
@@ -47,7 +47,7 @@ class TokenAllocationMetrics:
 class TokenMetrics:
     """Complete token metrics for a compilation run."""
 
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     query: str = ""
     query_type: str = "unknown"
     provider: str = "generic"
@@ -281,7 +281,7 @@ class TokenAnalyticsService:
         bucket_size_minutes: int = 60,
     ) -> List[Tuple[str, float]]:
         """Get historical trend for a metric."""
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         cutoff_time = now - timedelta(hours=hours)
 
         recent = [m for m in self.metrics if m.timestamp >= cutoff_time]
@@ -336,7 +336,7 @@ class TokenAnalyticsService:
     def export_analytics(self, output_file: str) -> str:
         """Export analytics to JSON file."""
         report = {
-            "exported_at": datetime.utcnow().isoformat(),
+            "exported_at": datetime.now(timezone.utc).isoformat(),
             "metrics_count": len(self.metrics),
             "metrics": [m.to_dict() for m in self.metrics[-1000:]],  # Last 1000
             "analytics": self.get_analytics_report(),
@@ -368,7 +368,7 @@ class TokenAnalyticsService:
             filtered = [m for m in filtered if m.query_type == query_type]
 
         if time_window_hours:
-            cutoff_time = datetime.utcnow() - timedelta(hours=time_window_hours)
+            cutoff_time = datetime.now(timezone.utc) - timedelta(hours=time_window_hours)
             filtered = [m for m in filtered if m.timestamp >= cutoff_time]
 
         return filtered

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 import hashlib
 import json
@@ -54,7 +54,7 @@ class ViewCompilationMetrics:
     runtime_trace_id: str
     projection_checksum: str
     semantic_divergence_from_base: float
-    compiled_at: datetime = field(default_factory=datetime.utcnow)
+    compiled_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -253,7 +253,7 @@ class ViewEngineCompiler:
     def export_view_history(self, output_file: str) -> str:
         """Export view compilation history to JSON."""
         payload = {
-            "exported_at": datetime.utcnow().isoformat(),
+            "exported_at": datetime.now(timezone.utc).isoformat(),
             "total_views": len(self.compiled_views),
             "views": [view.to_dict() for view in self.compiled_views],
         }

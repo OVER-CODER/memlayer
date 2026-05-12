@@ -1,7 +1,7 @@
 """Tests for Phase 6 View Engine Compiler infrastructure."""
 
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 from unittest.mock import MagicMock, Mock
 import json
 
@@ -84,7 +84,7 @@ def make_memories(count: int = 24) -> list[FakeMemory]:
                 id=f"m-{idx:04d}",
                 raw_content=text,
                 importance_score=0.5 + ((idx % 5) * 0.1),
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(timezone.utc),
                 embedding=[(idx + j) / 100.0 for j in range(16)],
             )
         )

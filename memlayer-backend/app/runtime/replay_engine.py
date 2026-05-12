@@ -10,7 +10,7 @@ Enables deterministic replay of compilation traces, providing:
 
 from typing import List, Dict, Optional, Any
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 import logging
 import json
 import hashlib
@@ -113,7 +113,7 @@ class ReplayResult:
 
     replay_id: str
     original_trace_id: str
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
     # Replay execution
     replayed_successfully: bool = False
@@ -431,7 +431,7 @@ class RuntimeReplayEngine:
     def export_replay_data(self, output_file: str) -> str:
         """Export all replay data to JSON."""
         report = {
-            "exported_at": datetime.utcnow().isoformat(),
+            "exported_at": datetime.now(timezone.utc).isoformat(),
             "stored_traces": len(self.stored_traces),
             "replay_results": len(self.replay_results),
             "traces": [t.to_dict() for t in list(self.stored_traces.values())[-100:]],

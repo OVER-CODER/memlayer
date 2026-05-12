@@ -16,7 +16,7 @@ Each workspace type has its own:
 
 from typing import List, Dict, Optional, Any
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 import logging
 import random
@@ -51,7 +51,7 @@ class WorkspaceMemory:
     content: str
     domain: str  # research, code, design, notes, etc.
     importance: float  # 0-1, how important this memory is
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     access_count: int = 0  # How many times accessed
     last_accessed: Optional[datetime] = None
 
@@ -69,7 +69,7 @@ class WorkspaceMemory:
         """Calculate recency score based on last access."""
         if self.last_accessed is None:
             return 0.0
-        delta = (datetime.utcnow() - self.last_accessed).total_seconds()
+        delta = (datetime.now(timezone.utc) - self.last_accessed).total_seconds()
         # Decay over time: 1.0 if accessed now, 0.0 if older than a day
         days_since = delta / 86400  # seconds per day
         return max(0.0, 1.0 - (days_since / 1.0))
@@ -85,7 +85,7 @@ class WorkspaceQuery:
     domain: str  # Which domain this query is about
     complexity_level: str  # simple, moderate, complex, very_complex
     num_memories_needed: int  # Estimated memories needed
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 @dataclass
@@ -139,7 +139,7 @@ class WorkspaceExecutionResult:
 
     run_id: str
     workspace: SimulatedWorkspace
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
     # Execution metrics
     total_queries: int = 0

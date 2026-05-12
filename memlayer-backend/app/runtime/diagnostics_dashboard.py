@@ -7,7 +7,7 @@ runtime subsystems into dashboard-ready diagnostics snapshots.
 
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 import json
 import logging
 
@@ -37,7 +37,7 @@ class RuntimeDiagnosticsSnapshot:
     """Serializable diagnostics snapshot."""
 
     snapshot_id: str
-    generated_at: datetime = field(default_factory=datetime.utcnow)
+    generated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     runtime_overview: Dict[str, Any] = field(default_factory=dict)
     replay_diagnostics: Dict[str, Any] = field(default_factory=dict)
     token_evolution: Dict[str, Any] = field(default_factory=dict)
@@ -50,6 +50,7 @@ class RuntimeDiagnosticsSnapshot:
     stress_validation: Dict[str, Any] = field(default_factory=dict)
     cognition_stability: Dict[str, Any] = field(default_factory=dict)
     view_engine_diagnostics: Dict[str, Any] = field(default_factory=dict)
+    cross_layer_diagnostics: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary."""
@@ -68,6 +69,7 @@ class RuntimeDiagnosticsSnapshot:
             "stress_validation": self.stress_validation,
             "cognition_stability": self.cognition_stability,
             "view_engine_diagnostics": self.view_engine_diagnostics,
+            "cross_layer_diagnostics": self.cross_layer_diagnostics,
         }
 
 
@@ -89,6 +91,7 @@ class RuntimeDiagnosticsDashboard:
         evolution_tracker: Optional[RuntimeEvolutionTracker] = None,
         stress_harness: Optional[LongHorizonStressHarness] = None,
         view_diagnostics_dashboard: Optional[Any] = None,
+        cross_layer_framework: Optional[Any] = None,
     ):
         self.integrated_runtime = integrated_runtime
         self.trace_service = trace_service or get_trace_service()
@@ -101,6 +104,7 @@ class RuntimeDiagnosticsDashboard:
         self.evolution_tracker = evolution_tracker or get_evolution_tracker()
         self.stress_harness = stress_harness
         self.view_diagnostics_dashboard = view_diagnostics_dashboard
+        self.cross_layer_framework = cross_layer_framework
         self.snapshots: List[RuntimeDiagnosticsSnapshot] = []
 
     def capture_snapshot(
@@ -110,7 +114,7 @@ class RuntimeDiagnosticsDashboard:
         trend_hours: int = 24,
     ) -> RuntimeDiagnosticsSnapshot:
         """Capture current end-to-end runtime diagnostics state."""
-        resolved_snapshot_id = snapshot_id or f"diag-{datetime.utcnow().strftime('%Y%m%d%H%M%S')}"
+        resolved_snapshot_id = snapshot_id or f"diag-{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S')}"
         snapshot = RuntimeDiagnosticsSnapshot(snapshot_id=resolved_snapshot_id)
 
         snapshot.runtime_overview = self._build_runtime_overview()
@@ -131,6 +135,7 @@ class RuntimeDiagnosticsDashboard:
         snapshot.stress_validation = self._build_stress_validation()
         snapshot.cognition_stability = self._build_cognition_stability(snapshot)
         snapshot.view_engine_diagnostics = self._build_view_engine_diagnostics()
+        snapshot.cross_layer_diagnostics = self._build_cross_layer_diagnostics()
 
         self.snapshots.append(snapshot)
         return snapshot
@@ -180,6 +185,17 @@ class RuntimeDiagnosticsDashboard:
                 "View Avg Quality: "
                 f"{snapshot.view_engine_diagnostics.get('avg_view_quality', 0.0):.3f}"
             ),
+            "",
+            "[Cross-Layer]",
+            f"Latest Report: {snapshot.cross_layer_diagnostics.get('latest_report_id', 'none')}",
+            (
+                "Cross-Layer Determinism: "
+                f"{snapshot.cross_layer_diagnostics.get('determinism_rate', 0.0):.3f}"
+            ),
+            (
+                "Cross-Layer Semantic Preservation: "
+                f"{snapshot.cross_layer_diagnostics.get('semantic_preservation', 0.0):.3f}"
+            ),
             "=" * 88,
         ]
         return "\n".join(lines)
@@ -187,7 +203,7 @@ class RuntimeDiagnosticsDashboard:
     def export_snapshot(self, snapshot: RuntimeDiagnosticsSnapshot, output_file: str) -> str:
         """Export snapshot as JSON."""
         payload = {
-            "exported_at": datetime.utcnow().isoformat(),
+            "exported_at": datetime.now(timezone.utc).isoformat(),
             "snapshot": snapshot.to_dict(),
         }
         with open(output_file, "w") as file_obj:
@@ -328,6 +344,19 @@ class RuntimeDiagnosticsDashboard:
             "total_views_compiled": sum(total_views.values()) if isinstance(total_views, dict) else 0,
             "avg_view_quality": float(quality_summary.get("avg_quality", 0.0)),
         }
+
+    def _build_cross_layer_diagnostics(self) -> Dict[str, Any]:
+        """Attach optional Phase 6.5 cross-layer diagnostics."""
+        if self.cross_layer_framework is None:
+            return {"message": "Cross-layer framework not attached"}
+
+        if not hasattr(self.cross_layer_framework, "get_latest_summary"):
+            return {"message": "Cross-layer framework does not expose latest summary"}
+
+        summary = self.cross_layer_framework.get_latest_summary()
+        if isinstance(summary, dict):
+            return summary
+        return {"message": "Cross-layer summary unavailable"}
 
     def _build_cognition_stability(
         self, snapshot: RuntimeDiagnosticsSnapshot

@@ -2,7 +2,7 @@
 Additional tests for regression comparison extensions.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from app.runtime.regression_comparison import (
     CrossVersionComparator,
@@ -67,7 +67,7 @@ def test_history_export_and_load(tmp_path):
     tracker = RegressionHistoryTracker()
     event = RegressionEvent(
         event_id="evt-1",
-        timestamp=datetime.utcnow(),
+        timestamp=datetime.now(timezone.utc),
         baseline_trace_id="b1",
         comparison_trace_id="c1",
         baseline_version="v1",
@@ -81,7 +81,7 @@ def test_history_export_and_load(tmp_path):
     tracker.record_comparison(
         CrossVersionComparison(
             comparison_id="cmp-1",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             baseline_version="v1",
             comparison_version="v2",
             comparable_traces=1,

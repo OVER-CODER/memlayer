@@ -1,0 +1,14 @@
+================================================================================
+VIEW ENGINE DIAGNOSTICS
+================================================================================
+Snapshot: phase6-benchmark
+Generated: 2026-05-12T05:50:10.003814
+
+Views compiled: 51
+View distribution: {'research': 12, 'drafter': 12, 'tool_agent': 15, 'critic': 12}
+Provider distribution: {'claude': 19, 'openai': 16, 'gemini': 16}
+
+Quality summary: {'count': 51, 'avg_quality': 0.58176211190947, 'min_quality': 0.5474626865671642, 'max_quality': 0.6316391461941201}
+
+Replay summary: {'total_replays': 51, 'by_view': {'research': 12, 'drafter': 12, 'tool_agent': 15, 'critic': 12}, 'by_provider': {'claude': 19, 'openai': 16, 'gemini': 16}, 'determinism_comparisons': 2, 'determinism_mismatches': 0, 'determinism_rate': 1.0}
+================================================================================

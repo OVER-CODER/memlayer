@@ -7,7 +7,7 @@ multi-hour simulations with realistic workloads.
 
 import pytest
 from unittest.mock import Mock, MagicMock
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from app.runtime import (
     IntegratedRuntimeSystem,

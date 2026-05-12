@@ -6,7 +6,7 @@ detection, and performance improvement validation.
 """
 
 import pytest
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from app.runtime.regression_comparison import (
     RegressionDetector,
     CrossVersionComparator,
@@ -580,7 +580,7 @@ class TestRegressionHistoryTracker:
 
         event = RegressionEvent(
             event_id="evt_1",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             baseline_trace_id="b1",
             comparison_trace_id="c1",
             baseline_version="v1.0",
@@ -603,7 +603,7 @@ class TestRegressionHistoryTracker:
         for i in range(5):
             event = RegressionEvent(
                 event_id=f"evt_{i}",
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(timezone.utc),
                 baseline_trace_id=f"b{i}",
                 comparison_trace_id=f"c{i}",
                 baseline_version="v1.0",
@@ -629,7 +629,7 @@ class TestRegressionHistoryTracker:
         for i, provider in enumerate(providers):
             event = RegressionEvent(
                 event_id=f"evt_{i}",
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(timezone.utc),
                 baseline_trace_id=f"b{i}",
                 comparison_trace_id=f"c{i}",
                 baseline_version="v1.0",
@@ -661,7 +661,7 @@ class TestRegressionHistoryTracker:
         for i, severity in enumerate(severities):
             event = RegressionEvent(
                 event_id=f"evt_{i}",
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(timezone.utc),
                 baseline_trace_id=f"b{i}",
                 comparison_trace_id=f"c{i}",
                 baseline_version="v1.0",
@@ -759,7 +759,7 @@ class TestRegressionComparison:
         for i in range(len(versions) - 1):
             comparison = CrossVersionComparison(
                 comparison_id=f"cmp_{i}",
-                timestamp=datetime.utcnow() - timedelta(hours=len(versions) - i - 1),
+                timestamp=datetime.now(timezone.utc) - timedelta(hours=len(versions) - i - 1),
                 baseline_version=versions[i],
                 comparison_version=versions[i + 1],
                 baseline_traces=100,

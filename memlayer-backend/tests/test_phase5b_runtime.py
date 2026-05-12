@@ -5,7 +5,7 @@ Tests for integrated runtime, replay engine, and failure detection.
 """
 
 import pytest
-from datetime import datetime
+from datetime import datetime, timezone
 from unittest.mock import Mock, MagicMock
 
 from app.runtime import (
@@ -145,7 +145,7 @@ class TestRuntimeReplayEngine:
 
         trace = ReplayableTrace(
             trace_id="trace-1",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             query="Test query",
             query_type="general",
             provider="claude",
@@ -167,7 +167,7 @@ class TestRuntimeReplayEngine:
 
         trace = ReplayableTrace(
             trace_id="trace-2",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             query="Integrity test",
             query_type="general",
             provider="openai",
@@ -188,7 +188,7 @@ class TestRuntimeReplayEngine:
 
         trace1 = ReplayableTrace(
             trace_id="trace-1",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             query="Query",
             query_type="general",
             provider="claude",
@@ -202,7 +202,7 @@ class TestRuntimeReplayEngine:
 
         trace2 = ReplayableTrace(
             trace_id="trace-2",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             query="Query",
             query_type="general",
             provider="claude",
@@ -228,7 +228,7 @@ class TestRuntimeReplayEngine:
 
         trace = ReplayableTrace(
             trace_id="trace-replay",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             query="Replay test",
             query_type="general",
             provider="claude",
@@ -254,7 +254,7 @@ class TestRuntimeReplayEngine:
 
         trace = ReplayableTrace(
             trace_id="trace-stats",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             query="Stats test",
             query_type="general",
             provider="claude",

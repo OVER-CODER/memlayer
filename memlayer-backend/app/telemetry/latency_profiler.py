@@ -7,7 +7,7 @@ percentile distributions, and latency trend tracking.
 
 from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass, field, asdict
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from collections import defaultdict
 from enum import Enum
 import statistics
@@ -92,7 +92,7 @@ class PipelineLatencyProfile:
     """Complete latency profile for a pipeline execution."""
 
     profile_id: str
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     total_duration_ms: float = 0.0
 
     # Stages
@@ -220,7 +220,7 @@ class LatencyProfiler:
 
         metric = StageLatencyMetrics(
             stage_name=stage_name,
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             duration_ms=duration_ms,
             stage_level=stage_level,
             input_size_items=input_size_items,
@@ -369,7 +369,7 @@ class LatencyProfiler:
         bucket_size_minutes: int = 60,
     ) -> List[Dict]:
         """Get latency trend data for visualization."""
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         cutoff_time = now - timedelta(hours=hours)
 
         # Collect relevant metrics
@@ -520,7 +520,7 @@ class LatencyProfiler:
     def export_profiles(self, output_file: str) -> str:
         """Export latency profiles to JSON file."""
         report = {
-            "exported_at": datetime.utcnow().isoformat(),
+            "exported_at": datetime.now(timezone.utc).isoformat(),
             "total_profiles": len(self.profiles),
             "profiles": [p.to_dict() for p in self.profiles[-1000:]],  # Last 1000
             "report": self.get_profiler_report(),

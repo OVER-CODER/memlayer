@@ -19,7 +19,7 @@ Tracks:
 
 from typing import List, Dict, Optional, Any, Tuple
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 import logging
 import random
 import uuid
@@ -82,7 +82,7 @@ class StressTestRun:
 
     run_id: str
     scenario: StressScenario
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
     # Execution
     total_turns: int = 0
@@ -462,7 +462,7 @@ class LongHorizonStressHarness:
     def export_stress_results(self, output_file: str) -> str:
         """Export stress test results to JSON."""
         report = {
-            "exported_at": datetime.utcnow().isoformat(),
+            "exported_at": datetime.now(timezone.utc).isoformat(),
             "total_runs": len(self.test_runs),
             "stress_report": self.get_stress_report(),
         }

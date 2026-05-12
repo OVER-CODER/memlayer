@@ -13,7 +13,7 @@ Detects runtime failures that emerge from complex interactions:
 
 from typing import List, Dict, Optional, Tuple
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 import logging
 
@@ -50,7 +50,7 @@ class RuntimeFailure:
     """Record of an emergent runtime failure."""
 
     failure_id: str
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
     # Classification
     failure_type: FailureType = FailureType.SEMANTIC_COLLAPSE
@@ -501,7 +501,7 @@ class EmergentFailureDetector:
     def export_failures(self, output_file: str) -> str:
         """Export all failures to JSON."""
         report = {
-            "exported_at": datetime.utcnow().isoformat(),
+            "exported_at": datetime.now(timezone.utc).isoformat(),
             "total_failures": len(self.failures),
             "failures": [f.to_dict() for f in self.failures[-500:]],
             "report": self.get_failure_report(),

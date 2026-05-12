@@ -1,0 +1,590 @@
+{
+  "checks": {
+    "trace_count_matches_runtime": true,
+    "replay_trace_count_matches_success": true,
+    "token_metrics_recorded": true,
+    "latency_profiles_recorded": true,
+    "drift_sessions_nonnegative": true
+  },
+  "all_checks_passed": true,
+  "trace_statistics": {
+    "total_traces": 1348,
+    "successful_traces": 1348,
+    "failed_traces": 0,
+    "success_rate": 1.0,
+    "total_duration_ms": 1156.12,
+    "avg_duration_ms": 0.8576557863501483,
+    "total_token_savings": 57307,
+    "avg_quality_score": 0.6954820149091699,
+    "stage_statistics": {
+      "ranking": {
+        "count": 1348,
+        "total_duration_ms": 438.0927085876465,
+        "avg_duration_ms": 0.32499459094039057
+      },
+      "token_allocation": {
+        "count": 1348,
+        "total_duration_ms": 515.6159400939941,
+        "avg_duration_ms": 0.3825044065979185
+      },
+      "assembly": {
+        "count": 1348,
+        "total_duration_ms": 10.911941528320312,
+        "avg_duration_ms": 0.008094912112997265
+      },
+      "quality_check": {
+        "count": 1348,
+        "total_duration_ms": 81.8631649017334,
+        "avg_duration_ms": 0.060729350817309645
+      }
+    }
+  },
+  "token_report": {
+    "total_runs": 1348,
+    "total_metrics_recorded": 1348,
+    "total_tokens_saved": 485926,
+    "avg_compression_ratio": 0.27970524282838827,
+    "avg_efficiency": 0.10547203087466442,
+    "allocation_distribution": {
+      "reasoning_context": 0.0,
+      "semantic_memories": 0.0,
+      "workspace_summary": 0.0,
+      "chunk_summaries": 0.0,
+      "metadata_glue": 0.0,
+      "response_reserve": 0.0
+    },
+    "provider_comparison": {
+      "claude": {
+        "runs": 438,
+        "avg_compression_ratio": 0.2780489373640059,
+        "avg_efficiency": 0.10629442088859896,
+        "total_tokens_saved": 159856,
+        "avg_semantic_density": 1.0
+      },
+      "openai": {
+        "runs": 475,
+        "avg_compression_ratio": 0.28214363531205633,
+        "avg_efficiency": 0.10361133667502088,
+        "total_tokens_saved": 168275,
+        "avg_semantic_density": 1.0
+      },
+      "gemini": {
+        "runs": 435,
+        "avg_compression_ratio": 0.27871035860691035,
+        "avg_efficiency": 0.10667576172231344,
+        "total_tokens_saved": 157795,
+        "avg_semantic_density": 1.0
+      }
+    },
+    "compression_mode_comparison": {
+      "balanced": {
+        "runs": 1348,
+        "avg_compression_ratio": 0.27970524282838827,
+        "avg_efficiency": 0.10547203087466442,
+        "total_tokens_saved": 485926
+      }
+    },
+    "query_type_analysis": {
+      "general": {
+        "runs": 9,
+        "avg_compression_ratio": 0.24285714285714283,
+        "avg_efficiency": 0.07565,
+        "avg_semantic_density": 1.0
+      },
+      "reasoning": {
+        "runs": 12,
+        "avg_compression_ratio": 0.20946428571428574,
+        "avg_efficiency": 0.0694875,
+        "avg_semantic_density": 1.0
+      },
+      "coding": {
+        "runs": 9,
+        "avg_compression_ratio": 0.1987012987012987,
+        "avg_efficiency": 0.07565,
+        "avg_semantic_density": 1.0
+      },
+      "research": {
+        "runs": 9,
+        "avg_compression_ratio": 0.18214285714285713,
+        "avg_efficiency": 0.07565,
+        "avg_semantic_density": 1.0
+      },
+      "narrative": {
+        "runs": 9,
+        "avg_compression_ratio": 0.16813186813186815,
+        "avg_efficiency": 0.07565,
+        "avg_semantic_density": 1.0
+      },
+      "complex": {
+        "runs": 1000,
+        "avg_compression_ratio": 0.3194805194805195,
+        "avg_efficiency": 0.07028571428571427,
+        "avg_semantic_density": 1.0
+      },
+      "very_complex": {
+        "runs": 300,
+        "avg_compression_ratio": 0.15974025974025974,
+        "avg_efficiency": 0.22777777777777777,
+        "avg_semantic_density": 1.0
+      }
+    },
+    "recent_trend_compression": [
+      [
+        "2026-05-12T05:00:00",
+        0.27970524282838827
+      ]
+    ]
+  },
+  "latency_report": {
+    "total_profiles": 1348,
+    "total_pipeline_duration_ms": 1046.4837551116943,
+    "avg_pipeline_duration_ms": 0.776323260468616,
+    "stage_comparison": {
+      "ranking": {
+        "percentiles": {
+          "p50": 0.2548694610595703,
+          "p75": 0.4011988639831543,
+          "p90": 0.5240440368652344,
+          "p95": 0.5400180816650391,
+          "p99": 0.6097602844238276,
+          "p99_9": 0.7445218563079874,
+          "min": 0.24580955505371094,
+          "max": 0.7517337799072266,
+          "mean": 0.32499459094039057,
+          "std_dev": 0.11782612141127514,
+          "count": 1348
+        },
+        "classification": "excellent"
+      },
+      "token_allocation": {
+        "percentiles": {
+          "p50": 0.2942085266113281,
+          "p75": 0.5118846893310547,
+          "p90": 0.614166259765625,
+          "p95": 0.635063648223877,
+          "p99": 0.7189583778381348,
+          "p99_9": 1.581864595413223,
+          "min": 0.2808570861816406,
+          "max": 1.8696784973144531,
+          "mean": 0.3825044065979185,
+          "std_dev": 0.15504070334861825,
+          "count": 1348
+        },
+        "classification": "excellent"
+      },
+      "assembly": {
+        "percentiles": {
+          "p50": 0.007152557373046875,
+          "p75": 0.009775161743164062,
+          "p90": 0.011205673217773438,
+          "p95": 0.011920928955078125,
+          "p99": 0.013113021850585938,
+          "p99_9": 0.015891313552856504,
+          "min": 0.0057220458984375,
+          "max": 0.017881393432617188,
+          "mean": 0.008094912112997265,
+          "std_dev": 0.0020926280676991263,
+          "count": 1348
+        },
+        "classification": "excellent"
+      },
+      "quality_check": {
+        "percentiles": {
+          "p50": 0.053048133850097656,
+          "p75": 0.0680088996887207,
+          "p90": 0.08239746093749997,
+          "p95": 0.08702278137207031,
+          "p99": 0.09787797927856445,
+          "p99_9": 0.12108659744263037,
+          "min": 0.04887580871582031,
+          "max": 0.15211105346679688,
+          "mean": 0.060729350817309645,
+          "std_dev": 0.013904391871429894,
+          "count": 1348
+        },
+        "classification": "excellent"
+      }
+    },
+    "provider_comparison": {
+      "claude": {
+        "runs": 438,
+        "avg_latency_ms": 0.7843465021211807,
+        "min_latency_ms": 0.5841255187988281,
+        "max_latency_ms": 1.91497802734375,
+        "p95_latency_ms": 1.2950897216796875
+      },
+      "openai": {
+        "runs": 475,
+        "avg_latency_ms": 0.7665257704885382,
+        "min_latency_ms": 0.5862712860107422,
+        "max_latency_ms": 2.2230148315429688,
+        "p95_latency_ms": 1.2819766998291016
+      },
+      "gemini": {
+        "runs": 435,
+        "avg_latency_ms": 0.7789430947139345,
+        "min_latency_ms": 0.5877017974853516,
+        "max_latency_ms": 1.4598369598388672,
+        "p95_latency_ms": 1.2657642364501953
+      }
+    },
+    "compression_mode_comparison": {
+      "balanced": {
+        "runs": 1348,
+        "avg_latency_ms": 0.776323260468616,
+        "min_latency_ms": 0.5841255187988281,
+        "max_latency_ms": 2.2230148315429688,
+        "p95_latency_ms": 1.2805461883544922
+      }
+    },
+    "bottleneck_analysis": {
+      "total_profiles_analyzed": 1000,
+      "bottlenecks": [
+        {
+          "stage": "token_allocation",
+          "frequency": 976,
+          "frequency_percentage": 97.6,
+          "total_bottleneck_time_ms": 391.6044235229492,
+          "avg_bottleneck_time_ms": 0.40123404049482503
+        },
+        {
+          "stage": "ranking",
+          "frequency": 24,
+          "frequency_percentage": 2.4,
+          "total_bottleneck_time_ms": 12.335062026977539,
+          "avg_bottleneck_time_ms": 0.5139609177907308
+        }
+      ]
+    }
+  },
+  "drift_report": {
+    "message": "No drift sessions recorded"
+  },
+  "replay_statistics": {
+    "total_replays": 200,
+    "successful_replays": 200,
+    "failed_replays": 0,
+    "success_rate": 1.0,
+    "regressions_detected": 0,
+    "regression_rate": 0.0,
+    "avg_fidelity_score": 100.0,
+    "stored_traces": 1348
+  },
+  "runtime_statistics": {
+    "total_executions": 1348,
+    "successful_executions": 1348,
+    "failed_executions": 0,
+    "success_rate": 1.0,
+    "avg_quality_score": 0.6954820149091699,
+    "avg_semantic_retention": 1.0,
+    "avg_token_efficiency": 0.10547203087466442,
+    "avg_duration_ms": 0.7883929357330594,
+    "trace_service_stats": {
+      "total_traces": 1348,
+      "successful_traces": 1348,
+      "failed_traces": 0,
+      "success_rate": 1.0,
+      "total_duration_ms": 1156.12,
+      "avg_duration_ms": 0.8576557863501483,
+      "total_token_savings": 57307,
+      "avg_quality_score": 0.6954820149091699,
+      "stage_statistics": {
+        "ranking": {
+          "count": 1348,
+          "total_duration_ms": 438.0927085876465,
+          "avg_duration_ms": 0.32499459094039057
+        },
+        "token_allocation": {
+          "count": 1348,
+          "total_duration_ms": 515.6159400939941,
+          "avg_duration_ms": 0.3825044065979185
+        },
+        "assembly": {
+          "count": 1348,
+          "total_duration_ms": 10.911941528320312,
+          "avg_duration_ms": 0.008094912112997265
+        },
+        "quality_check": {
+          "count": 1348,
+          "total_duration_ms": 81.8631649017334,
+          "avg_duration_ms": 0.060729350817309645
+        }
+      }
+    },
+    "token_analytics_report": {
+      "total_runs": 1348,
+      "total_metrics_recorded": 1348,
+      "total_tokens_saved": 485926,
+      "avg_compression_ratio": 0.27970524282838827,
+      "avg_efficiency": 0.10547203087466442,
+      "allocation_distribution": {
+        "reasoning_context": 0.0,
+        "semantic_memories": 0.0,
+        "workspace_summary": 0.0,
+        "chunk_summaries": 0.0,
+        "metadata_glue": 0.0,
+        "response_reserve": 0.0
+      },
+      "provider_comparison": {
+        "claude": {
+          "runs": 438,
+          "avg_compression_ratio": 0.2780489373640059,
+          "avg_efficiency": 0.10629442088859896,
+          "total_tokens_saved": 159856,
+          "avg_semantic_density": 1.0
+        },
+        "openai": {
+          "runs": 475,
+          "avg_compression_ratio": 0.28214363531205633,
+          "avg_efficiency": 0.10361133667502088,
+          "total_tokens_saved": 168275,
+          "avg_semantic_density": 1.0
+        },
+        "gemini": {
+          "runs": 435,
+          "avg_compression_ratio": 0.27871035860691035,
+          "avg_efficiency": 0.10667576172231344,
+          "total_tokens_saved": 157795,
+          "avg_semantic_density": 1.0
+        }
+      },
+      "compression_mode_comparison": {
+        "balanced": {
+          "runs": 1348,
+          "avg_compression_ratio": 0.27970524282838827,
+          "avg_efficiency": 0.10547203087466442,
+          "total_tokens_saved": 485926
+        }
+      },
+      "query_type_analysis": {
+        "general": {
+          "runs": 9,
+          "avg_compression_ratio": 0.24285714285714283,
+          "avg_efficiency": 0.07565,
+          "avg_semantic_density": 1.0
+        },
+        "reasoning": {
+          "runs": 12,
+          "avg_compression_ratio": 0.20946428571428574,
+          "avg_efficiency": 0.0694875,
+          "avg_semantic_density": 1.0
+        },
+        "coding": {
+          "runs": 9,
+          "avg_compression_ratio": 0.1987012987012987,
+          "avg_efficiency": 0.07565,
+          "avg_semantic_density": 1.0
+        },
+        "research": {
+          "runs": 9,
+          "avg_compression_ratio": 0.18214285714285713,
+          "avg_efficiency": 0.07565,
+          "avg_semantic_density": 1.0
+        },
+        "narrative": {
+          "runs": 9,
+          "avg_compression_ratio": 0.16813186813186815,
+          "avg_efficiency": 0.07565,
+          "avg_semantic_density": 1.0
+        },
+        "complex": {
+          "runs": 1000,
+          "avg_compression_ratio": 0.3194805194805195,
+          "avg_efficiency": 0.07028571428571427,
+          "avg_semantic_density": 1.0
+        },
+        "very_complex": {
+          "runs": 300,
+          "avg_compression_ratio": 0.15974025974025974,
+          "avg_efficiency": 0.22777777777777777,
+          "avg_semantic_density": 1.0
+        }
+      },
+      "recent_trend_compression": [
+        [
+          "2026-05-12T05:00:00",
+          0.27970524282838827
+        ]
+      ]
+    },
+    "latency_profiler_report": {
+      "total_profiles": 1348,
+      "total_pipeline_duration_ms": 1046.4837551116943,
+      "avg_pipeline_duration_ms": 0.776323260468616,
+      "stage_comparison": {
+        "ranking": {
+          "percentiles": {
+            "p50": 0.2548694610595703,
+            "p75": 0.4011988639831543,
+            "p90": 0.5240440368652344,
+            "p95": 0.5400180816650391,
+            "p99": 0.6097602844238276,
+            "p99_9": 0.7445218563079874,
+            "min": 0.24580955505371094,
+            "max": 0.7517337799072266,
+            "mean": 0.32499459094039057,
+            "std_dev": 0.11782612141127514,
+            "count": 1348
+          },
+          "classification": "excellent"
+        },
+        "token_allocation": {
+          "percentiles": {
+            "p50": 0.2942085266113281,
+            "p75": 0.5118846893310547,
+            "p90": 0.614166259765625,
+            "p95": 0.635063648223877,
+            "p99": 0.7189583778381348,
+            "p99_9": 1.581864595413223,
+            "min": 0.2808570861816406,
+            "max": 1.8696784973144531,
+            "mean": 0.3825044065979185,
+            "std_dev": 0.15504070334861825,
+            "count": 1348
+          },
+          "classification": "excellent"
+        },
+        "assembly": {
+          "percentiles": {
+            "p50": 0.007152557373046875,
+            "p75": 0.009775161743164062,
+            "p90": 0.011205673217773438,
+            "p95": 0.011920928955078125,
+            "p99": 0.013113021850585938,
+            "p99_9": 0.015891313552856504,
+            "min": 0.0057220458984375,
+            "max": 0.017881393432617188,
+            "mean": 0.008094912112997265,
+            "std_dev": 0.0020926280676991263,
+            "count": 1348
+          },
+          "classification": "excellent"
+        },
+        "quality_check": {
+          "percentiles": {
+            "p50": 0.053048133850097656,
+            "p75": 0.0680088996887207,
+            "p90": 0.08239746093749997,
+            "p95": 0.08702278137207031,
+            "p99": 0.09787797927856445,
+            "p99_9": 0.12108659744263037,
+            "min": 0.04887580871582031,
+            "max": 0.15211105346679688,
+            "mean": 0.060729350817309645,
+            "std_dev": 0.013904391871429894,
+            "count": 1348
+          },
+          "classification": "excellent"
+        }
+      },
+      "provider_comparison": {
+        "claude": {
+          "runs": 438,
+          "avg_latency_ms": 0.7843465021211807,
+          "min_latency_ms": 0.5841255187988281,
+          "max_latency_ms": 1.91497802734375,
+          "p95_latency_ms": 1.2950897216796875
+        },
+        "openai": {
+          "runs": 475,
+          "avg_latency_ms": 0.7665257704885382,
+          "min_latency_ms": 0.5862712860107422,
+          "max_latency_ms": 2.2230148315429688,
+          "p95_latency_ms": 1.2819766998291016
+        },
+        "gemini": {
+          "runs": 435,
+          "avg_latency_ms": 0.7789430947139345,
+          "min_latency_ms": 0.5877017974853516,
+          "max_latency_ms": 1.4598369598388672,
+          "p95_latency_ms": 1.2657642364501953
+        }
+      },
+      "compression_mode_comparison": {
+        "balanced": {
+          "runs": 1348,
+          "avg_latency_ms": 0.776323260468616,
+          "min_latency_ms": 0.5841255187988281,
+          "max_latency_ms": 2.2230148315429688,
+          "p95_latency_ms": 1.2805461883544922
+        }
+      },
+      "bottleneck_analysis": {
+        "total_profiles_analyzed": 1000,
+        "bottlenecks": [
+          {
+            "stage": "token_allocation",
+            "frequency": 976,
+            "frequency_percentage": 97.6,
+            "total_bottleneck_time_ms": 391.6044235229492,
+            "avg_bottleneck_time_ms": 0.40123404049482503
+          },
+          {
+            "stage": "ranking",
+            "frequency": 24,
+            "frequency_percentage": 2.4,
+            "total_bottleneck_time_ms": 12.335062026977539,
+            "avg_bottleneck_time_ms": 0.5139609177907308
+          }
+        ]
+      }
+    },
+    "benchmarking_report": {
+      "total_benchmarks": 1348,
+      "providers": [
+        "claude",
+        "openai",
+        "gemini"
+      ],
+      "compression_modes": [
+        "balanced"
+      ],
+      "query_complexities": [
+        "moderate",
+        "simple"
+      ],
+      "provider_profiles": {
+        "claude": {
+          "provider": "claude",
+          "total_benchmarks": 438,
+          "by_compression_mode": {
+            "balanced": {
+              "benchmarks": 438,
+              "avg_score": 76.46466067297588,
+              "success_rate": 1.0,
+              "avg_compression_ratio": 0.2780489373640059,
+              "avg_latency_ms": 0.7963681329875232
+            }
+          }
+        },
+        "openai": {
+          "provider": "openai",
+          "total_benchmarks": 475,
+          "by_compression_mode": {
+            "balanced": {
+              "benchmarks": 475,
+              "avg_score": 76.41483069327096,
+              "success_rate": 1.0,
+              "avg_compression_ratio": 0.28214363531205633,
+              "avg_latency_ms": 0.7783182043778268
+            }
+          }
+        },
+        "gemini": {
+          "provider": "gemini",
+          "total_benchmarks": 435,
+          "by_compression_mode": {
+            "balanced": {
+              "benchmarks": 435,
+              "avg_score": 76.45676822637222,
+              "success_rate": 1.0,
+              "avg_compression_ratio": 0.27871035860691035,
+              "avg_latency_ms": 0.7913638805520946
+            }
+          }
+        }
+      },
+      "total_comparisons": 0
+    }
+  }
+}

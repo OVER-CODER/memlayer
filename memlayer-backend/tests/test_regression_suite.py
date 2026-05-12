@@ -2,7 +2,7 @@
 Tests for Regression Replay Suite orchestration.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from app.runtime import (
     RegressionReplaySuite,
@@ -69,7 +69,7 @@ def test_register_from_replay_engine():
     replay_engine.store_trace(
         ReplayableTrace(
             trace_id="trace-1",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             query="q1",
             query_type="general",
             provider="claude",
@@ -85,7 +85,7 @@ def test_register_from_replay_engine():
     replay_engine.store_trace(
         ReplayableTrace(
             trace_id="trace-2",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             query="q2",
             query_type="general",
             provider="claude",

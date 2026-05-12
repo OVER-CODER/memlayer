@@ -1,0 +1,50 @@
+{
+  "generated_at": "2026-05-12T06:03:48.770432",
+  "workloads": [
+    "research",
+    "drafting",
+    "tooling",
+    "critique"
+  ],
+  "providers": [
+    "claude",
+    "openai",
+    "gemini"
+  ],
+  "rows": 4,
+  "avg_semantic_preservation": 1.0,
+  "avg_determinism_rate": 1.0,
+  "avg_view_divergence": 0.19892716135605926,
+  "avg_semantic_value_per_token": 0.002074550370493433,
+  "latest_summary": {
+    "latest_report_id": "xlayer-critique",
+    "generated_at": "2026-05-12T06:03:48.770386",
+    "workspace_id": "ws-critique",
+    "providers_evaluated": [
+      "claude",
+      "openai",
+      "gemini"
+    ],
+    "semantic_preservation": 1.0,
+    "determinism_rate": 1.0,
+    "avg_view_divergence": 0.20835478145419667,
+    "provider_robustness_ranking": [
+      {
+        "provider": "gemini",
+        "score": 0.7619616269641905
+      },
+      {
+        "provider": "openai",
+        "score": 0.7618587616189567
+      },
+      {
+        "provider": "claude",
+        "score": 0.760762981149629
+      }
+    ],
+    "recommendations": [
+      "Increase context reuse and deduplicate repeated projection segments to improve token economics.",
+      "Run targeted provider calibration benchmarks for claude across all core views."
+    ]
+  }
+}

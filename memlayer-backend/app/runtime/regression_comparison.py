@@ -15,7 +15,7 @@ Enables:
 
 from typing import List, Dict, Optional, Tuple, Any, Set
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 import logging
 import hashlib
@@ -457,7 +457,7 @@ class RegressionDetector:
         # Create regression event
         event = RegressionEvent(
             event_id=event_id,
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             baseline_trace_id=baseline_trace.get("trace_id", ""),
             comparison_trace_id=comparison_trace.get("trace_id", ""),
             baseline_version=baseline_version,
@@ -725,7 +725,7 @@ class CrossVersionComparator:
         """
         comparison = CrossVersionComparison(
             comparison_id=comparison_id,
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             baseline_version=baseline_version,
             comparison_version=comparison_version,
             baseline_traces=len(baseline_traces),
@@ -1184,7 +1184,7 @@ class RegressionHistoryTracker:
     def export_history(self, output_file: str) -> str:
         """Persist regression/comparison history to JSON."""
         report = {
-            "exported_at": datetime.utcnow().isoformat(),
+            "exported_at": datetime.now(timezone.utc).isoformat(),
             "versions": self.version_timeline,
             "regressions": [event.to_dict() for event in self.regression_history],
             "comparisons": [cmp.to_dict() for cmp in self.comparison_history],

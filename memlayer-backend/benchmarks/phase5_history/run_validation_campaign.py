@@ -13,7 +13,7 @@ Outputs structured JSON reports to:
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from statistics import mean
 from typing import Any, Dict, List, Optional
@@ -100,7 +100,7 @@ class ObjectMemoryStressHarness(LongHorizonStressHarness):
                 id=f"stress-mem-{self._mem_counter:06d}",
                 raw_content=base,
                 importance_score=0.4 + ((self._mem_counter % 6) * 0.1),
-                timestamp=datetime.utcnow() - timedelta(minutes=self._mem_counter % 90),
+                timestamp=datetime.now(timezone.utc) - timedelta(minutes=self._mem_counter % 90),
                 embedding=[float((self._mem_counter + i) % 100) / 100.0 for i in range(32)],
             )
             memories.append(memory)
@@ -133,7 +133,7 @@ class ValidationCampaign:
         random.seed(42)
         np.random.seed(42)
 
-        self.timestamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+        self.timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
         self.output_dir = (
             BACKEND_ROOT / "benchmarks" / "phase5_history" / f"validation_campaign_{self.timestamp}"
         )
@@ -176,7 +176,7 @@ class ValidationCampaign:
                     id=f"{domain}-mem-{idx:05d}",
                     raw_content=content,
                     importance_score=0.5 + ((idx % 5) * 0.1),
-                    timestamp=datetime.utcnow() - timedelta(minutes=idx % 120),
+                    timestamp=datetime.now(timezone.utc) - timedelta(minutes=idx % 120),
                     embedding=[float((idx + dim) % 97) / 97.0 for dim in range(32)],
                 )
             )

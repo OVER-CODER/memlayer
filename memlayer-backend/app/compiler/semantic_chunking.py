@@ -16,7 +16,7 @@ from __future__ import annotations
 
 from typing import List, Dict, Optional, Set, Tuple, TYPE_CHECKING
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 import numpy as np
 import logging
@@ -51,8 +51,8 @@ class SemanticChunk:
     title: str = ""
 
     # Metadata
-    created_at: datetime = field(default_factory=datetime.utcnow)
-    updated_at: datetime = field(default_factory=datetime.utcnow)
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     token_estimate: int = 0
     relevance_score: float = 0.0
     cohesion_score: float = 0.0  # How tightly related memories are
@@ -297,7 +297,7 @@ class SemanticChunkingService:
         chunks = []
 
         for i, group in enumerate(groups):
-            chunk_id = f"chunk_{chunk_type.value}_{i}_{int(datetime.utcnow().timestamp() * 1000)}"
+            chunk_id = f"chunk_{chunk_type.value}_{i}_{int(datetime.now(timezone.utc).timestamp() * 1000)}"
 
             chunk = SemanticChunk(
                 chunk_id=chunk_id,

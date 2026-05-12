@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, List, Any
 import hashlib
 import re
@@ -61,7 +61,7 @@ class SemanticProjectionEngine:
 
         projection = SemanticProjection(
             projection_id=projection_id,
-            created_at=datetime.utcnow(),
+            created_at=datetime.now(timezone.utc),
             view_type=view_type,
             provider=provider,
             source_trace_id=source_trace_id,

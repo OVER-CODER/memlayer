@@ -1,0 +1,1656 @@
+{
+  "sampled_traces": 40,
+  "divergence_events": 0,
+  "replay_statistics": {
+    "total_replays": 200,
+    "successful_replays": 200,
+    "failed_replays": 0,
+    "success_rate": 1.0,
+    "regressions_detected": 0,
+    "regression_rate": 0.0,
+    "avg_fidelity_score": 100.0,
+    "stored_traces": 48
+  },
+  "trace_cycles": [
+    {
+      "trace_id": "e420516e-a3f4-43aa-8a06-9f82865f9f9b",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "166b8bd2-c07c-4772-aa05-3af328ccf84b",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "5eb5ef35-832d-4c8a-841a-0c8df5793e9f",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "d028dfc3-f340-419f-a937-bcdf06ddff14",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "90edf6f4-0e2a-470d-8053-5945023b16ee",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "963cae0b-eeec-4b48-8429-61fe1bfad3ae",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "acc8ba6e-3c0f-4056-b0e6-29fa1e0270c8",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "db48c059-db9f-49a7-9850-e263cf05ea3d",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "446838b3-60d9-4e21-85c2-48a6ecac5b6c",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "f7e5d44a-69e0-4a9e-a197-bea08e023b83",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "faa11fc6-b2a0-4b59-855d-234d77de5f81",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "f7eff894-5c51-4473-ba0a-2e3317d944eb",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "7427988b-5c6a-4596-a405-0f93266cbe6d",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "033930a7-e13b-4c82-aa61-747de3561bc2",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "df2f7229-6ff2-427c-beb5-8f06e44a4f4e",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "efdaa7c3-cef5-4637-b7e0-df1372695a12",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "d7d835a7-b4be-4ba4-b6be-d644fd46b8d3",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "208f3c76-0770-4356-8e42-45339d668714",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "9d2ff452-5d48-4785-bc67-7ce46b292b81",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "ea85df06-4033-4801-9f44-cf71f9783575",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "9e4b0f1b-d9b0-4c0a-a367-40310c832bd7",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "d951a23e-4aec-42cd-ae9a-b067eef1f3f1",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "b44216ac-3d66-47c9-bbce-33713a74b66d",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "1dcc7467-c230-45b2-adf4-cc7ac019d616",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "6db91e28-4d3d-4c93-af69-c8c270537b84",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "236d65e5-6839-40ec-ac90-d388f913070e",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "37531a6a-2afe-4763-89c2-f2976567b071",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "986763b1-ade2-4559-8796-6fe0e0781c7a",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "e0bcdf36-d6b6-40e4-b45f-efb928ac37da",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "c38aaa4b-7e60-4ff9-846e-fb231aa9d44d",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "fd82f9af-ea96-4a9e-8713-56e666d6b6f4",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "65a47665-c7de-4432-b1dd-c17a214ebf7b",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "1035191e-b884-46cb-bd45-e0e414416626",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "4d804992-a03d-49d4-b27f-706b6b733f01",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "ef635459-26c4-4da3-a1bc-029b0fe88781",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "e805bd24-93d7-4c59-af1c-14abab38aacd",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "33d3f30c-10a9-4b92-9a7d-95a9de83c28f",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "43400dc0-97e9-467e-bc97-c11e38e3797c",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "53cba3fd-0a17-4354-b818-a6de97a8d346",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    },
+    {
+      "trace_id": "714205d3-5009-4830-a98d-3fa7ba73bef1",
+      "integrity_ok": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 2,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 3,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 4,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        },
+        {
+          "cycle": 5,
+          "fidelity_score": 100.0,
+          "quality_diff": 0.0,
+          "semantic_diff": 0.0,
+          "efficiency_diff": 0.0
+        }
+      ]
+    }
+  ]
+}

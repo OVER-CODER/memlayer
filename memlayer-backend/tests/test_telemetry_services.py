@@ -6,7 +6,7 @@ and SemanticDriftAnalyzer with realistic scenarios.
 """
 
 import pytest
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from app.telemetry import (
     RuntimeTraceService,
     TokenAnalyticsService,

@@ -2,7 +2,7 @@
 Tests for Runtime Diagnostics Dashboard.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 from unittest.mock import Mock
 
 from app.runtime import RuntimeDiagnosticsDashboard
@@ -27,6 +27,16 @@ class FakeViewSnapshot:
             "snapshot_id": "view-snapshot-1",
             "view_counts": {"research": 2, "drafter": 1},
             "quality_summary": {"avg_quality": 0.77},
+        }
+
+
+class FakeCrossLayerFramework:
+    def get_latest_summary(self):
+        return {
+            "latest_report_id": "xlayer-001",
+            "workspace_id": "ws-cross",
+            "semantic_preservation": 0.83,
+            "determinism_rate": 1.0,
         }
 
 
@@ -130,7 +140,7 @@ def test_capture_snapshot_and_render_console():
     replay_engine.store_trace(
         ReplayableTrace(
             trace_id="trace-1",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             query="diagnostics query",
             query_type="general",
             provider="claude",
@@ -220,3 +230,24 @@ def test_capture_snapshot_includes_view_engine_diagnostics():
     assert snapshot.view_engine_diagnostics["snapshot_id"] == "view-snapshot-1"
     assert snapshot.view_engine_diagnostics["total_views_compiled"] == 3
     assert snapshot.view_engine_diagnostics["avg_view_quality"] == 0.77
+
+
+def test_capture_snapshot_includes_cross_layer_diagnostics():
+    runtime = Mock()
+    runtime.get_runtime_statistics.return_value = {
+        "total_executions": 1,
+        "success_rate": 1.0,
+        "avg_quality_score": 0.9,
+        "avg_semantic_retention": 0.88,
+        "avg_token_efficiency": 0.85,
+        "avg_duration_ms": 60.0,
+    }
+
+    dashboard = RuntimeDiagnosticsDashboard(
+        integrated_runtime=runtime,
+        cross_layer_framework=FakeCrossLayerFramework(),
+    )
+
+    snapshot = dashboard.capture_snapshot(snapshot_id="diag-cross-layer")
+    assert snapshot.cross_layer_diagnostics["latest_report_id"] == "xlayer-001"
+    assert snapshot.cross_layer_diagnostics["determinism_rate"] == 1.0

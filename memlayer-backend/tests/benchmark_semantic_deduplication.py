@@ -14,7 +14,7 @@ import numpy as np
 from typing import List, Dict, Tuple
 from dataclasses import dataclass, asdict
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from unittest.mock import Mock
 import sys
 import os
@@ -74,7 +74,7 @@ class DeduplicationBenchmark:
         logger.info("Starting deduplication benchmarks...")
 
         results = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "benchmarks": {
                 "no_duplicates": self.benchmark_no_duplicates(),
                 "low_overlap": self.benchmark_low_overlap(),
@@ -99,7 +99,7 @@ class DeduplicationBenchmark:
 
         result = BenchmarkResult(
             benchmark_name="no_duplicates",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             num_memories=len(memories),
             overlap_level="none",
             strategy="keep_highest_importance",
@@ -132,7 +132,7 @@ class DeduplicationBenchmark:
 
         result = BenchmarkResult(
             benchmark_name="low_overlap",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             num_memories=len(memories),
             overlap_level="low",
             strategy="keep_highest_importance",
@@ -167,7 +167,7 @@ class DeduplicationBenchmark:
 
         result = BenchmarkResult(
             benchmark_name="high_overlap",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             num_memories=len(memories),
             overlap_level="high",
             strategy="keep_highest_importance",
@@ -204,7 +204,7 @@ class DeduplicationBenchmark:
 
         result = BenchmarkResult(
             benchmark_name="realistic_workload",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             num_memories=len(memories),
             overlap_level="medium",
             strategy="keep_highest_importance",
@@ -242,7 +242,7 @@ class DeduplicationBenchmark:
 
         result = BenchmarkResult(
             benchmark_name="large_scale",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             num_memories=len(memories),
             overlap_level="medium",
             strategy="keep_highest_importance",
@@ -302,7 +302,7 @@ class DeduplicationBenchmark:
             mem.id = f"unique-mem-{i}"
             mem.raw_content = f"Unique content {i} " + "x" * np.random.randint(50, 200)
             mem.importance_score = np.random.rand()
-            mem.timestamp = datetime.utcnow()
+            mem.timestamp = datetime.now(timezone.utc)
             # Random orthogonal embedding
             mem.embedding = np.random.rand(384).tolist()
 
@@ -345,7 +345,7 @@ class DeduplicationBenchmark:
                     + "y" * np.random.randint(50, 150)
                 )
                 mem.importance_score = np.random.rand()
-                mem.timestamp = datetime.utcnow()
+                mem.timestamp = datetime.now(timezone.utc)
                 mem.embedding = embedding.tolist()
 
                 memories.append(mem)
@@ -355,7 +355,7 @@ class DeduplicationBenchmark:
     def export_results(self, filename: str = None) -> str:
         """Export benchmark results as JSON."""
         results_data = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "total_benchmarks": len(self.results),
             "results": [r.to_dict() for r in self.results],
             "summary": self._summarize_results(),

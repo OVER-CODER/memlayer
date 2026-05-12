@@ -15,7 +15,7 @@ from app.services.llm import get_llm_service, LLMService
 from app.services.providers import GenerationConfig
 from app.core.config import settings
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 import logging
 
 logger = logging.getLogger(__name__)
@@ -96,7 +96,7 @@ class ChatOrchestrationService:
             chat_id=chat_id,
             role="user",
             content=query,
-            created_at=datetime.utcnow(),
+            created_at=datetime.now(timezone.utc),
         )
         self.db.add(user_message)
         self.db.commit()
@@ -189,7 +189,7 @@ class ChatOrchestrationService:
             chat_id=chat_id,
             role="assistant",
             content=response_text,
-            created_at=datetime.utcnow(),
+            created_at=datetime.now(timezone.utc),
         )
         self.db.add(assistant_message)
         self.db.commit()

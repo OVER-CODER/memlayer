@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List
 from unittest.mock import MagicMock, Mock
@@ -96,7 +96,7 @@ def make_memories(count: int, prefix: str) -> List[BenchMemory]:
                     f"sequence step execute command. contradiction gap note {idx}."
                 ),
                 importance_score=0.5 + ((idx % 5) * 0.1),
-                timestamp=datetime.utcnow() - timedelta(minutes=idx % 240),
+                timestamp=datetime.now(timezone.utc) - timedelta(minutes=idx % 240),
                 embedding=[float((idx + j) % 79) / 79.0 for j in range(24)],
             )
         )
@@ -105,7 +105,7 @@ def make_memories(count: int, prefix: str) -> List[BenchMemory]:
 
 def run() -> int:
     random.seed(42)
-    out_dir = Path(__file__).resolve().parent / f"results_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}"
+    out_dir = Path(__file__).resolve().parent / f"results_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     runtime = make_runtime()
@@ -172,7 +172,7 @@ def run() -> int:
     snapshot = diagnostics.capture_snapshot("phase6-benchmark")
 
     summary = {
-        "generated_at": datetime.utcnow().isoformat(),
+        "generated_at": datetime.now(timezone.utc).isoformat(),
         "output_dir": str(out_dir),
         "rows": len(benchmark_rows),
         "providers": providers,

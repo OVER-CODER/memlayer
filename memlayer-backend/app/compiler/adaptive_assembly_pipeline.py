@@ -19,7 +19,7 @@ Pipeline stages:
 
 from typing import List, Dict, Optional, Tuple
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 import logging
 import time
@@ -90,7 +90,7 @@ class AdaptiveAssemblyResult:
     compilation_plan: Optional[CompilationPlan] = None
 
     # Analytics
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
     def to_dict(self) -> Dict:
         """Convert to dictionary."""
@@ -396,7 +396,7 @@ class AdaptiveAssemblyPipeline:
         with open(output_file, "w") as f:
             json.dump(
                 {
-                    "timestamp": datetime.utcnow().isoformat(),
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
                     "total_executions": len(self.execution_history),
                     "executions": history_dicts,
                 },

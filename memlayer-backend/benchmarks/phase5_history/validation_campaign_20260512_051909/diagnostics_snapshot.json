@@ -1,0 +1,5013 @@
+{
+  "exported_at": "2026-05-12T05:19:25.322252",
+  "snapshot": {
+    "snapshot_id": "diag-20260512_051909",
+    "generated_at": "2026-05-12T05:19:25.299507",
+    "runtime_overview": {
+      "total_executions": 1378,
+      "successful_executions": 1378,
+      "failed_executions": 0,
+      "success_rate": 1.0,
+      "avg_quality_score": 0.6925004069358089,
+      "avg_semantic_retention": 0.998091894967518,
+      "avg_token_efficiency": 0.10428613760453381,
+      "avg_duration_ms": 0.8320118069475725,
+      "trace_service_stats": {
+        "total_traces": 1378,
+        "successful_traces": 1378,
+        "failed_traces": 0,
+        "success_rate": 1.0,
+        "total_duration_ms": 1243.065,
+        "avg_duration_ms": 0.9020791001451379,
+        "total_token_savings": 61202,
+        "avg_quality_score": 0.6925004069358089,
+        "stage_statistics": {
+          "ranking": {
+            "count": 1378,
+            "total_duration_ms": 470.6709384918213,
+            "avg_duration_ms": 0.3415609132741809
+          },
+          "token_allocation": {
+            "count": 1378,
+            "total_duration_ms": 561.9399547576904,
+            "avg_duration_ms": 0.40779387137713385
+          },
+          "assembly": {
+            "count": 1378,
+            "total_duration_ms": 11.380672454833984,
+            "avg_duration_ms": 0.008258833421505069
+          },
+          "quality_check": {
+            "count": 1378,
+            "total_duration_ms": 85.85715293884277,
+            "avg_duration_ms": 0.062305626225575304
+          }
+        }
+      },
+      "token_analytics_report": {
+        "total_runs": 1378,
+        "total_metrics_recorded": 1378,
+        "total_tokens_saved": 536351,
+        "avg_compression_ratio": 0.2806544081825287,
+        "avg_efficiency": 0.10428613760453381,
+        "allocation_distribution": {
+          "reasoning_context": 0.0,
+          "semantic_memories": 0.0,
+          "workspace_summary": 0.0,
+          "chunk_summaries": 0.0,
+          "metadata_glue": 0.0,
+          "response_reserve": 0.0
+        },
+        "provider_comparison": {
+          "claude": {
+            "runs": 450,
+            "avg_compression_ratio": 0.2792557276057276,
+            "avg_efficiency": 0.10481990299823633,
+            "total_tokens_saved": 180026,
+            "avg_semantic_density": 0.9976627833468799
+          },
+          "openai": {
+            "runs": 487,
+            "avg_compression_ratio": 0.2831578431835105,
+            "avg_efficiency": 0.10231495876927088,
+            "total_tokens_saved": 188445,
+            "avg_semantic_density": 0.9978403542219628
+          },
+          "gemini": {
+            "runs": 441,
+            "avg_compression_ratio": 0.27931706898543635,
+            "avg_efficiency": 0.10591826836554728,
+            "total_tokens_saved": 167880,
+            "avg_semantic_density": 0.9988075425239182
+          }
+        },
+        "compression_mode_comparison": {
+          "balanced": {
+            "runs": 1378,
+            "avg_compression_ratio": 0.2806544081825287,
+            "avg_efficiency": 0.10428613760453381,
+            "total_tokens_saved": 536351
+          }
+        },
+        "query_type_analysis": {
+          "general": {
+            "runs": 9,
+            "avg_compression_ratio": 0.24285714285714283,
+            "avg_efficiency": 0.07565,
+            "avg_semantic_density": 1.0
+          },
+          "reasoning": {
+            "runs": 12,
+            "avg_compression_ratio": 0.20946428571428574,
+            "avg_efficiency": 0.0694875,
+            "avg_semantic_density": 1.0
+          },
+          "coding": {
+            "runs": 9,
+            "avg_compression_ratio": 0.1987012987012987,
+            "avg_efficiency": 0.07565,
+            "avg_semantic_density": 1.0
+          },
+          "research": {
+            "runs": 39,
+            "avg_compression_ratio": 0.290728021978022,
+            "avg_efficiency": 0.056688461538461535,
+            "avg_semantic_density": 0.9325802888523018
+          },
+          "narrative": {
+            "runs": 9,
+            "avg_compression_ratio": 0.16813186813186815,
+            "avg_efficiency": 0.07565,
+            "avg_semantic_density": 1.0
+          },
+          "complex": {
+            "runs": 1000,
+            "avg_compression_ratio": 0.3194805194805195,
+            "avg_efficiency": 0.07028571428571427,
+            "avg_semantic_density": 1.0
+          },
+          "very_complex": {
+            "runs": 300,
+            "avg_compression_ratio": 0.15974025974025974,
+            "avg_efficiency": 0.22777777777777777,
+            "avg_semantic_density": 1.0
+          }
+        },
+        "recent_trend_compression": [
+          [
+            "2026-05-12T05:00:00",
+            0.2806544081825287
+          ]
+        ]
+      },
+      "latency_profiler_report": {
+        "total_profiles": 1378,
+        "total_pipeline_duration_ms": 1129.8487186431885,
+        "avg_pipeline_duration_ms": 0.8199192442983951,
+        "stage_comparison": {
+          "ranking": {
+            "percentiles": {
+              "p50": 0.2551078796386719,
+              "p75": 0.4436969757080078,
+              "p90": 0.5261898040771484,
+              "p95": 0.5472779273986815,
+              "p99": 0.8148384094238282,
+              "p99_9": 3.3282296657562256,
+              "min": 0.09107589721679688,
+              "max": 3.3359527587890625,
+              "mean": 0.3415609132741809,
+              "std_dev": 0.2305630089355283,
+              "count": 1378
+            },
+            "classification": "excellent"
+          },
+          "token_allocation": {
+            "percentiles": {
+              "p50": 0.29456615447998047,
+              "p75": 0.5455613136291504,
+              "p90": 0.6160736083984375,
+              "p95": 0.6440043449401854,
+              "p99": 1.1503195762634346,
+              "p99_9": 5.190579652786255,
+              "min": 0.1010894775390625,
+              "max": 5.221843719482422,
+              "mean": 0.40779387137713385,
+              "std_dev": 0.34782370675458707,
+              "count": 1378
+            },
+            "classification": "excellent"
+          },
+          "assembly": {
+            "percentiles": {
+              "p50": 0.007152557373046875,
+              "p75": 0.010013580322265625,
+              "p90": 0.011205673217773438,
+              "p95": 0.012159347534179688,
+              "p99": 0.0152587890625,
+              "p99_9": 0.03328490257263194,
+              "min": 0.0030994415283203125,
+              "max": 0.03504753112792969,
+              "mean": 0.008258833421505069,
+              "std_dev": 0.002906266010129689,
+              "count": 1378
+            },
+            "classification": "excellent"
+          },
+          "quality_check": {
+            "percentiles": {
+              "p50": 0.05316734313964844,
+              "p75": 0.06985664367675781,
+              "p90": 0.08296966552734375,
+              "p95": 0.08777379989624019,
+              "p99": 0.11132240295410158,
+              "p99_9": 0.35318398475646984,
+              "min": 0.032901763916015625,
+              "max": 0.3578662872314453,
+              "mean": 0.062305626225575304,
+              "std_dev": 0.023820745647956765,
+              "count": 1378
+            },
+            "classification": "excellent"
+          }
+        },
+        "provider_comparison": {
+          "claude": {
+            "runs": 450,
+            "avg_latency_ms": 0.8374547958374023,
+            "min_latency_ms": 0.24008750915527344,
+            "max_latency_ms": 8.934974670410156,
+            "p95_latency_ms": 1.3146400451660156
+          },
+          "openai": {
+            "runs": 487,
+            "avg_latency_ms": 0.8161278475970948,
+            "min_latency_ms": 0.2288818359375,
+            "max_latency_ms": 8.8958740234375,
+            "p95_latency_ms": 1.306295394897461
+          },
+          "gemini": {
+            "runs": 441,
+            "avg_latency_ms": 0.806212695547783,
+            "min_latency_ms": 0.23412704467773438,
+            "max_latency_ms": 8.903980255126953,
+            "p95_latency_ms": 1.2693405151367188
+          }
+        },
+        "compression_mode_comparison": {
+          "balanced": {
+            "runs": 1378,
+            "avg_latency_ms": 0.8199192442983951,
+            "min_latency_ms": 0.2288818359375,
+            "max_latency_ms": 8.934974670410156,
+            "p95_latency_ms": 1.2924671173095703
+          }
+        },
+        "bottleneck_analysis": {
+          "total_profiles_analyzed": 1000,
+          "bottlenecks": [
+            {
+              "stage": "token_allocation",
+              "frequency": 975,
+              "frequency_percentage": 97.5,
+              "total_bottleneck_time_ms": 428.8320541381836,
+              "avg_bottleneck_time_ms": 0.43982774783403444
+            },
+            {
+              "stage": "ranking",
+              "frequency": 25,
+              "frequency_percentage": 2.5,
+              "total_bottleneck_time_ms": 12.450933456420898,
+              "avg_bottleneck_time_ms": 0.49803733825683594
+            }
+          ]
+        }
+      },
+      "benchmarking_report": {
+        "total_benchmarks": 1378,
+        "providers": [
+          "claude",
+          "openai",
+          "gemini"
+        ],
+        "compression_modes": [
+          "balanced"
+        ],
+        "query_complexities": [
+          "moderate",
+          "simple"
+        ],
+        "provider_profiles": {
+          "claude": {
+            "provider": "claude",
+            "total_benchmarks": 450,
+            "by_compression_mode": {
+              "balanced": {
+                "benchmarks": 450,
+                "avg_score": 76.37547399055006,
+                "success_rate": 1.0,
+                "avg_compression_ratio": 0.2792557276057276,
+                "avg_latency_ms": 0.8495055304633247
+              }
+            }
+          },
+          "openai": {
+            "provider": "openai",
+            "total_benchmarks": 487,
+            "by_compression_mode": {
+              "balanced": {
+                "benchmarks": 487,
+                "avg_score": 76.33364171272093,
+                "success_rate": 1.0,
+                "avg_compression_ratio": 0.2831578431835105,
+                "avg_latency_ms": 0.8279449885875537
+              }
+            }
+          },
+          "gemini": {
+            "provider": "gemini",
+            "total_benchmarks": 441,
+            "by_compression_mode": {
+              "balanced": {
+                "benchmarks": 441,
+                "avg_score": 76.41136400662695,
+                "success_rate": 1.0,
+                "avg_compression_ratio": 0.27931706898543635,
+                "avg_latency_ms": 0.8186520903018597
+              }
+            }
+          }
+        },
+        "total_comparisons": 0
+      }
+    },
+    "replay_diagnostics": {
+      "total_replays": 200,
+      "successful_replays": 200,
+      "failed_replays": 0,
+      "success_rate": 1.0,
+      "regressions_detected": 0,
+      "regression_rate": 0.0,
+      "avg_fidelity_score": 100.0,
+      "stored_traces": 1378,
+      "recent_replays": [
+        {
+          "replay_id": "replay-e805bd24",
+          "original_trace_id": "e805bd24-93d7-4c59-af1c-14abab38aacd",
+          "timestamp": "2026-05-12T05:19:09.637623",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.0,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.6000000000000001,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.03825,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-e805bd24",
+          "original_trace_id": "e805bd24-93d7-4c59-af1c-14abab38aacd",
+          "timestamp": "2026-05-12T05:19:09.637626",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.00095367431640625,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.6000000000000001,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.03825,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-e805bd24",
+          "original_trace_id": "e805bd24-93d7-4c59-af1c-14abab38aacd",
+          "timestamp": "2026-05-12T05:19:09.637629",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.0,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.6000000000000001,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.03825,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-e805bd24",
+          "original_trace_id": "e805bd24-93d7-4c59-af1c-14abab38aacd",
+          "timestamp": "2026-05-12T05:19:09.637631",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.0,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.6000000000000001,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.03825,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-e805bd24",
+          "original_trace_id": "e805bd24-93d7-4c59-af1c-14abab38aacd",
+          "timestamp": "2026-05-12T05:19:09.637634",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.0011920928955078125,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.6000000000000001,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.03825,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-33d3f30c",
+          "original_trace_id": "33d3f30c-10a9-4b92-9a7d-95a9de83c28f",
+          "timestamp": "2026-05-12T05:19:09.637637",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.0,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.55,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.1275,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-33d3f30c",
+          "original_trace_id": "33d3f30c-10a9-4b92-9a7d-95a9de83c28f",
+          "timestamp": "2026-05-12T05:19:09.637640",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.0,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.55,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.1275,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-33d3f30c",
+          "original_trace_id": "33d3f30c-10a9-4b92-9a7d-95a9de83c28f",
+          "timestamp": "2026-05-12T05:19:09.637643",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.00095367431640625,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.55,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.1275,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-33d3f30c",
+          "original_trace_id": "33d3f30c-10a9-4b92-9a7d-95a9de83c28f",
+          "timestamp": "2026-05-12T05:19:09.637645",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.0,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.55,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.1275,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-33d3f30c",
+          "original_trace_id": "33d3f30c-10a9-4b92-9a7d-95a9de83c28f",
+          "timestamp": "2026-05-12T05:19:09.637648",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.00095367431640625,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.55,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.1275,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-43400dc0",
+          "original_trace_id": "43400dc0-97e9-467e-bc97-c11e38e3797c",
+          "timestamp": "2026-05-12T05:19:09.637652",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.00095367431640625,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.55,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.0612,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-43400dc0",
+          "original_trace_id": "43400dc0-97e9-467e-bc97-c11e38e3797c",
+          "timestamp": "2026-05-12T05:19:09.637654",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.0,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.55,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.0612,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-43400dc0",
+          "original_trace_id": "43400dc0-97e9-467e-bc97-c11e38e3797c",
+          "timestamp": "2026-05-12T05:19:09.637657",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.00095367431640625,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.55,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.0612,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-43400dc0",
+          "original_trace_id": "43400dc0-97e9-467e-bc97-c11e38e3797c",
+          "timestamp": "2026-05-12T05:19:09.637659",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.0,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.55,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.0612,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-43400dc0",
+          "original_trace_id": "43400dc0-97e9-467e-bc97-c11e38e3797c",
+          "timestamp": "2026-05-12T05:19:09.637662",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.0011920928955078125,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.55,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.0612,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-53cba3fd",
+          "original_trace_id": "53cba3fd-0a17-4354-b818-a6de97a8d346",
+          "timestamp": "2026-05-12T05:19:09.637665",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.00095367431640625,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.55,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.03825,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-53cba3fd",
+          "original_trace_id": "53cba3fd-0a17-4354-b818-a6de97a8d346",
+          "timestamp": "2026-05-12T05:19:09.637668",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.0,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.55,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.03825,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-53cba3fd",
+          "original_trace_id": "53cba3fd-0a17-4354-b818-a6de97a8d346",
+          "timestamp": "2026-05-12T05:19:09.637671",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.0007152557373046875,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.55,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.03825,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-53cba3fd",
+          "original_trace_id": "53cba3fd-0a17-4354-b818-a6de97a8d346",
+          "timestamp": "2026-05-12T05:19:09.637673",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.0,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.55,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.03825,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-53cba3fd",
+          "original_trace_id": "53cba3fd-0a17-4354-b818-a6de97a8d346",
+          "timestamp": "2026-05-12T05:19:09.637676",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.00095367431640625,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.55,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.03825,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-714205d3",
+          "original_trace_id": "714205d3-5009-4830-a98d-3fa7ba73bef1",
+          "timestamp": "2026-05-12T05:19:09.637680",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.00095367431640625,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.6000000000000001,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.1275,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-714205d3",
+          "original_trace_id": "714205d3-5009-4830-a98d-3fa7ba73bef1",
+          "timestamp": "2026-05-12T05:19:09.637682",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.0,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.6000000000000001,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.1275,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-714205d3",
+          "original_trace_id": "714205d3-5009-4830-a98d-3fa7ba73bef1",
+          "timestamp": "2026-05-12T05:19:09.637685",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.00095367431640625,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.6000000000000001,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.1275,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-714205d3",
+          "original_trace_id": "714205d3-5009-4830-a98d-3fa7ba73bef1",
+          "timestamp": "2026-05-12T05:19:09.637687",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.0,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.6000000000000001,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.1275,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        },
+        {
+          "replay_id": "replay-714205d3",
+          "original_trace_id": "714205d3-5009-4830-a98d-3fa7ba73bef1",
+          "timestamp": "2026-05-12T05:19:09.637690",
+          "replayed_successfully": true,
+          "replay_duration_ms": 0.0,
+          "quality_score_match": true,
+          "quality_score_diff": 0.0,
+          "semantic_retention_match": true,
+          "semantic_retention_diff": 0.0,
+          "token_efficiency_match": true,
+          "token_efficiency_diff": 0.0,
+          "replayed_quality_score": 0.6000000000000001,
+          "replayed_semantic_retention": 1.0,
+          "replayed_token_efficiency": 0.1275,
+          "is_regression": false,
+          "regression_reason": "",
+          "fidelity_score": 100.0
+        }
+      ]
+    },
+    "token_evolution": {
+      "analytics_report": {
+        "total_runs": 1378,
+        "total_metrics_recorded": 1378,
+        "total_tokens_saved": 536351,
+        "avg_compression_ratio": 0.2806544081825287,
+        "avg_efficiency": 0.10428613760453381,
+        "allocation_distribution": {
+          "reasoning_context": 0.0,
+          "semantic_memories": 0.0,
+          "workspace_summary": 0.0,
+          "chunk_summaries": 0.0,
+          "metadata_glue": 0.0,
+          "response_reserve": 0.0
+        },
+        "provider_comparison": {
+          "claude": {
+            "runs": 450,
+            "avg_compression_ratio": 0.2792557276057276,
+            "avg_efficiency": 0.10481990299823633,
+            "total_tokens_saved": 180026,
+            "avg_semantic_density": 0.9976627833468799
+          },
+          "openai": {
+            "runs": 487,
+            "avg_compression_ratio": 0.2831578431835105,
+            "avg_efficiency": 0.10231495876927088,
+            "total_tokens_saved": 188445,
+            "avg_semantic_density": 0.9978403542219628
+          },
+          "gemini": {
+            "runs": 441,
+            "avg_compression_ratio": 0.27931706898543635,
+            "avg_efficiency": 0.10591826836554728,
+            "total_tokens_saved": 167880,
+            "avg_semantic_density": 0.9988075425239182
+          }
+        },
+        "compression_mode_comparison": {
+          "balanced": {
+            "runs": 1378,
+            "avg_compression_ratio": 0.2806544081825287,
+            "avg_efficiency": 0.10428613760453381,
+            "total_tokens_saved": 536351
+          }
+        },
+        "query_type_analysis": {
+          "general": {
+            "runs": 9,
+            "avg_compression_ratio": 0.24285714285714283,
+            "avg_efficiency": 0.07565,
+            "avg_semantic_density": 1.0
+          },
+          "reasoning": {
+            "runs": 12,
+            "avg_compression_ratio": 0.20946428571428574,
+            "avg_efficiency": 0.0694875,
+            "avg_semantic_density": 1.0
+          },
+          "coding": {
+            "runs": 9,
+            "avg_compression_ratio": 0.1987012987012987,
+            "avg_efficiency": 0.07565,
+            "avg_semantic_density": 1.0
+          },
+          "research": {
+            "runs": 39,
+            "avg_compression_ratio": 0.290728021978022,
+            "avg_efficiency": 0.056688461538461535,
+            "avg_semantic_density": 0.9325802888523018
+          },
+          "narrative": {
+            "runs": 9,
+            "avg_compression_ratio": 0.16813186813186815,
+            "avg_efficiency": 0.07565,
+            "avg_semantic_density": 1.0
+          },
+          "complex": {
+            "runs": 1000,
+            "avg_compression_ratio": 0.3194805194805195,
+            "avg_efficiency": 0.07028571428571427,
+            "avg_semantic_density": 1.0
+          },
+          "very_complex": {
+            "runs": 300,
+            "avg_compression_ratio": 0.15974025974025974,
+            "avg_efficiency": 0.22777777777777777,
+            "avg_semantic_density": 1.0
+          }
+        },
+        "recent_trend_compression": [
+          [
+            "2026-05-12T05:00:00",
+            0.2806544081825287
+          ]
+        ]
+      },
+      "compression_ratio_trend": [
+        [
+          "2026-05-12T05:00:00",
+          0.2806544081825287
+        ]
+      ],
+      "efficiency_trend": [
+        [
+          "2026-05-12T05:00:00",
+          0.10428613760453381
+        ]
+      ],
+      "semantic_density_trend": [
+        [
+          "2026-05-12T05:00:00",
+          0.998091894967518
+        ]
+      ],
+      "tokens_saved_trend": [
+        [
+          "2026-05-12T05:00:00",
+          389.2242380261248
+        ]
+      ]
+    },
+    "semantic_drift_timeline": {
+      "drift_report": {
+        "message": "No drift sessions recorded"
+      },
+      "drift_trends": {}
+    },
+    "runtime_evolution": {
+      "total_datapoints": 8268,
+      "tracking_window_hours": 24,
+      "completed_periods": 0,
+      "metrics": {
+        "context_quality": {
+          "metric": "context_quality",
+          "data_point_count": 1378,
+          "start_value": 0.55,
+          "end_value": 0.6000000000000001,
+          "min_value": 0.43167840693578974,
+          "max_value": 0.7626016260162602,
+          "avg_value": 0.6925004069358089,
+          "degradation_rate": 44.18590778842907,
+          "total_degradation": -0.050000000000000044,
+          "degradation_type": "stable",
+          "volatility": 0.048105666323082726,
+          "stability_score": 95.18943336769172
+        },
+        "token_efficiency": {
+          "metric": "token_efficiency",
+          "data_point_count": 1378,
+          "start_value": 0.1275,
+          "end_value": 0.051,
+          "min_value": 0.03825,
+          "max_value": 0.22777777777777777,
+          "avg_value": 0.10428613760453381,
+          "degradation_rate": -67.60450529777283,
+          "total_degradation": 0.07650000000000001,
+          "degradation_type": "stable",
+          "volatility": 0.06557840235522884,
+          "stability_score": 93.44215976447711
+        },
+        "semantic_retention": {
+          "metric": "semantic_retention",
+          "data_point_count": 1378,
+          "start_value": 1.0,
+          "end_value": 1.0,
+          "min_value": 0.4741262530479545,
+          "max_value": 1.0,
+          "avg_value": 0.998091894967518,
+          "degradation_rate": 0.0,
+          "total_degradation": 0.0,
+          "degradation_type": "stable",
+          "volatility": 0.031619321279787026,
+          "stability_score": 96.8380678720213
+        },
+        "entity_preservation": {
+          "metric": "entity_preservation",
+          "data_point_count": 0,
+          "start_value": 0.0,
+          "end_value": 0.0,
+          "min_value": 1.0,
+          "max_value": 0.0,
+          "avg_value": 0.0,
+          "degradation_rate": 0.0,
+          "total_degradation": 0.0,
+          "degradation_type": "unknown",
+          "volatility": 0.0,
+          "stability_score": 100.0
+        },
+        "compression_ratio": {
+          "metric": "compression_ratio",
+          "data_point_count": 1378,
+          "start_value": 0.24285714285714285,
+          "end_value": 0.027321428571428573,
+          "min_value": 0.027321428571428573,
+          "max_value": 1.0928571428571427,
+          "avg_value": 0.2806544081825287,
+          "degradation_rate": -190.4730109580107,
+          "total_degradation": 0.21553571428571427,
+          "degradation_type": "exponential",
+          "volatility": 0.08685417687585813,
+          "stability_score": 91.31458231241419
+        },
+        "latency": {
+          "metric": "latency",
+          "data_point_count": 1378,
+          "start_value": 0.9789466857910156,
+          "end_value": 8.841991424560547,
+          "min_value": 0.2410411834716797,
+          "max_value": 8.948087692260742,
+          "avg_value": 0.8320118069475725,
+          "degradation_rate": 6948.723924039989,
+          "total_degradation": -7.863044738769531,
+          "degradation_type": "stable",
+          "volatility": 0.599319440056046,
+          "stability_score": 40.0680559943954
+        },
+        "provider_quality": {
+          "metric": "provider_quality",
+          "data_point_count": 1378,
+          "start_value": 0.55,
+          "end_value": 0.6000000000000001,
+          "min_value": 0.43167840693578974,
+          "max_value": 0.7626016260162602,
+          "avg_value": 0.6925004069358089,
+          "degradation_rate": 44.185962021674726,
+          "total_degradation": -0.050000000000000044,
+          "degradation_type": "stable",
+          "volatility": 0.048105666323082726,
+          "stability_score": 95.18943336769172
+        },
+        "memory_relevance": {
+          "metric": "memory_relevance",
+          "data_point_count": 0,
+          "start_value": 0.0,
+          "end_value": 0.0,
+          "min_value": 1.0,
+          "max_value": 0.0,
+          "avg_value": 0.0,
+          "degradation_rate": 0.0,
+          "total_degradation": 0.0,
+          "degradation_type": "unknown",
+          "volatility": 0.0,
+          "stability_score": 100.0
+        }
+      }
+    },
+    "provider_adaptation": {
+      "benchmark_report": {
+        "total_benchmarks": 1378,
+        "providers": [
+          "claude",
+          "openai",
+          "gemini"
+        ],
+        "compression_modes": [
+          "balanced"
+        ],
+        "query_complexities": [
+          "moderate",
+          "simple"
+        ],
+        "provider_profiles": {
+          "claude": {
+            "provider": "claude",
+            "total_benchmarks": 450,
+            "by_compression_mode": {
+              "balanced": {
+                "benchmarks": 450,
+                "avg_score": 76.37547399055006,
+                "success_rate": 1.0,
+                "avg_compression_ratio": 0.2792557276057276,
+                "avg_latency_ms": 0.8495055304633247
+              }
+            }
+          },
+          "openai": {
+            "provider": "openai",
+            "total_benchmarks": 487,
+            "by_compression_mode": {
+              "balanced": {
+                "benchmarks": 487,
+                "avg_score": 76.33364171272093,
+                "success_rate": 1.0,
+                "avg_compression_ratio": 0.2831578431835105,
+                "avg_latency_ms": 0.8279449885875537
+              }
+            }
+          },
+          "gemini": {
+            "provider": "gemini",
+            "total_benchmarks": 441,
+            "by_compression_mode": {
+              "balanced": {
+                "benchmarks": 441,
+                "avg_score": 76.41136400662695,
+                "success_rate": 1.0,
+                "avg_compression_ratio": 0.27931706898543635,
+                "avg_latency_ms": 0.8186520903018597
+              }
+            }
+          }
+        },
+        "total_comparisons": 0
+      },
+      "latency_provider_comparison": {
+        "claude": {
+          "runs": 450,
+          "avg_latency_ms": 0.8374547958374023,
+          "min_latency_ms": 0.24008750915527344,
+          "max_latency_ms": 8.934974670410156,
+          "p95_latency_ms": 1.3146400451660156
+        },
+        "openai": {
+          "runs": 487,
+          "avg_latency_ms": 0.8161278475970948,
+          "min_latency_ms": 0.2288818359375,
+          "max_latency_ms": 8.8958740234375,
+          "p95_latency_ms": 1.306295394897461
+        },
+        "gemini": {
+          "runs": 441,
+          "avg_latency_ms": 0.806212695547783,
+          "min_latency_ms": 0.23412704467773438,
+          "max_latency_ms": 8.903980255126953,
+          "p95_latency_ms": 1.2693405151367188
+        }
+      },
+      "token_provider_comparison": {
+        "claude": {
+          "runs": 450,
+          "avg_compression_ratio": 0.2792557276057276,
+          "avg_efficiency": 0.10481990299823633,
+          "total_tokens_saved": 180026,
+          "avg_semantic_density": 0.9976627833468799
+        },
+        "openai": {
+          "runs": 487,
+          "avg_compression_ratio": 0.2831578431835105,
+          "avg_efficiency": 0.10231495876927088,
+          "total_tokens_saved": 188445,
+          "avg_semantic_density": 0.9978403542219628
+        },
+        "gemini": {
+          "runs": 441,
+          "avg_compression_ratio": 0.27931706898543635,
+          "avg_efficiency": 0.10591826836554728,
+          "total_tokens_saved": 167880,
+          "avg_semantic_density": 0.9988075425239182
+        }
+      },
+      "drift_provider_comparison": {}
+    },
+    "latency_diagnostics": {
+      "profiler_report": {
+        "total_profiles": 1378,
+        "total_pipeline_duration_ms": 1129.8487186431885,
+        "avg_pipeline_duration_ms": 0.8199192442983951,
+        "stage_comparison": {
+          "ranking": {
+            "percentiles": {
+              "p50": 0.2551078796386719,
+              "p75": 0.4436969757080078,
+              "p90": 0.5261898040771484,
+              "p95": 0.5472779273986815,
+              "p99": 0.8148384094238282,
+              "p99_9": 3.3282296657562256,
+              "min": 0.09107589721679688,
+              "max": 3.3359527587890625,
+              "mean": 0.3415609132741809,
+              "std_dev": 0.2305630089355283,
+              "count": 1378
+            },
+            "classification": "excellent"
+          },
+          "token_allocation": {
+            "percentiles": {
+              "p50": 0.29456615447998047,
+              "p75": 0.5455613136291504,
+              "p90": 0.6160736083984375,
+              "p95": 0.6440043449401854,
+              "p99": 1.1503195762634346,
+              "p99_9": 5.190579652786255,
+              "min": 0.1010894775390625,
+              "max": 5.221843719482422,
+              "mean": 0.40779387137713385,
+              "std_dev": 0.34782370675458707,
+              "count": 1378
+            },
+            "classification": "excellent"
+          },
+          "assembly": {
+            "percentiles": {
+              "p50": 0.007152557373046875,
+              "p75": 0.010013580322265625,
+              "p90": 0.011205673217773438,
+              "p95": 0.012159347534179688,
+              "p99": 0.0152587890625,
+              "p99_9": 0.03328490257263194,
+              "min": 0.0030994415283203125,
+              "max": 0.03504753112792969,
+              "mean": 0.008258833421505069,
+              "std_dev": 0.002906266010129689,
+              "count": 1378
+            },
+            "classification": "excellent"
+          },
+          "quality_check": {
+            "percentiles": {
+              "p50": 0.05316734313964844,
+              "p75": 0.06985664367675781,
+              "p90": 0.08296966552734375,
+              "p95": 0.08777379989624019,
+              "p99": 0.11132240295410158,
+              "p99_9": 0.35318398475646984,
+              "min": 0.032901763916015625,
+              "max": 0.3578662872314453,
+              "mean": 0.062305626225575304,
+              "std_dev": 0.023820745647956765,
+              "count": 1378
+            },
+            "classification": "excellent"
+          }
+        },
+        "provider_comparison": {
+          "claude": {
+            "runs": 450,
+            "avg_latency_ms": 0.8374547958374023,
+            "min_latency_ms": 0.24008750915527344,
+            "max_latency_ms": 8.934974670410156,
+            "p95_latency_ms": 1.3146400451660156
+          },
+          "openai": {
+            "runs": 487,
+            "avg_latency_ms": 0.8161278475970948,
+            "min_latency_ms": 0.2288818359375,
+            "max_latency_ms": 8.8958740234375,
+            "p95_latency_ms": 1.306295394897461
+          },
+          "gemini": {
+            "runs": 441,
+            "avg_latency_ms": 0.806212695547783,
+            "min_latency_ms": 0.23412704467773438,
+            "max_latency_ms": 8.903980255126953,
+            "p95_latency_ms": 1.2693405151367188
+          }
+        },
+        "compression_mode_comparison": {
+          "balanced": {
+            "runs": 1378,
+            "avg_latency_ms": 0.8199192442983951,
+            "min_latency_ms": 0.2288818359375,
+            "max_latency_ms": 8.934974670410156,
+            "p95_latency_ms": 1.2924671173095703
+          }
+        },
+        "bottleneck_analysis": {
+          "total_profiles_analyzed": 1000,
+          "bottlenecks": [
+            {
+              "stage": "token_allocation",
+              "frequency": 975,
+              "frequency_percentage": 97.5,
+              "total_bottleneck_time_ms": 428.8320541381836,
+              "avg_bottleneck_time_ms": 0.43982774783403444
+            },
+            {
+              "stage": "ranking",
+              "frequency": 25,
+              "frequency_percentage": 2.5,
+              "total_bottleneck_time_ms": 12.450933456420898,
+              "avg_bottleneck_time_ms": 0.49803733825683594
+            }
+          ]
+        }
+      },
+      "latency_heatmap": [
+        {
+          "timestamp": "2026-05-12T05:00:00",
+          "stage": "assembly",
+          "avg_latency_ms": 0.008258833421505069,
+          "max_latency_ms": 0.03504753112792969,
+          "min_latency_ms": 0.0030994415283203125,
+          "sample_count": 1378
+        },
+        {
+          "timestamp": "2026-05-12T05:00:00",
+          "stage": "quality_check",
+          "avg_latency_ms": 0.062305626225575304,
+          "max_latency_ms": 0.3578662872314453,
+          "min_latency_ms": 0.032901763916015625,
+          "sample_count": 1378
+        },
+        {
+          "timestamp": "2026-05-12T05:00:00",
+          "stage": "ranking",
+          "avg_latency_ms": 0.3415609132741809,
+          "max_latency_ms": 3.3359527587890625,
+          "min_latency_ms": 0.09107589721679688,
+          "sample_count": 1378
+        },
+        {
+          "timestamp": "2026-05-12T05:00:00",
+          "stage": "token_allocation",
+          "avg_latency_ms": 0.40779387137713385,
+          "max_latency_ms": 5.221843719482422,
+          "min_latency_ms": 0.1010894775390625,
+          "sample_count": 1378
+        }
+      ]
+    },
+    "failure_propagation": {
+      "total_failures": 5,
+      "critical_or_higher": 2,
+      "most_frequent_failure_type": "semantic_collapse",
+      "report": {
+        "total_failures": 5,
+        "by_severity": {
+          "catastrophic": 1,
+          "error": 3,
+          "critical": 1
+        },
+        "by_type": {
+          "semantic_collapse": 1,
+          "entity_erosion": 1,
+          "reasoning_continuity_loss": 1,
+          "token_explosion": 1,
+          "allocation_drift": 1
+        },
+        "failure_patterns": [
+          {
+            "pattern_id": "pattern-semantic_collapse",
+            "failure_type": "semantic_collapse",
+            "occurrence_count": 1,
+            "triggered_by_provider": null,
+            "triggered_by_compression_mode": null,
+            "triggered_by_cycle_count": null,
+            "avg_degradation_rate": 6.5,
+            "avg_time_to_failure": 0.0,
+            "avg_severity": "warning",
+            "recovery_rate": 0.0
+          },
+          {
+            "pattern_id": "pattern-entity_erosion",
+            "failure_type": "entity_erosion",
+            "occurrence_count": 1,
+            "triggered_by_provider": null,
+            "triggered_by_compression_mode": null,
+            "triggered_by_cycle_count": null,
+            "avg_degradation_rate": 5.500000000000001,
+            "avg_time_to_failure": 0.0,
+            "avg_severity": "warning",
+            "recovery_rate": 0.0
+          },
+          {
+            "pattern_id": "pattern-reasoning_continuity_loss",
+            "failure_type": "reasoning_continuity_loss",
+            "occurrence_count": 1,
+            "triggered_by_provider": null,
+            "triggered_by_compression_mode": null,
+            "triggered_by_cycle_count": null,
+            "avg_degradation_rate": 3.6842105263157894,
+            "avg_time_to_failure": 0.0,
+            "avg_severity": "warning",
+            "recovery_rate": 0.0
+          },
+          {
+            "pattern_id": "pattern-token_explosion",
+            "failure_type": "token_explosion",
+            "occurrence_count": 1,
+            "triggered_by_provider": null,
+            "triggered_by_compression_mode": null,
+            "triggered_by_cycle_count": null,
+            "avg_degradation_rate": 21.25,
+            "avg_time_to_failure": 0.0,
+            "avg_severity": "warning",
+            "recovery_rate": 0.0
+          },
+          {
+            "pattern_id": "pattern-allocation_drift",
+            "failure_type": "allocation_drift",
+            "occurrence_count": 1,
+            "triggered_by_provider": null,
+            "triggered_by_compression_mode": null,
+            "triggered_by_cycle_count": null,
+            "avg_degradation_rate": 6.8888888888888875,
+            "avg_time_to_failure": 0.0,
+            "avg_severity": "warning",
+            "recovery_rate": 0.0
+          }
+        ],
+        "recent_failures": [
+          {
+            "failure_id": "inj-semantic-collapse",
+            "timestamp": "2026-05-12T05:19:13.505793",
+            "failure_type": "semantic_collapse",
+            "severity": "catastrophic",
+            "query": "failure injection semantic",
+            "provider": "claude",
+            "compression_mode": "aggressive",
+            "cycle_number": 2,
+            "semantic_density": 0.35,
+            "entity_preservation": 0.0,
+            "reasoning_continuity": 0.0,
+            "token_count": 0,
+            "quality_score": 0.0,
+            "degradation_rate": 65.0,
+            "time_to_failure": 0.0,
+            "propagation_depth": 0,
+            "auto_recovery_attempted": false,
+            "recovery_successful": false,
+            "description": "Semantic collapse detected: 65.0% degradation",
+            "mitigation_suggestion": "Reduce compression aggressiveness or increase token budget"
+          },
+          {
+            "failure_id": "inj-entity-erosion",
+            "timestamp": "2026-05-12T05:19:13.505877",
+            "failure_type": "entity_erosion",
+            "severity": "error",
+            "query": "failure injection entities",
+            "provider": "openai",
+            "compression_mode": "",
+            "cycle_number": 4,
+            "semantic_density": 0.0,
+            "entity_preservation": 0.45,
+            "reasoning_continuity": 0.0,
+            "token_count": 0,
+            "quality_score": 0.0,
+            "degradation_rate": 55.00000000000001,
+            "time_to_failure": 0.0,
+            "propagation_depth": 0,
+            "auto_recovery_attempted": false,
+            "recovery_successful": false,
+            "description": "Entity erosion: 45/100 preserved",
+            "mitigation_suggestion": "Implement entity anchoring or reduce compression ratio"
+          },
+          {
+            "failure_id": "inj-reasoning-loss",
+            "timestamp": "2026-05-12T05:19:13.505915",
+            "failure_type": "reasoning_continuity_loss",
+            "severity": "error",
+            "query": "failure injection reasoning",
+            "provider": "gemini",
+            "compression_mode": "",
+            "cycle_number": 3,
+            "semantic_density": 0.0,
+            "entity_preservation": 0.0,
+            "reasoning_continuity": 0.6,
+            "token_count": 0,
+            "quality_score": 0.0,
+            "degradation_rate": 36.84210526315789,
+            "time_to_failure": 0.0,
+            "propagation_depth": 0,
+            "auto_recovery_attempted": false,
+            "recovery_successful": false,
+            "description": "Reasoning continuity loss: 0.60",
+            "mitigation_suggestion": "Preserve reasoning context layer or reduce chunking"
+          },
+          {
+            "failure_id": "inj-token-explosion",
+            "timestamp": "2026-05-12T05:19:13.505945",
+            "failure_type": "token_explosion",
+            "severity": "critical",
+            "query": "failure injection tokens",
+            "provider": "claude",
+            "compression_mode": "",
+            "cycle_number": 5,
+            "semantic_density": 0.0,
+            "entity_preservation": 0.0,
+            "reasoning_continuity": 0.0,
+            "token_count": 2500,
+            "quality_score": 0.0,
+            "degradation_rate": 212.5,
+            "time_to_failure": 0.0,
+            "propagation_depth": 0,
+            "auto_recovery_attempted": false,
+            "recovery_successful": false,
+            "description": "Token explosion: 2500 tokens (212.5% growth)",
+            "mitigation_suggestion": "Increase compression aggressiveness or reduce memory scope"
+          },
+          {
+            "failure_id": "inj-allocation-drift",
+            "timestamp": "2026-05-12T05:19:13.505974",
+            "failure_type": "allocation_drift",
+            "severity": "error",
+            "query": "failure injection allocation",
+            "provider": "openai",
+            "compression_mode": "",
+            "cycle_number": 1,
+            "semantic_density": 0.0,
+            "entity_preservation": 0.0,
+            "reasoning_continuity": 0.0,
+            "token_count": 0,
+            "quality_score": 0.0,
+            "degradation_rate": 68.88888888888887,
+            "time_to_failure": 0.0,
+            "propagation_depth": 0,
+            "auto_recovery_attempted": false,
+            "recovery_successful": false,
+            "description": "Allocation drift in 3 layers: 68.9% avg",
+            "mitigation_suggestion": "Review adaptive allocation logic or use fixed allocations"
+          }
+        ]
+      }
+    },
+    "context_evolution_timeline": [
+      {
+        "trace_id": "acd515ac-7de8-4ebe-bac2-8ce4596c3a8e",
+        "started_at": "2026-05-12T05:19:11.274882",
+        "duration_ms": 1.3,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.99060762845553,
+          "token_allocation": 46.84008084810697,
+          "assembly": 0.8436349722055289,
+          "quality_check": 6.070503821739783
+        }
+      },
+      {
+        "trace_id": "267cd2d2-12c9-4621-9938-e08dd338ae46",
+        "started_at": "2026-05-12T05:19:11.277627",
+        "duration_ms": 1.27,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.8978973148376,
+          "token_allocation": 47.10174920990711,
+          "assembly": 0.9198827067698081,
+          "quality_check": 6.138809083953617
+        }
+      },
+      {
+        "trace_id": "ab276ac1-807d-4464-a78f-fc6860109d71",
+        "started_at": "2026-05-12T05:19:11.280212",
+        "duration_ms": 1.307,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.54464098252499,
+          "token_allocation": 46.99053249928271,
+          "assembly": 0.8391166517729056,
+          "quality_check": 6.202166556582346
+        }
+      },
+      {
+        "trace_id": "78409058-6d20-4e94-a470-c313b514f0a2",
+        "started_at": "2026-05-12T05:19:11.282835",
+        "duration_ms": 1.272,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.76176270298988,
+          "token_allocation": 46.37166389129447,
+          "assembly": 0.862205553354707,
+          "quality_check": 7.085080416697376
+        }
+      },
+      {
+        "trace_id": "ffd8c0eb-4125-413a-ab71-95dc06aa5140",
+        "started_at": "2026-05-12T05:19:11.285454",
+        "duration_ms": 1.2730000000000001,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.65639805700118,
+          "token_allocation": 47.458969319981094,
+          "assembly": 0.8615282512703749,
+          "quality_check": 6.12434213403071
+        }
+      },
+      {
+        "trace_id": "377d6ecf-73bb-46b0-914c-90408efdbefc",
+        "started_at": "2026-05-12T05:19:11.288089",
+        "duration_ms": 1.284,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.80800859207676,
+          "token_allocation": 46.81099983761987,
+          "assembly": 0.8727159826926354,
+          "quality_check": 6.164717154339466
+        }
+      },
+      {
+        "trace_id": "d7351029-e39a-4f21-9a92-7fb351b81690",
+        "started_at": "2026-05-12T05:19:11.290658",
+        "duration_ms": 1.28,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.66851329803467,
+          "token_allocation": 47.497451305389404,
+          "assembly": 0.8568167686462402,
+          "quality_check": 6.314367055892944
+        }
+      },
+      {
+        "trace_id": "ed1de35d-8919-4fad-8a6b-a2019d33e175",
+        "started_at": "2026-05-12T05:19:11.293289",
+        "duration_ms": 1.408,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 35.79665314067494,
+          "token_allocation": 51.20580846613104,
+          "assembly": 0.7789243351329457,
+          "quality_check": 5.8249993757768115
+        }
+      },
+      {
+        "trace_id": "eea165ac-157c-458f-ba8d-e75ec1a9ac7e",
+        "started_at": "2026-05-12T05:19:11.296034",
+        "duration_ms": 1.281,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.56387946123634,
+          "token_allocation": 46.995075115647566,
+          "assembly": 0.8375359921600557,
+          "quality_check": 6.234990163858193
+        }
+      },
+      {
+        "trace_id": "8c35220c-b37a-4c40-a156-6651202d475c",
+        "started_at": "2026-05-12T05:19:11.298692",
+        "duration_ms": 1.286,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.19260312758189,
+          "token_allocation": 46.589882525834106,
+          "assembly": 0.852819178745869,
+          "quality_check": 6.377604293229977
+        }
+      },
+      {
+        "trace_id": "b746c48c-6fc9-4594-a175-6e283f8242b9",
+        "started_at": "2026-05-12T05:19:11.301280",
+        "duration_ms": 1.269,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.909761806094245,
+          "token_allocation": 47.04492687709318,
+          "assembly": 0.9393955047342889,
+          "quality_check": 6.218798241340993
+        }
+      },
+      {
+        "trace_id": "a84e5e05-a114-4df5-b1f6-f462382c26e6",
+        "started_at": "2026-05-12T05:19:11.303927",
+        "duration_ms": 1.289,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.249358018116034,
+          "token_allocation": 46.62942109503794,
+          "assembly": 0.7768487449391486,
+          "quality_check": 6.307271952958325
+        }
+      },
+      {
+        "trace_id": "3ea9e1f4-2c38-4234-8acc-82ebdc570cb7",
+        "started_at": "2026-05-12T05:19:11.306520",
+        "duration_ms": 1.279,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.03428496002126,
+          "token_allocation": 47.087203347188975,
+          "assembly": 0.8574866801150802,
+          "quality_check": 6.244739953011997
+        }
+      },
+      {
+        "trace_id": "484b8545-26de-4c9f-b8db-5878f25248ac",
+        "started_at": "2026-05-12T05:19:11.309172",
+        "duration_ms": 1.4040000000000001,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 44.304421145012576,
+          "token_allocation": 42.38552517361111,
+          "assembly": 0.781143492782897,
+          "quality_check": 5.909520336705395
+        }
+      },
+      {
+        "trace_id": "40b1bd72-04a9-4342-927f-102cbce5b05d",
+        "started_at": "2026-05-12T05:19:11.311909",
+        "duration_ms": 1.28,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.45082426071167,
+          "token_allocation": 46.640634536743164,
+          "assembly": 0.8568167686462402,
+          "quality_check": 6.165355443954468
+        }
+      },
+      {
+        "trace_id": "4a36f24a-0dd5-47d5-b7b8-34d62d39de77",
+        "started_at": "2026-05-12T05:19:11.314571",
+        "duration_ms": 1.28,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.05966877937317,
+          "token_allocation": 47.18080163002014,
+          "assembly": 0.8568167686462402,
+          "quality_check": 6.109476089477539
+        }
+      },
+      {
+        "trace_id": "d60f5daf-7f0e-40ae-8e63-33078d2c2250",
+        "started_at": "2026-05-12T05:19:11.317186",
+        "duration_ms": 1.281,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.345579720585725,
+          "token_allocation": 46.69728454065732,
+          "assembly": 0.8561479030969458,
+          "quality_check": 6.104706787299961
+        }
+      },
+      {
+        "trace_id": "1604f3b3-17a3-4a1f-a445-96dcf378c076",
+        "started_at": "2026-05-12T05:19:11.319852",
+        "duration_ms": 1.2730000000000001,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.105891057663975,
+          "token_allocation": 47.140578444511604,
+          "assembly": 0.8615282512703749,
+          "quality_check": 6.217986509168794
+        }
+      },
+      {
+        "trace_id": "25d7b39e-3d5d-4bb8-820b-5eefd590e13f",
+        "started_at": "2026-05-12T05:19:11.322454",
+        "duration_ms": 1.285,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.2787651329189,
+          "token_allocation": 46.77457104397191,
+          "assembly": 0.8534828512585118,
+          "quality_check": 6.289797534274684
+        }
+      },
+      {
+        "trace_id": "a46b6c12-2a0b-43aa-878f-66376ed94fc7",
+        "started_at": "2026-05-12T05:19:11.325279",
+        "duration_ms": 1.267,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.14054021556828,
+          "token_allocation": 46.818107719391286,
+          "assembly": 0.8656081009212214,
+          "quality_check": 6.341520217618514
+        }
+      },
+      {
+        "trace_id": "983d17c1-c9eb-4014-ad39-78f70a020efe",
+        "started_at": "2026-05-12T05:19:11.327899",
+        "duration_ms": 1.2730000000000001,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.97478893247066,
+          "token_allocation": 46.840916444069734,
+          "assembly": 0.8615282512703749,
+          "quality_check": 6.367817509389728
+        }
+      },
+      {
+        "trace_id": "082d81d8-07bc-46bf-bdd3-8bb93f876aa4",
+        "started_at": "2026-05-12T05:19:11.331975",
+        "duration_ms": 1.415,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 35.82175965865172,
+          "token_allocation": 51.238932794901174,
+          "assembly": 0.7750709991994258,
+          "quality_check": 5.79618312444788
+        }
+      },
+      {
+        "trace_id": "c8b7e36f-4ef6-4a79-af04-255d8d59e3ba",
+        "started_at": "2026-05-12T05:19:11.334783",
+        "duration_ms": 1.3439999999999999,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 40.392790521894185,
+          "token_allocation": 46.10490231286912,
+          "assembly": 0.8160159701392765,
+          "quality_check": 5.88950656709217
+        }
+      },
+      {
+        "trace_id": "8eafc3b0-cfe6-4f96-b1a6-177668623cad",
+        "started_at": "2026-05-12T05:19:11.337506",
+        "duration_ms": 1.282,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.29629154770683,
+          "token_allocation": 46.56787223637383,
+          "assembly": 0.781090508757069,
+          "quality_check": 6.397503214581708
+        }
+      },
+      {
+        "trace_id": "6a83b394-3f81-4b15-82e4-42a4748caf3d",
+        "started_at": "2026-05-12T05:19:11.340181",
+        "duration_ms": 1.333,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 41.56675002490857,
+          "token_allocation": 45.07237954508159,
+          "assembly": 0.8227497853467273,
+          "quality_check": 6.009650606010878
+        }
+      },
+      {
+        "trace_id": "67e566e8-3165-40c6-bff1-ed4eb9997505",
+        "started_at": "2026-05-12T05:19:11.342920",
+        "duration_ms": 1.299,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.09403952935552,
+          "token_allocation": 46.270457114321715,
+          "assembly": 0.8442844217607295,
+          "quality_check": 6.4789652365551635
+        }
+      },
+      {
+        "trace_id": "c71d77c3-8bce-4005-a3ef-1674839cd476",
+        "started_at": "2026-05-12T05:19:11.345804",
+        "duration_ms": 1.3110000000000002,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.20880508713827,
+          "token_allocation": 45.62869679373152,
+          "assembly": 0.8365564179002192,
+          "quality_check": 6.110499052488557
+        }
+      },
+      {
+        "trace_id": "1bf2844e-0627-49ee-b729-b3261f3520aa",
+        "started_at": "2026-05-12T05:19:11.348532",
+        "duration_ms": 1.315,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.543035819050026,
+          "token_allocation": 46.61400508518002,
+          "assembly": 0.8521424500207937,
+          "quality_check": 6.1463040544053
+        }
+      },
+      {
+        "trace_id": "d59b5442-f56e-4b32-bc7e-2c659f9cd94a",
+        "started_at": "2026-05-12T05:19:11.351309",
+        "duration_ms": 1.327,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 40.17362041229041,
+          "token_allocation": 46.12060983826006,
+          "assembly": 0.8264698295909476,
+          "quality_check": 6.018856367673206
+        }
+      },
+      {
+        "trace_id": "76f42bfa-cb63-4439-ad72-6a21ae4cc255",
+        "started_at": "2026-05-12T05:19:11.354089",
+        "duration_ms": 1.4469999999999998,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 36.41361850825523,
+          "token_allocation": 50.92963566018865,
+          "assembly": 0.757930520986308,
+          "quality_check": 5.733909158765982
+        }
+      },
+      {
+        "trace_id": "554ef36a-0ed5-4158-ad75-a38489ec422a",
+        "started_at": "2026-05-12T05:19:11.357014",
+        "duration_ms": 1.294,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.02399926871015,
+          "token_allocation": 46.81774416515226,
+          "assembly": 0.8659716551602347,
+          "quality_check": 6.246050874453608
+        }
+      },
+      {
+        "trace_id": "debdfac0-e2cd-4345-8029-0700677f0327",
+        "started_at": "2026-05-12T05:19:11.359757",
+        "duration_ms": 1.3,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.47709068885216,
+          "token_allocation": 47.55533658541166,
+          "assembly": 0.8436349722055289,
+          "quality_check": 6.382281963641827
+        }
+      },
+      {
+        "trace_id": "c56890bd-1239-42d2-bed7-4e62058563f9",
+        "started_at": "2026-05-12T05:19:11.362559",
+        "duration_ms": 1.271,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.92356818534557,
+          "token_allocation": 46.80207355298178,
+          "assembly": 0.8628839212172994,
+          "quality_check": 6.377837678562647
+        }
+      },
+      {
+        "trace_id": "ba1df2b2-f11f-4d72-b37a-4366c40f5356",
+        "started_at": "2026-05-12T05:19:11.365439",
+        "duration_ms": 1.286,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.41507769595038,
+          "token_allocation": 46.738198904746426,
+          "assembly": 0.852819178745869,
+          "quality_check": 6.21074836695361
+        }
+      },
+      {
+        "trace_id": "b54f64e3-3fb6-4c99-bc32-91d85ef3a845",
+        "started_at": "2026-05-12T05:19:11.368242",
+        "duration_ms": 1.269,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.92854971618893,
+          "token_allocation": 46.96977523671445,
+          "assembly": 0.8642438643555458,
+          "quality_check": 6.312737791814421
+        }
+      },
+      {
+        "trace_id": "74a97271-67e0-4823-bd99-de00969ef5c2",
+        "started_at": "2026-05-12T05:19:11.370993",
+        "duration_ms": 1.302,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.47292125133509,
+          "token_allocation": 46.694883003762236,
+          "assembly": 1.0437679730252736,
+          "quality_check": 6.299231275801651
+        }
+      },
+      {
+        "trace_id": "c562f0cf-4374-4097-bd24-e84a321ce2c8",
+        "started_at": "2026-05-12T05:19:11.373995",
+        "duration_ms": 1.286,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.04428674866956,
+          "token_allocation": 46.90505483102279,
+          "assembly": 0.9269773682020316,
+          "quality_check": 6.118050630133408
+        }
+      },
+      {
+        "trace_id": "f4bdc2e7-873f-4a37-b412-77428ae34d60",
+        "started_at": "2026-05-12T05:19:11.376813",
+        "duration_ms": 1.35,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 37.33458342375579,
+          "token_allocation": 49.04358475296585,
+          "assembly": 0.900692409939236,
+          "quality_check": 5.916312888816551
+        }
+      },
+      {
+        "trace_id": "262ed0e4-71a5-48d2-8c76-254f16ab73a5",
+        "started_at": "2026-05-12T05:19:11.379694",
+        "duration_ms": 1.27,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.991762897161045,
+          "token_allocation": 47.08297609344242,
+          "assembly": 0.8635633573757382,
+          "quality_check": 6.382859597994586
+        }
+      },
+      {
+        "trace_id": "182b3d75-f882-4de0-bbbb-a89e3ec79958",
+        "started_at": "2026-05-12T05:19:11.382500",
+        "duration_ms": 1.4909999999999999,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 47.29994345958564,
+          "token_allocation": 40.775813327229,
+          "assembly": 0.7355636913931507,
+          "quality_check": 5.2448889299337695
+        }
+      },
+      {
+        "trace_id": "c49d5da3-302f-4d94-b125-7532b01336fa",
+        "started_at": "2026-05-12T05:19:11.385548",
+        "duration_ms": 1.286,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.11844493812573,
+          "token_allocation": 46.738198904746426,
+          "assembly": 0.852819178745869,
+          "quality_check": 6.3034461037738145
+        }
+      },
+      {
+        "trace_id": "13390ec6-ddd4-4108-af2e-d0f31e9f197f",
+        "started_at": "2026-05-12T05:19:11.388404",
+        "duration_ms": 1.3179999999999998,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 40.66502016846074,
+          "token_allocation": 45.76623711130146,
+          "assembly": 0.8502028238067859,
+          "quality_check": 6.059956297346241
+        }
+      },
+      {
+        "trace_id": "b1f567e2-72a5-4ed9-9b91-39888f52122b",
+        "started_at": "2026-05-12T05:19:11.391452",
+        "duration_ms": 1.278,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.803649806827075,
+          "token_allocation": 47.03076978990916,
+          "assembly": 0.8581576399586757,
+          "quality_check": 6.398871097952734
+        }
+      },
+      {
+        "trace_id": "ffba89a6-fec7-4f16-b849-081a540d939e",
+        "started_at": "2026-05-12T05:19:11.394359",
+        "duration_ms": 1.288,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.131745048191235,
+          "token_allocation": 47.128393042902026,
+          "assembly": 0.8700056846097389,
+          "quality_check": 6.219615106997282
+        }
+      },
+      {
+        "trace_id": "32d87944-d8da-4b49-8684-a6ea04d2b322",
+        "started_at": "2026-05-12T05:19:11.397226",
+        "duration_ms": 1.312,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.179682522285276,
+          "token_allocation": 45.72112385819598,
+          "assembly": 0.854090946476634,
+          "quality_check": 6.251218842297066
+        }
+      },
+      {
+        "trace_id": "f1f59fcf-7326-4bae-8996-53fadd1d0265",
+        "started_at": "2026-05-12T05:19:11.401816",
+        "duration_ms": 1.3,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.37574533315805,
+          "token_allocation": 46.381583580603966,
+          "assembly": 0.8436349722055289,
+          "quality_check": 6.253902728740986
+        }
+      },
+      {
+        "trace_id": "2b1fb773-97fb-4e87-83f1-961bcc00ddc9",
+        "started_at": "2026-05-12T05:19:11.404791",
+        "duration_ms": 1.286,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.9701285592134,
+          "token_allocation": 46.90505483102279,
+          "assembly": 0.8713587261099096,
+          "quality_check": 6.525920672142302
+        }
+      },
+      {
+        "trace_id": "0bf86bd7-5e8d-43d0-8a64-a74182dd2fe6",
+        "started_at": "2026-05-12T05:19:11.407689",
+        "duration_ms": 1.4549999999999998,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 45.766535493516436,
+          "token_allocation": 41.52252092394223,
+          "assembly": 0.7537632054070018,
+          "quality_check": 5.6368378839132305
+        }
+      },
+      {
+        "trace_id": "214f2ad5-0e7e-4666-88be-f21c41726ec1",
+        "started_at": "2026-05-12T05:19:11.410817",
+        "duration_ms": 1.2899999999999998,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.29286040076914,
+          "token_allocation": 46.74113074014354,
+          "assembly": 0.8501747781916184,
+          "quality_check": 6.209972292877907
+        }
+      },
+      {
+        "trace_id": "279d1cbd-5378-4682-ad11-47b28685e85f",
+        "started_at": "2026-05-12T05:19:11.413736",
+        "duration_ms": 1.3190000000000002,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.97122490848891,
+          "token_allocation": 46.38226489572474,
+          "assembly": 0.8314825351532884,
+          "quality_check": 6.597633159368484
+        }
+      },
+      {
+        "trace_id": "c65f6f4a-76c3-41be-9efa-5b5c760d969c",
+        "started_at": "2026-05-12T05:19:11.417007",
+        "duration_ms": 1.285,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.81491575723493,
+          "token_allocation": 46.84878694408135,
+          "assembly": 0.8720368262858706,
+          "quality_check": 6.364013434384121
+        }
+      },
+      {
+        "trace_id": "d40a9649-9d0a-47d2-9b36-b7040c475836",
+        "started_at": "2026-05-12T05:19:11.419970",
+        "duration_ms": 1.339,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 41.166822620075614,
+          "token_allocation": 45.17310942349993,
+          "assembly": 0.747840203305872,
+          "quality_check": 6.036138783825966
+        }
+      },
+      {
+        "trace_id": "ba137f05-a9b2-48d0-817b-f63c130f9f87",
+        "started_at": "2026-05-12T05:19:11.423201",
+        "duration_ms": 1.279,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.23933612265748,
+          "token_allocation": 46.84487015498253,
+          "assembly": 0.8574866801150802,
+          "quality_check": 6.31930401215244
+        }
+      },
+      {
+        "trace_id": "0cdc999e-6a7e-4b32-be8d-3ab3b47fb8f4",
+        "started_at": "2026-05-12T05:19:11.426200",
+        "duration_ms": 1.292,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.25048898986249,
+          "token_allocation": 46.74258985017475,
+          "assembly": 0.8673121685583155,
+          "quality_check": 6.181905882277356
+        }
+      },
+      {
+        "trace_id": "1471764e-5c79-4d93-a31a-65868b0ddb40",
+        "started_at": "2026-05-12T05:19:11.429408",
+        "duration_ms": 1.297,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.76093959881879,
+          "token_allocation": 46.488865578091875,
+          "assembly": 0.84558632526383,
+          "quality_check": 6.1029273910346
+        }
+      },
+      {
+        "trace_id": "cc1f9dac-fd4f-4677-ad85-6bb6136f0307",
+        "started_at": "2026-05-12T05:19:11.432470",
+        "duration_ms": 1.3079999999999998,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.98909332555369,
+          "token_allocation": 47.62903265996811,
+          "assembly": 0.8384751252807245,
+          "quality_check": 5.978692197653861
+        }
+      },
+      {
+        "trace_id": "628774b2-3437-42bc-886e-0d8668cca892",
+        "started_at": "2026-05-12T05:19:11.435719",
+        "duration_ms": 1.342,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.0723558133121,
+          "token_allocation": 48.429884249691455,
+          "assembly": 0.888295749260665,
+          "quality_check": 5.951581520046456
+        }
+      },
+      {
+        "trace_id": "0a628098-9537-44a4-b0d9-011360f7067e",
+        "started_at": "2026-05-12T05:19:11.438862",
+        "duration_ms": 1.2979999999999998,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.99558115813692,
+          "token_allocation": 46.765308350737925,
+          "assembly": 0.7714622744426523,
+          "quality_check": 6.4655885858050866
+        }
+      },
+      {
+        "trace_id": "5a9fa14a-145d-4043-82cf-4d73020cee0b",
+        "started_at": "2026-05-12T05:19:11.442228",
+        "duration_ms": 1.28,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.05966877937317,
+          "token_allocation": 47.1062958240509,
+          "assembly": 0.8568167686462402,
+          "quality_check": 6.109476089477539
+        }
+      },
+      {
+        "trace_id": "ff63f827-84c7-456d-a42d-d8816a2aba9c",
+        "started_at": "2026-05-12T05:19:11.445324",
+        "duration_ms": 1.324,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 40.3907003719641,
+          "token_allocation": 45.70289680964997,
+          "assembly": 0.8283424953679664,
+          "quality_check": 6.140538933053837
+        }
+      },
+      {
+        "trace_id": "d69440f1-dcca-4123-95e7-63f7c8a5646d",
+        "started_at": "2026-05-12T05:19:11.448790",
+        "duration_ms": 1.314,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.93601922393752,
+          "token_allocation": 46.26844571605665,
+          "assembly": 0.8346464717406297,
+          "quality_check": 6.150981606958119
+        }
+      },
+      {
+        "trace_id": "9befb207-c2a8-40c0-821b-1e9586f1c98a",
+        "started_at": "2026-05-12T05:19:11.452142",
+        "duration_ms": 1.345,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 41.195894262604554,
+          "token_allocation": 45.52110863440985,
+          "assembly": 0.8154092668157528,
+          "quality_check": 5.849675174982575
+        }
+      },
+      {
+        "trace_id": "f9aa83f0-bc67-4498-b214-45effde9374a",
+        "started_at": "2026-05-12T05:19:11.455391",
+        "duration_ms": 1.284,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.78944016691309,
+          "token_allocation": 47.200936766057,
+          "assembly": 0.8541475575289621,
+          "quality_check": 6.146148729175794
+        }
+      },
+      {
+        "trace_id": "b4112ee6-08e7-4651-b024-8d900dadfb05",
+        "started_at": "2026-05-12T05:19:11.458861",
+        "duration_ms": 1.292,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.61955799775965,
+          "token_allocation": 46.44733464385703,
+          "assembly": 0.8488587181634578,
+          "quality_check": 6.181905882277356
+        }
+      },
+      {
+        "trace_id": "af4a4500-1980-43e6-bc58-58986f10b028",
+        "started_at": "2026-05-12T05:19:11.462111",
+        "duration_ms": 1.338,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 37.5981466296186,
+          "token_allocation": 48.66376229643999,
+          "assembly": 0.8196752345793628,
+          "quality_check": 6.272297447215994
+        }
+      },
+      {
+        "trace_id": "7bf4e53f-2f19-430d-8074-8583d66c7685",
+        "started_at": "2026-05-12T05:19:11.465647",
+        "duration_ms": 1.2750000000000001,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.081947476256126,
+          "token_allocation": 46.82353898590686,
+          "assembly": 0.8601768344056371,
+          "quality_check": 6.357828776041666
+        }
+      },
+      {
+        "trace_id": "cdb3c8f6-735d-48ad-ae94-9c017561deca",
+        "started_at": "2026-05-12T05:19:11.469216",
+        "duration_ms": 1.333,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 37.57820215246683,
+          "token_allocation": 47.32599852233567,
+          "assembly": 0.8227497853467273,
+          "quality_check": 6.152737525201613
+        }
+      },
+      {
+        "trace_id": "bf0959aa-6304-4390-8eae-cf1bb9a65571",
+        "started_at": "2026-05-12T05:19:11.472569",
+        "duration_ms": 1.3339999999999999,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 37.78237452928809,
+          "token_allocation": 46.46838873043947,
+          "assembly": 0.8221330313846984,
+          "quality_check": 7.27409008203418
+        }
+      },
+      {
+        "trace_id": "aa70a8a3-cdad-4704-b2eb-a2a58b6e6fe6",
+        "started_at": "2026-05-12T05:19:11.477772",
+        "duration_ms": 1.366,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 37.85723997593624,
+          "token_allocation": 45.65907781330069,
+          "assembly": 0.8028736924357155,
+          "quality_check": 7.103686800463831
+        }
+      },
+      {
+        "trace_id": "88a0d513-894d-45b7-8e3a-dd513c0dda42",
+        "started_at": "2026-05-12T05:19:11.481444",
+        "duration_ms": 1.348,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 41.98855391595767,
+          "token_allocation": 44.58851913316313,
+          "assembly": 0.8135945577649758,
+          "quality_check": 6.013524992175908
+        }
+      },
+      {
+        "trace_id": "daec56ae-ce69-4fc0-a3a3-6ceca15c852c",
+        "started_at": "2026-05-12T05:19:11.485092",
+        "duration_ms": 1.2899999999999998,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.45919894432837,
+          "token_allocation": 46.42693571342055,
+          "assembly": 0.8501747781916184,
+          "quality_check": 6.2839005344597885
+        }
+      },
+      {
+        "trace_id": "2578c577-f5d8-4d5c-a001-6138715b898d",
+        "started_at": "2026-05-12T05:19:11.488580",
+        "duration_ms": 1.3190000000000002,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 37.452865496469855,
+          "token_allocation": 47.087217479876436,
+          "assembly": 0.8314825351532884,
+          "quality_check": 6.52533033022472
+        }
+      },
+      {
+        "trace_id": "5cd9b444-363f-49c8-893d-9960f25cf33c",
+        "started_at": "2026-05-12T05:19:11.492604",
+        "duration_ms": 1.307,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.69386596212701,
+          "token_allocation": 46.443282508996035,
+          "assembly": 0.8391166517729056,
+          "quality_check": 6.129199891210789
+        }
+      },
+      {
+        "trace_id": "a14c0b45-aa7c-4796-8086-0ae8054ece20",
+        "started_at": "2026-05-12T05:19:11.496569",
+        "duration_ms": 1.2910000000000001,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.114682458335345,
+          "token_allocation": 46.39097371829008,
+          "assembly": 0.8495162384718724,
+          "quality_check": 6.371371788539043
+        }
+      },
+      {
+        "trace_id": "a5b1f8d2-70eb-4f30-aca6-2b9a3d5c31a5",
+        "started_at": "2026-05-12T05:19:11.500321",
+        "duration_ms": 1.374,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.94465568353689,
+          "token_allocation": 46.65993880670317,
+          "assembly": 0.8849597914250137,
+          "quality_check": 5.67415395678391
+        }
+      },
+      {
+        "trace_id": "48a29cc0-775e-4e9c-bf3e-6a7c3b3cc10a",
+        "started_at": "2026-05-12T05:19:11.504248",
+        "duration_ms": 1.2730000000000001,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.65639805700118,
+          "token_allocation": 46.42888119346217,
+          "assembly": 0.9551726264084592,
+          "quality_check": 6.611292884748747
+        }
+      },
+      {
+        "trace_id": "0370b95d-e67c-4e70-a0c6-332591e4e731",
+        "started_at": "2026-05-12T05:19:11.508023",
+        "duration_ms": 1.3010000000000002,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.14389584634415,
+          "token_allocation": 46.510865008437015,
+          "assembly": 0.8429865210355014,
+          "quality_check": 6.139140968410716
+        }
+      },
+      {
+        "trace_id": "159776b4-e2c7-4ce0-9a82-67e682452dbc",
+        "started_at": "2026-05-12T05:19:11.511926",
+        "duration_ms": 1.307,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.32574098641032,
+          "token_allocation": 47.57426582225517,
+          "assembly": 0.8391166517729056,
+          "quality_check": 5.9832665604676745
+        }
+      },
+      {
+        "trace_id": "5f56ac8c-0bb5-465e-bf8c-252ee43cf83e",
+        "started_at": "2026-05-12T05:19:11.515618",
+        "duration_ms": 1.575,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 47.62316507006449,
+          "token_allocation": 40.705241854228674,
+          "assembly": 0.7720220656622024,
+          "quality_check": 5.2679152715773805
+        }
+      },
+      {
+        "trace_id": "b63b98c5-a59c-4ca7-9375-b7967d15a848",
+        "started_at": "2026-05-12T05:19:11.519742",
+        "duration_ms": 1.5050000000000001,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 33.426126372378526,
+          "token_allocation": 54.47983345716102,
+          "assembly": 0.7128794723966985,
+          "quality_check": 5.3228333938953485
+        }
+      },
+      {
+        "trace_id": "250b0775-1bb7-4432-9e56-d64700622bed",
+        "started_at": "2026-05-12T05:19:11.523759",
+        "duration_ms": 1.519,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 48.31154618002695,
+          "token_allocation": 39.56900842100323,
+          "assembly": 0.8004837086359242,
+          "quality_check": 5.352253816565689
+        }
+      },
+      {
+        "trace_id": "e8e155fd-b413-4322-b7e5-3917cdf76f7f",
+        "started_at": "2026-05-12T05:19:11.529954",
+        "duration_ms": 1.294,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.87659983804458,
+          "token_allocation": 46.67034473448669,
+          "assembly": 0.9396713704930207,
+          "quality_check": 6.3381755186195905
+        }
+      },
+      {
+        "trace_id": "9b1e49ec-ee65-4b88-b4e4-d0b56c8bf810",
+        "started_at": "2026-05-12T05:19:11.561225",
+        "duration_ms": 1.4040000000000001,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.957187793872976,
+          "token_allocation": 43.86290525778745,
+          "assembly": 0.8490690138944533,
+          "quality_check": 6.554812787265179
+        }
+      },
+      {
+        "trace_id": "fdbc7ef7-31aa-4ef0-ba63-5e56f15f78f1",
+        "started_at": "2026-05-12T05:19:11.566053",
+        "duration_ms": 1.3519999999999999,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.09054222332656,
+          "token_allocation": 45.39122948279748,
+          "assembly": 0.811187473274547,
+          "quality_check": 7.177245687450884
+        }
+      },
+      {
+        "trace_id": "615b8af0-db01-4f12-9a3b-dffaa19de224",
+        "started_at": "2026-05-12T05:19:11.570608",
+        "duration_ms": 1.296,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.0557595241217,
+          "token_allocation": 46.0648242338204,
+          "assembly": 0.9198247650523245,
+          "quality_check": 6.401980364764177
+        }
+      },
+      {
+        "trace_id": "96edfccc-5a13-4e77-9771-18a771987318",
+        "started_at": "2026-05-12T05:19:11.574926",
+        "duration_ms": 1.3619999999999999,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 40.174055729668574,
+          "token_allocation": 45.05796054386358,
+          "assembly": 0.8052316181110041,
+          "quality_check": 6.09175224136151
+        }
+      },
+      {
+        "trace_id": "d229cd48-454f-45aa-9caf-f56735bb822f",
+        "started_at": "2026-05-12T05:19:11.579671",
+        "duration_ms": 1.3639999999999999,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 37.68551734185988,
+          "token_allocation": 48.382890539085416,
+          "assembly": 0.8040509265888472,
+          "quality_check": 6.082820053324323
+        }
+      },
+      {
+        "trace_id": "f04f26e3-bc3d-454e-b76d-4047b405ab72",
+        "started_at": "2026-05-12T05:19:11.584218",
+        "duration_ms": 1.331,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.37220412210626,
+          "token_allocation": 45.30132130336977,
+          "assembly": 0.8239860735290665,
+          "quality_check": 6.8964051806237086
+        }
+      },
+      {
+        "trace_id": "5934090f-7841-45c4-b8bb-7f2b2ce0840a",
+        "started_at": "2026-05-12T05:19:11.588859",
+        "duration_ms": 1.332,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 40.75668953560494,
+          "token_allocation": 45.124116960588516,
+          "assembly": 0.8233674653657563,
+          "quality_check": 6.01416235571509
+        }
+      },
+      {
+        "trace_id": "d5c465b4-c937-42db-876d-0e3cf9382ac9",
+        "started_at": "2026-05-12T05:19:11.593416",
+        "duration_ms": 1.304,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.34637900510449,
+          "token_allocation": 46.23930878434444,
+          "assembly": 0.9324653017008963,
+          "quality_check": 6.289569878139378
+        }
+      },
+      {
+        "trace_id": "29c83935-d0db-44f7-b71a-65fa0eafe198",
+        "started_at": "2026-05-12T05:19:11.597922",
+        "duration_ms": 1.292,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.93678033314991,
+          "token_allocation": 46.52114844543646,
+          "assembly": 0.8488587181634578,
+          "quality_check": 6.421800737410507
+        }
+      },
+      {
+        "trace_id": "d1062d2c-7449-464a-aa9a-ca888a7415ed",
+        "started_at": "2026-05-12T05:19:11.602618",
+        "duration_ms": 1.31,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.07516712450799,
+          "token_allocation": 46.42792330443404,
+          "assembly": 0.8371950105856393,
+          "quality_check": 6.406361820133588
+        }
+      },
+      {
+        "trace_id": "d2689ca6-5e68-4b39-ade0-df9ca9715a69",
+        "started_at": "2026-05-12T05:19:11.609333",
+        "duration_ms": 1.4040000000000001,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 36.81563244246349,
+          "token_allocation": 48.651654496152176,
+          "assembly": 0.9339759152838986,
+          "quality_check": 5.841594815593838
+        }
+      },
+      {
+        "trace_id": "84f40461-bb89-4f32-b202-5e5bad8b8d0a",
+        "started_at": "2026-05-12T05:19:11.614386",
+        "duration_ms": 1.4549999999999998,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 35.93484150994685,
+          "token_allocation": 50.371045509154854,
+          "assembly": 0.9012386151605456,
+          "quality_check": 5.8334717635846225
+        }
+      },
+      {
+        "trace_id": "9050f4ff-bdcf-4aeb-ac90-39af5d101976",
+        "started_at": "2026-05-12T05:19:11.619896",
+        "duration_ms": 1.341,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.8474716880622,
+          "token_allocation": 46.616966025674635,
+          "assembly": 0.8356206724663264,
+          "quality_check": 6.258265461875466
+        }
+      },
+      {
+        "trace_id": "9e81f5a9-c626-474e-9c5d-5d50ae1674b6",
+        "started_at": "2026-05-12T05:19:11.624938",
+        "duration_ms": 1.415,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 44.0948001066282,
+          "token_allocation": 42.76369991235093,
+          "assembly": 0.7750709991994258,
+          "quality_check": 5.711936276708811
+        }
+      },
+      {
+        "trace_id": "548d3f1d-5621-41ed-a918-d09929111eeb",
+        "started_at": "2026-05-12T05:19:11.644393",
+        "duration_ms": 1.353,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.82453723352042,
+          "token_allocation": 45.44578828550848,
+          "assembly": 0.8810738326000092,
+          "quality_check": 6.202759781504065
+        }
+      },
+      {
+        "trace_id": "8a017c94-098c-4d34-95d0-1993a42fd0e4",
+        "started_at": "2026-05-12T05:19:11.652617",
+        "duration_ms": 1.346,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.65002523028301,
+          "token_allocation": 45.23930542536334,
+          "assembly": 0.8856559401989692,
+          "quality_check": 6.536140838668391
+        }
+      },
+      {
+        "trace_id": "35a2df9b-6134-46df-a68b-866c5d40a716",
+        "started_at": "2026-05-12T05:19:11.658317",
+        "duration_ms": 1.3339999999999999,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.05131899077317,
+          "token_allocation": 46.03944975754311,
+          "assembly": 0.8221330313846984,
+          "quality_check": 6.30897739301736
+        }
+      },
+      {
+        "trace_id": "c4e18a8a-1ce1-4c9f-b9b8-5b6478a1fa5e",
+        "started_at": "2026-05-12T05:19:11.664397",
+        "duration_ms": 1.3519999999999999,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 40.10087639622435,
+          "token_allocation": 45.12671182846882,
+          "assembly": 0.8288219835631241,
+          "quality_check": 6.136809580424834
+        }
+      },
+      {
+        "trace_id": "d9d9a404-310c-4a50-92d8-9e18ec316bfa",
+        "started_at": "2026-05-12T05:19:11.670137",
+        "duration_ms": 1.479,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 42.79927839855635,
+          "token_allocation": 43.395727852698194,
+          "assembly": 0.7576520093153102,
+          "quality_check": 5.883893263831664
+        }
+      },
+      {
+        "trace_id": "2e41555f-fecd-4532-850a-9afd628f3247",
+        "started_at": "2026-05-12T05:19:11.675908",
+        "duration_ms": 1.501,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 35.99310461320058,
+          "token_allocation": 51.11465606587796,
+          "assembly": 0.7306632004444954,
+          "quality_check": 5.416438072860281
+        }
+      },
+      {
+        "trace_id": "7e76e6f5-92bf-4ed4-acc6-36af8cdf4f51",
+        "started_at": "2026-05-12T05:19:11.681905",
+        "duration_ms": 1.42,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 44.35928774551607,
+          "token_allocation": 42.260532647791045,
+          "assembly": 0.7723418759628081,
+          "quality_check": 5.994044559102663
+        }
+      },
+      {
+        "trace_id": "c31aa64e-bdea-44b4-9489-083ac01e6c08",
+        "started_at": "2026-05-12T05:19:11.690811",
+        "duration_ms": 1.327,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.18544996386645,
+          "token_allocation": 45.22227306696555,
+          "assembly": 0.8264698295909476,
+          "quality_check": 6.198523721932108
+        }
+      },
+      {
+        "trace_id": "fde81ef7-1784-4ef2-ad84-ea1b6b56e18b",
+        "started_at": "2026-05-12T05:19:11.697130",
+        "duration_ms": 1.3639999999999999,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.542006372356695,
+          "token_allocation": 47.0719379413862,
+          "assembly": 0.8040509265888472,
+          "quality_check": 6.012902581447031
+        }
+      },
+      {
+        "trace_id": "0efa78ba-47d5-4f53-a3e5-043c3e3db41d",
+        "started_at": "2026-05-12T05:19:11.703527",
+        "duration_ms": 1.32,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.941701253255204,
+          "token_allocation": 45.751080368504375,
+          "assembly": 0.8489146377101089,
+          "quality_check": 6.881627169522372
+        }
+      },
+      {
+        "trace_id": "01f41ec0-f470-4405-a591-2259caf63dfd",
+        "started_at": "2026-05-12T05:19:11.710591",
+        "duration_ms": 1.366,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.14881939420239,
+          "token_allocation": 45.60671648553314,
+          "assembly": 1.0123190035059022,
+          "quality_check": 6.230998004338053
+        }
+      },
+      {
+        "trace_id": "73ed276e-c98e-4b95-a3b7-2638556e68eb",
+        "started_at": "2026-05-12T05:19:11.717523",
+        "duration_ms": 1.504,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 35.30307019010503,
+          "token_allocation": 50.85417564879072,
+          "assembly": 0.7926149571195562,
+          "quality_check": 5.516600101552111
+        }
+      },
+      {
+        "trace_id": "4a930686-7648-406d-813b-ad70b30a9c92",
+        "started_at": "2026-05-12T05:19:11.724474",
+        "duration_ms": 1.339,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.956033719485156,
+          "token_allocation": 44.959440793983966,
+          "assembly": 0.9080916754428445,
+          "quality_check": 6.036138783825966
+        }
+      },
+      {
+        "trace_id": "83b69f9b-a51c-4661-95e3-79d8e6da8a74",
+        "started_at": "2026-05-12T05:19:11.733875",
+        "duration_ms": 1.444,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.14753816134382,
+          "token_allocation": 43.63852524691341,
+          "assembly": 0.8255490966120586,
+          "quality_check": 6.852057501880086
+        }
+      },
+      {
+        "trace_id": "a05949f1-70dc-4d42-a57f-837323d95ea3",
+        "started_at": "2026-05-12T05:19:11.741302",
+        "duration_ms": 1.3159999999999998,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.22311730660204,
+          "token_allocation": 45.81767374983675,
+          "assembly": 0.9058456652794928,
+          "quality_check": 6.141633610594962
+        }
+      },
+      {
+        "trace_id": "90d420f7-7939-48e2-a98e-dd6ac5c58fc8",
+        "started_at": "2026-05-12T05:19:11.748454",
+        "duration_ms": 1.4549999999999998,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 35.049989051425584,
+          "token_allocation": 51.20673949775827,
+          "assembly": 0.7537632054070018,
+          "quality_check": 5.6368378839132305
+        }
+      },
+      {
+        "trace_id": "dec99429-e47a-40a9-913f-5a83cd01c328",
+        "started_at": "2026-05-12T05:19:11.755937",
+        "duration_ms": 1.399,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.60577396940895,
+          "token_allocation": 46.115845250094935,
+          "assembly": 0.8691456421858247,
+          "quality_check": 6.203313995208632
+        }
+      },
+      {
+        "trace_id": "2d6815cf-d43f-485b-993e-5ffaa93d82e7",
+        "started_at": "2026-05-12T05:19:11.767371",
+        "duration_ms": 1.3699999999999999,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.39997540773267,
+          "token_allocation": 44.22055543774236,
+          "assembly": 0.8005295356694799,
+          "quality_check": 6.560861629291173
+        }
+      },
+      {
+        "trace_id": "5a1aa92e-82c8-4f41-a4e0-03ba63e30844",
+        "started_at": "2026-05-12T05:19:11.775561",
+        "duration_ms": 1.338,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.54042055503491,
+          "token_allocation": 45.064318875026274,
+          "assembly": 0.8196752345793628,
+          "quality_check": 6.129745232506539
+        }
+      },
+      {
+        "trace_id": "d64e99d8-5616-4750-bade-138c1c352174",
+        "started_at": "2026-05-12T05:19:11.783810",
+        "duration_ms": 1.342,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.49362901212917,
+          "token_allocation": 45.0188285725305,
+          "assembly": 0.8172320893198118,
+          "quality_check": 5.987113350016882
+        }
+      },
+      {
+        "trace_id": "d23c5e1e-1928-453c-b536-39a9e3ed8f4a",
+        "started_at": "2026-05-12T05:19:11.793658",
+        "duration_ms": 1.5590000000000002,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.7160391229479,
+          "token_allocation": 42.392322082715275,
+          "assembly": 0.8258244561567911,
+          "quality_check": 6.285441694082243
+        }
+      },
+      {
+        "trace_id": "a6325083-cf3a-4237-ade5-afd720b996b1",
+        "started_at": "2026-05-12T05:19:11.807194",
+        "duration_ms": 1.562,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.082865227810395,
+          "token_allocation": 46.47788561871049,
+          "assembly": 0.8395020390900088,
+          "quality_check": 5.76966855956406
+        }
+      },
+      {
+        "trace_id": "42cb1539-c005-48de-8492-d02f686af9fc",
+        "started_at": "2026-05-12T05:19:11.816443",
+        "duration_ms": 1.4189999999999998,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 37.97223317614738,
+          "token_allocation": 44.54176555308261,
+          "assembly": 0.8400936543395437,
+          "quality_check": 7.628050381403058
+        }
+      },
+      {
+        "trace_id": "7092f8ad-dc03-4dfa-8d2b-a491670e2f1b",
+        "started_at": "2026-05-12T05:19:11.825539",
+        "duration_ms": 1.4549999999999998,
+        "quality_score": 0.7219512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 40.94900544156734,
+          "token_allocation": 41.85024405672788,
+          "assembly": 0.8356939886034149,
+          "quality_check": 6.3250564627631025
+        }
+      },
+      {
+        "trace_id": "84f1a70f-dbae-4471-b561-026a6e9eb204",
+        "started_at": "2026-05-12T05:19:11.834890",
+        "duration_ms": 1.4009999999999998,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.68132978571389,
+          "token_allocation": 43.68454622082163,
+          "assembly": 0.8338694058512893,
+          "quality_check": 6.773061704669657
+        }
+      },
+      {
+        "trace_id": "1a1aa661-6fb0-4abe-869b-a598ed0fc4dd",
+        "started_at": "2026-05-12T05:19:11.847749",
+        "duration_ms": 1.397,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.304079289255434,
+          "token_allocation": 44.236288978614894,
+          "assembly": 0.8533234756677255,
+          "quality_check": 6.212194902861041
+        }
+      },
+      {
+        "trace_id": "575a6dde-2f77-466e-b638-d8c333bf4b1b",
+        "started_at": "2026-05-12T05:19:11.857563",
+        "duration_ms": 1.403,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 40.61442651837023,
+          "token_allocation": 43.55429923287988,
+          "assembly": 0.849674194944984,
+          "quality_check": 6.202621623098383
+        }
+      },
+      {
+        "trace_id": "ab416624-7941-48f5-ac91-ef2113486696",
+        "started_at": "2026-05-12T05:19:11.867949",
+        "duration_ms": 1.453,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 41.23509217358751,
+          "token_allocation": 42.95800688836136,
+          "assembly": 0.8860704247408379,
+          "quality_check": 5.923544876508194
+        }
+      },
+      {
+        "trace_id": "6026223e-0fb5-4259-a03a-c83fff68288a",
+        "started_at": "2026-05-12T05:19:11.882142",
+        "duration_ms": 1.3699999999999999,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.756071215998524,
+          "token_allocation": 44.9688765254334,
+          "assembly": 0.8701407996407392,
+          "quality_check": 6.3520278373773955
+        }
+      },
+      {
+        "trace_id": "c7d71816-deb0-4366-b665-fc26c98f7cf1",
+        "started_at": "2026-05-12T05:19:11.892614",
+        "duration_ms": 1.398,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.76433693117679,
+          "token_allocation": 43.98294102309941,
+          "assembly": 0.8697673486537688,
+          "quality_check": 6.599999292725657
+        }
+      },
+      {
+        "trace_id": "cb7d4dfe-ec5c-4943-8698-cdaeba1dd742",
+        "started_at": "2026-05-12T05:19:11.903580",
+        "duration_ms": 1.3860000000000001,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.96234355447612,
+          "token_allocation": 44.6733802255958,
+          "assembly": 0.8600958842047708,
+          "quality_check": 6.209892283958446
+        }
+      },
+      {
+        "trace_id": "ff66fec6-7fd3-451c-ba8d-cbad7f47b722",
+        "started_at": "2026-05-12T05:19:11.919639",
+        "duration_ms": 1.3840000000000001,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.07117484208476,
+          "token_allocation": 45.30642073967553,
+          "assembly": 0.8613387973322345,
+          "quality_check": 6.4428142040451135
+        }
+      },
+      {
+        "trace_id": "4dee5a88-eaa0-47db-93c5-d75665295815",
+        "started_at": "2026-05-12T05:19:11.931004",
+        "duration_ms": 1.613,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 43.64848506428481,
+          "token_allocation": 39.24372768224727,
+          "assembly": 0.7242721869793282,
+          "quality_check": 6.887976308823815
+        }
+      },
+      {
+        "trace_id": "b04409ab-0f71-4e7a-a5bf-97229c9fe1e4",
+        "started_at": "2026-05-12T05:19:11.943034",
+        "duration_ms": 1.4120000000000001,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 40.57505988534381,
+          "token_allocation": 43.41176819193464,
+          "assembly": 0.8442584245806036,
+          "quality_check": 6.028005151505511
+        }
+      },
+      {
+        "trace_id": "6e3cbfaa-26ff-452f-81f3-60950e2a042b",
+        "started_at": "2026-05-12T05:19:11.960635",
+        "duration_ms": 1.387,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.93425246323281,
+          "token_allocation": 44.12548612499718,
+          "assembly": 0.8766652872515996,
+          "quality_check": 6.0507094335796685
+        }
+      },
+      {
+        "trace_id": "2e3b86f2-a208-4258-98b7-3ecb6e4447bf",
+        "started_at": "2026-05-12T05:19:11.973314",
+        "duration_ms": 1.3639999999999999,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.629403212203314,
+          "token_allocation": 44.79962010537425,
+          "assembly": 0.891447766435461,
+          "quality_check": 6.379969308802809
+        }
+      },
+      {
+        "trace_id": "cd384450-8769-4b96-a69e-16f5ac38bd7a",
+        "started_at": "2026-05-12T05:19:11.986049",
+        "duration_ms": 1.382,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.574814968964816,
+          "token_allocation": 44.716422361161364,
+          "assembly": 0.8625853078927732,
+          "quality_check": 6.296872747617245
+        }
+      },
+      {
+        "trace_id": "fb98b369-ab1d-40d0-8c79-0714f0e0a036",
+        "started_at": "2026-05-12T05:19:12.072360",
+        "duration_ms": 1.42,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.952894613776415,
+          "token_allocation": 43.87237656284386,
+          "assembly": 0.9234522429990097,
+          "quality_check": 6.548115904902069
+        }
+      },
+      {
+        "trace_id": "851fd8c7-d240-4302-ae51-9af4aa9db1db",
+        "started_at": "2026-05-12T05:19:12.086044",
+        "duration_ms": 1.4400000000000002,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 37.56748305426703,
+          "token_allocation": 45.398871103922524,
+          "assembly": 1.026524437798394,
+          "quality_check": 6.457169850667317
+        }
+      },
+      {
+        "trace_id": "b1dfde06-f62a-47c1-a210-eb6f67436046",
+        "started_at": "2026-05-12T05:19:12.105819",
+        "duration_ms": 1.377,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.905341121366085,
+          "token_allocation": 43.995759585843885,
+          "assembly": 1.1081183051924473,
+          "quality_check": 6.319737209300675
+        }
+      },
+      {
+        "trace_id": "3a2abe3e-2de6-4247-b52a-71ab41c8ac2e",
+        "started_at": "2026-05-12T05:19:12.120097",
+        "duration_ms": 1.403,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 37.64056683606279,
+          "token_allocation": 43.97913633035237,
+          "assembly": 0.849674194944984,
+          "quality_check": 5.8457584612214895
+        }
+      },
+      {
+        "trace_id": "9b510b0a-4502-4ba7-8d69-49a7e81cd9ef",
+        "started_at": "2026-05-12T05:19:12.140946",
+        "duration_ms": 1.379,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.52042017681517,
+          "token_allocation": 44.88285941607369,
+          "assembly": 0.8817510902233276,
+          "quality_check": 6.241414579816103
+        }
+      },
+      {
+        "trace_id": "a8018d06-0758-4ded-bdda-6c8538ab078a",
+        "started_at": "2026-05-12T05:19:12.155882",
+        "duration_ms": 1.4189999999999998,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 40.3244954082981,
+          "token_allocation": 44.05451123356568,
+          "assembly": 0.8400936543395437,
+          "quality_check": 5.863853707290016
+        }
+      },
+      {
+        "trace_id": "477e1a7e-b5d6-491a-90c0-f785df58380f",
+        "started_at": "2026-05-12T05:19:12.177305",
+        "duration_ms": 1.486,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.554498356733156,
+          "token_allocation": 41.90776101031503,
+          "assembly": 0.8182602647496425,
+          "quality_check": 5.984530955914051
+        }
+      },
+      {
+        "trace_id": "dc2b0fa4-6e00-4be7-8332-a7f30a86b37b",
+        "started_at": "2026-05-12T05:19:12.192906",
+        "duration_ms": 1.421,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 36.94565173692052,
+          "token_allocation": 46.5763529617127,
+          "assembly": 0.8556894816452982,
+          "quality_check": 6.275056198732187
+        }
+      },
+      {
+        "trace_id": "b6070929-8111-4082-8cbf-93813f7ffdb6",
+        "started_at": "2026-05-12T05:19:12.215841",
+        "duration_ms": 1.4,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.48757062639509,
+          "token_allocation": 44.14149693080358,
+          "assembly": 0.8685248238699776,
+          "quality_check": 6.573540823800224
+        }
+      },
+      {
+        "trace_id": "928eaee6-6e59-4d8f-ad00-53e51cfa5406",
+        "started_at": "2026-05-12T05:19:12.232354",
+        "duration_ms": 1.389,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.31175439558585,
+          "token_allocation": 44.353751504567136,
+          "assembly": 0.8582382257075684,
+          "quality_check": 6.848741041146396
+        }
+      },
+      {
+        "trace_id": "5a335396-e2dc-4c85-92b0-83ca2381ef72",
+        "started_at": "2026-05-12T05:19:12.255273",
+        "duration_ms": 1.351,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.01876227931567,
+          "token_allocation": 44.5424495671609,
+          "assembly": 0.8823781609976408,
+          "quality_check": 6.300180069523154
+        }
+      },
+      {
+        "trace_id": "4323a901-f232-4ff9-aaa2-4928882b2e1d",
+        "started_at": "2026-05-12T05:19:12.272391",
+        "duration_ms": 1.4120000000000001,
+        "quality_score": 0.7626016260162602,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 37.46818888288719,
+          "token_allocation": 43.39488302344303,
+          "assembly": 0.8611435930722158,
+          "quality_check": 6.939804250052563
+        }
+      },
+      {
+        "trace_id": "660d21fc-c6d2-48f7-9270-031ad2343df6",
+        "started_at": "2026-05-12T05:19:12.297811",
+        "duration_ms": 1.413,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.420318797895106,
+          "token_allocation": 44.71402934318051,
+          "assembly": 0.7761680565231334,
+          "quality_check": 6.00686582874425
+        }
+      },
+      {
+        "trace_id": "b533c5cb-4180-48db-a7f1-e2bc514d3122",
+        "started_at": "2026-05-12T05:19:12.316570",
+        "duration_ms": 1.381,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.10340924439095,
+          "token_allocation": 44.23087615193361,
+          "assembly": 0.9495309088041952,
+          "quality_check": 6.456810179868529
+        }
+      },
+      {
+        "trace_id": "80fdde03-a1f2-4331-a157-70485faf0318",
+        "started_at": "2026-05-12T05:19:12.342590",
+        "duration_ms": 1.4480000000000002,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 41.09756722634668,
+          "token_allocation": 43.22160014790066,
+          "assembly": 0.8232685742457267,
+          "quality_check": 6.092187449418378
+        }
+      },
+      {
+        "trace_id": "b5f37a68-1394-4062-a1c4-0867585d6549",
+        "started_at": "2026-05-12T05:19:12.368052",
+        "duration_ms": 1.411,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.268942440257355,
+          "token_allocation": 43.93255178342045,
+          "assembly": 0.8617539003670934,
+          "quality_check": 6.285734332089386
+        }
+      },
+      {
+        "trace_id": "f61c779f-1384-48fd-8b15-5b933a42fc25",
+        "started_at": "2026-05-12T05:19:12.388841",
+        "duration_ms": 1.385,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.9044035212658,
+          "token_allocation": 44.3441342791065,
+          "assembly": 0.8779312299046705,
+          "quality_check": 6.197161622856498
+        }
+      },
+      {
+        "trace_id": "586ed880-8b19-4246-b682-327da32454d9",
+        "started_at": "2026-05-12T05:19:12.417008",
+        "duration_ms": 1.424,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 37.554274784045276,
+          "token_allocation": 46.00942804572288,
+          "assembly": 0.8371438872948122,
+          "quality_check": 6.32880778794878
+        }
+      },
+      {
+        "trace_id": "104888eb-dfc6-41a1-bf1f-891ee637582e",
+        "started_at": "2026-05-12T05:19:12.443250",
+        "duration_ms": 1.426,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 37.81927250545122,
+          "token_allocation": 44.30639793963118,
+          "assembly": 0.902847354241541,
+          "quality_check": 7.139181856687742
+        }
+      },
+      {
+        "trace_id": "31153ad8-b1f9-4a68-8640-b8373ed1ff07",
+        "started_at": "2026-05-12T05:19:12.464840",
+        "duration_ms": 1.427,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 37.27483181328563,
+          "token_allocation": 46.31368614362517,
+          "assembly": 0.8353839491995884,
+          "quality_check": 5.96464139728506
+        }
+      },
+      {
+        "trace_id": "737ffaf8-ad1a-497d-8078-60776cb49e57",
+        "started_at": "2026-05-12T05:19:12.607481",
+        "duration_ms": 1.42,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.204745225503416,
+          "token_allocation": 43.36867533938985,
+          "assembly": 0.9234522429990097,
+          "quality_check": 6.548115904902069
+        }
+      },
+      {
+        "trace_id": "0c6bf04c-ed3a-4615-a89e-0fd3d2106c43",
+        "started_at": "2026-05-12T05:19:12.636420",
+        "duration_ms": 1.449,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.79855138174495,
+          "token_allocation": 45.1991605791575,
+          "assembly": 0.839154419198046,
+          "quality_check": 5.874080934386322
+        }
+      },
+      {
+        "trace_id": "1a3497e2-c18b-47fa-8328-dec42deab7f5",
+        "started_at": "2026-05-12T05:19:12.666761",
+        "duration_ms": 1.682,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 41.85791106343128,
+          "token_allocation": 36.66996814124508,
+          "assembly": 0.9355306908860359,
+          "quality_check": 9.04346334523168
+        }
+      },
+      {
+        "trace_id": "6f494633-5c71-4a10-a47c-27d33bcf2a12",
+        "started_at": "2026-05-12T05:19:12.692123",
+        "duration_ms": 1.399,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.532123470238226,
+          "token_allocation": 44.66726917978522,
+          "assembly": 0.8691456421858247,
+          "quality_check": 6.220356066624039
+        }
+      },
+      {
+        "trace_id": "9284c78e-9e09-4e83-9197-f36874f2b2af",
+        "started_at": "2026-05-12T05:19:12.727679",
+        "duration_ms": 1.369,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.923705207596214,
+          "token_allocation": 44.026454928323595,
+          "assembly": 0.8881919309115915,
+          "quality_check": 6.3740832688949505
+        }
+      },
+      {
+        "trace_id": "e6f0fe69-615c-4590-bc54-6dcb8e702f85",
+        "started_at": "2026-05-12T05:19:12.759698",
+        "duration_ms": 1.4,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 37.9255839756557,
+          "token_allocation": 43.6476298740932,
+          "assembly": 0.8685248238699776,
+          "quality_check": 6.6586903163364966
+        }
+      },
+      {
+        "trace_id": "d3ce84ca-e907-4ca3-9cd8-f3c0922d0387",
+        "started_at": "2026-05-12T05:19:12.792437",
+        "duration_ms": 1.397,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 37.802229972080234,
+          "token_allocation": 43.17816786878691,
+          "assembly": 0.8362570061543709,
+          "quality_check": 6.382859597994586
+        }
+      },
+      {
+        "trace_id": "dd004f03-8940-4dc6-8d9b-6a9803c112d3",
+        "started_at": "2026-05-12T05:19:12.826051",
+        "duration_ms": 1.3639999999999999,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.699320684080604,
+          "token_allocation": 44.34515653817186,
+          "assembly": 0.8739683984661384,
+          "quality_check": 6.379969308802809
+        }
+      },
+      {
+        "trace_id": "b3be8aaf-db25-4bd2-811c-2a9c095c1b59",
+        "started_at": "2026-05-12T05:19:12.860203",
+        "duration_ms": 1.4009999999999998,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 40.84258314373662,
+          "token_allocation": 43.327173618313935,
+          "assembly": 0.8508871488278462,
+          "quality_check": 6.075334242630823
+        }
+      },
+      {
+        "trace_id": "d6f153c8-7c4f-4c62-b48a-139acb80f9a0",
+        "started_at": "2026-05-12T05:19:12.895912",
+        "duration_ms": 1.4549999999999998,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.310389777639074,
+          "token_allocation": 45.37326773417365,
+          "assembly": 0.8356939886034149,
+          "quality_check": 5.702382510470361
+        }
+      },
+      {
+        "trace_id": "b138e5ad-03f9-43b0-bf4c-6cbfebecc30c",
+        "started_at": "2026-05-12T05:19:12.931404",
+        "duration_ms": 1.619,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 46.43198146431294,
+          "token_allocation": 38.17053471471588,
+          "assembly": 0.8099457597644186,
+          "quality_check": 5.566536312562731
+        }
+      },
+      {
+        "trace_id": "c8725a3e-6552-4b28-bf64-a30356d9c613",
+        "started_at": "2026-05-12T05:19:12.968877",
+        "duration_ms": 1.4189999999999998,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.77872308431334,
+          "token_allocation": 44.7433880301241,
+          "assembly": 0.9241030197734982,
+          "quality_check": 6.183089295939043
+        }
+      },
+      {
+        "trace_id": "3dd63167-c8ef-4aa9-ae12-34b5ae283491",
+        "started_at": "2026-05-12T05:19:13.158096",
+        "duration_ms": 1.4569999999999999,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.09460893263127,
+          "token_allocation": 45.80189450276414,
+          "assembly": 0.8018195179119124,
+          "quality_check": 5.972737225262205
+        }
+      },
+      {
+        "trace_id": "25e2c46d-9763-4900-b16c-9fdad0514420",
+        "started_at": "2026-05-12T05:19:13.196440",
+        "duration_ms": 1.45,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.10064697265625,
+          "token_allocation": 44.674708925444506,
+          "assembly": 0.8385756920123922,
+          "quality_check": 6.05089911099138
+        }
+      },
+      {
+        "trace_id": "202be3aa-5c53-42ae-b4d9-6e7b6869ddcc",
+        "started_at": "2026-05-12T05:19:13.236295",
+        "duration_ms": 1.443,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.53029289430657,
+          "token_allocation": 46.0149509908421,
+          "assembly": 0.8261212027081167,
+          "quality_check": 5.964595083552602
+        }
+      },
+      {
+        "trace_id": "c3cac072-ccb7-4fbd-8ea4-086073255f95",
+        "started_at": "2026-05-12T05:19:13.277304",
+        "duration_ms": 1.3639999999999999,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.153784251283,
+          "token_allocation": 44.85205820928221,
+          "assembly": 0.8739683984661384,
+          "quality_check": 6.310051836925519
+        }
+      },
+      {
+        "trace_id": "a414b7e4-96a0-439e-b3b2-4d8980fb2561",
+        "started_at": "2026-05-12T05:19:13.318766",
+        "duration_ms": 1.446,
+        "quality_score": 0.6719512195121952,
+        "semantic_retention": 1.0,
+        "token_savings": 69,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 40.85762372155407,
+          "token_allocation": 43.42977436746305,
+          "assembly": 0.8244072583041581,
+          "quality_check": 5.886267824291688
+        }
+      },
+      {
+        "trace_id": "89c712bc-8eda-464e-8cfe-bdaa98d0d3ca",
+        "started_at": "2026-05-12T05:19:13.510373",
+        "duration_ms": 0.381,
+        "quality_score": 0.43167840693578974,
+        "semantic_retention": 0.4741262530479545,
+        "token_savings": 9,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 30.412448672797737,
+          "token_allocation": 28.28482880679954,
+          "assembly": 1.0638099329990978,
+          "quality_check": 11.514178098343175
+        }
+      },
+      {
+        "trace_id": "28ad7bd2-b7d3-4076-b7f2-ba15e032bd2b",
+        "started_at": "2026-05-12T05:19:13.512519",
+        "duration_ms": 0.324,
+        "quality_score": 0.45538471958818744,
+        "semantic_retention": 0.4741262530479545,
+        "token_savings": 9,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 29.949494350103684,
+          "token_allocation": 31.789143880208332,
+          "assembly": 1.1773756992669753,
+          "quality_check": 11.11148316183208
+        }
+      },
+      {
+        "trace_id": "ad154f73-32d6-4758-9ebe-af077672a314",
+        "started_at": "2026-05-12T05:19:13.514288",
+        "duration_ms": 0.31,
+        "quality_score": 0.4816784069357897,
+        "semantic_retention": 0.4741262530479545,
+        "token_savings": 9,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 30.302232311617942,
+          "token_allocation": 32.840236540763605,
+          "assembly": 1.384365943170363,
+          "quality_check": 10.998018326297883
+        }
+      },
+      {
+        "trace_id": "762efe01-cc2e-4736-b5ab-1ee19f0d8361",
+        "started_at": "2026-05-12T05:19:13.516017",
+        "duration_ms": 0.313,
+        "quality_score": 0.43167840693578974,
+        "semantic_retention": 0.4741262530479545,
+        "token_savings": 9,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 31.002032490203174,
+          "token_allocation": 33.51571080021965,
+          "assembly": 0.9902369100064897,
+          "quality_check": 11.197294290073383
+        }
+      },
+      {
+        "trace_id": "dffb61a4-6a97-487a-9425-51ffc682a98e",
+        "started_at": "2026-05-12T05:19:13.517780",
+        "duration_ms": 0.297,
+        "quality_score": 0.45538471958818744,
+        "semantic_retention": 0.4741262530479545,
+        "token_savings": 9,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 30.66528525818077,
+          "token_allocation": 34.03686112426347,
+          "assembly": 1.2844098537457913,
+          "quality_check": 11.07803498855745
+        }
+      },
+      {
+        "trace_id": "c33ace82-c244-4a5b-bbd4-dbc69f6f3dee",
+        "started_at": "2026-05-12T05:19:13.519558",
+        "duration_ms": 0.593,
+        "quality_score": 0.55,
+        "semantic_retention": 1.0,
+        "token_savings": 24,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 36.94884893665024,
+          "token_allocation": 40.8487818494414,
+          "assembly": 1.0051373486575148,
+          "quality_check": 7.880276813474916
+        }
+      },
+      {
+        "trace_id": "cbe7420d-9865-4660-b929-776b31d907e1",
+        "started_at": "2026-05-12T05:19:13.521619",
+        "duration_ms": 0.623,
+        "quality_score": 0.6000000000000001,
+        "semantic_retention": 1.0,
+        "token_savings": 24,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.99655410987034,
+          "token_allocation": 39.83848167652112,
+          "assembly": 1.1480830454328854,
+          "quality_check": 7.347731490770465
+        }
+      },
+      {
+        "trace_id": "668c71a3-016d-43f4-8529-9e99f964a0a3",
+        "started_at": "2026-05-12T05:19:13.523694",
+        "duration_ms": 0.583,
+        "quality_score": 0.6000000000000001,
+        "semantic_retention": 1.0,
+        "token_savings": 24,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 36.72382230415148,
+          "token_allocation": 41.50855193620686,
+          "assembly": 1.0632732515678602,
+          "quality_check": 7.851864011578045
+        }
+      },
+      {
+        "trace_id": "59e9d286-0acb-4fa3-a048-b82e35a18826",
+        "started_at": "2026-05-12T05:19:13.525742",
+        "duration_ms": 0.5900000000000001,
+        "quality_score": 0.55,
+        "semantic_retention": 1.0,
+        "token_savings": 24,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 36.44975565247616,
+          "token_allocation": 41.541406663797666,
+          "assembly": 1.0102482165320443,
+          "quality_check": 7.8395261602886634
+        }
+      },
+      {
+        "trace_id": "f4821e19-6e6a-4cb2-aa30-49f0676e578b",
+        "started_at": "2026-05-12T05:19:13.527882",
+        "duration_ms": 0.585,
+        "quality_score": 0.6000000000000001,
+        "semantic_retention": 1.0,
+        "token_savings": 24,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 36.88355796357505,
+          "token_allocation": 41.0405998556023,
+          "assembly": 0.8151062533386753,
+          "quality_check": 7.865775344718216
+        }
+      },
+      {
+        "trace_id": "ffccc43a-5e98-40c1-a743-72afe6b47837",
+        "started_at": "2026-05-12T05:19:13.530064",
+        "duration_ms": 1.0610000000000002,
+        "quality_score": 0.55,
+        "semantic_retention": 1.0,
+        "token_savings": 49,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.009863649416815,
+          "token_allocation": 45.14447930396221,
+          "assembly": 0.8539025453213358,
+          "quality_check": 6.516624687978616
+        }
+      },
+      {
+        "trace_id": "4d4fa085-6982-43f5-8ab9-9f78091316a5",
+        "started_at": "2026-05-12T05:19:13.532682",
+        "duration_ms": 1.046,
+        "quality_score": 0.6000000000000001,
+        "semantic_retention": 1.0,
+        "token_savings": 49,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.09061789284701,
+          "token_allocation": 45.54113967924683,
+          "assembly": 0.843354438504571,
+          "quality_check": 6.382141696791348
+        }
+      },
+      {
+        "trace_id": "5fbf7b7b-9792-4d4f-95a9-ef49394eaebe",
+        "started_at": "2026-05-12T05:19:13.535277",
+        "duration_ms": 1.072,
+        "quality_score": 0.6000000000000001,
+        "semantic_retention": 1.0,
+        "token_savings": 49,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.45389209576507,
+          "token_allocation": 46.26032131821361,
+          "assembly": 0.8451404856212104,
+          "quality_check": 6.1383887903014225
+        }
+      },
+      {
+        "trace_id": "5702711b-6748-4ca9-b776-df44a873134b",
+        "started_at": "2026-05-12T05:19:13.537887",
+        "duration_ms": 1.035,
+        "quality_score": 0.55,
+        "semantic_retention": 1.0,
+        "token_savings": 49,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.39089567764946,
+          "token_allocation": 45.61051078464674,
+          "assembly": 0.8753532372810992,
+          "quality_check": 6.081401437952899
+        }
+      },
+      {
+        "trace_id": "4df244db-9cc4-43ba-826a-5751fe029ab0",
+        "started_at": "2026-05-12T05:19:13.540395",
+        "duration_ms": 1.03,
+        "quality_score": 0.6000000000000001,
+        "semantic_retention": 1.0,
+        "token_savings": 49,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.60526105269645,
+          "token_allocation": 45.62359411739608,
+          "assembly": 0.8564550899764866,
+          "quality_check": 6.2266599784777
+        }
+      },
+      {
+        "trace_id": "dc6f0b1c-0e62-454a-ae06-92527014b659",
+        "started_at": "2026-05-12T05:19:13.543237",
+        "duration_ms": 2.042,
+        "quality_score": 0.55,
+        "semantic_retention": 1.0,
+        "token_savings": 99,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 40.39805502896211,
+          "token_allocation": 48.62945063457433,
+          "assembly": 0.5721111839361687,
+          "quality_check": 5.2424065630069325
+        }
+      },
+      {
+        "trace_id": "597a9dea-60e1-439e-89a4-32f88493070e",
+        "started_at": "2026-05-12T05:19:13.546917",
+        "duration_ms": 2.1020000000000003,
+        "quality_score": 0.6000000000000001,
+        "semantic_retention": 1.0,
+        "token_savings": 99,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.90464920639197,
+          "token_allocation": 50.62141382161148,
+          "assembly": 0.5557807029484567,
+          "quality_check": 5.047396179838025
+        }
+      },
+      {
+        "trace_id": "4a5a9338-5e4a-4aef-a290-b59941452948",
+        "started_at": "2026-05-12T05:19:13.550677",
+        "duration_ms": 2.069,
+        "quality_score": 0.6000000000000001,
+        "semantic_retention": 1.0,
+        "token_savings": 99,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 40.11286002187236,
+          "token_allocation": 49.135660767958555,
+          "assembly": 0.5300751396168136,
+          "quality_check": 5.116377434562288
+        }
+      },
+      {
+        "trace_id": "a73c3c06-906c-4c40-8be7-d4745a37a2b0",
+        "started_at": "2026-05-12T05:19:13.554421",
+        "duration_ms": 2.0300000000000002,
+        "quality_score": 0.55,
+        "semantic_retention": 1.0,
+        "token_savings": 99,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 40.09660241639085,
+          "token_allocation": 49.11657624644011,
+          "assembly": 0.5754931219692888,
+          "quality_check": 5.214672370497228
+        }
+      },
+      {
+        "trace_id": "a2917cbb-8eac-43f1-ab7b-3f8ecc9077ff",
+        "started_at": "2026-05-12T05:19:13.558065",
+        "duration_ms": 2.1,
+        "quality_score": 0.6000000000000001,
+        "semantic_retention": 1.0,
+        "token_savings": 99,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.13470676967076,
+          "token_allocation": 50.238200596400674,
+          "assembly": 0.5676632835751488,
+          "quality_check": 5.370094662620907
+        }
+      },
+      {
+        "trace_id": "031e226b-1463-402f-b2cd-7cd2bf194310",
+        "started_at": "2026-05-12T05:19:13.562082",
+        "duration_ms": 4.247,
+        "quality_score": 0.55,
+        "semantic_retention": 1.0,
+        "token_savings": 199,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.286195184192515,
+          "token_allocation": 53.0729749664745,
+          "assembly": 0.7522507558184454,
+          "quality_check": 4.457366418804818
+        }
+      },
+      {
+        "trace_id": "dc0a71bc-8f43-4d1d-ba99-dfa37c83e6a9",
+        "started_at": "2026-05-12T05:19:13.568279",
+        "duration_ms": 4.266,
+        "quality_score": 0.6000000000000001,
+        "semantic_retention": 1.0,
+        "token_savings": 199,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.75878508505662,
+          "token_allocation": 51.83061187500916,
+          "assembly": 0.7489003656729811,
+          "quality_check": 4.336915550464428
+        }
+      },
+      {
+        "trace_id": "406ee71c-96f1-47f3-97a5-616c74c3a649",
+        "started_at": "2026-05-12T05:19:13.574449",
+        "duration_ms": 4.254,
+        "quality_score": 0.6000000000000001,
+        "semantic_retention": 1.0,
+        "token_savings": 199,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 39.77566186844827,
+          "token_allocation": 51.64614965728488,
+          "assembly": 0.7005717533543797,
+          "quality_check": 4.422008907172845
+        }
+      },
+      {
+        "trace_id": "f96fa1cb-e76f-497f-a51f-dfdd6ba09b6a",
+        "started_at": "2026-05-12T05:19:13.580687",
+        "duration_ms": 4.2379999999999995,
+        "quality_score": 0.55,
+        "semantic_retention": 1.0,
+        "token_savings": 199,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.79505713743217,
+          "token_allocation": 52.803133162984096,
+          "assembly": 0.7313453346673697,
+          "quality_check": 4.3430661412554565
+        }
+      },
+      {
+        "trace_id": "72f56c89-1a81-4d7b-87eb-4fdb74259a19",
+        "started_at": "2026-05-12T05:19:13.586901",
+        "duration_ms": 4.242,
+        "quality_score": 0.6000000000000001,
+        "semantic_retention": 1.0,
+        "token_savings": 199,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 38.263877570095175,
+          "token_allocation": 52.01144580400423,
+          "assembly": 0.8262029968866028,
+          "quality_check": 4.9234954100181225
+        }
+      },
+      {
+        "trace_id": "00f80664-7387-4ec6-8349-7315103c4480",
+        "started_at": "2026-05-12T05:19:13.593748",
+        "duration_ms": 9.157,
+        "quality_score": 0.55,
+        "semantic_retention": 1.0,
+        "token_savings": 399,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 36.33168999435627,
+          "token_allocation": 57.025704045893,
+          "assembly": 0.3723256176861793,
+          "quality_check": 3.8456289323250825
+        }
+      },
+      {
+        "trace_id": "5a7a2d7e-c930-480f-b91e-09729bbc6bba",
+        "started_at": "2026-05-12T05:19:13.605429",
+        "duration_ms": 9.116000000000001,
+        "quality_score": 0.6000000000000001,
+        "semantic_retention": 1.0,
+        "token_savings": 399,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 36.59447958303051,
+          "token_allocation": 56.7355664375844,
+          "assembly": 0.32953862403243606,
+          "quality_check": 3.92569424343402
+        }
+      },
+      {
+        "trace_id": "62a4fbb0-7c8c-4bc5-9f9f-d08b3ecbd3d1",
+        "started_at": "2026-05-12T05:19:13.617109",
+        "duration_ms": 9.121,
+        "quality_score": 0.6000000000000001,
+        "semantic_retention": 1.0,
+        "token_savings": 399,
+        "provider": "gemini",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 36.49861440626156,
+          "token_allocation": 56.90312518870644,
+          "assembly": 0.3398137844885772,
+          "quality_check": 3.879105047546527
+        }
+      },
+      {
+        "trace_id": "e978cc84-efba-4995-8160-8b506557b021",
+        "started_at": "2026-05-12T05:19:13.628788",
+        "duration_ms": 9.065999999999999,
+        "quality_score": 0.55,
+        "semantic_retention": 1.0,
+        "token_savings": 399,
+        "provider": "claude",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 36.188816093278206,
+          "token_allocation": 57.25622440105029,
+          "assembly": 0.34187530645492087,
+          "quality_check": 3.8474121026426866
+        }
+      },
+      {
+        "trace_id": "12cd86f2-43a6-4ced-9673-29ac799babf8",
+        "started_at": "2026-05-12T05:19:13.640426",
+        "duration_ms": 9.052,
+        "quality_score": 0.6000000000000001,
+        "semantic_retention": 1.0,
+        "token_savings": 399,
+        "provider": "openai",
+        "compression_mode": "balanced",
+        "success": true,
+        "stage_breakdown": {
+          "ranking": 36.04724562068034,
+          "token_allocation": 57.31053759026622,
+          "assembly": 0.34240405748125413,
+          "quality_check": 3.8349254437900466
+        }
+      }
+    ],
+    "stress_validation": {
+      "total_runs": 2,
+      "total_turns_executed": 1300,
+      "overall_success_rate": 1.0,
+      "avg_stability_score": 90.15305921775433,
+      "stress_runs": [
+        {
+          "run_id": "stress-long1000",
+          "scenario": {
+            "scenario_id": "long1000",
+            "scenario_name": "Long Horizon 1000 Turn",
+            "description": "1000-turn recursive validation workload",
+            "num_turns": 1000,
+            "num_memories": 35,
+            "memory_noise_level": 0.15,
+            "recursive_compression_cycles": 5,
+            "provider_switching_frequency": 40,
+            "memory_growth_factor": 1.05,
+            "token_budget": 2500,
+            "token_pressure_level": 0.7,
+            "query_complexity": "complex",
+            "query_diversity": 0.8
+          },
+          "timestamp": "2026-05-12T05:19:09.638927",
+          "total_turns": 1000,
+          "successful_turns": 1000,
+          "failed_turns": 0,
+          "success_rate": 1.0,
+          "avg_quality_score": 0.6939593495934959,
+          "min_quality_score": 0.6469512195121951,
+          "quality_degradation_rate": 0.0,
+          "avg_semantic_retention": 1.0,
+          "semantic_retention_degradation": 0.0,
+          "avg_token_efficiency": 0.0,
+          "max_tokens_used": 123,
+          "crashes_detected": 0,
+          "provider_failures": {},
+          "failure_patterns": [],
+          "avg_latency_ms": 0.6342840194702148,
+          "p95_latency_ms": 0.7030963897705078,
+          "p99_latency_ms": 0.7832050323486328,
+          "recovery_rate": 0.0,
+          "stability_score": 90.81878048780487,
+          "stress_level_tolerated": "high"
+        },
+        {
+          "run_id": "stress-token_pr",
+          "scenario": {
+            "scenario_id": "token_pressure_extreme",
+            "scenario_name": "Extreme Token Pressure",
+            "description": "Aggressive token constraints under noisy memory",
+            "num_turns": 300,
+            "num_memories": 70,
+            "memory_noise_level": 0.3,
+            "recursive_compression_cycles": 4,
+            "provider_switching_frequency": 25,
+            "memory_growth_factor": 1.08,
+            "token_budget": 1200,
+            "token_pressure_level": 0.45,
+            "query_complexity": "very_complex",
+            "query_diversity": 0.85
+          },
+          "timestamp": "2026-05-12T05:19:10.948083",
+          "total_turns": 300,
+          "successful_turns": 300,
+          "failed_turns": 0,
+          "success_rate": 1.0,
+          "avg_quality_score": 0.7188346883468836,
+          "min_quality_score": 0.6719512195121952,
+          "quality_degradation_rate": 0.06925675675675681,
+          "avg_semantic_retention": 1.0,
+          "semantic_retention_degradation": 0.0,
+          "avg_token_efficiency": 0.0,
+          "max_tokens_used": 123,
+          "crashes_detected": 0,
+          "provider_failures": {},
+          "failure_patterns": [],
+          "avg_latency_ms": 1.256550947825114,
+          "p95_latency_ms": 1.3740062713623047,
+          "p99_latency_ms": 1.4958381652832031,
+          "recovery_rate": 0.0,
+          "stability_score": 89.48733794770381,
+          "stress_level_tolerated": "high"
+        }
+      ]
+    },
+    "cognition_stability": {
+      "stability_score": 74.25121741409605,
+      "stability_classification": "monitor",
+      "failure_pressure": 0.00362844702467344,
+      "success_rate": 1.0,
+      "avg_quality_score": 0.6925004069358089,
+      "avg_semantic_retention": 0.998091894967518,
+      "avg_token_efficiency": 0.10428613760453381
+    }
+  }
+}

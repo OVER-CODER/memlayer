@@ -13,7 +13,7 @@ Tracks longitudinal semantic degradation and evolution of runtime characteristic
 
 from typing import List, Dict, Optional, Any, Tuple
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from enum import Enum
 import logging
 import json
@@ -191,7 +191,7 @@ class RuntimeEvolutionTracker:
             Recorded EvolutionDataPoint
         """
         datapoint = EvolutionDataPoint(
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             metric=metric,
             value=value,
             domain=domain,
@@ -202,7 +202,7 @@ class RuntimeEvolutionTracker:
         self.all_data_points.append(datapoint)
 
         if self.current_period_start is None:
-            self.current_period_start = datetime.utcnow()
+            self.current_period_start = datetime.now(timezone.utc)
 
         logger.debug(
             f"Recorded {metric.value}={value:.3f} "
@@ -222,7 +222,7 @@ class RuntimeEvolutionTracker:
             EvolutionTrend with current analysis
         """
         # Get recent data points
-        cutoff_time = datetime.utcnow() - timedelta(hours=self.tracking_window_hours)
+        cutoff_time = datetime.now(timezone.utc) - timedelta(hours=self.tracking_window_hours)
         relevant_points = [
             dp
             for dp in self.all_data_points
@@ -277,7 +277,7 @@ class RuntimeEvolutionTracker:
         Returns:
             EvolutionTrend for the domain
         """
-        cutoff_time = datetime.utcnow() - timedelta(hours=self.tracking_window_hours)
+        cutoff_time = datetime.now(timezone.utc) - timedelta(hours=self.tracking_window_hours)
         relevant_points = [
             dp
             for dp in self.all_data_points
@@ -312,7 +312,7 @@ class RuntimeEvolutionTracker:
         Returns:
             EvolutionTrend for the provider
         """
-        cutoff_time = datetime.utcnow() - timedelta(hours=self.tracking_window_hours)
+        cutoff_time = datetime.now(timezone.utc) - timedelta(hours=self.tracking_window_hours)
         relevant_points = [
             dp
             for dp in self.all_data_points

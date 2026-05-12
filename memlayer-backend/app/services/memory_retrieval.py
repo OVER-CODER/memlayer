@@ -8,7 +8,7 @@ from app.db.models import Memory, MemoryRetrieval
 from app.services.embedding import get_embedding_service
 from typing import List, Tuple, Optional
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 class MemoryRetrievalService:
@@ -104,7 +104,7 @@ class MemoryRetrievalService:
             query=query,
             retrieved_memory_ids=[m.id for m in memories],
             similarity_scores=similarities,
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
         )
         self.db.add(retrieval_log)
         self.db.commit()

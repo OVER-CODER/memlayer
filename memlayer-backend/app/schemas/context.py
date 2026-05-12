@@ -7,7 +7,7 @@ including chat history, semantic memories, workspace summary, and metadata.
 
 from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 
 

@@ -9,7 +9,7 @@ Every execution generates a unified cognition trace with complete observability.
 
 from typing import List, Dict, Optional, Any, Tuple
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 import logging
 import uuid
 
@@ -49,7 +49,7 @@ class UnifiedCognitionTrace:
     """Complete trace of a single cognitive compilation execution."""
 
     trace_id: str = field(default_factory=lambda: str(uuid.uuid4()))
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
     # Runtime execution
     assembly_result: Optional[AdaptiveAssemblyResult] = None
@@ -502,7 +502,7 @@ class IntegratedRuntimeSystem:
     def export_integrated_report(self, output_file: str) -> str:
         """Export complete integrated runtime report."""
         report = {
-            "exported_at": datetime.utcnow().isoformat(),
+            "exported_at": datetime.now(timezone.utc).isoformat(),
             "total_traces": len(self.unified_traces),
             "unified_traces": [t.to_dict() for t in self.unified_traces[-500:]],
             "runtime_statistics": self.get_runtime_statistics(),

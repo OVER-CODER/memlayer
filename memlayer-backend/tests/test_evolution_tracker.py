@@ -6,7 +6,7 @@ token efficiency, and provider adaptation over time.
 """
 
 import pytest
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from app.runtime import (
     RuntimeEvolutionTracker,
     EvolutionDataPoint,
@@ -23,7 +23,7 @@ class TestEvolutionDataPoint:
     def test_datapoint_creation(self):
         """Test creating evolution data point."""
         datapoint = EvolutionDataPoint(
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             metric=EvolutionMetric.CONTEXT_QUALITY,
             value=0.85,
             domain="research",
@@ -36,7 +36,7 @@ class TestEvolutionDataPoint:
 
     def test_datapoint_to_dict(self):
         """Test converting data point to dict."""
-        ts = datetime.utcnow()
+        ts = datetime.now(timezone.utc)
         datapoint = EvolutionDataPoint(
             timestamp=ts,
             metric=EvolutionMetric.TOKEN_EFFICIENCY,
@@ -84,7 +84,7 @@ class TestEvolutionPeriod:
 
     def test_period_creation(self):
         """Test creating evolution period."""
-        start = datetime.utcnow()
+        start = datetime.now(timezone.utc)
         end = start + timedelta(hours=1)
 
         period = EvolutionPeriod(
@@ -100,7 +100,7 @@ class TestEvolutionPeriod:
 
     def test_period_to_dict(self):
         """Test converting period to dict."""
-        start = datetime.utcnow()
+        start = datetime.now(timezone.utc)
         end = start + timedelta(hours=2)
 
         period = EvolutionPeriod(
@@ -198,7 +198,7 @@ class TestRuntimeEvolutionTracker:
         tracker = RuntimeEvolutionTracker()
 
         # Record with timestamps
-        base_time = datetime.utcnow()
+        base_time = datetime.now(timezone.utc)
         for i in range(3):
             # Manually set timestamps 1 hour apart
             dp = EvolutionDataPoint(
@@ -302,8 +302,8 @@ class TestRuntimeEvolutionTracker:
         tracker = RuntimeEvolutionTracker()
 
         # Record data for 2 hours
-        start_time = datetime.utcnow() - timedelta(hours=2)
-        end_time = datetime.utcnow()
+        start_time = datetime.now(timezone.utc) - timedelta(hours=2)
+        end_time = datetime.now(timezone.utc)
 
         for i in range(20):
             dp = EvolutionDataPoint(
@@ -323,8 +323,8 @@ class TestRuntimeEvolutionTracker:
         """Test detecting critical degradation in period."""
         tracker = RuntimeEvolutionTracker()
 
-        start_time = datetime.utcnow() - timedelta(hours=1)
-        end_time = datetime.utcnow()
+        start_time = datetime.now(timezone.utc) - timedelta(hours=1)
+        end_time = datetime.now(timezone.utc)
 
         # Record severe degradation
         for i in range(10):
@@ -346,8 +346,8 @@ class TestRuntimeEvolutionTracker:
         """Test domain-specific analysis in period."""
         tracker = RuntimeEvolutionTracker()
 
-        start_time = datetime.utcnow() - timedelta(hours=1)
-        end_time = datetime.utcnow()
+        start_time = datetime.now(timezone.utc) - timedelta(hours=1)
+        end_time = datetime.now(timezone.utc)
 
         # Record for multiple domains
         for i in range(10):
@@ -369,8 +369,8 @@ class TestRuntimeEvolutionTracker:
         """Test provider-specific analysis in period."""
         tracker = RuntimeEvolutionTracker()
 
-        start_time = datetime.utcnow() - timedelta(hours=1)
-        end_time = datetime.utcnow()
+        start_time = datetime.now(timezone.utc) - timedelta(hours=1)
+        end_time = datetime.now(timezone.utc)
 
         # Record for multiple providers
         for i in range(10):
@@ -392,8 +392,8 @@ class TestRuntimeEvolutionTracker:
         """Test overall stability calculation in period."""
         tracker = RuntimeEvolutionTracker()
 
-        start_time = datetime.utcnow() - timedelta(hours=1)
-        end_time = datetime.utcnow()
+        start_time = datetime.now(timezone.utc) - timedelta(hours=1)
+        end_time = datetime.now(timezone.utc)
 
         # Record stable data
         for i in range(10):
@@ -414,7 +414,7 @@ class TestRuntimeEvolutionTracker:
         tracker = RuntimeEvolutionTracker()
 
         # Add data points first
-        base_time = datetime.utcnow() - timedelta(hours=4)
+        base_time = datetime.now(timezone.utc) - timedelta(hours=4)
         for i in range(30):
             dp = EvolutionDataPoint(
                 timestamp=base_time + timedelta(minutes=i * 5),
@@ -474,7 +474,7 @@ class TestRuntimeEvolutionTracker:
 
         # Add old data
         old_dp = EvolutionDataPoint(
-            timestamp=datetime.utcnow() - timedelta(hours=2),
+            timestamp=datetime.now(timezone.utc) - timedelta(hours=2),
             metric=EvolutionMetric.CONTEXT_QUALITY,
             value=0.5,
         )

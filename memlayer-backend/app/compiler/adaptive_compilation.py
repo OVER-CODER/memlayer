@@ -23,7 +23,7 @@ from __future__ import annotations
 
 from typing import List, Dict, Optional, Tuple, Set, TYPE_CHECKING, Any
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 import numpy as np
 import logging
@@ -150,7 +150,7 @@ class CompilationPlan:
 
     # Metadata
     compilation_time_ms: float = 0.0
-    created_at: datetime = field(default_factory=datetime.utcnow)
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 @dataclass
@@ -177,7 +177,7 @@ class CompilationMetrics:
 class FailureAnalysis:
     """Analysis of compilation failures and regressions."""
 
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     query: str = ""
     reason: str = ""
 
@@ -308,7 +308,7 @@ class RelevanceRankingService:
     def _calculate_recency(self, timestamp: datetime) -> float:
         """Calculate recency score (0-1)."""
         try:
-            now = datetime.utcnow()
+            now = datetime.now(timezone.utc)
             age_days = (now - timestamp).days
             # Exponential decay: fresh = 1.0, old = 0.0
             recency = np.exp(-age_days / 30.0)

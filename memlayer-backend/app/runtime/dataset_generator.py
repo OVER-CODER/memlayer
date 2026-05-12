@@ -19,7 +19,7 @@ This framework enables building training datasets that improve:
 
 from typing import List, Dict, Optional, Any, Tuple
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 import logging
 import json
@@ -73,7 +73,7 @@ class DatasetSample:
     latency_ms: float
 
     # Metadata
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     trace_id: Optional[str] = None  # Link to compilation trace
     replay_compatible: bool = True
 
@@ -137,7 +137,7 @@ class DatasetPartition:
     partition_id: str
     partition_type: str  # train, validation, test
     samples: List[DatasetSample] = field(default_factory=list)
-    created_at: datetime = field(default_factory=datetime.utcnow)
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
     def get_statistics(self) -> Dict[str, Any]:
         """Get statistics for this partition."""
@@ -185,7 +185,7 @@ class RuntimeIntelligenceDataset:
 
     # Metadata
     total_samples: int = 0
-    created_at: datetime = field(default_factory=datetime.utcnow)
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     deterministic_seed: int = 42  # For reproducibility
     replay_compatible: bool = True
 

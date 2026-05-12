@@ -1,0 +1,29 @@
+{
+  "dataset_path": "/Users/overcoder/Code/memlayer/Dataset/locomo10.json",
+  "samples": 10,
+  "total_questions": 1986,
+  "lexical_recall_at_1": 0.14350453172205438,
+  "lexical_recall_at_5": 0.27492447129909364,
+  "category_breakdown": {
+    "2": {
+      "total": 321,
+      "hit_at_5": 85
+    },
+    "3": {
+      "total": 96,
+      "hit_at_5": 11
+    },
+    "1": {
+      "total": 282,
+      "hit_at_5": 61
+    },
+    "4": {
+      "total": 841,
+      "hit_at_5": 254
+    },
+    "5": {
+      "total": 446,
+      "hit_at_5": 135
+    }
+  }
+}

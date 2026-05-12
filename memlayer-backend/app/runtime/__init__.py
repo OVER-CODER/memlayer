@@ -81,6 +81,24 @@ from .diagnostics_dashboard import (
     RuntimeDiagnosticsSnapshot,
 )
 
+from .cross_layer_evaluation import (
+    CrossLayerEvaluationFramework,
+    CrossLayerEvaluationReport,
+    SemanticFidelityReport,
+    CrossViewConsistencyReport,
+    ReplayIntegrityReport,
+    ProjectionEvolutionReport,
+    TokenEconomicsReport,
+    ProviderDivergenceReport,
+)
+
+from .production_readiness import (
+    ProductionReadinessGate,
+    ProductionReadinessReport,
+    ReadinessCheckResult,
+    ReadinessThresholds,
+)
+
 __all__ = [
     # Integrated Runtime
     "IntegratedRuntimeSystem",
@@ -143,4 +161,18 @@ __all__ = [
     # Runtime Diagnostics Dashboard
     "RuntimeDiagnosticsDashboard",
     "RuntimeDiagnosticsSnapshot",
+    # Cross-layer Runtime Evaluation
+    "CrossLayerEvaluationFramework",
+    "CrossLayerEvaluationReport",
+    "SemanticFidelityReport",
+    "CrossViewConsistencyReport",
+    "ReplayIntegrityReport",
+    "ProjectionEvolutionReport",
+    "TokenEconomicsReport",
+    "ProviderDivergenceReport",
+    # Production Readiness Gate
+    "ProductionReadinessGate",
+    "ProductionReadinessReport",
+    "ReadinessCheckResult",
+    "ReadinessThresholds",
 ]

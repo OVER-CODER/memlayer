@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from app.db.models import Workspace, Chat
 from typing import List, Optional
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 class WorkspaceService:
@@ -25,8 +25,8 @@ class WorkspaceService:
             id=str(uuid.uuid4()),
             name=name,
             description=description,
-            created_at=datetime.utcnow(),
-            updated_at=datetime.utcnow(),
+            created_at=datetime.now(timezone.utc),
+            updated_at=datetime.now(timezone.utc),
         )
         self.db.add(workspace)
         self.db.commit()
@@ -61,9 +61,9 @@ class WorkspaceService:
         chat = Chat(
             id=str(uuid.uuid4()),
             workspace_id=workspace_id,
-            title=title or f"Chat {datetime.utcnow().strftime('%Y-%m-%d %H:%M')}",
-            created_at=datetime.utcnow(),
-            updated_at=datetime.utcnow(),
+            title=title or f"Chat {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M')}",
+            created_at=datetime.now(timezone.utc),
+            updated_at=datetime.now(timezone.utc),
         )
         self.db.add(chat)
         self.db.commit()

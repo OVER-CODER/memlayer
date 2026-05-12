@@ -9,7 +9,7 @@ Traces are deterministic, reproducible, and fully persistent.
 
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, field, asdict
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 import logging
 import json
@@ -135,7 +135,7 @@ class ExecutionTrace:
     token_budget: int = 4000
 
     # Timeline
-    started_at: datetime = field(default_factory=datetime.utcnow)
+    started_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     completed_at: Optional[datetime] = None
     total_duration_ms: float = 0.0
 
@@ -166,7 +166,7 @@ class ExecutionTrace:
 
     def finalize(self) -> None:
         """Finalize trace after execution."""
-        self.completed_at = datetime.utcnow()
+        self.completed_at = datetime.now(timezone.utc)
         self.total_duration_ms = (
             self.completed_at - self.started_at
         ).total_seconds() * 1000
@@ -267,7 +267,7 @@ class RuntimeTraceService:
 
         stage_trace = StageTrace(
             stage=stage,
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             duration_ms=duration_ms,
             input_token_count=input_token_count,
             output_token_count=output_token_count,
@@ -398,7 +398,7 @@ class RuntimeTraceService:
     def export_traces(self, output_file: str) -> str:
         """Export all traces to JSON file."""
         traces_data = {
-            "exported_at": datetime.utcnow().isoformat(),
+            "exported_at": datetime.now(timezone.utc).isoformat(),
             "total_traces": len(self.traces),
             "traces": [t.to_dict() for t in self.traces],
         }

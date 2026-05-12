@@ -11,7 +11,7 @@ Tests verify:
 
 import pytest
 import numpy as np
-from datetime import datetime
+from datetime import datetime, timezone
 from unittest.mock import Mock, patch
 import sys
 import os
@@ -54,7 +54,7 @@ class TestSemanticDeduplication:
             mem.id = memory_id
             mem.raw_content = content
             mem.importance_score = importance
-            mem.timestamp = datetime.utcnow()
+            mem.timestamp = datetime.now(timezone.utc)
             mem.embedding = embedding or np.random.rand(384).tolist()
             return mem
 
@@ -151,8 +151,8 @@ class TestSemanticDeduplication:
         mem2 = mock_memory("mem-2", embedding=shared_embedding.tolist())
 
         # Make mem2 more recent
-        mem2.timestamp = datetime.utcnow()
-        mem1.timestamp = datetime(2020, 1, 1)
+        mem2.timestamp = datetime.now(timezone.utc)
+        mem1.timestamp = datetime(2020, 1, 1, tzinfo=timezone.utc)
 
         dedup_service.overlap_threshold = 0.95
 
@@ -274,7 +274,7 @@ class TestDuplicateGroup:
             mem.id = memory_id
             mem.raw_content = content
             mem.importance_score = importance
-            mem.timestamp = datetime.utcnow()
+            mem.timestamp = datetime.now(timezone.utc)
             mem.embedding = embedding or np.random.rand(384).tolist()
             return mem
 

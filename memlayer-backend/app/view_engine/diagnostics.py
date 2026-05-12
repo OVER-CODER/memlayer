@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, Any, List
 import json
 
@@ -67,7 +67,7 @@ class ViewDiagnosticsDashboard:
 
         snapshot = ViewDiagnosticsSnapshot(
             snapshot_id=snapshot_id,
-            generated_at=datetime.utcnow(),
+            generated_at=datetime.now(timezone.utc),
             view_counts=by_view,
             provider_distribution=by_provider,
             quality_summary=quality_summary,

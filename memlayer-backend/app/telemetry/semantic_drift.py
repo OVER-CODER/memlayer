@@ -7,7 +7,7 @@ entity erosion, reasoning continuity, and semantic quality regression.
 
 from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass, field, asdict
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from collections import defaultdict
 from enum import Enum
 import statistics
@@ -203,7 +203,7 @@ class SemanticDriftSession:
     compression_mode: str = "balanced"
 
     # Timeline
-    started_at: datetime = field(default_factory=datetime.utcnow)
+    started_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     completed_at: Optional[datetime] = None
 
     # Cycles
@@ -221,7 +221,7 @@ class SemanticDriftSession:
 
     def finalize(self) -> None:
         """Finalize session analysis."""
-        self.completed_at = datetime.utcnow()
+        self.completed_at = datetime.now(timezone.utc)
 
         if not self.cycles:
             return
@@ -348,7 +348,7 @@ class SemanticDriftAnalyzer:
 
         cycle = CompressionCycleDrift(
             cycle_number=cycle_number,
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             compression_ratio=compression_ratio,
             semantic_density_before=semantic_density_before,
             semantic_density_after=semantic_density_after,
@@ -461,7 +461,7 @@ class SemanticDriftAnalyzer:
 
     def get_drift_trends(self, hours: int = 24) -> Dict[str, List]:
         """Get drift trends over time."""
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         cutoff_time = now - timedelta(hours=hours)
 
         relevant_sessions = [s for s in self.sessions if s.started_at >= cutoff_time]
@@ -581,7 +581,7 @@ class SemanticDriftAnalyzer:
     def export_sessions(self, output_file: str) -> str:
         """Export drift sessions to JSON file."""
         report = {
-            "exported_at": datetime.utcnow().isoformat(),
+            "exported_at": datetime.now(timezone.utc).isoformat(),
             "total_sessions": len(self.sessions),
             "sessions": [s.to_dict() for s in self.sessions[-500:]],  # Last 500
             "report": self.get_drift_analyzer_report(),
