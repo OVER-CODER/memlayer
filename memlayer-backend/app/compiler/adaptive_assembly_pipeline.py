@@ -107,6 +107,16 @@ class AdaptiveAssemblyResult:
             "semantic_retention": self.semantic_retention,
             "token_efficiency": self.token_efficiency,
             "total_duration_ms": self.total_duration_ms,
+            "stage_metrics": [
+                {
+                    "stage": sm.stage.value,
+                    "duration_ms": sm.duration_ms,
+                    "input_count": sm.input_count,
+                    "output_count": sm.output_count,
+                    "notes": sm.notes
+                }
+                for sm in self.stage_metrics
+            ],
             "timestamp": self.timestamp.isoformat(),
         }
 

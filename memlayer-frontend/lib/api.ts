@@ -18,6 +18,9 @@ export const api = {
     getGovernanceHealth: () => apiClient.get('/console/governance/health').then(res => res.data),
     getPolicyDecisions: () => apiClient.get('/console/governance/policy').then(res => res.data),
     getLineage: (id?: string) => apiClient.get('/console/governance/lineage', { params: { workspace_id: id } }).then(res => res.data),
+    getCompilerPipeline: () => apiClient.get('/console/compiler/pipeline').then(res => res.data),
+    getCoordinationTraces: () => apiClient.get('/console/telemetry/coordination-traces').then(res => res.data),
+    getCachedViews: () => apiClient.get('/console/views/cached').then(res => res.data),
     seedMockData: () => apiClient.post('/console/seed-mock-data').then(res => res.data),
   }
 };

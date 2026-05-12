@@ -62,9 +62,42 @@ def coordinate_workspace(workspace_id: str, payload: Dict[str, Any]):
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
 
+@router.get("/compiler/pipeline")
+def get_compiler_pipeline():
+    history = [r.to_dict() for r in _pipeline.execution_history[-10:]]
+    # Also include the analytics summary
+    analytics = _pipeline.get_analytics_report()
+    return {"history": history, "analytics": analytics}
+
 @router.get("/telemetry")
 def get_telemetry():
     return sdk.get_telemetry()
+
+@router.get("/telemetry/coordination-traces")
+def get_coordination_traces(limit: int = 50):
+    return sdk._integrated_runtime.telemetry.get_coordination_traces(limit=limit)
+
+@router.get("/views/cached")
+def get_cached_views():
+    # Return all cached views across all workspaces for visualization
+    workspaces = sdk.workspaces.list_workspaces()
+    all_views = []
+    
+    for ws in workspaces:
+        ws_id = ws["workspace_id"]
+        try:
+            ws_obj = sdk.workspaces.get_workspace(ws_id)
+            if ws_obj.snapshots:
+                latest_snap = ws_obj.snapshots[-1]
+                # Assuming state property or similar exists on snapshot
+                # In phase 8, snapshots have get_semantic_state or similar, but
+                # we can just use the view_api get_diagnostics which exposes shared_state_summary
+                pass
+        except Exception:
+            continue
+            
+    # Actually, sdk.views.get_diagnostics() contains "context_bus" which has all the cached projections
+    return sdk.views.get_diagnostics()
 
 @router.get("/diagnostics")
 def get_diagnostics():
@@ -87,12 +120,28 @@ def get_policy_decisions(tenant_id: str = "default"):
 
 @router.get("/governance/lineage")
 def get_lineage(tenant_id: str = "default", workspace_id: Optional[str] = None):
-    # For visualization, we need ancestry nodes
-    if workspace_id:
-        # Generate dummy data or fetch real lineage
-        pass
+    # Fetch lineage data across workspaces or a specific workspace
+    target_workspaces = [workspace_id] if workspace_id else [ws["workspace_id"] for ws in sdk.workspaces.list_workspaces()]
     
-    return {"nodes": [], "edges": []}
+    nodes = []
+    edges = []
+    
+    for ws_id in target_workspaces:
+        checkpoints = lineage_engine.get_checkpoints_for_workspace(ws_id, tenant_id)
+        for cp in checkpoints:
+            nodes.append({
+                "id": cp.checkpoint_id,
+                "label": f"Checkpoint\n{cp.operation_id}",
+                "timestamp": cp.timestamp,
+                "hash": cp.semantic_state_hash[:8]
+            })
+            for parent_id in cp.derived_from:
+                edges.append({
+                    "source": parent_id,
+                    "target": cp.checkpoint_id
+                })
+                
+    return {"nodes": nodes, "edges": edges}
 
 @router.post("/seed-mock-data")
 def seed_mock_data():
