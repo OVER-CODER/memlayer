@@ -177,7 +177,7 @@ class ContextCompilationService:
                 importance_score=memory.importance_score,
                 similarity_score=score,
                 timestamp=memory.timestamp,
-                metadata=memory.metadata or {},
+                metadata=memory.extra_metadata or {},
             )
             memory_layers.append(layer)
 

@@ -267,8 +267,8 @@ Summary:"""
         topics = set()
 
         for memory in memories:
-            if memory.metadata and "topic" in memory.metadata:
-                topic = memory.metadata["topic"]
+            if memory.extra_metadata and "topic" in memory.extra_metadata:
+                topic = memory.extra_metadata["topic"]
                 if isinstance(topic, (list, tuple)):
                     topics.update(topic)
                 else:

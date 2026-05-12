@@ -359,8 +359,10 @@ class AdaptiveAssemblyPipeline:
             for mem_id in plan.selected_memories[:10]:  # Limit to top 10
                 # Find memory by ID
                 for mem in memories:
-                    if mem.id == mem_id:
-                        parts.append(f"- {mem.raw_content[:200]}")
+                    m_id = mem.get("id") if isinstance(mem, dict) else getattr(mem, "id", None)
+                    if m_id == mem_id:
+                        content = mem.get("content", mem.get("raw_content", "")) if isinstance(mem, dict) else getattr(mem, "raw_content", "")
+                        parts.append(f"- {content[:200]}")
                         break
 
         # Add workspace summary if present

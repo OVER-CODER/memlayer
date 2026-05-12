@@ -2,7 +2,7 @@
 Pydantic schemas for API request/response validation.
 """
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, ConfigDict
 from typing import Optional, List
 from datetime import datetime, timezone
 
@@ -74,10 +74,9 @@ class MemoryResponse(BaseModel):
     summary: Optional[str]
     importance_score: float
     timestamp: datetime
-    metadata: Optional[dict]
+    metadata: Optional[dict] = Field(None, validation_alias="extra_metadata")
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True, populate_by_name=True)
 
 
 # Query/Response Schemas

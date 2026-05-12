@@ -44,6 +44,19 @@ class AuditRecord:
     recorded_by: str  # Component name
     integrity_hash: str  # SHA256
 
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert to dictionary."""
+        return {
+            "audit_id": self.audit_id,
+            "workspace_id": self.workspace_id,
+            "tenant_id": self.tenant_id,
+            "timestamp": self.timestamp,
+            "event_type": self.event_type,
+            "event_data": self.event_data,
+            "recorded_by": self.recorded_by,
+            "integrity_hash": self.integrity_hash,
+        }
+
 
 class RuntimeAuditTrailManager:
     """
@@ -110,6 +123,31 @@ class RuntimeAuditTrailManager:
             event_data,
             "RuntimeCoordination",
             tenant_id,
+        )
+
+    def record_event(
+        self,
+        workspace_id: str,
+        event_type: str,
+        event_data: Dict[str, Any],
+        recorded_by: str,
+        tenant_id: str,
+    ) -> AuditRecord:
+        """
+        Record a generic audit event.
+
+        Args:
+            workspace_id: Workspace identifier
+            event_type: Type of event
+            event_data: Event-specific data
+            recorded_by: Component recording the event
+            tenant_id: Tenant identifier
+
+        Returns:
+            The recorded AuditRecord
+        """
+        return self._record_event(
+            workspace_id, event_type, event_data, recorded_by, tenant_id
         )
 
     def record_replay_event(
@@ -352,8 +390,36 @@ class RuntimeAuditTrailManager:
             "first_event": records[0].timestamp,
             "last_event": records[-1].timestamp,
             "event_types": event_types,
-            "recorded_by": set(r.recorded_by for r in records),
+            "recorded_by": list(set(r.recorded_by for r in records)),
         }
+
+    def query_records(
+        self,
+        tenant_id: str,
+        action_type: Optional[str] = None,
+        limit: int = 100,
+    ) -> List[AuditRecord]:
+        """
+        Query audit records across all workspaces for a tenant.
+
+        Args:
+            tenant_id: Tenant identifier
+            action_type: Optional event type to filter by
+            limit: Maximum number of records to return
+
+        Returns:
+            List of matching AuditRecords sorted by timestamp descending
+        """
+        results = []
+        for ws_records in self._audit_trails.values():
+            for record in ws_records:
+                if record.tenant_id == tenant_id:
+                    if action_type is None or record.event_type == action_type:
+                        results.append(record)
+
+        # Sort by timestamp descending
+        results.sort(key=lambda x: x.timestamp, reverse=True)
+        return results[:limit]
 
     def verify_audit_integrity(
         self, workspace_id: str, tenant_id: str

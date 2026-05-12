@@ -5,7 +5,8 @@ Exposes runtime SDK, Telemetry, and Governance layers.
 
 from fastapi import APIRouter, HTTPException, Query
 from typing import Dict, Any, List, Optional
-from datetime import datetime
+from datetime import datetime, timezone
+import uuid
 
 from app.sdk import MemLayerSDK, WorkspaceConfig
 from app.governance import (
@@ -19,19 +20,27 @@ from app.agent_runtime.runtime_kernel import SharedAgentRuntime
 from app.view_engine.compiler import ViewEngineCompiler, WorkspaceSemanticState
 from app.runtime.integrated_runtime import IntegratedRuntimeSystem
 from app.compiler.adaptive_assembly_pipeline import AdaptiveAssemblyPipeline
+from app.compiler.adaptive_compilation import RelevanceRankingService
+from app.services.embedding import get_embedding_service
 
 router = APIRouter(prefix="/api/console", tags=["console"])
 
 # Global SDK and Governance Instances for the console
-_pipeline = AdaptiveAssemblyPipeline()
-_integrated_runtime = IntegratedRuntimeSystem(_pipeline)
-sdk = MemLayerSDK(_integrated_runtime)
-
+_embedding_service = get_embedding_service()
+_ranking_service = RelevanceRankingService(_embedding_service)
+_pipeline = AdaptiveAssemblyPipeline(_ranking_service, _embedding_service)
 audit_manager = RuntimeAuditTrailManager()
 lineage_engine = SemanticLineageEngine()
-policy_engine = GovernancePolicyEngine(audit_manager)
+policy_engine = GovernancePolicyEngine()
 observability_manager = OperationalObservabilityManager()
-integrity_monitor = RuntimeIntegrityMonitor(audit_manager, lineage_engine)
+integrity_monitor = RuntimeIntegrityMonitor()
+
+_integrated_runtime = IntegratedRuntimeSystem(
+    _pipeline, 
+    lineage_engine=lineage_engine, 
+    audit_manager=audit_manager
+)
+sdk = MemLayerSDK(_integrated_runtime)
 
 
 @router.get("/workspaces")
@@ -155,22 +164,123 @@ def seed_mock_data():
     sdk.coordinate(ws2.workspace_id, "summarize Q4")
     
     # Generate some governance records
+    cp1 = lineage_engine.record_semantic_checkpoint(
+        workspace_id=ws1.workspace_id,
+        semantic_state={"nodes": 10, "edges": 15},
+        operation_id="initial_compilation",
+        tenant_id="default"
+    )
+    cp2 = lineage_engine.record_semantic_checkpoint(
+        workspace_id=ws1.workspace_id,
+        semantic_state={"nodes": 12, "edges": 18},
+        operation_id="market_analysis",
+        derived_from=[cp1.checkpoint_id],
+        tenant_id="default"
+    )
+    
     audit_manager.record_event(
-        tenant_id="default",
-        action_type="WORKSPACE_CREATED",
-        actor="system",
-        resource_id=ws1.workspace_id,
-        details={"provider": "claude"}
+        workspace_id=ws1.workspace_id,
+        event_type="WORKSPACE_CREATED",
+        event_data={"provider": "claude"},
+        recorded_by="system",
+        tenant_id="default"
     )
     audit_manager.record_event(
-        tenant_id="default",
-        action_type="POLICY_ENFORCEMENT",
-        actor="policy_engine",
-        resource_id=ws1.workspace_id,
-        details={"policy": "TokenBudgetLimit", "status": "passed"}
+        workspace_id=ws1.workspace_id,
+        event_type="POLICY_ENFORCEMENT",
+        event_data={"policy": "TokenBudgetLimit", "status": "passed"},
+        recorded_by="policy_engine",
+        tenant_id="default"
+    )
+    audit_manager.record_event(
+        workspace_id=ws1.workspace_id,
+        event_type="SEMANTIC_CHECKPOINT",
+        event_data={"checkpoint_id": cp2.checkpoint_id},
+        recorded_by="LineageEngine",
+        tenant_id="default"
     )
     
     observability_manager.record_health_metric("default", "SharedAgentRuntime", 0.95, {"latency": 450})
     observability_manager.record_health_metric("default", "ViewEngineCompiler", 0.99, {"cache_hit_rate": 0.85})
+    observability_manager.record_health_metric("default", "GovernancePolicyEngine", 1.0, {"policies_enforced": 12})
+    observability_manager.record_health_metric("default", "RuntimeIntegrityMonitor", 0.98, {"checks_passed": 100})
     
     return {"status": "seeded"}
+@router.post("/ingest-locomo")
+def ingest_locomo_dataset(payload: Dict[str, Any]):
+    """
+    Ingests the LoCoMo dataset into the runtime.
+    Creates isolated workspaces for longitudinal evaluation.
+    """
+    dataset_path = payload.get("dataset_path", "/Users/overcoder/Code/memlayer/Dataset/locomo10.json")
+    workspace_prefix = payload.get("workspace_prefix", "locomo-eval")
+    num_samples = payload.get("num_samples", 1)
+    
+    import json
+    from pathlib import Path
+    
+    path = Path(dataset_path)
+    if not path.exists():
+        raise HTTPException(status_code=404, detail=f"Dataset not found at {path}")
+        
+    with open(path, "r") as f:
+        data = json.load(f)
+        
+    results = []
+    
+    for s_idx in range(min(num_samples, len(data))):
+        sample = data[s_idx]
+        ws_id = f"{workspace_prefix}-{s_idx}-{uuid.uuid4().hex[:4]}"
+        conversation = sample["conversation"]
+        
+        # Create workspace
+        sdk.create_workspace(workspace_id=ws_id, provider="openai")
+        
+        session_results = []
+        
+        # Ingest sessions chronologically (up to 35 sessions in LoCoMo)
+        for i in range(1, 36):
+            session_key = f"session_{i}"
+            date_key = f"session_{i}_date_time"
+            
+            if session_key not in conversation:
+                continue
+                
+            session_data = conversation[session_key]
+            timestamp = conversation.get(date_key, datetime.now(timezone.utc).isoformat())
+            
+            memories = []
+            for utt in session_data:
+                memories.append({
+                    "id": utt["dia_id"],
+                    "content": utt["text"],
+                    "metadata": {
+                        "speaker": utt["speaker"],
+                        "session": i,
+                        "timestamp": timestamp,
+                        "dia_id": utt["dia_id"]
+                    }
+                })
+                
+            # Add memories
+            sdk.add_memories(ws_id, memories)
+            
+            # Run coordination to trigger runtime systems (Lineage, Telemetry, etc.)
+            # We vary the query to simulate evolution
+            query = f"What were the key updates in session {i} compared to previous sessions?"
+            if i == 1:
+                query = "Initialize the conversation state and summarize the first meeting."
+                
+            sdk.coordinate(ws_id, query)
+            
+            session_results.append({
+                "session": i,
+                "utterances": len(session_data)
+            })
+            
+        results.append({
+            "workspace_id": ws_id,
+            "sessions": len(session_results)
+        })
+        
+    return {"status": "ingested", "workspaces": results}

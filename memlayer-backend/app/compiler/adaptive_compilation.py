@@ -233,7 +233,8 @@ class RelevanceRankingService:
                 query, memory, workspace_state, provider_type, query_type
             )
             score = factors.total_score()
-            rankings.append((memory.id, score, factors))
+            m_id = memory.get("id") if isinstance(memory, dict) else getattr(memory, "id", None)
+            rankings.append((m_id, score, factors))
 
         # Sort by score descending
         rankings.sort(key=lambda x: x[1], reverse=True)
@@ -246,7 +247,7 @@ class RelevanceRankingService:
     def _calculate_ranking_factors(
         self,
         query: str,
-        memory: Memory,
+        memory: Any,
         workspace_state: Optional[Dict],
         provider_type: str,
         query_type: QueryType,
@@ -254,24 +255,38 @@ class RelevanceRankingService:
         """Calculate 7-factor ranking for a memory."""
         factors = RankingFactors()
 
+        # Helper to get attributes from dict or object
+        def get_attr(obj, attr, default=None):
+            if isinstance(obj, dict):
+                # Map some common keys
+                if attr == "raw_content" and "content" in obj:
+                    return obj["content"]
+                return obj.get(attr, default)
+            return getattr(obj, attr, default)
+
+        embedding = get_attr(memory, "embedding")
+        content = get_attr(memory, "raw_content")
+        importance = get_attr(memory, "importance_score")
+        timestamp = get_attr(memory, "timestamp")
+
         # 1. Semantic Similarity
-        if memory.embedding and hasattr(memory, "raw_content"):
-            sim = self._calculate_similarity(query, memory.embedding)
+        if embedding and content:
+            sim = self._calculate_similarity(query, embedding)
             factors.semantic_similarity = sim
 
         # 2. Importance Score
-        if hasattr(memory, "importance_score"):
-            factors.importance_score = memory.importance_score
+        if importance is not None:
+            factors.importance_score = importance
 
         # 3. Recency Factor
-        if hasattr(memory, "timestamp"):
-            recency = self._calculate_recency(memory.timestamp)
+        if timestamp:
+            recency = self._calculate_recency(timestamp)
             factors.recency_factor = recency
 
         # 4. Reasoning Continuity
-        if hasattr(memory, "raw_content"):
+        if content:
             reasoning_score = self._calculate_reasoning_continuity(
-                memory.raw_content, query
+                content, query
             )
             factors.reasoning_continuity = reasoning_score
 
@@ -287,8 +302,8 @@ class RelevanceRankingService:
         factors.provider_fit = provider_score
 
         # 7. Information Density
-        if hasattr(memory, "raw_content"):
-            density = self._calculate_information_density(memory.raw_content)
+        if content:
+            density = self._calculate_information_density(content)
             factors.information_density = density
 
         return factors
@@ -345,7 +360,7 @@ class RelevanceRankingService:
         return continuity
 
     def _calculate_workspace_relevance(
-        self, memory: Memory, workspace_state: Dict
+        self, memory: Any, workspace_state: Dict
     ) -> float:
         """Calculate relevance to current workspace."""
         # Simple: if memory mentions workspace entities, boost score
@@ -354,10 +369,17 @@ class RelevanceRankingService:
 
         relevance = 0.5  # Baseline
 
+        # Helper to get content
+        content = ""
+        if isinstance(memory, dict):
+            content = memory.get("content", memory.get("raw_content", ""))
+        else:
+            content = getattr(memory, "raw_content", "")
+
         # Check if memory relates to workspace context
         workspace_entities = workspace_state.get("entities", [])
-        if hasattr(memory, "raw_content"):
-            content_lower = memory.raw_content.lower()
+        if content:
+            content_lower = content.lower()
             for entity in workspace_entities:
                 if entity.lower() in content_lower:
                     relevance = min(1.0, relevance + 0.1)
@@ -365,13 +387,20 @@ class RelevanceRankingService:
         return relevance
 
     def _calculate_provider_fit(
-        self, memory: Memory, provider_type: str, query_type: QueryType
+        self, memory: Any, provider_type: str, query_type: QueryType
     ) -> float:
         """Calculate fit for target provider."""
         fit = 0.6  # Baseline
 
-        if hasattr(memory, "raw_content"):
-            content_length = len(memory.raw_content)
+        # Helper to get content
+        content = ""
+        if isinstance(memory, dict):
+            content = memory.get("content", memory.get("raw_content", ""))
+        else:
+            content = getattr(memory, "raw_content", "")
+
+        if content:
+            content_length = len(content)
 
             # Claude prefers longer context
             if provider_type == "claude":
@@ -389,8 +418,8 @@ class RelevanceRankingService:
                     fit += 0.2
 
         # Query type fit
-        if query_type == QueryType.CODING and hasattr(memory, "raw_content"):
-            if any(char in memory.raw_content for char in ["(", ")", "=", "{"]):
+        if query_type == QueryType.CODING and content:
+            if any(char in content for char in ["(", ")", "=", "{"]):
                 fit += 0.1
 
         return min(1.0, fit)
@@ -493,15 +522,17 @@ class ContextQualityEvaluator:
 
         # 1. Semantic Density (value per token)
         context_tokens = len(compiled_context) // 4
-        original_tokens = sum(
-            len(m.raw_content) // 4 if hasattr(m, "raw_content") else 0
-            for m in original_memories
-        )
+        original_tokens = 0
+        for m in original_memories:
+            content = m.get("content", m.get("raw_content", "")) if isinstance(m, dict) else getattr(m, "raw_content", "")
+            if content:
+                original_tokens += len(content) // 4
+
         if context_tokens > 0:
             # Density = (information preserved) / (tokens used)
             info_preserved = 1.0 - compression_ratio
             score.semantic_density = info_preserved / (
-                context_tokens / original_tokens + 0.001
+                (context_tokens / original_tokens if original_tokens > 0 else 1) + 0.001
             )
             score.semantic_density = min(1.0, score.semantic_density)
 
@@ -518,10 +549,11 @@ class ContextQualityEvaluator:
         # 3. Entity Continuity (named entity preservation)
         original_entities = set()
         for memory in original_memories:
-            if hasattr(memory, "raw_content"):
+            content = memory.get("content", memory.get("raw_content", "")) if isinstance(memory, dict) else getattr(memory, "raw_content", "")
+            if content:
                 entities = set(
                     word
-                    for word in memory.raw_content.split()
+                    for word in content.split()
                     if word and word[0].isupper()
                 )
                 original_entities.update(entities)
@@ -770,10 +802,12 @@ class AdaptiveCompilationPlanner:
             if selected_tokens < memory_budget:
                 # Find memory by ID to get content length
                 for mem in memories:
-                    if mem.id == mem_id:
+                    m_id = mem.get("id") if isinstance(mem, dict) else getattr(mem, "id", None)
+                    if m_id == mem_id:
+                        content = mem.get("content", mem.get("raw_content", "")) if isinstance(mem, dict) else getattr(mem, "raw_content", "")
                         mem_tokens = (
-                            len(mem.raw_content) // 4
-                            if hasattr(mem, "raw_content")
+                            len(content) // 4
+                            if content
                             else 100
                         )
                         if selected_tokens + mem_tokens <= memory_budget:

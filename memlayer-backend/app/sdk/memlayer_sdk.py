@@ -142,6 +142,7 @@ class MemLayerSDK:
             provider=provider or ws["provider"],
             token_budget=ws["token_budget"],
             query_type=ws.get("query_type", "general"),
+            workspace_state={"workspace_id": workspace_id}
         )
 
     # -----------------------------------------------------------------
