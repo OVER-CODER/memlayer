@@ -95,6 +95,7 @@ def init_db():
 async def init_async_db():
     """Initialize the database asynchronously with connection verification."""
     from app.db.models import Base
+    from sqlalchemy import text
 
     max_retries = 5
     retry_delay = 2
@@ -103,7 +104,7 @@ async def init_async_db():
         try:
             # Test connection
             async with async_engine.connect() as conn:
-                await conn.execute("SELECT 1")
+                await conn.execute(text("SELECT 1"))
 
             # Create tables
             async with async_engine.begin() as conn:
