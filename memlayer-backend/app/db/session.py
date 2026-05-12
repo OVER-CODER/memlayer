@@ -4,8 +4,6 @@ Supports both synchronous (legacy) and asynchronous (production) execution.
 """
 
 import logging
-import socket
-from urllib.parse import urlparse
 from sqlalchemy import create_engine
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.orm import sessionmaker, Session
@@ -17,41 +15,12 @@ logging.basicConfig(level=logging.INFO, format="%(name)s - %(levelname)s - %(mes
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
+# Use direct URLs
+_db_url = settings.database_url
+_async_db_url = settings.async_database_url
 
-def _resolve_host_to_ip(hostname: str) -> str:
-    """Resolve hostname to IP address to avoid DNS issues in some environments."""
-    try:
-        ip = socket.gethostbyname(hostname)
-        logger.info(f"Resolved {hostname} to {ip}")
-        return ip
-    except Exception as e:
-        logger.warning(f"Could not resolve {hostname}: {e}")
-        return hostname
-
-
-def _convert_dsn_to_ip(dsn: str) -> str:
-    """Convert a DSN with hostname to use IP address directly."""
-    try:
-        parsed = urlparse(dsn)
-        if parsed.hostname and not parsed.hostname.replace(".", "").isdigit():
-            ip = _resolve_host_to_ip(parsed.hostname)
-            # Rebuild the DSN with IP
-            port = f":{parsed.port}" if parsed.port else ""
-            path = parsed.path if parsed.path else ""
-            query = f"?{parsed.query}" if parsed.query else ""
-            username = parsed.username or ""
-            password = f":{parsed.password}" if parsed.password else ""
-            at = "@" if username else ""
-            return f"{parsed.scheme}://{username}{password}{at}{ip}{port}{path}{query}"
-        return dsn
-    except Exception as e:
-        logger.warning(f"Could not convert DSN: {e}")
-        return dsn
-
-
-# Convert database URLs to use IP addresses
-_db_url = _convert_dsn_to_ip(settings.database_url)
-_async_db_url = _convert_dsn_to_ip(settings.async_database_url)
+logger.info(f"Database URL: {_db_url}")
+logger.info(f"Async Database URL: {_async_db_url}")
 
 logger.info(f"Database URL: {_db_url}")
 logger.info(f"Async Database URL: {_async_db_url}")
