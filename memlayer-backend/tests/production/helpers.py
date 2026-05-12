@@ -4,10 +4,25 @@ Test helper module - provides authentication and common utilities.
 
 import httpx
 from typing import Dict, Optional
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
+from typing import List, Any
 
 # JWT Token for authenticated API requests (generated with production secret key)
 # Production uses the default dev secret key from config
-JWT_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0LXVzZXIiLCJ0ZW5hbnRfaWQiOiJ0ZXN0LXRlbmFudCIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTc3ODcwMDA2MiwiaWF0IjoxNzc4NjEzNjYyfQ.uAbb1ylKoxBQ07UePXD3VwXZqhHei3PCWadZMebZ6yQ"
+JWT_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0LXVzZXIiLCJ0ZW5hbnRfaWQiOiJ0ZXN0LXRlbmFudCIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTc3ODcwMDQ4NCwiaWF0IjoxNzc4NjE0MDg0fQ.7zoUZ8STuwHJ4maF_ZNAXFAW1euDT0SGc74_TVdCSOI"
+
+
+@dataclass
+class TestResult:
+    test_name: str
+    status: str  # PASS, FAIL, SKIP, ERROR
+    duration: float
+    metrics: Dict[str, Any] = field(default_factory=dict)
+    errors: List[str] = field(default_factory=list)
+    timestamp: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
 
 
 def get_auth_headers(tenant_id: str = "test-tenant") -> Dict[str, str]:

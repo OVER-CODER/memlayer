@@ -10,7 +10,7 @@ import json
 from typing import Dict, Any, List
 from datetime import datetime
 
-from production_runner import TestResult
+from helpers import TestResult
 
 
 async def test_pgvector_scaling(base_url: str) -> TestResult:
@@ -37,6 +37,7 @@ async def test_pgvector_scaling(base_url: str) -> TestResult:
 
             # Create workspace
             response = await client.post(
+            headers=get_auth_headers(),
                 f"{base_url}/api/workspaces",
                 params={"name": f"vector-scale-{scale}-{int(time.time())}"},
             )
@@ -53,6 +54,7 @@ async def test_pgvector_scaling(base_url: str) -> TestResult:
                 start = time.time()
 
                 response = await client.post(
+            headers=get_auth_headers(),
                     f"{base_url}/api/memories",
                     params={
                         "workspace_id": workspace_id,
@@ -85,6 +87,7 @@ async def test_pgvector_scaling(base_url: str) -> TestResult:
 
         # Create workspace with known memories
         response = await client.post(
+            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={"name": f"topk-test-{int(time.time())}"},
         )

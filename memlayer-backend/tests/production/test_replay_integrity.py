@@ -11,7 +11,7 @@ import hashlib
 from typing import Dict, Any, List
 from datetime import datetime
 
-from production_runner import TestResult
+from helpers import TestResult
 
 
 def compute_canonical_hash(data: Dict) -> str:
@@ -38,6 +38,7 @@ async def test_replay_integrity(base_url: str) -> TestResult:
         print("  Creating test workspace...")
 
         response = await client.post(
+            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={
                 "name": f"replay-test-{int(time.time())}",
@@ -71,6 +72,7 @@ async def test_replay_integrity(base_url: str) -> TestResult:
 
         for msg in test_messages:
             response = await client.post(
+            headers=get_auth_headers(),
                 f"{base_url}/api/memories",
                 params={
                     "workspace_id": workspace_id,

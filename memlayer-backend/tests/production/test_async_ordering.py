@@ -11,7 +11,7 @@ import hashlib
 from typing import Dict, Any, List
 from datetime import datetime
 
-from production_runner import TestResult
+from helpers import TestResult
 
 
 async def test_async_ordering(base_url: str) -> TestResult:
@@ -32,6 +32,7 @@ async def test_async_ordering(base_url: str) -> TestResult:
         print("  Testing async ordering...")
 
         response = await client.post(
+            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={"name": f"async-order-test-{int(time.time())}"},
         )
@@ -57,6 +58,7 @@ async def test_async_ordering(base_url: str) -> TestResult:
             content = f"Order test message {i}"
 
             response = await client.post(
+            headers=get_auth_headers(),
                 f"{base_url}/api/memories",
                 params={
                     "workspace_id": workspace_id,
@@ -90,6 +92,7 @@ async def test_async_ordering(base_url: str) -> TestResult:
         async def add_concurrent_message(index: int):
             content = f"Concurrent message {index}"
             response = await client.post(
+            headers=get_auth_headers(),
                 f"{base_url}/api/memories",
                 params={
                     "workspace_id": workspace_id,
@@ -141,6 +144,7 @@ async def test_async_ordering(base_url: str) -> TestResult:
         headers = {"X-Tenant-ID": "test-tenant-async"}
 
         response = await client.post(
+            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={"name": "context-test"},
             headers=headers,

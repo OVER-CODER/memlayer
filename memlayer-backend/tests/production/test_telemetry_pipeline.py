@@ -10,7 +10,7 @@ import json
 from typing import Dict, Any, List
 from datetime import datetime
 
-from production_runner import TestResult
+from helpers import TestResult
 
 
 async def test_telemetry_pipeline(base_url: str) -> TestResult:
@@ -59,6 +59,7 @@ async def test_telemetry_pipeline(base_url: str) -> TestResult:
 
             # Create workspace (generates telemetry)
             response = await client.post(
+            headers=get_auth_headers(),
                 f"{base_url}/api/workspaces",
                 params={"name": f"telemetry-test-{i}-{int(time.time())}"},
             )
@@ -96,6 +97,7 @@ async def test_telemetry_pipeline(base_url: str) -> TestResult:
 
         # Create workspace with many operations
         response = await client.post(
+            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={"name": f"async-telemetry-{int(time.time())}"},
         )

@@ -9,10 +9,29 @@ import asyncio
 import time
 import json
 import hashlib
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, field
 from pathlib import Path
+
+# Import from helpers
+from helpers import TestResult
+
+# Import test modules
+from test_concurrent_ingestion import test_concurrent_ingestion
+from test_longitudinal_growth import test_longitudinal_growth
+from test_replay_integrity import test_replay_integrity
+from test_governance_integrity import test_governance_integrity
+from test_snapshot_recovery import test_snapshot_recovery
+from test_redis_coordination import test_redis_coordination
+from test_connection_resilience import test_connection_resilience
+from test_partial_failure_recovery import test_partial_failure_recovery
+from test_telemetry_pipeline import test_telemetry_pipeline
+from test_cold_restart_recovery import test_cold_restart_recovery
+from test_async_ordering import test_async_ordering
+from test_pgvector_scaling import test_pgvector_scaling
+from test_high_volume_replay import test_high_volume_replay
+from test_tenant_isolation import test_tenant_isolation
 
 # Configuration
 PRODUCTION_URL = os.getenv("PRODUCTION_URL", "https://memlayer-prod.onrender.com")
@@ -20,7 +39,7 @@ REPORT_DIR = Path(__file__).parent.parent.parent / "docs" / "production_validati
 
 # JWT Token for authenticated API requests (generated with production secret key)
 # Production uses the default dev secret key from config
-JWT_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0LXVzZXIiLCJ0ZW5hbnRfaWQiOiJ0ZXN0LXRlbmFudCIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTc3ODcwMDA2MiwiaWF0IjoxNzc4NjEzNjYyfQ.uAbb1ylKoxBQ07UePXD3VwXZqhHei3PCWadZMebZ6yQ"
+JWT_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0LXVzZXIiLCJ0ZW5hbnRfaWQiOiJ0ZXN0LXRlbmFudCIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTc3ODcwMDQ4NCwiaWF0IjoxNzc4NjE0MDg0fQ.7zoUZ8STuwHJ4maF_ZNAXFAW1euDT0SGc74_TVdCSOI"
 
 # Ensure report directory exists
 REPORT_DIR.mkdir(parents=True, exist_ok=True)
@@ -33,7 +52,9 @@ class TestResult:
     duration: float
     metrics: Dict[str, Any] = field(default_factory=dict)
     errors: List[str] = field(default_factory=list)
-    timestamp: str = field(default_factory=lambda: datetime.utcnow().isoformat())
+    timestamp: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
 
 
 @dataclass
@@ -73,24 +94,24 @@ class ProductionValidator:
 
     async def run_all_tests(self) -> Dict[str, Any]:
         """Run all production validation tests."""
-        self.start_time = datetime.utcnow()
+        self.start_time = datetime.now(timezone.utc)
 
         # Import all test modules
         test_modules = [
-            ("concurrent_ingestion", "test_concurrent_ingestion"),
-            ("longitudinal_growth", "test_longitudinal_growth"),
-            ("replay_integrity", "test_replay_integrity"),
-            ("governance_integrity", "test_governance_integrity"),
-            ("snapshot_recovery", "test_snapshot_recovery"),
-            ("redis_coordination", "test_redis_coordination"),
-            ("connection_resilience", "test_connection_resilience"),
-            ("partial_failure_recovery", "test_partial_failure_recovery"),
-            ("telemetry_pipeline", "test_telemetry_pipeline"),
-            ("cold_restart_recovery", "test_cold_restart_recovery"),
-            ("async_ordering", "test_async_ordering"),
-            ("pgvector_scaling", "test_pgvector_scaling"),
-            ("high_volume_replay", "test_high_volume_replay"),
-            ("tenant_isolation", "test_tenant_isolation"),
+            ("concurrent_ingestion", test_concurrent_ingestion),
+            ("longitudinal_growth", test_longitudinal_growth),
+            ("replay_integrity", test_replay_integrity),
+            ("governance_integrity", test_governance_integrity),
+            ("snapshot_recovery", test_snapshot_recovery),
+            ("redis_coordination", test_redis_coordination),
+            ("connection_resilience", test_connection_resilience),
+            ("partial_failure_recovery", test_partial_failure_recovery),
+            ("telemetry_pipeline", test_telemetry_pipeline),
+            ("cold_restart_recovery", test_cold_restart_recovery),
+            ("async_ordering", test_async_ordering),
+            ("pgvector_scaling", test_pgvector_scaling),
+            ("high_volume_replay", test_high_volume_replay),
+            ("tenant_isolation", test_tenant_isolation),
         ]
 
         print(f"\n{'=' * 60}")
@@ -100,41 +121,35 @@ class ProductionValidator:
         print(f"Started: {self.start_time.isoformat()}")
         print(f"{'=' * 60}\n")
 
-        for module_name, test_name in test_modules:
+        for module_name, test_func in test_modules:
             suite = TestSuite(name=module_name)
             self.suites[module_name] = suite
 
             try:
-                # Import and run test module dynamically
-                module = __import__(
-                    f"tests.production.{module_name}", fromlist=[test_name]
+                print(f"Running: {module_name}...")
+                result = await test_func(self.base_url)
+                suite.add_result(result)
+
+                status_icon = (
+                    "✓"
+                    if result.status == "PASS"
+                    else "✗"
+                    if result.status == "FAIL"
+                    else "?"
                 )
-
-                test_func = getattr(module, test_name, None)
-                if test_func:
-                    print(f"Running: {module_name}...")
-                    result = await test_func(self.base_url)
-                    suite.add_result(result)
-
-                    status_icon = (
-                        "✓"
-                        if result.status == "PASS"
-                        else "✗"
-                        if result.status == "FAIL"
-                        else "?"
-                    )
-                    print(f"  {status_icon} {result.status} ({result.duration:.2f}s)")
-                else:
-                    print(f"Skipping: {module_name} (test function not found)")
+                print(f"  {status_icon} {result.status} ({result.duration:.2f}s)")
 
             except Exception as e:
                 print(f"Error in {module_name}: {e}")
+                import traceback
+
+                traceback.print_exc()
                 error_result = TestResult(
-                    test_name=test_name, status="ERROR", duration=0, errors=[str(e)]
+                    test_name=module_name, status="ERROR", duration=0, errors=[str(e)]
                 )
                 suite.add_result(error_result)
 
-        self.end_time = datetime.utcnow()
+        self.end_time = datetime.now(timezone.utc)
         return self.generate_report()
 
     def generate_report(self) -> Dict[str, Any]:
@@ -152,7 +167,7 @@ class ProductionValidator:
 
         report = {
             "phase": "D1.5",
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "target_url": self.base_url,
             "duration_seconds": (self.end_time - self.start_time).total_seconds()
             if self.end_time

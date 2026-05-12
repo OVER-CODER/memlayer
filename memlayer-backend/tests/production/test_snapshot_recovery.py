@@ -11,7 +11,7 @@ import hashlib
 from typing import Dict, Any, List
 from datetime import datetime
 
-from production_runner import TestResult
+from helpers import TestResult
 
 
 async def test_snapshot_recovery(base_url: str) -> TestResult:
@@ -33,6 +33,7 @@ async def test_snapshot_recovery(base_url: str) -> TestResult:
         print("  Creating workspace for snapshot test...")
 
         response = await client.post(
+            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={
                 "name": f"snapshot-test-{int(time.time())}",
@@ -58,6 +59,7 @@ async def test_snapshot_recovery(base_url: str) -> TestResult:
         for i in range(5):
             content = f"Pre-snapshot message {i}"
             response = await client.post(
+            headers=get_auth_headers(),
                 f"{base_url}/api/memories",
                 params={
                     "workspace_id": workspace_id,
@@ -85,6 +87,7 @@ async def test_snapshot_recovery(base_url: str) -> TestResult:
 
         # Try snapshot endpoint if it exists
         snapshot_response = await client.post(
+            headers=get_auth_headers(),
             f"{base_url}/api/workspaces/{workspace_id}/snapshot",
             params={"name": f"snapshot-{int(time.time())}"},
         )
@@ -113,6 +116,7 @@ async def test_snapshot_recovery(base_url: str) -> TestResult:
 
         if snapshot_id:
             restore_response = await client.post(
+            headers=get_auth_headers(),
                 f"{base_url}/api/workspaces/{workspace_id}/restore",
                 params={"snapshot_id": snapshot_id},
             )
@@ -146,6 +150,7 @@ async def test_snapshot_recovery(base_url: str) -> TestResult:
         print("  Testing branch restoration...")
 
         branch_response = await client.post(
+            headers=get_auth_headers(),
             f"{base_url}/api/workspaces/{workspace_id}/branch",
             params={"name": f"branch-{int(time.time())}"},
         )

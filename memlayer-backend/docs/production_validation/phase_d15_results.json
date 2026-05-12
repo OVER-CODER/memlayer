@@ -1,0 +1,404 @@
+{
+  "phase": "D1.5",
+  "timestamp": "2026-05-12T19:29:46.590311+00:00",
+  "target_url": "https://memlayer-prod.onrender.com",
+  "duration_seconds": 83.02151,
+  "summary": {
+    "total_tests": 14,
+    "passed": 6,
+    "failed": 2,
+    "errors": 6,
+    "pass_rate": 0.42857142857142855
+  },
+  "suites": {
+    "concurrent_ingestion": {
+      "suite": "concurrent_ingestion",
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "errors": 0,
+      "skipped": 0,
+      "pass_rate": 0.0
+    },
+    "longitudinal_growth": {
+      "suite": "longitudinal_growth",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "pass_rate": 1.0
+    },
+    "replay_integrity": {
+      "suite": "replay_integrity",
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "errors": 1,
+      "skipped": 0,
+      "pass_rate": 0.0
+    },
+    "governance_integrity": {
+      "suite": "governance_integrity",
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "errors": 1,
+      "skipped": 0,
+      "pass_rate": 0.0
+    },
+    "snapshot_recovery": {
+      "suite": "snapshot_recovery",
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "errors": 1,
+      "skipped": 0,
+      "pass_rate": 0.0
+    },
+    "redis_coordination": {
+      "suite": "redis_coordination",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "pass_rate": 1.0
+    },
+    "connection_resilience": {
+      "suite": "connection_resilience",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "pass_rate": 1.0
+    },
+    "partial_failure_recovery": {
+      "suite": "partial_failure_recovery",
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "errors": 1,
+      "skipped": 0,
+      "pass_rate": 0.0
+    },
+    "telemetry_pipeline": {
+      "suite": "telemetry_pipeline",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "pass_rate": 1.0
+    },
+    "cold_restart_recovery": {
+      "suite": "cold_restart_recovery",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "pass_rate": 1.0
+    },
+    "async_ordering": {
+      "suite": "async_ordering",
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "errors": 1,
+      "skipped": 0,
+      "pass_rate": 0.0
+    },
+    "pgvector_scaling": {
+      "suite": "pgvector_scaling",
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "errors": 0,
+      "skipped": 0,
+      "pass_rate": 0.0
+    },
+    "high_volume_replay": {
+      "suite": "high_volume_replay",
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "errors": 1,
+      "skipped": 0,
+      "pass_rate": 0.0
+    },
+    "tenant_isolation": {
+      "suite": "tenant_isolation",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "pass_rate": 1.0
+    }
+  },
+  "results": [
+    {
+      "suite": "concurrent_ingestion",
+      "test": "test_concurrent_ingestion",
+      "status": "FAIL",
+      "duration": 11.336359977722168,
+      "metrics": {
+        "workspace_creation": {
+          "attempted": 50,
+          "successful": 50,
+          "failed": 0
+        },
+        "memory_ingestion": {
+          "attempted": 50,
+          "successful": 0,
+          "failed": 0
+        },
+        "concurrent_reads": {
+          "attempted": 50,
+          "successful": 50
+        }
+      },
+      "errors": []
+    },
+    {
+      "suite": "longitudinal_growth",
+      "test": "test_longitudinal_growth",
+      "status": "PASS",
+      "duration": 6.235203981399536,
+      "metrics": {
+        "ingestion": {
+          "total_turns": 10,
+          "avg_latency_ms": 350.4934310913086,
+          "max_latency_ms": 413.2049083709717,
+          "min_latency_ms": 283.30397605895996
+        },
+        "lineage_retrieval": {
+          "latency_ms": 407.0720672607422,
+          "checkpoints": 1
+        },
+        "lineage_depth": {
+          "max_depth": 10,
+          "avg_traversal_ms": 407.81617164611816,
+          "max_traversal_ms": 407.81617164611816
+        },
+        "replay": {
+          "checkpoints_tested": 0,
+          "checksums": []
+        }
+      },
+      "errors": []
+    },
+    {
+      "suite": "replay_integrity",
+      "test": "test_replay_integrity",
+      "status": "ERROR",
+      "duration": 0.5011260509490967,
+      "metrics": {},
+      "errors": [
+        "Failed to create workspace: 401"
+      ]
+    },
+    {
+      "suite": "governance_integrity",
+      "test": "test_governance_integrity",
+      "status": "ERROR",
+      "duration": 0.39485621452331543,
+      "metrics": {},
+      "errors": [
+        "Failed to create workspace: 401"
+      ]
+    },
+    {
+      "suite": "snapshot_recovery",
+      "test": "test_snapshot_recovery",
+      "status": "ERROR",
+      "duration": 0.38179898262023926,
+      "metrics": {},
+      "errors": [
+        "Failed to create workspace: 401"
+      ]
+    },
+    {
+      "suite": "redis_coordination",
+      "test": "test_redis_coordination",
+      "status": "PASS",
+      "duration": 3.8192050457000732,
+      "metrics": {
+        "workspaces": {
+          "created": 0
+        },
+        "coordination": {
+          "operations": 0,
+          "successful": 0,
+          "avg_latency_ms": 0,
+          "max_latency_ms": 0
+        },
+        "locks": {
+          "avg_acquisition_ms": 0
+        },
+        "deadlock_check": {
+          "total": 0,
+          "accessible": 0,
+          "deadlock_detected": false
+        }
+      },
+      "errors": []
+    },
+    {
+      "suite": "connection_resilience",
+      "test": "test_connection_resilience",
+      "status": "PASS",
+      "duration": 28.843140125274658,
+      "metrics": {
+        "basic_connectivity": {
+          "status_code": 200,
+          "healthy": true
+        },
+        "rapid_requests": {
+          "count": 20,
+          "avg_latency_ms": 373.6353635787964,
+          "max_latency_ms": 457.90624618530273,
+          "min_latency_ms": 272.86505699157715
+        },
+        "long_connection": {
+          "duration_seconds": 0.2770969867706299,
+          "operations": 10
+        },
+        "connection_pool": {
+          "requests": 50,
+          "failures": 0,
+          "avg_latency_ms": 400.6600570678711
+        },
+        "recovery": {
+          "failed_request": 401,
+          "recovered": true
+        }
+      },
+      "errors": []
+    },
+    {
+      "suite": "partial_failure_recovery",
+      "test": "test_partial_failure_recovery",
+      "status": "ERROR",
+      "duration": 0.789417028427124,
+      "metrics": {},
+      "errors": [
+        "Failed to create workspace: 401"
+      ]
+    },
+    {
+      "suite": "telemetry_pipeline",
+      "test": "test_telemetry_pipeline",
+      "status": "PASS",
+      "duration": 19.942373991012573,
+      "metrics": {
+        "endpoint": {
+          "metrics": true,
+          "status": 200
+        },
+        "health_telemetry": {
+          "status": "healthy",
+          "version": "0.1.0"
+        },
+        "load_telemetry": {
+          "requests": 50,
+          "avg_latency_ms": 346.1022424697876,
+          "max_latency_ms": 450.822114944458,
+          "metrics_endpoint_still_works": true
+        },
+        "trace_propagation": {
+          "headers_sent": [
+            "X-Trace-ID",
+            "X-Span-ID"
+          ],
+          "propagated": true
+        },
+        "async_buffering": {
+          "operations": 20,
+          "metrics_stable": true
+        }
+      },
+      "errors": []
+    },
+    {
+      "suite": "cold_restart_recovery",
+      "test": "test_cold_restart_recovery",
+      "status": "PASS",
+      "duration": 1.167937994003296,
+      "metrics": {
+        "health_check": {
+          "status": "ready",
+          "database": "connected",
+          "redis": "connected"
+        },
+        "persistence": {
+          "workspaces_count": 0,
+          "accessible": false
+        },
+        "redis_state": {
+          "connected": true
+        }
+      },
+      "errors": []
+    },
+    {
+      "suite": "async_ordering",
+      "test": "test_async_ordering",
+      "status": "ERROR",
+      "duration": 0.41843509674072266,
+      "metrics": {},
+      "errors": [
+        "Failed to create workspace: 401"
+      ]
+    },
+    {
+      "suite": "pgvector_scaling",
+      "test": "test_pgvector_scaling",
+      "status": "FAIL",
+      "duration": 4.250175952911377,
+      "metrics": {
+        "scaling": [],
+        "topk": {
+          "retrievals": [],
+          "ranking_deterministic": false
+        }
+      },
+      "errors": []
+    },
+    {
+      "suite": "high_volume_replay",
+      "test": "test_high_volume_replay",
+      "status": "ERROR",
+      "duration": 0.43599987030029297,
+      "metrics": {},
+      "errors": [
+        "Failed to create workspace: 401"
+      ]
+    },
+    {
+      "suite": "tenant_isolation",
+      "test": "test_tenant_isolation",
+      "status": "PASS",
+      "duration": 4.500106334686279,
+      "metrics": {
+        "workspace_isolation": {
+          "total_attempts": 6,
+          "leaks_found": 0
+        },
+        "cache_isolation": {
+          "verified": true
+        },
+        "sql_filtering": {
+          "leaks": 0
+        },
+        "storage_isolation": {
+          "path_traversal_attempts": 3,
+          "leaks": 0
+        }
+      },
+      "errors": []
+    }
+  ]
+}

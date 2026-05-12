@@ -10,7 +10,7 @@ import json
 from typing import Dict, Any, List
 from datetime import datetime
 
-from production_runner import TestResult
+from helpers import TestResult
 
 
 async def test_tenant_isolation(base_url: str) -> TestResult:
@@ -36,6 +36,7 @@ async def test_tenant_isolation(base_url: str) -> TestResult:
 
         for tenant_id in tenant_ids:
             response = await client.post(
+            headers=get_auth_headers(),
                 f"{base_url}/api/workspaces",
                 params={
                     "name": f"workspace-{tenant_id}-{int(time.time())}",
@@ -115,6 +116,7 @@ async def test_tenant_isolation(base_url: str) -> TestResult:
         # Create separate workspaces and verify cache doesn't leak
         for tenant_id in tenant_ids:
             response = await client.post(
+            headers=get_auth_headers(),
                 f"{base_url}/api/workspaces",
                 params={"name": f"cache-test-{tenant_id}"},
                 headers={"X-Tenant-ID": tenant_id},

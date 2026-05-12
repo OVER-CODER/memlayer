@@ -11,12 +11,7 @@ import hashlib
 from typing import Dict, Any, List
 from datetime import datetime
 
-from production_runner import TestResult, JWT_TOKEN
-
-
-def get_auth_headers(tenant_id: str = "test-tenant") -> Dict[str, str]:
-    """Get authentication headers."""
-    return {"Authorization": f"Bearer {JWT_TOKEN}", "X-Tenant-ID": tenant_id}
+from helpers import TestResult, JWT_TOKEN, get_auth_headers
 
 
 async def create_workspace(
@@ -24,6 +19,7 @@ async def create_workspace(
 ) -> Dict[str, Any]:
     """Create a workspace via API."""
     response = await client.post(
+            headers=get_auth_headers(),
         f"{base_url}/api/workspaces",
         params={"name": name, "description": f"Test workspace {name}"},
         headers=get_auth_headers(tenant_id),
@@ -40,6 +36,7 @@ async def create_memory(
 ) -> Dict[str, Any]:
     """Create a memory in a workspace."""
     response = await client.post(
+            headers=get_auth_headers(),
         f"{base_url}/api/memories",
         params={
             "workspace_id": workspace_id,

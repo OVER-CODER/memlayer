@@ -10,7 +10,7 @@ import json
 from typing import Dict, Any, List
 from datetime import datetime
 
-from production_runner import TestResult
+from helpers import TestResult
 
 
 async def test_partial_failure_recovery(base_url: str) -> TestResult:
@@ -32,6 +32,7 @@ async def test_partial_failure_recovery(base_url: str) -> TestResult:
         print("  Creating workspace for partial failure test...")
 
         response = await client.post(
+            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={"name": f"partial-fail-test-{int(time.time())}"},
         )
@@ -56,6 +57,7 @@ async def test_partial_failure_recovery(base_url: str) -> TestResult:
         for i in range(10):
             try:
                 response = await client.post(
+            headers=get_auth_headers(),
                     f"{base_url}/api/memories",
                     params={
                         "workspace_id": workspace_id,
@@ -102,6 +104,7 @@ async def test_partial_failure_recovery(base_url: str) -> TestResult:
         retry_results = []
         for i in range(3):
             response = await client.post(
+            headers=get_auth_headers(),
                 f"{base_url}/api/memories",
                 params={
                     "workspace_id": workspace_id,
@@ -118,6 +121,7 @@ async def test_partial_failure_recovery(base_url: str) -> TestResult:
 
         # Create another workspace and add data
         response = await client.post(
+            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={"name": f"atomicity-test-{int(time.time())}"},
         )

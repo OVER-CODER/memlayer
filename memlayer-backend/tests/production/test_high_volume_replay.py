@@ -11,7 +11,7 @@ import hashlib
 from typing import Dict, Any, List
 from datetime import datetime
 
-from production_runner import TestResult
+from helpers import TestResult
 
 
 async def test_high_volume_replay(base_url: str) -> TestResult:
@@ -31,6 +31,7 @@ async def test_high_volume_replay(base_url: str) -> TestResult:
         print("  Creating workspace with high memory volume...")
 
         response = await client.post(
+            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={"name": f"high-volume-{int(time.time())}"},
         )
@@ -58,6 +59,7 @@ async def test_high_volume_replay(base_url: str) -> TestResult:
             start = time.time()
 
             response = await client.post(
+            headers=get_auth_headers(),
                 f"{base_url}/api/memories",
                 params={
                     "workspace_id": workspace_id,

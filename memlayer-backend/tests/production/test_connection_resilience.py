@@ -10,7 +10,7 @@ import json
 from typing import Dict, Any, List
 from datetime import datetime
 
-from production_runner import TestResult
+from helpers import TestResult
 
 
 async def test_connection_resilience(base_url: str) -> TestResult:
@@ -62,6 +62,7 @@ async def test_connection_resilience(base_url: str) -> TestResult:
 
         # Create workspace and add multiple memories
         response = await client.post(
+            headers=get_auth_headers(),
             f"{base_url}/api/workspaces",
             params={"name": f"resilience-test-{int(time.time())}"},
         )
