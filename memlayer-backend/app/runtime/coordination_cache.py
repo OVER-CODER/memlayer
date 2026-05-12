@@ -27,15 +27,23 @@ def _get_redis_client():
             import redis
             from app.core.config import settings
 
-            _redis = redis.Redis(
-                host=settings.redis_host,
-                port=settings.redis_port,
-                db=settings.redis_db,
-                password=settings.redis_password,
-                decode_responses=True,
-                socket_connect_timeout=5,
-                socket_timeout=5,
-            )
+            if settings.redis_url:
+                _redis = redis.from_url(
+                    settings.redis_url,
+                    decode_responses=True,
+                    socket_connect_timeout=5,
+                    socket_timeout=5,
+                )
+            else:
+                _redis = redis.Redis(
+                    host=settings.redis_host,
+                    port=settings.redis_port,
+                    db=settings.redis_db,
+                    password=settings.redis_password,
+                    decode_responses=True,
+                    socket_connect_timeout=5,
+                    socket_timeout=5,
+                )
             # Test connection
             _redis.ping()
             _redis_available = True

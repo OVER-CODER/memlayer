@@ -43,6 +43,7 @@ class Settings(BaseSettings):
     supabase_anon_key: Optional[str] = None
 
     # Redis (Operational Coordination)
+    redis_url: Optional[str] = None
     redis_host: str = "localhost"
     redis_port: int = 6379
     redis_db: int = 0
