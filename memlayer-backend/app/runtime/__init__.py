@@ -22,6 +22,13 @@ from .failure_detector import (
     get_failure_detector,
 )
 
+from .stress_harness import (
+    LongHorizonStressHarness,
+    StressScenario,
+    StressTestRun,
+    get_stress_harness,
+)
+
 __all__ = [
     # Integrated Runtime
     "IntegratedRuntimeSystem",
@@ -39,4 +46,9 @@ __all__ = [
     "FailureSeverity",
     "FailureType",
     "get_failure_detector",
+    # Stress Harness
+    "LongHorizonStressHarness",
+    "StressScenario",
+    "StressTestRun",
+    "get_stress_harness",
 ]

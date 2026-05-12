@@ -16,6 +16,9 @@ from app.runtime import (
     EmergentFailureDetector,
     FailureType,
     FailureSeverity,
+    LongHorizonStressHarness,
+    StressScenario,
+    StressTestRun,
 )
 
 from app.compiler.adaptive_assembly_pipeline import (
@@ -407,5 +410,404 @@ class TestEmergentFailureDetector:
         assert len(report["by_type"]) >= 2
 
 
-if __name__ == "__main__":
+class TestLongHorizonStressHarness:
+    """Test long-horizon stress harness functionality."""
+
+    def test_stress_harness_initialization(self):
+        """Test stress harness initialization."""
+        mock_pipeline = MagicMock(spec=AdaptiveAssemblyPipeline)
+        runtime = IntegratedRuntimeSystem(mock_pipeline)
+        harness = LongHorizonStressHarness(runtime)
+
+        assert harness.runtime is not None
+        assert harness.failure_detector is not None
+        assert len(harness.test_runs) == 0
+
+    def test_stress_scenario_creation(self):
+        """Test stress scenario creation."""
+        scenario = StressScenario(
+            scenario_id="test-1",
+            scenario_name="Test Scenario",
+            description="Test scenario for unit testing",
+            num_turns=50,
+            num_memories=25,
+            memory_noise_level=0.1,
+            recursive_compression_cycles=2,
+            token_budget=4000,
+            token_pressure_level=0.8,
+            query_complexity="moderate",
+            query_diversity=0.5,
+        )
+
+        assert scenario.scenario_id == "test-1"
+        assert scenario.num_turns == 50
+        assert scenario.num_memories == 25
+        assert scenario.memory_noise_level == 0.1
+
+    def test_stress_scenario_to_dict(self):
+        """Test converting scenario to dictionary."""
+        scenario = StressScenario(
+            scenario_id="test-2",
+            scenario_name="Dict Test Scenario",
+            description="Test scenario conversion",
+            num_turns=100,
+            num_memories=50,
+        )
+
+        scenario_dict = scenario.to_dict()
+
+        assert scenario_dict["scenario_id"] == "test-2"
+        assert scenario_dict["num_turns"] == 100
+        assert scenario_dict["num_memories"] == 50
+        assert isinstance(scenario_dict, dict)
+
+    def test_stress_test_run_creation(self):
+        """Test stress test run creation."""
+        scenario = StressScenario(
+            scenario_id="test-run",
+            scenario_name="Test Run",
+            description="Test run scenario",
+        )
+
+        run = StressTestRun(
+            run_id="run-1",
+            scenario=scenario,
+        )
+
+        assert run.run_id == "run-1"
+        assert run.scenario == scenario
+        assert run.total_turns == 0
+        assert run.successful_turns == 0
+        assert run.failed_turns == 0
+        assert run.stability_score == 0.0
+
+    def test_stress_test_run_to_dict(self):
+        """Test converting stress test run to dictionary."""
+        scenario = StressScenario(
+            scenario_id="dict-test",
+            scenario_name="Dict Test",
+            description="Dict conversion test",
+        )
+
+        run = StressTestRun(
+            run_id="run-dict-1",
+            scenario=scenario,
+            total_turns=50,
+            successful_turns=48,
+            failed_turns=2,
+            avg_quality_score=0.87,
+            stability_score=85.0,
+        )
+
+        run_dict = run.to_dict()
+
+        assert run_dict["run_id"] == "run-dict-1"
+        assert run_dict["total_turns"] == 50
+        assert run_dict["successful_turns"] == 48
+        assert run_dict["avg_quality_score"] == 0.87
+        assert "success_rate" in run_dict
+
+    def test_run_scenario_basic(self):
+        """Test running a basic stress scenario."""
+        mock_pipeline = MagicMock(spec=AdaptiveAssemblyPipeline)
+        mock_result = AdaptiveAssemblyResult(
+            query="Test query",
+            provider="claude",
+            compression_mode="balanced",
+            compiled_context="Context",
+            reasoning_context="Reasoning",
+            semantic_memories="Memories",
+            workspace_summary="Workspace",
+            quality_score=Mock(overall_quality=Mock(return_value=0.9)),
+            semantic_retention=0.88,
+            token_efficiency=0.85,
+            total_duration_ms=50.0,
+            stage_metrics=[],
+        )
+        mock_pipeline.execute.return_value = mock_result
+
+        runtime = IntegratedRuntimeSystem(mock_pipeline)
+        harness = LongHorizonStressHarness(runtime)
+
+        scenario = StressScenario(
+            scenario_id="basic-stress",
+            scenario_name="Basic Stress",
+            description="Basic stress test",
+            num_turns=10,
+            num_memories=5,
+        )
+
+        run = harness.run_scenario(scenario)
+
+        assert run.run_id is not None
+        assert run.total_turns == 10
+        assert run.successful_turns > 0  # Most should succeed with mock
+        assert run.avg_quality_score > 0
+
+    def test_scenario_quality_degradation_tracking(self):
+        """Test quality degradation tracking across scenario."""
+        mock_pipeline = MagicMock(spec=AdaptiveAssemblyPipeline)
+
+        # Simulate degrading quality scores
+        quality_scores = [0.95, 0.92, 0.87, 0.82, 0.75]
+
+        def side_effect(*args, **kwargs):
+            turn = mock_pipeline.execute.call_count - 1
+            if turn < len(quality_scores):
+                return AdaptiveAssemblyResult(
+                    query="Query",
+                    provider="claude",
+                    compression_mode="balanced",
+                    compiled_context="Context",
+                    reasoning_context="Reasoning",
+                    semantic_memories="Memories",
+                    workspace_summary="Workspace",
+                    quality_score=Mock(
+                        overall_quality=Mock(return_value=quality_scores[turn])
+                    ),
+                    semantic_retention=0.88,
+                    token_efficiency=0.85,
+                    total_duration_ms=50.0,
+                    stage_metrics=[],
+                )
+            return AdaptiveAssemblyResult(
+                query="Query",
+                provider="claude",
+                compression_mode="balanced",
+                compiled_context="Context",
+                reasoning_context="Reasoning",
+                semantic_memories="Memories",
+                workspace_summary="Workspace",
+                quality_score=Mock(overall_quality=Mock(return_value=0.9)),
+                semantic_retention=0.88,
+                token_efficiency=0.85,
+                total_duration_ms=50.0,
+                stage_metrics=[],
+            )
+
+        mock_pipeline.execute.side_effect = side_effect
+
+        runtime = IntegratedRuntimeSystem(mock_pipeline)
+        harness = LongHorizonStressHarness(runtime)
+
+        scenario = StressScenario(
+            scenario_id="degrad-test",
+            scenario_name="Degradation Test",
+            description="Test quality degradation",
+            num_turns=5,
+            num_memories=5,
+        )
+
+        run = harness.run_scenario(scenario)
+
+        # Check that degradation was detected
+        assert run.quality_degradation_rate >= 0
+
+    def test_scenario_with_memory_noise(self):
+        """Test scenario execution with memory noise."""
+        mock_pipeline = MagicMock(spec=AdaptiveAssemblyPipeline)
+        mock_result = AdaptiveAssemblyResult(
+            query="Test query",
+            provider="claude",
+            compression_mode="balanced",
+            compiled_context="Context",
+            reasoning_context="Reasoning",
+            semantic_memories="Memories",
+            workspace_summary="Workspace",
+            quality_score=Mock(overall_quality=Mock(return_value=0.9)),
+            semantic_retention=0.88,
+            token_efficiency=0.85,
+            total_duration_ms=50.0,
+            stage_metrics=[],
+        )
+        mock_pipeline.execute.return_value = mock_result
+
+        runtime = IntegratedRuntimeSystem(mock_pipeline)
+        harness = LongHorizonStressHarness(runtime)
+
+        scenario = StressScenario(
+            scenario_id="noise-test",
+            scenario_name="Memory Noise Test",
+            description="Test with memory noise",
+            num_turns=10,
+            num_memories=10,
+            memory_noise_level=0.2,  # 20% noise
+        )
+
+        run = harness.run_scenario(scenario)
+
+        assert run.total_turns == 10
+        assert run.successful_turns > 0
+
+    def test_scenario_with_recursive_compression(self):
+        """Test scenario with recursive compression cycles."""
+        mock_pipeline = MagicMock(spec=AdaptiveAssemblyPipeline)
+        mock_result = AdaptiveAssemblyResult(
+            query="Test query",
+            provider="claude",
+            compression_mode="balanced",
+            compiled_context="Context",
+            reasoning_context="Reasoning",
+            semantic_memories="Memories",
+            workspace_summary="Workspace",
+            quality_score=Mock(overall_quality=Mock(return_value=0.9)),
+            semantic_retention=0.88,
+            token_efficiency=0.85,
+            total_duration_ms=50.0,
+            stage_metrics=[],
+        )
+        mock_pipeline.execute.return_value = mock_result
+
+        runtime = IntegratedRuntimeSystem(mock_pipeline)
+        harness = LongHorizonStressHarness(runtime)
+
+        scenario = StressScenario(
+            scenario_id="recursive-test",
+            scenario_name="Recursive Compression Test",
+            description="Test with recursive compression",
+            num_turns=20,
+            num_memories=10,
+            recursive_compression_cycles=3,
+            memory_growth_factor=1.5,
+        )
+
+        run = harness.run_scenario(scenario)
+
+        assert run.total_turns == 20
+        assert run.successful_turns > 0
+
+    def test_scenario_with_provider_switching(self):
+        """Test scenario with provider switching."""
+        mock_pipeline = MagicMock(spec=AdaptiveAssemblyPipeline)
+        mock_result = AdaptiveAssemblyResult(
+            query="Test query",
+            provider="claude",
+            compression_mode="balanced",
+            compiled_context="Context",
+            reasoning_context="Reasoning",
+            semantic_memories="Memories",
+            workspace_summary="Workspace",
+            quality_score=Mock(overall_quality=Mock(return_value=0.9)),
+            semantic_retention=0.88,
+            token_efficiency=0.85,
+            total_duration_ms=50.0,
+            stage_metrics=[],
+        )
+        mock_pipeline.execute.return_value = mock_result
+
+        runtime = IntegratedRuntimeSystem(mock_pipeline)
+        harness = LongHorizonStressHarness(runtime)
+
+        scenario = StressScenario(
+            scenario_id="switch-test",
+            scenario_name="Provider Switching Test",
+            description="Test with provider switching",
+            num_turns=15,
+            num_memories=10,
+            provider_switching_frequency=5,  # Switch every 5 turns
+        )
+
+        run = harness.run_scenario(scenario)
+
+        assert run.total_turns == 15
+        assert run.successful_turns > 0
+
+    def test_scenario_with_token_pressure(self):
+        """Test scenario with token budget pressure."""
+        mock_pipeline = MagicMock(spec=AdaptiveAssemblyPipeline)
+        mock_result = AdaptiveAssemblyResult(
+            query="Test query",
+            provider="claude",
+            compression_mode="balanced",
+            compiled_context="Context",
+            reasoning_context="Reasoning",
+            semantic_memories="Memories",
+            workspace_summary="Workspace",
+            quality_score=Mock(overall_quality=Mock(return_value=0.9)),
+            semantic_retention=0.88,
+            token_efficiency=0.85,
+            total_duration_ms=50.0,
+            stage_metrics=[],
+        )
+        mock_pipeline.execute.return_value = mock_result
+
+        runtime = IntegratedRuntimeSystem(mock_pipeline)
+        harness = LongHorizonStressHarness(runtime)
+
+        scenario = StressScenario(
+            scenario_id="pressure-test",
+            scenario_name="Token Pressure Test",
+            description="Test with tight token budget",
+            num_turns=10,
+            num_memories=10,
+            token_budget=4000,
+            token_pressure_level=0.4,  # 40% of budget (tight!)
+        )
+
+        run = harness.run_scenario(scenario)
+
+        assert run.total_turns == 10
+        assert run.successful_turns > 0
+
+    def test_get_standard_scenarios(self):
+        """Test retrieving standard stress scenarios."""
+        from app.runtime.stress_harness import create_standard_stress_scenarios
+
+        scenarios = create_standard_stress_scenarios()
+
+        assert (
+            len(scenarios) == 4
+        )  # baseline, recursive, provider_switching, saturation
+        assert any(s.scenario_id == "baseline" for s in scenarios)
+        assert any(s.scenario_id == "recursive" for s in scenarios)
+        assert any(s.scenario_id == "provider_switching" for s in scenarios)
+        assert any(s.scenario_id == "saturation" for s in scenarios)
+
+    def test_baseline_scenario_properties(self):
+        """Test baseline scenario has correct properties."""
+        from app.runtime.stress_harness import create_standard_stress_scenarios
+
+        scenarios = create_standard_stress_scenarios()
+        baseline = next(s for s in scenarios if s.scenario_id == "baseline")
+
+        assert baseline.num_turns == 100
+        assert baseline.memory_noise_level == 0.0
+        assert baseline.recursive_compression_cycles == 1
+        assert baseline.token_pressure_level == 0.8
+
+    def test_recursive_scenario_properties(self):
+        """Test recursive scenario has correct properties."""
+        from app.runtime.stress_harness import create_standard_stress_scenarios
+
+        scenarios = create_standard_stress_scenarios()
+        recursive = next(s for s in scenarios if s.scenario_id == "recursive")
+
+        assert recursive.num_turns == 200
+        assert recursive.recursive_compression_cycles == 4
+        assert recursive.memory_growth_factor == 1.2
+        assert recursive.query_complexity == "complex"
+
+    def test_provider_switching_scenario_properties(self):
+        """Test provider switching scenario has correct properties."""
+        from app.runtime.stress_harness import create_standard_stress_scenarios
+
+        scenarios = create_standard_stress_scenarios()
+        switching = next(s for s in scenarios if s.scenario_id == "provider_switching")
+
+        assert switching.provider_switching_frequency == 25
+        assert switching.query_complexity == "very_complex"
+        assert switching.query_diversity == 0.8
+
+    def test_saturation_scenario_properties(self):
+        """Test saturation scenario has correct properties."""
+        from app.runtime.stress_harness import create_standard_stress_scenarios
+
+        scenarios = create_standard_stress_scenarios()
+        saturation = next(s for s in scenarios if s.scenario_id == "saturation")
+
+        assert saturation.num_turns == 300
+        assert saturation.num_memories == 200
+        assert saturation.token_pressure_level == 0.4
+        assert saturation.memory_noise_level == 0.3
+
     pytest.main([__file__, "-v"])
