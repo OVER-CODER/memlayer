@@ -67,7 +67,7 @@ class TestRegressionDetection:
 
         assert regression is not None
         assert regression.regression_type == RegressionType.QUALITY_DEGRADATION
-        assert regression.quality_delta == -0.10
+        assert regression.quality_delta == pytest.approx(-0.10, abs=0.001)
         assert regression.severity in [
             RegressionSeverity.HIGH,
             RegressionSeverity.CRITICAL,
@@ -618,7 +618,7 @@ class TestRegressionHistoryTracker:
         trends = tracker.get_regression_trends()
 
         assert trends["total_regressions"] == 5
-        assert "QUALITY_DEGRADATION" in trends["by_type"]
+        assert "quality_degradation" in trends["by_type"]
         assert trends["by_type"]["quality_degradation"] == 5
 
     def test_get_provider_regression_summary(self):
@@ -759,7 +759,7 @@ class TestRegressionComparison:
         for i in range(len(versions) - 1):
             comparison = CrossVersionComparison(
                 comparison_id=f"cmp_{i}",
-                timestamp=datetime.now(timezone.utc) - timedelta(hours=len(versions) - i - 1),
+                timestamp=datetime.utcnow() - timedelta(hours=len(versions) - i - 1),
                 baseline_version=versions[i],
                 comparison_version=versions[i + 1],
                 baseline_traces=100,
@@ -774,6 +774,6 @@ class TestRegressionComparison:
         progression = tracker.get_version_progression()
 
         assert progression["total_comparisons"] == 3
-        assert len(progression["versions"]) > 0
+        assert len(progression["versions"]) >= 3  # At least 3 versions
         assert progression["progression"][0]["from"] == "v1.0"
         assert progression["progression"][-1]["to"] == "v2.1"
