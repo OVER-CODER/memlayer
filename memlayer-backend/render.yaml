@@ -12,28 +12,28 @@ services:
       # Database (PostgreSQL - Supabase) - Set in Render dashboard
       - key: DATABASE_URL
         sync: false
-        value: "postgresql+asyncpg://postgres.memlayer:YOUR_PASSWORD@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres"
+        value: "postgresql+asyncpg://postgres.memlayer:memlayer@2373@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres"
       
       - key: ASYNC_DATABASE_URL
         sync: false
-        value: "postgresql+asyncpg://postgres.memlayer:YOUR_PASSWORD@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres"
+        value: "postgresql+asyncpg://postgres.memlayer:memlayer@2373@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres"
       
       # Redis (Upstash) - Set in Render dashboard
       - key: REDIS_HOST
         sync: false
-        value: "YOUR_UPSTASH_HOST"
+        value: "pleased-pig-121933.upstash.io"
       
       - key: REDIS_PORT
         value: "6379"
       
       - key: REDIS_PASSWORD
         sync: false
-        value: "YOUR_UPSTASH_PASSWORD"
+        value: "gQAAAAAAAdxNAAIgcDFkOWRiN2RhODkxMTY0MTBiOGQ1Zjc0OThiOWNhYWJjNA"
       
       # Security - Set in Render dashboard
       - key: SECRET_KEY
         sync: false
-        value: "YOUR_SECRET_KEY"
+        value: "memlayer-prod-secret-key-2026"
       
       - key: SECURITY_ENABLED
         value: "true"
@@ -51,7 +51,7 @@ services:
       # LLM Provider (Gemini) - Set in Render dashboard
       - key: GEMINI_API_KEY
         sync: false
-        value: "YOUR_GEMINI_API_KEY"
+        value: "AIzaSyAvuFbsaFT2jkyQnM6yDjRF80i31YOfBJw"
       
       # Embedding
       - key: EMBEDDING_MODEL
