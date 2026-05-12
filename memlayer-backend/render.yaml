@@ -12,30 +12,28 @@ services:
       # Database (PostgreSQL - Supabase)
       - key: DATABASE_URL
         sync: false
-        # Format: postgresql+asyncpg://postgres.[project]:[password]@aws-0-[region].pooler.supabase.com:6543/postgres
-        # Replace with your actual Supabase connection string
-        value: "REPLACE_WITH_YOUR_SUPABASE_DATABASE_URL"
+        value: "postgresql+asyncpg://postgres.memlayer:Aryanpandit@2373@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres"
       
       - key: ASYNC_DATABASE_URL
         sync: false
-        value: "REPLACE_WITH_YOUR_SUPABASE_DATABASE_URL"
+        value: "postgresql+asyncpg://postgres.memlayer:Aryanpandit@2373@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres"
       
       # Redis (Upstash)
       - key: REDIS_HOST
         sync: false
-        value: "REPLACE_WITH_YOUR_UPSTASH_HOST"
+        value: "pleased-pig-121933.upstash.io"
       
       - key: REDIS_PORT
         value: "6379"
       
       - key: REDIS_PASSWORD
         sync: false
-        value: "REPLACE_WITH_YOUR_UPSTASH_PASSWORD"
+        value: "gQAAAAAAAdxNAAIgcDFkOWRiN2RhODkxMTY0MTBiOGQ1Zjc0OThiOWNhYWJjNA"
       
       # Security
       - key: SECRET_KEY
         sync: false
-        value: "REPLACE_WITH_GENERATED_SECRET_KEY"
+        value: "PlEZVYgLfdt-IjuYVZyR1pSlBMxFqdHV4FB2FUkdWac"
       
       - key: SECURITY_ENABLED
         value: "true"
@@ -53,7 +51,7 @@ services:
       # LLM Provider (Gemini)
       - key: GEMINI_API_KEY
         sync: false
-        value: "REPLACE_WITH_YOUR_GEMINI_API_KEY"
+        value: "AIzaSyAvuFbsaFT2jkyQnM6yDjRF80i31YOfBJw"
       
       # Embedding
       - key: EMBEDDING_MODEL
@@ -87,17 +85,5 @@ services:
     # Instance settings
     instances: 1
     
-    # Plan (shared is sufficient for initial testing)
+    # Plan (free for initial testing)
     plan: free
-
-# Database (using Supabase - external, not managed by Render)
-# Supabase provides:
-# - PostgreSQL with pgvector support
-# - Connection pooling
-# - Automatic backups
-
-# Redis (using Upstash - external, not managed by Render)
-# Upstash provides:
-# - Redis API compatible
-# - Serverless plan available
-# - Global replication option
