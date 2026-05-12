@@ -29,6 +29,17 @@ from .stress_harness import (
     get_stress_harness,
 )
 
+from .workspace_simulator import (
+    WorkspaceSimulator,
+    SimulatedWorkspace,
+    WorkspaceExecutionResult,
+    WorkspaceType,
+    QueryPattern,
+    WorkspaceMemory,
+    WorkspaceQuery,
+    get_workspace_simulator,
+)
+
 __all__ = [
     # Integrated Runtime
     "IntegratedRuntimeSystem",
@@ -51,4 +62,13 @@ __all__ = [
     "StressScenario",
     "StressTestRun",
     "get_stress_harness",
+    # Workspace Simulator
+    "WorkspaceSimulator",
+    "SimulatedWorkspace",
+    "WorkspaceExecutionResult",
+    "WorkspaceType",
+    "QueryPattern",
+    "WorkspaceMemory",
+    "WorkspaceQuery",
+    "get_workspace_simulator",
 ]
