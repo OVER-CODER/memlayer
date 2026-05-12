@@ -15,7 +15,23 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-from pgvector.sqlalchemy import Vector
+try:
+    from pgvector.sqlalchemy import Vector
+except ImportError:
+    from sqlalchemy import TypeDecorator, String
+    import json
+    class Vector(TypeDecorator):
+        impl = String
+        def __init__(self, dim):
+            super().__init__()
+        def process_bind_param(self, value, dialect):
+            if value is not None:
+                return json.dumps(value)
+            return value
+        def process_result_value(self, value, dialect):
+            if value is not None:
+                return json.loads(value)
+            return value
 from datetime import datetime
 import uuid
 
@@ -118,7 +134,7 @@ class Memory(Base):
     embedding = Column(Vector(384), nullable=True)  # Matches embedding_dim in config
     timestamp = Column(DateTime, default=datetime.utcnow, nullable=False)
     importance_score = Column(Float, default=0.5, nullable=False)
-    metadata = Column(JSON, default={}, nullable=True)
+    extra_metadata = Column("metadata", JSON, default={}, nullable=True)
 
     # Lineage tracking for memory graphs
     source_memory_ids = Column(

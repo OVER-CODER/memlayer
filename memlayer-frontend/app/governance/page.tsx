@@ -2,8 +2,30 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { api } from '../../lib/api';
-import { Shield, ShieldAlert, ShieldCheck, Activity } from 'lucide-react';
+import { Shield, ShieldAlert, ShieldCheck, Activity, GitBranch } from 'lucide-react';
 import { format } from 'date-fns';
+import ReactFlow, { Background, Controls, Edge, Node, MarkerType } from 'reactflow';
+import 'reactflow/dist/style.css';
+import { useMemo } from 'react';
+
+const LineageNode = ({ data }: { data: any }) => {
+  return (
+    <div className="bg-slate-950 border border-indigo-900/50 rounded-lg p-3 min-w-[200px] shadow-lg">
+      <div className="font-bold text-white text-sm mb-1">{data.label}</div>
+      <div className="flex justify-between items-center text-xs mb-1">
+        <span className="text-slate-500">Hash</span>
+        <span className="text-indigo-400 font-mono">{data.hash}</span>
+      </div>
+      <div className="text-[10px] text-slate-500 text-right">
+        {format(new Date(data.timestamp), 'HH:mm:ss.SSS')}
+      </div>
+    </div>
+  );
+};
+
+const nodeTypes = {
+  lineageNode: LineageNode,
+};
 
 export default function GovernanceConsole() {
   const { data: auditTrail, isLoading: auditLoading } = useQuery({
@@ -18,7 +40,41 @@ export default function GovernanceConsole() {
     refetchInterval: 5000,
   });
 
-  if (auditLoading || policyLoading) return <div className="p-8 text-slate-400">Loading Governance Data...</div>;
+  const { data: lineageData, isLoading: lineageLoading } = useQuery({
+    queryKey: ['lineage'],
+    queryFn: () => api.console.getLineage(),
+    refetchInterval: 5000,
+  });
+
+  const { nodes, edges } = useMemo(() => {
+    if (!lineageData || !lineageData.nodes) {
+      return { nodes: [], edges: [] };
+    }
+
+    const flowNodes: Node[] = lineageData.nodes.map((n: any, i: number) => ({
+      id: n.id,
+      type: 'lineageNode',
+      position: { x: 250, y: 50 + i * 150 }, // Simple linear layout for now
+      data: {
+        label: n.label,
+        hash: n.hash,
+        timestamp: n.timestamp,
+      }
+    }));
+
+    const flowEdges: Edge[] = lineageData.edges.map((e: any, i: number) => ({
+      id: `e_${i}`,
+      source: e.source,
+      target: e.target,
+      animated: true,
+      style: { stroke: '#6366f1', strokeWidth: 2 },
+      markerEnd: { type: MarkerType.ArrowClosed, color: '#6366f1' },
+    }));
+
+    return { nodes: flowNodes, edges: flowEdges };
+  }, [lineageData]);
+
+  if (auditLoading || policyLoading || lineageLoading) return <div className="p-8 text-slate-400">Loading Governance Data...</div>;
 
   return (
     <div className="p-8 max-w-7xl mx-auto">
@@ -91,6 +147,27 @@ export default function GovernanceConsole() {
               <div className="text-slate-500 text-center py-8">No policy decisions found.</div>
             )}
           </div>
+        </div>
+      </div>
+
+      {/* Lineage Graph */}
+      <div className="mt-8 bg-slate-950 border border-slate-800 rounded-lg overflow-hidden flex flex-col h-[500px]">
+        <div className="p-4 border-b border-slate-800 bg-slate-900 flex justify-between items-center shrink-0">
+          <h2 className="text-lg font-semibold text-white flex items-center">
+            <GitBranch className="mr-2 h-5 w-5 text-indigo-400" /> Semantic Ancestry Graph
+          </h2>
+        </div>
+        <div className="flex-1 relative bg-slate-950">
+          <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            nodeTypes={nodeTypes}
+            fitView
+            className="bg-slate-950"
+          >
+            <Background color="#1e293b" gap={16} />
+            <Controls className="bg-slate-900 border-slate-800 fill-slate-400" />
+          </ReactFlow>
         </div>
       </div>
     </div>

@@ -107,6 +107,16 @@ class AdaptiveAssemblyResult:
             "semantic_retention": self.semantic_retention,
             "token_efficiency": self.token_efficiency,
             "total_duration_ms": self.total_duration_ms,
+            "stage_metrics": [
+                {
+                    "stage": sm.stage.value,
+                    "duration_ms": sm.duration_ms,
+                    "input_count": sm.input_count,
+                    "output_count": sm.output_count,
+                    "notes": sm.notes
+                }
+                for sm in self.stage_metrics
+            ],
             "timestamp": self.timestamp.isoformat(),
         }
 
@@ -349,8 +359,10 @@ class AdaptiveAssemblyPipeline:
             for mem_id in plan.selected_memories[:10]:  # Limit to top 10
                 # Find memory by ID
                 for mem in memories:
-                    if mem.id == mem_id:
-                        parts.append(f"- {mem.raw_content[:200]}")
+                    m_id = mem.get("id") if isinstance(mem, dict) else getattr(mem, "id", None)
+                    if m_id == mem_id:
+                        content = mem.get("content", mem.get("raw_content", "")) if isinstance(mem, dict) else getattr(mem, "raw_content", "")
+                        parts.append(f"- {content[:200]}")
                         break
 
         # Add workspace summary if present

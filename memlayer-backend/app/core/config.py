@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
 
     # Database
-    database_url: str = "postgresql://localhost/memlayer_dev"
+    database_url: str = "sqlite:///./memlayer.db"
 
     # Embedding
     embedding_model: str = "all-MiniLM-L6-v2"

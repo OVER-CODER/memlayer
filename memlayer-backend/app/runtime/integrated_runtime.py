@@ -12,10 +12,13 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 import logging
 import uuid
+import hashlib
 
 from app.runtime.replay_engine import ReplayableTrace, get_replay_engine
 from app.runtime.evolution_tracker import EvolutionMetric, get_evolution_tracker
 from app.runtime.failure_detector import get_failure_detector
+from app.governance.lineage import SemanticLineageEngine
+from app.governance.audit_trail import RuntimeAuditTrailManager
 
 from app.compiler.adaptive_assembly_pipeline import (
     AdaptiveAssemblyPipeline,
@@ -107,14 +110,23 @@ class IntegratedRuntimeSystem:
     Every execution generates a unified cognition trace.
     """
 
-    def __init__(self, pipeline: AdaptiveAssemblyPipeline):
+    def __init__(
+        self,
+        pipeline: AdaptiveAssemblyPipeline,
+        lineage_engine: Optional[SemanticLineageEngine] = None,
+        audit_manager: Optional[RuntimeAuditTrailManager] = None,
+    ):
         """
         Initialize integrated runtime system.
 
         Args:
             pipeline: AdaptiveAssemblyPipeline instance
+            lineage_engine: Optional semantic lineage engine
+            audit_manager: Optional audit trail manager
         """
         self.pipeline = pipeline
+        self.lineage_engine = lineage_engine
+        self.audit_manager = audit_manager
 
         # Get singleton telemetry services
         self.trace_service = get_trace_service()
@@ -317,6 +329,31 @@ class IntegratedRuntimeSystem:
             unified_trace.semantic_retention = assembly_result.semantic_retention
             unified_trace.token_efficiency = assembly_result.token_efficiency
             unified_trace.success = True
+
+            # Record governance events if engines are present
+            if self.lineage_engine:
+                self.lineage_engine.record_semantic_checkpoint(
+                    workspace_id=workspace_state.get("workspace_id", "unknown") if workspace_state else "unknown",
+                    semantic_state={
+                        "compiled_context_hash": hashlib.sha256(assembly_result.compiled_context.encode()).hexdigest()[:16],
+                        "query": query,
+                    },
+                    operation_id=f"compilation-{trace_id[:8]}",
+                    tenant_id="default",
+                )
+
+            if self.audit_manager:
+                self.audit_manager.record_event(
+                    workspace_id=workspace_state.get("workspace_id", "unknown") if workspace_state else "unknown",
+                    event_type="COORDINATION_COMPLETED",
+                    event_data={
+                        "trace_id": trace_id,
+                        "quality_score": unified_trace.quality_score,
+                        "token_efficiency": unified_trace.token_efficiency,
+                    },
+                    recorded_by="IntegratedRuntimeSystem",
+                    tenant_id="default",
+                )
 
             # Persist deterministic replay trace
             replayable = ReplayableTrace(

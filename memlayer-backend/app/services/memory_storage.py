@@ -60,7 +60,7 @@ class MemoryStorageService:
             summary=summary or raw_content[:200],
             embedding=embedding,
             importance_score=importance_score,
-            metadata=metadata or {},
+            extra_metadata=metadata or {},
             timestamp=datetime.now(timezone.utc),
             generated_from_message_id=generated_from_message_id,
             generated_by_provider=generated_by_provider,
