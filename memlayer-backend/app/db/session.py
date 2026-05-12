@@ -12,7 +12,10 @@ from sqlalchemy.orm import sessionmaker, Session
 from app.core.config import settings
 from typing import AsyncGenerator
 
+# Configure logging early so we see startup messages
+logging.basicConfig(level=logging.INFO, format="%(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 def _resolve_host_to_ip(hostname: str) -> str:
