@@ -1,0 +1,14 @@
+{
+  "reuse_metrics": {
+    "total_accesses": 0,
+    "cache_hits": 0,
+    "cache_misses": 0,
+    "total_tokens_served": 0,
+    "tokens_saved_by_reuse": 0,
+    "unique_compilations": 0,
+    "reuse_ratio": 0.0,
+    "per_view_accesses": {},
+    "per_agent_accesses": {}
+  },
+  "cached_views": 0
+}

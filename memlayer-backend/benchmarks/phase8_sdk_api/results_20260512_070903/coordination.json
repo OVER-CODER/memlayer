@@ -1,0 +1,23 @@
+[
+  {
+    "provider": "claude",
+    "tokens_consumed": 572,
+    "tokens_saved": 0,
+    "savings_ratio": 0.0,
+    "reuse_ratio": 1.0
+  },
+  {
+    "provider": "openai",
+    "tokens_consumed": 572,
+    "tokens_saved": 0,
+    "savings_ratio": 0.0,
+    "reuse_ratio": 1.0
+  },
+  {
+    "provider": "gemini",
+    "tokens_consumed": 572,
+    "tokens_saved": 0,
+    "savings_ratio": 0.0,
+    "reuse_ratio": 1.0
+  }
+]

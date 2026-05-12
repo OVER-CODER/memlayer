@@ -1,0 +1,44 @@
+{
+  "benchmark_run_at": "2026-05-12T07:09:03.816887+00:00",
+  "api_determinism": {
+    "is_deterministic": true,
+    "unique_token_counts": 1
+  },
+  "replay_compatibility": {
+    "all_deterministic": true
+  },
+  "scalability": {
+    "memory_sizes": [
+      10,
+      25,
+      50,
+      100,
+      200
+    ],
+    "durations_ms": [
+      1.3060569763183594,
+      1.7032623291015625,
+      1.8470287322998047,
+      2.5959014892578125,
+      3.9491653442382812
+    ]
+  },
+  "projection_reuse": {
+    "reuse_metrics": {
+      "total_accesses": 0,
+      "cache_hits": 0,
+      "cache_misses": 0,
+      "total_tokens_served": 0,
+      "tokens_saved_by_reuse": 0,
+      "unique_compilations": 0,
+      "reuse_ratio": 0.0,
+      "per_view_accesses": {},
+      "per_agent_accesses": {}
+    },
+    "cached_views": 0
+  },
+  "coordination_efficiency": {
+    "providers_tested": 3,
+    "avg_savings_ratio": 0.0
+  }
+}
