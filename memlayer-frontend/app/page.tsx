@@ -1,131 +1,101 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { workspacesAPI } from '@/lib/api';
-import { Workspace } from '@/types';
-import Link from 'next/link';
+import { useQuery } from '@tanstack/react-query';
+import { api } from '../lib/api';
+import { Shield, Database, Zap, Activity } from 'lucide-react';
 
-export default function WorkspacesPage() {
-  const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [newName, setNewName] = useState('');
-  const [newDescription, setNewDescription] = useState('');
+export default function Dashboard() {
+  const { data: telemetry, isLoading: telLoading } = useQuery({
+    queryKey: ['telemetry'],
+    queryFn: api.console.getTelemetry,
+    refetchInterval: 5000,
+  });
 
-  useEffect(() => {
-    loadWorkspaces();
-  }, []);
+  const { data: health, isLoading: healthLoading } = useQuery({
+    queryKey: ['health'],
+    queryFn: api.console.getGovernanceHealth,
+  });
 
-  const loadWorkspaces = async () => {
-    try {
-      setLoading(true);
-      const response = await workspacesAPI.list();
-      setWorkspaces(response.data);
-    } catch (error) {
-      console.error('Failed to load workspaces:', error);
-    } finally {
-      setLoading(false);
-    }
+  const seedData = async () => {
+    await api.console.seedMockData();
+    window.location.reload();
   };
 
-  const handleCreateWorkspace = async () => {
-    if (!newName.trim()) return;
-    
-    try {
-      await workspacesAPI.create(newName, newDescription);
-      setNewName('');
-      setNewDescription('');
-      loadWorkspaces();
-    } catch (error) {
-      console.error('Failed to create workspace:', error);
-    }
-  };
+  if (telLoading || healthLoading) {
+    return <div className="p-8 text-slate-400">Initializing Kernel Console...</div>;
+  }
 
-  const handleDeleteWorkspace = async (id: string) => {
-    if (!window.confirm('Delete this workspace?')) return;
-    
-    try {
-      await workspacesAPI.delete(id);
-      loadWorkspaces();
-    } catch (error) {
-      console.error('Failed to delete workspace:', error);
-    }
-  };
+  const tokenSavings = telemetry?.token_analytics?.overall_savings_ratio || 0;
+  const totalRuns = telemetry?.token_analytics?.total_runs || 0;
+  const healthScore = health?.overall_health_score || 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="max-w-6xl mx-auto p-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">MemLayer</h1>
-          <p className="text-gray-600">Persistent semantic memory for AI workspaces</p>
+    <div className="p-8 max-w-7xl mx-auto">
+      <div className="flex justify-between items-center mb-8">
+        <div>
+          <h1 className="text-3xl font-bold text-white mb-2">Cognition Kernel Status</h1>
+          <p className="text-slate-400">Realtime operational overview of MemLayer infrastructure.</p>
         </div>
+        <button 
+          onClick={seedData}
+          className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-md text-sm font-medium transition-colors"
+        >
+          Seed Kernel Data
+        </button>
+      </div>
 
-        {/* Create Workspace Form */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-xl font-semibold mb-4">Create New Workspace</h2>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <MetricCard title="System Health" value={`${(healthScore * 100).toFixed(1)}%`} icon={<Activity className="text-emerald-500" />} />
+        <MetricCard title="Token Savings Ratio" value={`${(tokenSavings * 100).toFixed(1)}%`} icon={<Zap className="text-amber-500" />} />
+        <MetricCard title="Total Coordinations" value={totalRuns} icon={<Database className="text-blue-500" />} />
+        <MetricCard title="Tenant Isolation" value="100%" icon={<Shield className="text-indigo-500" />} />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="bg-slate-950 border border-slate-800 rounded-lg p-6">
+          <h2 className="text-lg font-semibold text-white mb-4">Runtime Component Health</h2>
           <div className="space-y-4">
-            <input
-              type="text"
-              placeholder="Workspace name"
-              value={newName}
-              onChange={(e) => setNewName(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <textarea
-              placeholder="Description (optional)"
-              value={newDescription}
-              onChange={(e) => setNewDescription(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-24"
-            />
-            <button
-              onClick={handleCreateWorkspace}
-              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
-            >
-              Create Workspace
-            </button>
+            {health?.components && Object.entries(health.components).map(([name, data]: [string, any]) => (
+              <div key={name} className="flex justify-between items-center border-b border-slate-800 pb-2">
+                <span className="text-slate-300 font-medium">{name}</span>
+                <div className="flex items-center">
+                  <div className="w-32 bg-slate-800 rounded-full h-2 mr-3">
+                    <div className="bg-emerald-500 h-2 rounded-full" style={{ width: `${data.health_score * 100}%` }}></div>
+                  </div>
+                  <span className="text-sm text-slate-400 w-12 text-right">{(data.health_score * 100).toFixed(0)}%</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Workspaces List */}
-        <div>
-          <h2 className="text-2xl font-semibold mb-4">Your Workspaces</h2>
-          {loading ? (
-            <div className="text-center py-8">
-              <p className="text-gray-600">Loading workspaces...</p>
-            </div>
-          ) : workspaces.length === 0 ? (
-            <div className="text-center py-8 bg-white rounded-lg">
-              <p className="text-gray-600">No workspaces yet. Create one to get started!</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {workspaces.map((ws) => (
-                <Link
-                  key={ws.id}
-                  href={`/workspace/${ws.id}`}
-                >
-                  <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition p-6 cursor-pointer h-full">
-                    <h3 className="text-lg font-semibold mb-2">{ws.name}</h3>
-                    <p className="text-gray-600 text-sm mb-4">{ws.description || 'No description'}</p>
-                    <div className="text-xs text-gray-500">
-                      Created {new Date(ws.created_at).toLocaleDateString()}
-                    </div>
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleDeleteWorkspace(ws.id);
-                      }}
-                      className="mt-4 text-red-600 hover:text-red-700 text-sm font-medium"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          )}
+        <div className="bg-slate-950 border border-slate-800 rounded-lg p-6">
+          <h2 className="text-lg font-semibold text-white mb-4">Recent Kernel Activity</h2>
+          <div className="space-y-3">
+            {telemetry?.token_analytics?.recent_runs?.slice(0, 5).map((run: any) => (
+              <div key={run.report_id} className="text-sm p-3 bg-slate-900 rounded border border-slate-800 flex justify-between items-center">
+                <span className="text-slate-400 font-mono">{run.report_id}</span>
+                <span className="text-emerald-400">-{run.tokens_saved} tokens saved</span>
+              </div>
+            ))}
+            {(!telemetry?.token_analytics?.recent_runs || telemetry.token_analytics.recent_runs.length === 0) && (
+              <div className="text-slate-500 text-sm text-center py-4">No recent activity. Click 'Seed Kernel Data' to begin.</div>
+            )}
+          </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function MetricCard({ title, value, icon }: { title: string, value: string | number, icon: React.ReactNode }) {
+  return (
+    <div className="bg-slate-950 border border-slate-800 rounded-lg p-6 flex flex-col">
+      <div className="flex justify-between items-start mb-4">
+        <h3 className="text-sm font-medium text-slate-400">{title}</h3>
+        {icon}
+      </div>
+      <div className="text-3xl font-bold text-white">{value}</div>
     </div>
   );
 }

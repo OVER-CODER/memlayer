@@ -1,13 +1,26 @@
-import axios, { AxiosInstance } from 'axios';
+import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-
-const apiClient: AxiosInstance = axios.create({
-  baseURL: API_URL,
+export const apiClient = axios.create({
+  baseURL: 'http://localhost:8000/api',
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+export const api = {
+  console: {
+    getWorkspaces: () => apiClient.get('/console/workspaces').then(res => res.data),
+    getWorkspaceDiagnostics: (id: string) => apiClient.get(`/console/workspaces/${id}/diagnostics`).then(res => res.data),
+    coordinate: (id: string, query: string) => apiClient.post(`/console/workspaces/${id}/coordinate`, { query }).then(res => res.data),
+    getTelemetry: () => apiClient.get('/console/telemetry').then(res => res.data),
+    getDiagnostics: () => apiClient.get('/console/diagnostics').then(res => res.data),
+    getAuditTrail: () => apiClient.get('/console/governance/audit-trail').then(res => res.data),
+    getGovernanceHealth: () => apiClient.get('/console/governance/health').then(res => res.data),
+    getPolicyDecisions: () => apiClient.get('/console/governance/policy').then(res => res.data),
+    getLineage: (id?: string) => apiClient.get('/console/governance/lineage', { params: { workspace_id: id } }).then(res => res.data),
+    seedMockData: () => apiClient.post('/console/seed-mock-data').then(res => res.data),
+  }
+};
 
 // Workspace API
 export const workspacesAPI = {
