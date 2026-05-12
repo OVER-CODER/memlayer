@@ -12,10 +12,10 @@ services:
     envVars:
       # Database (PostgreSQL - Supabase)
       - key: DATABASE_URL
-        value: "postgresql+asyncpg://postgres.memlayer:memlayer%402373@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres"
+        value: "postgresql://postgres:memlayer%402373@db.ierjjxnthhnbkbcxynuv.supabase.co:5432/postgres"
       
       - key: ASYNC_DATABASE_URL
-        value: "postgresql+asyncpg://postgres.memlayer:memlayer%402373@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres"
+        value: "postgresql+asyncpg://postgres:memlayer%402373@db.ierjjxnthhnbkbcxynuv.supabase.co:5432/postgres"
       
       # Redis (Upstash)
       - key: REDIS_HOST
