@@ -40,6 +40,15 @@ from .workspace_simulator import (
     get_workspace_simulator,
 )
 
+from .evolution_tracker import (
+    RuntimeEvolutionTracker,
+    EvolutionDataPoint,
+    EvolutionTrend,
+    EvolutionPeriod,
+    EvolutionMetric,
+    get_evolution_tracker,
+)
+
 __all__ = [
     # Integrated Runtime
     "IntegratedRuntimeSystem",
@@ -71,4 +80,11 @@ __all__ = [
     "WorkspaceMemory",
     "WorkspaceQuery",
     "get_workspace_simulator",
+    # Evolution Tracker
+    "RuntimeEvolutionTracker",
+    "EvolutionDataPoint",
+    "EvolutionTrend",
+    "EvolutionPeriod",
+    "EvolutionMetric",
+    "get_evolution_tracker",
 ]
