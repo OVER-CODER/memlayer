@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  # Cognition Runtime Engine
+  backend:
+    build: 
+      context: ./memlayer-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://memlayer:memlayer@db:5432/memlayer
+      - ASYNC_DATABASE_URL=postgresql+asyncpg://memlayer:memlayer@db:5432/memlayer
+      - REDIS_HOST=redis
+      - STORAGE_PROVIDER=minio
+      - S3_ENDPOINT_URL=http://minio:9000
+      - S3_ACCESS_KEY=minioadmin
+      - S3_SECRET_KEY=minioadmin
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - memlayer-network
+
+  # Persistent Storage Substrate
+  db:
+    image: ankane/pgvector:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=memlayer
+      - POSTGRES_PASSWORD=memlayer
+      - POSTGRES_DB=memlayer
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U memlayer"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - memlayer-network
+
+  # Operational Coordination Layer
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - memlayer-network
+
+  # Durable Object Storage (S3 Mock for local prod)
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - memlayer-network
+
+networks:
+  memlayer-network:
+    driver: bridge

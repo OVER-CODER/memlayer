@@ -11,6 +11,9 @@ from app.core.config import settings
 # Initialize database
 init_db()
 
+from app.security.middleware.authentication import AuthenticationMiddleware
+from app.security.middleware.tenant import TenantMiddleware
+
 # Create app
 app = FastAPI(
     title="MemLayer - Persistent Semantic Memory Runtime",
@@ -18,7 +21,9 @@ app = FastAPI(
     version="0.1.0",
 )
 
-# Add CORS middleware
+# Add Middleware (Execution order is bottom-to-top)
+app.add_middleware(TenantMiddleware)
+app.add_middleware(AuthenticationMiddleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],

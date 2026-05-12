@@ -44,11 +44,12 @@ class Workspace(Base):
     __tablename__ = "workspaces"
 
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    tenant_id = Column(String, nullable=False, default="default")
     name = Column(String, nullable=False)
     description = Column(Text, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    created_at = Column(DateTime(timezone=True), default=datetime.utcnow, nullable=False)
     updated_at = Column(
-        DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False
+        DateTime(timezone=True), default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False
     )
 
     # Multi-model support
@@ -126,13 +127,14 @@ class Memory(Base):
 
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     workspace_id = Column(String, ForeignKey("workspaces.id"), nullable=False)
+    tenant_id = Column(String, nullable=False, default="default")
     source_type = Column(
         String, nullable=False
     )  # "user_message", "assistant_response", "file_upload", "generated", etc.
     raw_content = Column(Text, nullable=False)
     summary = Column(Text, nullable=True)
     embedding = Column(Vector(384), nullable=True)  # Matches embedding_dim in config
-    timestamp = Column(DateTime, default=datetime.utcnow, nullable=False)
+    timestamp = Column(DateTime(timezone=True), default=datetime.utcnow, nullable=False)
     importance_score = Column(Float, default=0.5, nullable=False)
     extra_metadata = Column("metadata", JSON, default={}, nullable=True)
 
@@ -144,7 +146,7 @@ class Memory(Base):
     generated_by_provider = Column(
         String, nullable=True
     )  # Which provider generated this
-    generation_timestamp = Column(DateTime, nullable=True)  # When it was generated
+    generation_timestamp = Column(DateTime(timezone=True), nullable=True)  # When it was generated
 
     # Relationships
     workspace = relationship("Workspace", back_populates="memories")
@@ -244,3 +246,94 @@ class ContextCompilation(Base):
 
     def __repr__(self):
         return f"<ContextCompilation {self.id}>"
+
+
+class ReplayTrace(Base):
+    """Immutable record of runtime executions for deterministic replay."""
+
+    __tablename__ = "replay_traces"
+
+    trace_id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    workspace_id = Column(String, ForeignKey("workspaces.id"), nullable=False)
+    tenant_id = Column(String, nullable=False, default="default")
+    
+    query = Column(Text, nullable=False)
+    query_type = Column(String, nullable=True)
+    provider = Column(String, nullable=False)
+    compression_mode = Column(String, nullable=False)
+    token_budget = Column(Integer, nullable=False)
+    
+    # Deterministic State
+    execution_plan = Column(JSON, nullable=False)  # Canonical JSON
+    trace_data = Column(JSON, nullable=False)     # Full stage metrics
+    integrity_hash = Column(String(64), nullable=False)
+    
+    # Results
+    quality_score = Column(Float, default=0.0)
+    semantic_retention = Column(Float, default=0.0)
+    token_efficiency = Column(Float, default=0.0)
+    total_duration_ms = Column(Float, default=0.0)
+    
+    timestamp = Column(DateTime(timezone=True), default=datetime.utcnow, nullable=False)
+
+    def __repr__(self):
+        return f"<ReplayTrace {self.trace_id}>"
+
+
+class SemanticLineage(Base):
+    """Recursive ancestry tracking for cognition state."""
+
+    __tablename__ = "semantic_lineage"
+
+    checkpoint_id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    workspace_id = Column(String, ForeignKey("workspaces.id"), nullable=False)
+    tenant_id = Column(String, nullable=False, default="default")
+    
+    state_hash = Column(String(64), nullable=False)
+    parent_id = Column(String, ForeignKey("semantic_lineage.checkpoint_id"), nullable=True)
+    operation_id = Column(String, nullable=False)
+    
+    extra_metadata = Column("metadata", JSON, default={}, nullable=True)
+    timestamp = Column(DateTime(timezone=True), default=datetime.utcnow, nullable=False)
+
+    def __repr__(self):
+        return f"<SemanticLineage {self.checkpoint_id}>"
+
+
+class GovernanceAudit(Base):
+    """Immutable append-only audit trail."""
+
+    __tablename__ = "governance_audit"
+
+    audit_id = Column(Integer, primary_key=True, autoincrement=True)
+    workspace_id = Column(String, ForeignKey("workspaces.id"), nullable=False)
+    tenant_id = Column(String, nullable=False, default="default")
+    
+    event_type = Column(String(100), nullable=False)
+    event_data = Column(JSON, nullable=False)
+    integrity_hash = Column(String(64), nullable=False)
+    recorded_by = Column(String(100), nullable=False)
+    
+    timestamp = Column(DateTime(timezone=True), default=datetime.utcnow, nullable=False)
+
+    def __repr__(self):
+        return f"<GovernanceAudit {self.audit_id}>"
+
+
+class TelemetryEvent(Base):
+    """Time-series telemetry events linked to traces."""
+
+    __tablename__ = "telemetry_events"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    trace_id = Column(String, ForeignKey("replay_traces.trace_id"), nullable=False)
+    tenant_id = Column(String, nullable=False, default="default")
+    
+    stage = Column(String(50), nullable=False)
+    duration_ms = Column(Float, nullable=True)
+    token_metrics = Column(JSON, nullable=True)
+    
+    timestamp = Column(DateTime(timezone=True), default=datetime.utcnow, nullable=False)
+
+    def __repr__(self):
+        return f"<TelemetryEvent {self.id}>"
