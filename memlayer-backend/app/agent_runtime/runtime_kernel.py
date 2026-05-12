@@ -401,7 +401,7 @@ class SharedAgentRuntime:
         Here we produce a deterministic structured output based on the view content.
         """
         caps = AGENT_CAPABILITIES.get(agent_type)
-        sections = view.projection.semantic_sections
+        sections = view.projection.sections
         objective = caps.primary_objective if caps else "general processing"
 
         parts = [

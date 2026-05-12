@@ -1,0 +1,16 @@
+{
+  "total_routing_decisions": 12,
+  "projection_reuse_count": 0,
+  "projection_reuse_ratio": 0.0,
+  "provider_distribution": {
+    "claude": 4,
+    "openai": 4,
+    "gemini": 4
+  },
+  "view_distribution": {
+    "research": 3,
+    "drafter": 3,
+    "tool_agent": 3,
+    "critic": 3
+  }
+}

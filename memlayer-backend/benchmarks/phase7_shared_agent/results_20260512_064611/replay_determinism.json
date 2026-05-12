@@ -1,0 +1,20 @@
+[
+  {
+    "provider": "claude",
+    "cycles": 5,
+    "is_deterministic": true,
+    "unique_checksum_sets": 1
+  },
+  {
+    "provider": "openai",
+    "cycles": 5,
+    "is_deterministic": true,
+    "unique_checksum_sets": 1
+  },
+  {
+    "provider": "gemini",
+    "cycles": 5,
+    "is_deterministic": true,
+    "unique_checksum_sets": 1
+  }
+]

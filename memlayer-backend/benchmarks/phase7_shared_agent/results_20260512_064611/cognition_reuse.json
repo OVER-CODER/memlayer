@@ -1,0 +1,83 @@
+[
+  {
+    "cycle": 0,
+    "provider": "claude",
+    "context_reuse_ratio": 1.0,
+    "bus_reuse_ratio": 1.0,
+    "cache_hits": 4,
+    "total_accesses": 4,
+    "tokens_saved": 468
+  },
+  {
+    "cycle": 0,
+    "provider": "openai",
+    "context_reuse_ratio": 1.0,
+    "bus_reuse_ratio": 1.0,
+    "cache_hits": 8,
+    "total_accesses": 8,
+    "tokens_saved": 468
+  },
+  {
+    "cycle": 0,
+    "provider": "gemini",
+    "context_reuse_ratio": 1.0,
+    "bus_reuse_ratio": 1.0,
+    "cache_hits": 12,
+    "total_accesses": 12,
+    "tokens_saved": 468
+  },
+  {
+    "cycle": 1,
+    "provider": "claude",
+    "context_reuse_ratio": 1.0,
+    "bus_reuse_ratio": 1.0,
+    "cache_hits": 16,
+    "total_accesses": 16,
+    "tokens_saved": 468
+  },
+  {
+    "cycle": 1,
+    "provider": "openai",
+    "context_reuse_ratio": 1.0,
+    "bus_reuse_ratio": 1.0,
+    "cache_hits": 20,
+    "total_accesses": 20,
+    "tokens_saved": 468
+  },
+  {
+    "cycle": 1,
+    "provider": "gemini",
+    "context_reuse_ratio": 1.0,
+    "bus_reuse_ratio": 1.0,
+    "cache_hits": 24,
+    "total_accesses": 24,
+    "tokens_saved": 468
+  },
+  {
+    "cycle": 2,
+    "provider": "claude",
+    "context_reuse_ratio": 1.0,
+    "bus_reuse_ratio": 1.0,
+    "cache_hits": 28,
+    "total_accesses": 28,
+    "tokens_saved": 468
+  },
+  {
+    "cycle": 2,
+    "provider": "openai",
+    "context_reuse_ratio": 1.0,
+    "bus_reuse_ratio": 1.0,
+    "cache_hits": 32,
+    "total_accesses": 32,
+    "tokens_saved": 468
+  },
+  {
+    "cycle": 2,
+    "provider": "gemini",
+    "context_reuse_ratio": 1.0,
+    "bus_reuse_ratio": 1.0,
+    "cache_hits": 36,
+    "total_accesses": 36,
+    "tokens_saved": 468
+  }
+]
