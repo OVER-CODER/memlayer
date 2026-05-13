@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import desc
 from app.db.models import Memory, Workspace
 from app.services.embedding import get_embedding_service
+from app.embeddings import get_embedding_factory, EmbeddingMetadata
 from app.schemas.memory import MemoryCreate, MemoryResponse
 from typing import List, Optional
 import uuid
@@ -18,6 +19,7 @@ class MemoryStorageService:
     def __init__(self, db: Session):
         self.db = db
         self.embedding_service = get_embedding_service()
+        self.embedding_factory = get_embedding_factory()
 
     def create_memory(
         self,
@@ -47,13 +49,27 @@ class MemoryStorageService:
         Returns:
             Created Memory object
         """
-        # Generate embedding
+        # Generate embedding with metadata
         embedding = None
+        embedding_metadata = None
+
         try:
-            embedding = self.embedding_service.embed(raw_content)
+            # Try to use the new embedding factory first
+            factory = get_embedding_factory()
+            provider = factory.get_provider()
+            embedding = provider.embed_text(raw_content)
+            embedding_metadata = provider.create_metadata(embedding)
         except Exception:
-            # Embedding generation failed - continue without
-            pass
+            # Fallback to legacy embedding service
+            try:
+                embedding = self.embedding_service.embed(raw_content)
+            except Exception:
+                pass
+
+        # Build metadata with embedding info
+        final_metadata = metadata.copy() if metadata else {}
+        if embedding_metadata:
+            final_metadata["embedding_metadata"] = embedding_metadata.to_dict()
 
         # Create memory object with lineage tracking
         memory = Memory(
@@ -64,7 +80,7 @@ class MemoryStorageService:
             summary=summary or raw_content[:200],
             embedding=embedding,
             importance_score=importance_score,
-            extra_metadata=metadata or {},
+            extra_metadata=final_metadata,
             timestamp=datetime.now(timezone.utc),
             generated_from_message_id=generated_from_message_id,
             generated_by_provider=generated_by_provider,

@@ -1,11 +1,13 @@
 """
 Memory retrieval service using semantic search with pgvector.
+Deterministic ranking: similarity DESC, importance DESC, timestamp ASC, id ASC
 """
 
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 from app.db.models import Memory, MemoryRetrieval
 from app.services.embedding import get_embedding_service
+from app.embeddings import get_embedding_factory
 from typing import List, Tuple, Optional
 import uuid
 from datetime import datetime, timezone
@@ -17,6 +19,7 @@ class MemoryRetrievalService:
     def __init__(self, db: Session):
         self.db = db
         self.embedding_service = get_embedding_service()
+        self.embedding_factory = get_embedding_factory()
 
     def retrieve(
         self,
@@ -29,6 +32,14 @@ class MemoryRetrievalService:
         Retrieve semantically similar memories for a query.
         Uses vector similarity when embeddings are available, falls back to text matching.
 
+        DETERMINISTIC RANKING ORDER:
+        1. similarity_score DESC
+        2. importance_score DESC
+        3. timestamp ASC
+        4. memory_id ASC
+
+        This ordering MUST NEVER vary for identical inputs.
+
         Args:
             workspace_id: ID of the workspace
             query: Query text
@@ -38,12 +49,20 @@ class MemoryRetrievalService:
         Returns:
             Tuple of (memories, similarity_scores)
         """
-        # Try to generate embedding and use vector similarity
+        # Try to generate embedding using factory
         query_embedding = None
         try:
-            query_embedding = self.embedding_service.embed(query)
+            factory = get_embedding_factory()
+            query_embedding = factory.embed_text(query)
         except Exception:
             pass
+
+        # Fallback to legacy service
+        if query_embedding is None:
+            try:
+                query_embedding = self.embedding_service.embed(query)
+            except Exception:
+                pass
 
         # Check if we have valid embeddings in the database
         memories_with_embeddings = (
@@ -58,7 +77,7 @@ class MemoryRetrievalService:
         if query_embedding and memories_with_embeddings:
             try:
                 # Use pgvector cosine similarity (<=> operator)
-                # Similarity = 1 - distance
+                # Apply deterministic ordering: similarity DESC, importance DESC, timestamp ASC, id ASC
                 results = (
                     self.db.query(
                         Memory,
@@ -76,21 +95,34 @@ class MemoryRetrievalService:
                         - func.cast(Memory.embedding.op("<=>")(query_embedding), float)
                         >= similarity_threshold
                     )
-                    .order_by("similarity")
+                    .order_by(
+                        func.cast(
+                            Memory.embedding.op("<=>")(query_embedding), float
+                        ).asc(),  # similarity DESC (1-similarity = distance)
+                        Memory.importance_score.desc(),  # importance DESC
+                        Memory.timestamp.asc(),  # timestamp ASC
+                        Memory.id.asc(),  # memory_id ASC (deterministic tiebreaker)
+                    )
                     .limit(top_k)
                     .all()
                 )
 
-                return [r[0] for r in results], [float(r[1]) for r in results]
+                similarities = [1.0 - float(r[1]) for r in results]
+                return [r[0] for r in results], similarities
             except Exception:
                 # Vector query failed, fall back to text matching
                 pass
 
-        # Fallback: text-based matching
+        # Fallback: text-based matching with deterministic ordering
         memories = (
             self.db.query(Memory)
             .filter(Memory.workspace_id == workspace_id)
-            .limit(top_k * 2)
+            .order_by(
+                Memory.importance_score.desc(),
+                Memory.timestamp.asc(),
+                Memory.id.asc(),
+            )
+            .limit(top_k * 3)
             .all()
         )
 
@@ -117,30 +149,15 @@ class MemoryRetrievalService:
                 score = 0
 
             if score > 0:
-                results.append((mem, score))
+                # Apply importance weighting
+                weighted_score = (score * 0.7) + (mem.importance_score * 0.3)
+                results.append((mem, weighted_score))
 
-        results.sort(key=lambda x: x[1], reverse=True)
+        # Deterministic sort: score DESC, timestamp ASC, id ASC
+        results.sort(key=lambda x: (-x[1], x[0].timestamp, x[0].id))
         results = results[:top_k]
 
         return [r[0] for r in results], [r[1] for r in results]
-
-        # Filter by similarity threshold and apply importance weighting
-        memories = []
-        similarities = []
-
-        for memory, similarity in results:
-            if similarity >= similarity_threshold:
-                # Apply importance weighting to similarity
-                weighted_similarity = (similarity * 0.7) + (
-                    memory.importance_score * 0.3
-                )
-                memories.append(memory)
-                similarities.append(weighted_similarity)
-
-        # Log retrieval for analytics
-        self._log_retrieval(workspace_id, query, memories, similarities)
-
-        return memories, similarities
 
     def retrieve_batch(
         self,
