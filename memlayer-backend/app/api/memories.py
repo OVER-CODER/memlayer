@@ -49,7 +49,6 @@ def create_memory(
         summary=request.summary,
         importance_score=request.importance_score,
         metadata=request.metadata,
-        tenant_id=auth.tenant_id,
     )
     return memory
 
