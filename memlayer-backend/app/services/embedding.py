@@ -5,6 +5,7 @@ Supports both local models and API-based embeddings.
 
 from abc import ABC, abstractmethod
 from typing import List, Union
+
 try:
     from sentence_transformers import SentenceTransformer
 except (ImportError, ValueError, Exception):
@@ -54,6 +55,7 @@ class SentenceTransformersProvider(EmbeddingProvider):
         """Get embedding dimension from model."""
         return self.model.get_sentence_embedding_dimension()
 
+
 class MockEmbeddingProvider(EmbeddingProvider):
     """Mock embedding provider for local testing without large dependencies."""
 
@@ -70,11 +72,13 @@ class MockEmbeddingProvider(EmbeddingProvider):
 
     def get_dimension(self) -> int:
         return self.dimension
+
+
 class EmbeddingService:
     """Service for text embedding with pluggable providers."""
 
     def __init__(self, provider: EmbeddingProvider = None):
-        self.provider = provider or SentenceTransformersProvider()
+        self.provider = provider if provider is not None else get_default_provider()
 
     def embed(
         self, text: Union[str, List[str]]
@@ -99,11 +103,27 @@ class EmbeddingService:
 _embedding_service: EmbeddingService = None
 
 
+def get_default_provider() -> EmbeddingProvider:
+    """Get the default embedding provider, with automatic fallback."""
+    if SentenceTransformer is not None:
+        try:
+            return SentenceTransformersProvider()
+        except Exception:
+            return MockEmbeddingProvider()
+    return MockEmbeddingProvider()
+
+
 def get_embedding_service() -> EmbeddingService:
     """Get or create the global embedding service."""
+    import os
+
     global _embedding_service
     if _embedding_service is None:
-        if SentenceTransformer is not None:
+        use_mock = os.getenv("USE_MOCK_EMBEDDINGS", "false").lower() == "true"
+
+        if use_mock:
+            _embedding_service = EmbeddingService(MockEmbeddingProvider())
+        elif SentenceTransformer is not None:
             try:
                 _embedding_service = EmbeddingService()
             except Exception:
