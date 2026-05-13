@@ -19,10 +19,12 @@ class WorkspaceService:
         self,
         name: str,
         description: Optional[str] = None,
+        tenant_id: str = "default",
     ) -> Workspace:
-        """Create a new workspace."""
+        """Create a new workspace (tenant-scoped)."""
         workspace = Workspace(
             id=str(uuid.uuid4()),
+            tenant_id=tenant_id,
             name=name,
             description=description,
             created_at=datetime.now(timezone.utc),
@@ -33,23 +35,34 @@ class WorkspaceService:
         self.db.refresh(workspace)
         return workspace
 
-    def get_workspace(self, workspace_id: str) -> Optional[Workspace]:
-        """Get workspace by ID."""
-        return self.db.query(Workspace).filter(Workspace.id == workspace_id).first()
-
-    def list_workspaces(self, limit: int = 100, offset: int = 0) -> List[Workspace]:
-        """List all workspaces."""
+    def get_workspace(self, workspace_id: str, tenant_id: str) -> Optional[Workspace]:
+        """Get workspace by ID (tenant-scoped)."""
         return (
             self.db.query(Workspace)
+            .filter(Workspace.id == workspace_id)
+            .filter(Workspace.tenant_id == tenant_id)
+            .first()
+        )
+
+    def list_workspaces(
+        self,
+        tenant_id: str,
+        limit: int = 100,
+        offset: int = 0,
+    ) -> List[Workspace]:
+        """List workspaces (tenant-scoped)."""
+        return (
+            self.db.query(Workspace)
+            .filter(Workspace.tenant_id == tenant_id)
             .order_by(Workspace.updated_at.desc())
             .offset(offset)
             .limit(limit)
             .all()
         )
 
-    def delete_workspace(self, workspace_id: str) -> bool:
-        """Delete a workspace and all associated data."""
-        workspace = self.get_workspace(workspace_id)
+    def delete_workspace(self, workspace_id: str, tenant_id: str) -> bool:
+        """Delete a workspace and all associated data (tenant-scoped)."""
+        workspace = self.get_workspace(workspace_id, tenant_id)
         if workspace:
             self.db.delete(workspace)
             self.db.commit()
@@ -61,7 +74,8 @@ class WorkspaceService:
         chat = Chat(
             id=str(uuid.uuid4()),
             workspace_id=workspace_id,
-            title=title or f"Chat {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M')}",
+            title=title
+            or f"Chat {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M')}",
             created_at=datetime.now(timezone.utc),
             updated_at=datetime.now(timezone.utc),
         )

@@ -14,6 +14,8 @@ from app.schemas.memory import (
     RetrievalStats,
     RetrievedMemory,
 )
+from app.security.authentication import AuthContext
+from app.api.dependencies import get_auth_context
 from typing import List
 
 router = APIRouter(prefix="/api/workspaces/{workspace_id}/memories", tags=["memories"])
@@ -24,12 +26,18 @@ def create_memory(
     workspace_id: str,
     request: MemoryCreate,
     db: Session = Depends(get_db),
+    auth: AuthContext = Depends(get_auth_context),
 ):
-    """Create a new memory."""
+    """Create a new memory (tenant-scoped)."""
     from app.db.models import Workspace
 
-    # Verify workspace exists
-    workspace = db.query(Workspace).filter(Workspace.id == workspace_id).first()
+    # Verify workspace exists and belongs to tenant
+    workspace = (
+        db.query(Workspace)
+        .filter(Workspace.id == workspace_id)
+        .filter(Workspace.tenant_id == auth.tenant_id)
+        .first()
+    )
     if not workspace:
         raise HTTPException(status_code=404, detail="Workspace not found")
 
@@ -41,6 +49,7 @@ def create_memory(
         summary=request.summary,
         importance_score=request.importance_score,
         metadata=request.metadata,
+        tenant_id=auth.tenant_id,
     )
     return memory
 
@@ -51,12 +60,18 @@ def list_memories(
     limit: int = 100,
     offset: int = 0,
     db: Session = Depends(get_db),
+    auth: AuthContext = Depends(get_auth_context),
 ):
-    """List memories in a workspace."""
+    """List memories in a workspace (tenant-scoped)."""
     from app.db.models import Workspace
 
-    # Verify workspace exists
-    workspace = db.query(Workspace).filter(Workspace.id == workspace_id).first()
+    # Verify workspace exists and belongs to tenant
+    workspace = (
+        db.query(Workspace)
+        .filter(Workspace.id == workspace_id)
+        .filter(Workspace.tenant_id == auth.tenant_id)
+        .first()
+    )
     if not workspace:
         raise HTTPException(status_code=404, detail="Workspace not found")
 
