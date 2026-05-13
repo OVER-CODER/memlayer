@@ -36,13 +36,40 @@ class MistralEmbeddingProvider(IEmbeddingProvider):
     def version(self) -> str:
         return "mistral-embed-2024"
 
-    def _get_client(self):
+def _get_client(self):
         """Lazy initialization of Mistral client."""
         if self._client is None and self._api_key:
             try:
-                from mistralai import Mistral
-
-                self._client = Mistral(api_key=self._api_key)
+                # Try different import approaches
+                try:
+                    from mistralai.client import MistralClient
+                    self._client = MistralClient(api_key=self._api_key)
+                except ImportError:
+                    try:
+                        from mistralai import Mistral
+                        self._client = Mistral(api_key=self._api_key)
+                    except ImportError:
+                        # Try OpenAI-compatible API
+                        import requests
+                        self._client = {
+                            'api_key': self._api_key,
+                            'base_url': 'https://api.mistral.ai/v1'
+                        }
+                        # Test by making a request
+                        response = requests.post(
+                            'https://api.mistral.ai/v1/embeddings',
+                            headers={
+                                'Authorization': f'Bearer {self._api_key}',
+                                'Content-Type': 'application/json'
+                            },
+                            json={
+                                'model': self._model,
+                                'inputs': ['test']
+                            },
+                            timeout=10
+                        )
+                        if response.status_code != 200:
+                            raise Exception(f"Mistral API error: {response.status_code}")
             except Exception as e:
                 print(f"Mistral client init error: {e}")
                 return None
@@ -54,17 +81,62 @@ class MistralEmbeddingProvider(IEmbeddingProvider):
         if not client:
             raise RuntimeError("Mistral client not available - no API key")
 
-        response = client.embeddings.create(model=self._model, inputs=[text])
-        return response.data[0].embedding
+        # Try different client types
+        try:
+            # Try MistralClient
+            if hasattr(client, 'embeddings'):
+                response = client.embeddings.create(
+                    model=self._model,
+                    inputs=[text]
+                )
+                return response.data[0].embedding
+        except Exception:
+            pass
+
+        try:
+            # Try generic client with API call
+            import requests
+            response = requests.post(
+                'https://api.mistral.ai/v1/embeddings',
+                headers={
+                    'Authorization': f'Bearer {self._api_key}',
+                    'Content-Type': 'application/json'
+                },
+                json={
+                    'model': self._model,
+                    'inputs': [text]
+                },
+                timeout=30
+            )
+            if response.status_code == 200:
+                return response.json()['data'][0]['embedding']
+            else:
+                raise Exception(f"Mistral API error: {response.status_code}")
+        except Exception as e:
+            raise RuntimeError(f"Mistral embedding failed: {e}")
 
     def embed_batch(self, texts: List[str]) -> List[List[float]]:
         """Generate embeddings for multiple texts."""
-        client = self._get_client()
-        if not client:
-            raise RuntimeError("Mistral client not available - no API key")
-
-        response = client.embeddings.create(model=self._model, inputs=texts)
-        return [item.embedding for item in response.data]
+        try:
+            import requests
+            response = requests.post(
+                'https://api.mistral.ai/v1/embeddings',
+                headers={
+                    'Authorization': f'Bearer {self._api_key}',
+                    'Content-Type': 'application/json'
+                },
+                json={
+                    'model': self._model,
+                    'inputs': texts
+                },
+                timeout=60
+            )
+            if response.status_code == 200:
+                return [item['embedding'] for item in response.json()['data']]
+            else:
+                raise Exception(f"Mistral API error: {response.status_code}")
+        except Exception as e:
+            raise RuntimeError(f"Mistral batch embedding failed: {e}")
 
     def is_available(self) -> bool:
         """Check if provider is available."""
