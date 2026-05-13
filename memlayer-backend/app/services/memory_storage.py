@@ -47,9 +47,18 @@ class MemoryStorageService:
         Returns:
             Created Memory object
         """
+        import logging
 
-        # Generate embedding
-        embedding = self.embedding_service.embed(raw_content)
+        logger = logging.getLogger(__name__)
+
+        # Generate embedding with graceful degradation
+        embedding = None
+        try:
+            embedding = self.embedding_service.embed(raw_content)
+        except Exception as e:
+            logger.warning(
+                f"Failed to generate embedding: {e}. Continuing without embedding."
+            )
 
         # Create memory object with lineage tracking
         memory = Memory(
@@ -67,10 +76,22 @@ class MemoryStorageService:
             source_memory_ids=source_memory_ids or [],
         )
 
-        # Save to database
-        self.db.add(memory)
-        self.db.commit()
-        self.db.refresh(memory)
+        # Save to database with error handling
+        try:
+            self.db.add(memory)
+            self.db.commit()
+            self.db.refresh(memory)
+        except Exception as e:
+            logger.error(f"Failed to save memory to database: {e}")
+            # If embedding is the issue, retry without it
+            if embedding is not None:
+                logger.warning("Retrying memory creation without embedding...")
+                memory.embedding = None
+                self.db.add(memory)
+                self.db.commit()
+                self.db.refresh(memory)
+            else:
+                raise
 
         return memory
 
