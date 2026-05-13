@@ -18,15 +18,21 @@ from sqlalchemy.orm import relationship
 
 try:
     from pgvector.sqlalchemy import Vector
+
+    VECTOR_AVAILABLE = True
 except ImportError:
+    VECTOR_AVAILABLE = False
     from sqlalchemy import TypeDecorator, String
     import json
 
     class Vector(TypeDecorator):
+        """Fallback Vector type for when pgvector is unavailable."""
+
         impl = String
 
-        def __init__(self, dim):
+        def __init__(self, dim=384):
             super().__init__()
+            self.dim = dim
 
         def process_bind_param(self, value, dialect):
             if value is not None:
@@ -146,8 +152,8 @@ class Memory(Base):
     raw_content = Column(Text, nullable=False)
     summary = Column(Text, nullable=True)
     embedding = Column(
-        JSON, nullable=True
-    )  # Using JSON for portability (pgvector requires extension)
+        Vector(384) if VECTOR_AVAILABLE else JSON, nullable=True
+    )  # 384-dim embedding vector
     timestamp = Column(DateTime(timezone=True), default=datetime.utcnow, nullable=False)
     importance_score = Column(Float, default=0.5, nullable=False)
     extra_metadata = Column("metadata", JSON, default={}, nullable=True)

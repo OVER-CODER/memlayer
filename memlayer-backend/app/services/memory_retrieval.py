@@ -27,7 +27,7 @@ class MemoryRetrievalService:
     ) -> Tuple[List[Memory], List[float]]:
         """
         Retrieve semantically similar memories for a query.
-        Uses simple text matching when embeddings aren't available.
+        Uses vector similarity when embeddings are available, falls back to text matching.
 
         Args:
             workspace_id: ID of the workspace
@@ -38,15 +38,62 @@ class MemoryRetrievalService:
         Returns:
             Tuple of (memories, similarity_scores)
         """
-        # Get all memories for workspace
-        memories = (
+        # Try to generate embedding and use vector similarity
+        query_embedding = None
+        try:
+            query_embedding = self.embedding_service.embed(query)
+        except Exception:
+            pass
+
+        # Check if we have valid embeddings in the database
+        memories_with_embeddings = (
             self.db.query(Memory)
             .filter(Memory.workspace_id == workspace_id)
-            .limit(top_k * 2)  # Get more to filter
+            .filter(Memory.embedding.isnot(None))
+            .limit(100)
             .all()
         )
 
-        # Simple text-based scoring since embeddings aren't available
+        # If we have embeddings and a query embedding, use vector similarity
+        if query_embedding and memories_with_embeddings:
+            try:
+                # Use pgvector cosine similarity (<=> operator)
+                # Similarity = 1 - distance
+                results = (
+                    self.db.query(
+                        Memory,
+                        (
+                            1
+                            - func.cast(
+                                Memory.embedding.op("<=>")(query_embedding), float
+                            )
+                        ).label("similarity"),
+                    )
+                    .filter(Memory.workspace_id == workspace_id)
+                    .filter(Memory.embedding.isnot(None))
+                    .filter(
+                        1
+                        - func.cast(Memory.embedding.op("<=>")(query_embedding), float)
+                        >= similarity_threshold
+                    )
+                    .order_by("similarity")
+                    .limit(top_k)
+                    .all()
+                )
+
+                return [r[0] for r in results], [float(r[1]) for r in results]
+            except Exception:
+                # Vector query failed, fall back to text matching
+                pass
+
+        # Fallback: text-based matching
+        memories = (
+            self.db.query(Memory)
+            .filter(Memory.workspace_id == workspace_id)
+            .limit(top_k * 2)
+            .all()
+        )
+
         results = []
         query_lower = query.lower()
 
@@ -54,12 +101,10 @@ class MemoryRetrievalService:
             content = (mem.raw_content or "").lower()
             summary = (mem.summary or "").lower()
 
-            # Simple keyword matching score
             query_words = set(query_lower.split())
             content_words = set(content.split())
             summary_words = set(summary.split())
 
-            # Calculate simple overlap score
             if query_words:
                 overlap = len(query_words & content_words) / len(query_words)
                 score = max(
@@ -74,7 +119,6 @@ class MemoryRetrievalService:
             if score > 0:
                 results.append((mem, score))
 
-        # Sort by score and take top_k
         results.sort(key=lambda x: x[1], reverse=True)
         results = results[:top_k]
 

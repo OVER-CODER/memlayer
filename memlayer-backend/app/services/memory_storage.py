@@ -47,8 +47,13 @@ class MemoryStorageService:
         Returns:
             Created Memory object
         """
-        # Skip embedding for now - set to None
+        # Generate embedding
         embedding = None
+        try:
+            embedding = self.embedding_service.embed(raw_content)
+        except Exception:
+            # Embedding generation failed - continue without
+            pass
 
         # Create memory object with lineage tracking
         memory = Memory(
