@@ -27,6 +27,7 @@ class MemoryRetrievalService:
     ) -> Tuple[List[Memory], List[float]]:
         """
         Retrieve semantically similar memories for a query.
+        Uses simple text matching when embeddings aren't available.
 
         Args:
             workspace_id: ID of the workspace
@@ -37,27 +38,47 @@ class MemoryRetrievalService:
         Returns:
             Tuple of (memories, similarity_scores)
         """
-        # Generate query embedding
-        query_embedding = self.embedding_service.embed(query)
-
-        # Query memories using vector similarity
-        # Using PostgreSQL's <=> operator (cosine distance)
-        results = (
-            self.db.query(
-                Memory,
-                # Calculate similarity as 1 - cosine_distance
-                (
-                    1 - func.cast(Memory.embedding.op("<=>")(query_embedding), float)
-                ).label("similarity"),
-            )
-            .filter(
-                Memory.workspace_id == workspace_id,
-                Memory.embedding.isnot(None),
-            )
-            .order_by("similarity")
-            .limit(top_k)
+        # Get all memories for workspace
+        memories = (
+            self.db.query(Memory)
+            .filter(Memory.workspace_id == workspace_id)
+            .limit(top_k * 2)  # Get more to filter
             .all()
         )
+
+        # Simple text-based scoring since embeddings aren't available
+        results = []
+        query_lower = query.lower()
+
+        for mem in memories:
+            content = (mem.raw_content or "").lower()
+            summary = (mem.summary or "").lower()
+
+            # Simple keyword matching score
+            query_words = set(query_lower.split())
+            content_words = set(content.split())
+            summary_words = set(summary.split())
+
+            # Calculate simple overlap score
+            if query_words:
+                overlap = len(query_words & content_words) / len(query_words)
+                score = max(
+                    overlap,
+                    len(query_words & summary_words) / len(query_words)
+                    if query_words
+                    else 0,
+                )
+            else:
+                score = 0
+
+            if score > 0:
+                results.append((mem, score))
+
+        # Sort by score and take top_k
+        results.sort(key=lambda x: x[1], reverse=True)
+        results = results[:top_k]
+
+        return [r[0] for r in results], [r[1] for r in results]
 
         # Filter by similarity threshold and apply importance weighting
         memories = []
