@@ -34,56 +34,68 @@ class EmbeddingFactory:
         3. OpenAI (if API key available) - 1536 dimensions
         4. SentenceTransformers (if model available)
         5. Deterministic (always available - FAILURE STATE)
+
+        SKIPs providers that fail during initialization or embedding generation.
         """
+        # Clear provider if it previously failed
         if self._provider is not None:
-            return self._provider
+            # Check if it's the deterministic fallback (failure state)
+            if isinstance(self._provider, DeterministicEmbeddingProvider):
+                # Try other providers again
+                self._provider = None
 
         # Priority 1: Mistral
-        if preferred in ("auto", "mistral"):
+        if preferred in ("auto", "mistral", None):
             try:
                 provider = MistralEmbeddingProvider()
-                if provider.is_available():
-                    print(">>> Using MISTRAL embedding provider (1024-dim)")
-                    self._provider = provider
-                    return provider
+                # Test if it works
+                _ = provider.embed_text("test")
+                print(">>> Using MISTRAL embedding provider (1024-dim)")
+                self._provider = provider
+                return self._provider
             except Exception as e:
-                print(f"Mistral unavailable: {e}")
+                print(f"Mistral failed: {e}")
 
         # Priority 2: Gemini
-        if preferred in ("auto", "gemini"):
+        if preferred in ("auto", "gemini", None):
             try:
                 provider = GeminiEmbeddingProvider()
-                if provider.is_available():
-                    print(">>> Using GEMINI embedding provider (768-dim)")
-                    self._provider = provider
-                    return provider
+                # Test if it works
+                _ = provider.embed_text("test")
+                print(">>> Using GEMINI embedding provider (768-dim)")
+                self._provider = provider
+                return self._provider
             except Exception as e:
-                print(f"Gemini unavailable: {e}")
+                print(f"Gemini failed: {e}")
 
         # Priority 3: OpenAI
-        if preferred in ("auto", "openai"):
+        if preferred in ("auto", "openai", None):
             try:
                 provider = OpenAIEmbeddingProvider()
-                if provider.is_available():
-                    print(">>> Using OPENAI embedding provider (1536-dim)")
-                    self._provider = provider
-                    return provider
+                # Test if it works
+                _ = provider.embed_text("test")
+                print(">>> Using OPENAI embedding provider (1536-dim)")
+                self._provider = provider
+                return self._provider
             except Exception as e:
-                print(f"OpenAI unavailable: {e}")
+                print(f"OpenAI failed: {e}")
 
         # Priority 4: SentenceTransformers
-        if preferred in ("auto", "sentence-transformers"):
+        if preferred in ("auto", "sentence-transformers", None):
             try:
                 provider = SentenceTransformerProvider()
-                if provider.is_available():
-                    print(">>> Using SentenceTransformer embedding provider")
-                    self._provider = provider
-                    return provider
+                # Test if it works
+                _ = provider.embed_text("test")
+                print(">>> Using SentenceTransformer embedding provider")
+                self._provider = provider
+                return self._provider
             except Exception as e:
-                print(f"SentenceTransformers unavailable: {e}")
+                print(f"SentenceTransformers failed: {e}")
 
         # FAILURE: Fallback to deterministic (NOT REAL SEMANTICS)
-        print(">>> WARNING: Using deterministic fallback - NOT REAL SEMANTICS <<<")
+        print(
+            ">>> WARNING: All real embedding providers failed. Using deterministic fallback - NOT REAL SEMANTICS <<<"
+        )
         self._provider = DeterministicEmbeddingProvider()
         return self._provider
 

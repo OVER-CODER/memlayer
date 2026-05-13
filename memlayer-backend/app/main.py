@@ -8,8 +8,12 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse
+from dotenv import load_dotenv
 from app.api import workspaces, chats, memories, console
 from app.core.config import settings
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Prometheus metrics import
 try:
