@@ -1,8 +1,8 @@
 {
   "phase": "D1.5",
-  "timestamp": "2026-05-12T19:50:21.729262+00:00",
+  "timestamp": "2026-05-13T04:13:09.518499+00:00",
   "target_url": "https://memlayer-prod.onrender.com",
-  "duration_seconds": 368.953558,
+  "duration_seconds": 381.227342,
   "summary": {
     "total_tests": 14,
     "passed": 10,
@@ -143,7 +143,7 @@
       "suite": "concurrent_ingestion",
       "test": "test_concurrent_ingestion",
       "status": "FAIL",
-      "duration": 11.540503025054932,
+      "duration": 13.536925792694092,
       "metrics": {
         "workspace_creation": {
           "attempted": 50,
@@ -166,27 +166,27 @@
       "suite": "longitudinal_growth",
       "test": "test_longitudinal_growth",
       "status": "PASS",
-      "duration": 7.598779916763306,
+      "duration": 7.279056787490845,
       "metrics": {
         "ingestion": {
           "total_turns": 10,
-          "avg_latency_ms": 368.6936855316162,
-          "max_latency_ms": 518.4252262115479,
-          "min_latency_ms": 293.9879894256592
+          "avg_latency_ms": 376.0597229003906,
+          "max_latency_ms": 512.0182037353516,
+          "min_latency_ms": 316.1659240722656
         },
         "lineage_retrieval": {
-          "latency_ms": 919.9738502502441,
+          "latency_ms": 800.6558418273926,
           "checkpoints": 1
         },
         "lineage_depth": {
           "max_depth": 10,
-          "avg_traversal_ms": 421.8130111694336,
-          "max_traversal_ms": 421.8130111694336
+          "avg_traversal_ms": 287.9190444946289,
+          "max_traversal_ms": 287.9190444946289
         },
         "replay": {
           "checkpoints_tested": 1,
           "checksums": [
-            "a7b8ae775c88b0483c4e87489c7b06e1001d5639bb802a2481d7e1bdcdd95443"
+            "7087ac58cf5b6cbede283ccb1a02856a6611a27d44fd72aef70600b419734a80"
           ]
         }
       },
@@ -196,12 +196,12 @@
       "suite": "replay_integrity",
       "test": "test_replay_integrity",
       "status": "PASS",
-      "duration": 9.437092065811157,
+      "duration": 10.35135006904602,
       "metrics": {
         "replay_traces": {
-          "hash_1": "c5704481e613e48e",
-          "hash_2": "c5704481e613e48e",
-          "hash_3": "c5704481e613e48e",
+          "hash_1": "5414ff09f9a927f7",
+          "hash_2": "5414ff09f9a927f7",
+          "hash_3": "5414ff09f9a927f7",
           "fidelity": 1.0,
           "is_deterministic": true
         },
@@ -220,7 +220,7 @@
       "suite": "governance_integrity",
       "test": "test_governance_integrity",
       "status": "PASS",
-      "duration": 8.366697072982788,
+      "duration": 8.93100905418396,
       "metrics": {
         "lineage": {
           "total_entries": 10,
@@ -253,11 +253,11 @@
       "suite": "snapshot_recovery",
       "test": "test_snapshot_recovery",
       "status": "FAIL",
-      "duration": 5.964741230010986,
+      "duration": 6.767131090164185,
       "metrics": {
         "pre_snapshot": {
           "data_count": 0,
-          "checksum": "95326a0ae43ee7c2"
+          "checksum": "1e7d310938472c2a"
         },
         "snapshot": {
           "created": false,
@@ -277,7 +277,7 @@
       "suite": "redis_coordination",
       "test": "test_redis_coordination",
       "status": "PASS",
-      "duration": 26.718054056167603,
+      "duration": 27.750782012939453,
       "metrics": {
         "workspaces": {
           "created": 10
@@ -285,11 +285,11 @@
         "coordination": {
           "operations": 15,
           "successful": 0,
-          "avg_latency_ms": 432.0487181345622,
-          "max_latency_ms": 481.677770614624
+          "avg_latency_ms": 436.01848284403485,
+          "max_latency_ms": 509.7050666809082
         },
         "locks": {
-          "avg_acquisition_ms": 851.5172799428304
+          "avg_acquisition_ms": 819.4326559702555
         },
         "deadlock_check": {
           "total": 10,
@@ -303,7 +303,7 @@
       "suite": "connection_resilience",
       "test": "test_connection_resilience",
       "status": "PASS",
-      "duration": 33.990349769592285,
+      "duration": 32.627410888671875,
       "metrics": {
         "basic_connectivity": {
           "status_code": 200,
@@ -311,18 +311,18 @@
         },
         "rapid_requests": {
           "count": 20,
-          "avg_latency_ms": 382.42400884628296,
-          "max_latency_ms": 534.5649719238281,
-          "min_latency_ms": 276.27110481262207
+          "avg_latency_ms": 368.2915925979614,
+          "max_latency_ms": 427.4020195007324,
+          "min_latency_ms": 283.3230495452881
         },
         "long_connection": {
-          "duration_seconds": 5.631935119628906,
+          "duration_seconds": 5.120003700256348,
           "operations": 10
         },
         "connection_pool": {
           "requests": 50,
           "failures": 0,
-          "avg_latency_ms": 376.8331813812256
+          "avg_latency_ms": 366.5818452835083
         },
         "recovery": {
           "failed_request": 404,
@@ -335,7 +335,7 @@
       "suite": "partial_failure_recovery",
       "test": "test_partial_failure_recovery",
       "status": "PASS",
-      "duration": 11.884943008422852,
+      "duration": 10.944605112075806,
       "metrics": {
         "batch_ingestion": {
           "total": 10,
@@ -360,7 +360,7 @@
       "suite": "telemetry_pipeline",
       "test": "test_telemetry_pipeline",
       "status": "PASS",
-      "duration": 86.73520421981812,
+      "duration": 87.08879280090332,
       "metrics": {
         "endpoint": {
           "metrics": true,
@@ -372,8 +372,8 @@
         },
         "load_telemetry": {
           "requests": 50,
-          "avg_latency_ms": 1505.440673828125,
-          "max_latency_ms": 1650.925874710083,
+          "avg_latency_ms": 1539.2409086227417,
+          "max_latency_ms": 2150.9130001068115,
           "metrics_endpoint_still_works": true
         },
         "trace_propagation": {
@@ -394,7 +394,7 @@
       "suite": "cold_restart_recovery",
       "test": "test_cold_restart_recovery",
       "status": "PASS",
-      "duration": 4.302566051483154,
+      "duration": 4.179137945175171,
       "metrics": {
         "health_check": {
           "status": "ready",
@@ -420,7 +420,7 @@
       "suite": "async_ordering",
       "test": "test_async_ordering",
       "status": "FAIL",
-      "duration": 20.27835702896118,
+      "duration": 21.631979942321777,
       "metrics": {
         "sequential_order": {
           "total": 0,
@@ -428,7 +428,7 @@
         },
         "event_loop": {
           "requests": 30,
-          "max_latency_s": 0.5133869647979736,
+          "max_latency_s": 0.5125482082366943,
           "stable": true
         },
         "context_propagation": {
@@ -441,26 +441,26 @@
       "suite": "pgvector_scaling",
       "test": "test_pgvector_scaling",
       "status": "PASS",
-      "duration": 69.25286388397217,
+      "duration": 75.3609561920166,
       "metrics": {
         "scaling": [
           {
             "scale": 10,
-            "ingest_avg_ms": 402.51126289367676,
-            "ingest_max_ms": 802.9041290283203,
-            "retrieval_ms": 819.4210529327393
+            "ingest_avg_ms": 358.3892822265625,
+            "ingest_max_ms": 457.4778079986572,
+            "retrieval_ms": 980.9699058532715
           },
           {
             "scale": 50,
-            "ingest_avg_ms": 372.708683013916,
-            "ingest_max_ms": 514.1592025756836,
-            "retrieval_ms": 820.2190399169922
+            "ingest_avg_ms": 374.7963762283325,
+            "ingest_max_ms": 509.9050998687744,
+            "retrieval_ms": 820.9171295166016
           },
           {
             "scale": 100,
-            "ingest_avg_ms": 340.4625916481018,
-            "ingest_max_ms": 537.8456115722656,
-            "retrieval_ms": 752.1240711212158
+            "ingest_avg_ms": 398.2345700263977,
+            "ingest_max_ms": 1841.1948680877686,
+            "retrieval_ms": 819.5152282714844
           }
         ],
         "topk": {
@@ -473,7 +473,7 @@
         },
         "scaling_behavior": {
           "scale_factor": 10.0,
-          "time_factor": 0.9178725252778593,
+          "time_factor": 0.8354132205091961,
           "behavior": "sublinear"
         }
       },
@@ -483,24 +483,24 @@
       "suite": "high_volume_replay",
       "test": "test_high_volume_replay",
       "status": "PASS",
-      "duration": 46.59310293197632,
+      "duration": 48.998209714889526,
       "metrics": {
         "ingestion": {
           "count": 100,
-          "avg_latency_ms": 356.8281817436218,
-          "max_latency_ms": 803.7478923797607,
-          "min_latency_ms": 263.71312141418457
+          "avg_latency_ms": 383.6464595794678,
+          "max_latency_ms": 813.2977485656738,
+          "min_latency_ms": 270.4799175262451
         },
         "replay": {
           "replays": 5,
-          "avg_replay_ms": 822.7023601531982,
-          "max_replay_ms": 853.7259101867676,
+          "avg_replay_ms": 913.9118671417236,
+          "max_replay_ms": 1024.2011547088623,
           "deterministic": true
         },
         "concurrent_replay": {
           "attempted": 10,
           "successful": 10,
-          "avg_latency_ms": 1617.337965965271
+          "avg_latency_ms": 1396.7103958129883
         }
       },
       "errors": []
@@ -509,7 +509,7 @@
       "suite": "tenant_isolation",
       "test": "test_tenant_isolation",
       "status": "FAIL",
-      "duration": 26.2861487865448,
+      "duration": 25.772944927215576,
       "metrics": {
         "workspace_isolation": {
           "total_attempts": 6,
