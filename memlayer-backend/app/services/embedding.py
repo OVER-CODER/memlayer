@@ -18,6 +18,7 @@ from app.core.config import settings
 # TF-IDF for semantic embeddings
 try:
     from sklearn.feature_extraction.text import TfidfVectorizer
+
     TFIDF_AVAILABLE = True
 except ImportError:
     TFIDF_AVAILABLE = False
@@ -75,10 +76,12 @@ class TFIDFEmbeddingProvider(EmbeddingProvider):
     def _tokenize(self, text: str) -> List[str]:
         """Simple tokenization."""
         text = text.lower()
-        text = re.sub(r'[^\w\s]', ' ', text)
+        text = re.sub(r"[^\w\s]", " ", text)
         return text.split()
 
-    def embed(self, text: Union[str, List[str]]) -> Union[List[float], List[List[float]]]:
+    def embed(
+        self, text: Union[str, List[str]]
+    ) -> Union[List[float], List[List[float]]]:
         """Generate TF-IDF based embeddings."""
         if isinstance(text, str):
             text = [text]
@@ -92,7 +95,7 @@ class TFIDFEmbeddingProvider(EmbeddingProvider):
             all_tokens.update(tokens)
 
         # Use top dimension terms
-        vocab = list(all_tokens)[:self.dimension]
+        vocab = list(all_tokens)[: self.dimension]
         vocab_map = {w: i for i, w in enumerate(vocab)}
 
         # Build TF-IDF vectors
@@ -101,7 +104,7 @@ class TFIDFEmbeddingProvider(EmbeddingProvider):
             vector = [0.0] * self.dimension
             token_counts = {}
             for token in tokens:
-                token_counts[token] = token_counts.get(token, 0) +
+                token_counts[token] = token_counts.get(token, 0) + 1
 
             for token, count in token_counts.items():
                 if token in vocab_map:
@@ -142,7 +145,7 @@ class DeterministicHashEmbeddingProvider(EmbeddingProvider):
             for j in range(min(8, self.dimension // len(words) if words else 1)):
                 idx = (i * 8 + j) % self.dimension
                 # Use pairs of hex chars to create float values
-                val = int(word_hash[j*4:j*4+4], 16) / 65535.0
+                val = int(word_hash[j * 4 : j * 4 + 4], 16) / 65535.0
                 vector[idx] = (vector[idx] + val) / 2
 
         # Normalize
@@ -151,7 +154,9 @@ class DeterministicHashEmbeddingProvider(EmbeddingProvider):
             vector = [v / norm for v in vector]
         return vector
 
-    def embed(self, text: Union[str, List[str]]) -> Union[List[float], List[List[float]]]:
+    def embed(
+        self, text: Union[str, List[str]]
+    ) -> Union[List[float], List[List[float]]]:
         """Generate deterministic embeddings."""
         if isinstance(text, str):
             return self._get_deterministic_vector(text)
