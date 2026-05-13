@@ -152,8 +152,8 @@ class Memory(Base):
     raw_content = Column(Text, nullable=False)
     summary = Column(Text, nullable=True)
     embedding = Column(
-        Vector(384) if VECTOR_AVAILABLE else JSON, nullable=True
-    )  # 384-dim embedding vector
+        JSON, nullable=True
+    )  # JSON storage for variable-dimension embeddings (Mistral=1024, OpenAI=1536, etc.)
     timestamp = Column(DateTime(timezone=True), default=datetime.utcnow, nullable=False)
     importance_score = Column(Float, default=0.5, nullable=False)
     extra_metadata = Column("metadata", JSON, default={}, nullable=True)

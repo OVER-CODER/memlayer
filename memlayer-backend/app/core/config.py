@@ -61,6 +61,7 @@ class Settings(BaseSettings):
     # Embedding
     embedding_model: str = "all-MiniLM-L6-v2"
     embedding_dim: int = 384
+    mistral_api_key: Optional[str] = None
 
     # LLM Providers
     gemini_api_key: Optional[str] = None

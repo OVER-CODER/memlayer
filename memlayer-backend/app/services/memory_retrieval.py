@@ -1,5 +1,5 @@
 """
-Memory retrieval service using semantic search with pgvector.
+Memory retrieval service using semantic search with JSON embeddings.
 Deterministic ranking: similarity DESC, importance DESC, timestamp ASC, id ASC
 """
 
@@ -10,7 +10,23 @@ from app.services.embedding import get_embedding_service
 from app.embeddings import get_embedding_factory
 from typing import List, Tuple, Optional
 import uuid
+import math
 from datetime import datetime, timezone
+
+
+def cosine_similarity(vec1: List[float], vec2: List[float]) -> float:
+    """Calculate cosine similarity between two vectors."""
+    if not vec1 or not vec2:
+        return 0.0
+
+    dot_product = sum(a * b for a, b in zip(vec1, vec2))
+    magnitude1 = math.sqrt(sum(a * a for a in vec1))
+    magnitude2 = math.sqrt(sum(b * b for b in vec2))
+
+    if magnitude1 == 0 or magnitude2 == 0:
+        return 0.0
+
+    return dot_product / (magnitude1 * magnitude2)
 
 
 class MemoryRetrievalService:
@@ -54,10 +70,53 @@ class MemoryRetrievalService:
         try:
             factory = get_embedding_factory()
             query_embedding = factory.embed_text(query)
-        except Exception:
-            pass
+            print(
+                f"Query embedding generated using: {factory.get_current_provider_name()}"
+            )
+        except Exception as e:
+            print(f"Embedding generation failed: {e}")
 
         # Fallback to legacy service
+        if query_embedding is None:
+            try:
+                query_embedding = self.embedding_service.embed(query)
+            except Exception:
+                pass
+
+        # Get memories with embeddings
+        memories = (
+            self.db.query(Memory)
+            .filter(Memory.workspace_id == workspace_id)
+            .filter(Memory.embedding.isnot(None))
+            .all()
+        )
+
+        # If we have embeddings and query embedding, compute similarity
+        if query_embedding and memories:
+            results = []
+            for mem in memories:
+                # Handle JSON stored embeddings
+                emb = mem.embedding
+                if isinstance(emb, str):
+                    import json
+
+                    emb = json.loads(emb)
+
+                if emb and isinstance(emb, list):
+                    similarity = cosine_similarity(query_embedding, emb)
+                    if similarity >= similarity_threshold:
+                        results.append((mem, similarity))
+
+            # Deterministic sort: similarity DESC, importance DESC, timestamp ASC, id ASC
+            results.sort(
+                key=lambda x: (-x[1], -x[0].importance_score, x[0].timestamp, x[0].id)
+            )
+            results = results[:top_k]
+
+            if results:
+                return [r[0] for r in results], [r[1] for r in results]
+
+        # Fallback: text-based matching with deterministic ordering
         if query_embedding is None:
             try:
                 query_embedding = self.embedding_service.embed(query)

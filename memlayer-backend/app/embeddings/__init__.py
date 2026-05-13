@@ -1,10 +1,13 @@
 """
-Embedding Factory - Phase D1.8
+Embedding Factory - Phase D1.9
 Manages embedding provider selection with fallback logic.
+Priority: Mistral > Gemini > OpenAI > SentenceTransformers > Deterministic
 """
 
 from typing import List, Optional
 from app.embeddings.base import IEmbeddingProvider, EmbeddingMetadata
+from app.embeddings.mistral_provider import MistralEmbeddingProvider
+from app.embeddings.gemini_provider import GeminiEmbeddingProvider
 from app.embeddings.openai_provider import OpenAIEmbeddingProvider
 from app.embeddings.sentence_transformer_provider import SentenceTransformerProvider
 from app.embeddings.deterministic import DeterministicEmbeddingProvider
@@ -26,26 +29,61 @@ class EmbeddingFactory:
         Get embedding provider with automatic fallback.
 
         Priority:
-        1. OpenAI (if API key available)
-        2. SentenceTransformers (if model available)
-        3. Deterministic (always available)
+        1. Mistral (if API key available) - 1024 dimensions
+        2. Gemini (if API key available) - 768 dimensions
+        3. OpenAI (if API key available) - 1536 dimensions
+        4. SentenceTransformers (if model available)
+        5. Deterministic (always available - FAILURE STATE)
         """
         if self._provider is not None:
             return self._provider
 
-        if preferred == "openai":
-            provider = OpenAIEmbeddingProvider()
-            if provider.is_available():
-                self._provider = provider
-                return provider
+        # Priority 1: Mistral
+        if preferred in ("auto", "mistral"):
+            try:
+                provider = MistralEmbeddingProvider()
+                if provider.is_available():
+                    print(">>> Using MISTRAL embedding provider (1024-dim)")
+                    self._provider = provider
+                    return provider
+            except Exception as e:
+                print(f"Mistral unavailable: {e}")
 
+        # Priority 2: Gemini
+        if preferred in ("auto", "gemini"):
+            try:
+                provider = GeminiEmbeddingProvider()
+                if provider.is_available():
+                    print(">>> Using GEMINI embedding provider (768-dim)")
+                    self._provider = provider
+                    return provider
+            except Exception as e:
+                print(f"Gemini unavailable: {e}")
+
+        # Priority 3: OpenAI
+        if preferred in ("auto", "openai"):
+            try:
+                provider = OpenAIEmbeddingProvider()
+                if provider.is_available():
+                    print(">>> Using OPENAI embedding provider (1536-dim)")
+                    self._provider = provider
+                    return provider
+            except Exception as e:
+                print(f"OpenAI unavailable: {e}")
+
+        # Priority 4: SentenceTransformers
         if preferred in ("auto", "sentence-transformers"):
-            provider = SentenceTransformerProvider()
-            if provider.is_available():
-                self._provider = provider
-                return provider
+            try:
+                provider = SentenceTransformerProvider()
+                if provider.is_available():
+                    print(">>> Using SentenceTransformer embedding provider")
+                    self._provider = provider
+                    return provider
+            except Exception as e:
+                print(f"SentenceTransformers unavailable: {e}")
 
-        # Fallback to deterministic
+        # FAILURE: Fallback to deterministic (NOT REAL SEMANTICS)
+        print(">>> WARNING: Using deterministic fallback - NOT REAL SEMANTICS <<<")
         self._provider = DeterministicEmbeddingProvider()
         return self._provider
 
@@ -68,6 +106,14 @@ class EmbeddingFactory:
         provider = self.get_provider()
         embedding = provider.embed_text(text)
         return provider.create_metadata(embedding)
+
+    def get_current_provider_name(self) -> str:
+        """Get the name of the currently active provider."""
+        return self.get_provider().provider_name
+
+    def get_current_dimension(self) -> int:
+        """Get the dimension of the currently active provider."""
+        return self.get_provider().dimension
 
 
 # Global factory instance
