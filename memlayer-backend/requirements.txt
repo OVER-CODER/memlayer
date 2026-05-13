@@ -32,6 +32,6 @@ numpy>=1.24.0
 # Authentication
 PyJWT>=2.8.0
 
-# For embeddings (optional - can be installed separately)
-# sentence-transformers>=2.2.0
-# torch>=2.0.0
+# For real semantic embeddings
+sentence-transformers>=2.2.0
+torch>=2.0.0
