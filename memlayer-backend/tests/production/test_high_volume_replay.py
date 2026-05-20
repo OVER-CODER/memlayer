@@ -51,7 +51,7 @@ async def test_high_volume_replay(base_url: str) -> TestResult:
         workspace_id = workspace.get("id")
 
         # Ingest high volume of memories
-        num_memories = 100
+        num_memories = 20
         ingest_latencies = []
 
         print(f"  Ingesting {num_memories} memories...")

@@ -60,7 +60,7 @@ async def test_governance_integrity(base_url: str) -> TestResult:
         for i in range(10):
             content = f"Governance test message {i}"
 
-             await client.post(
+            await client.post(
                 f"{base_url}/api/workspaces/{workspace_id}/memories",
                 json={
                     "raw_content": content,

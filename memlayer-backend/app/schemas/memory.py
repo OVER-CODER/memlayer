@@ -15,6 +15,7 @@ class WorkspaceCreate(BaseModel):
 
 class WorkspaceResponse(BaseModel):
     id: str
+    tenant_id: str
     name: str
     description: Optional[str]
     created_at: datetime

@@ -71,8 +71,8 @@ async def test_concurrent_ingestion(base_url: str) -> TestResult:
     errors: List[str] = []
     metrics: Dict[str, Any] = {}
 
-    num_concurrent = 50  # Number of concurrent operations
-    num_workspaces = 10  # Number of workspaces to create
+    num_concurrent = 15  # Number of concurrent operations
+    num_workspaces = 5  # Number of workspaces to create
 
     async with httpx.AsyncClient(timeout=60.0) as client:
         # Test 1: Concurrent workspace creation

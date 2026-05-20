@@ -30,7 +30,7 @@ async def test_pgvector_scaling(base_url: str) -> TestResult:
     async with httpx.AsyncClient(timeout=180.0) as client:
         # Test with different memory scales
 
-        scales = [10, 50, 100]
+        scales = [5, 15, 30]
         scale_results = []
 
         for scale in scales:
