@@ -36,10 +36,18 @@ def _clean_dsn_for_asyncpg(dsn: str) -> str:
         return dsn
 
 
-_db_url = settings.database_url
+def _clean_dsn_for_sync(dsn: str) -> str:
+    """Ensure DSN uses a synchronous driver (removes +asyncpg)."""
+    try:
+        return dsn.replace("postgresql+asyncpg://", "postgresql://")
+    except Exception:
+        return dsn
+
+
+_db_url = _clean_dsn_for_sync(settings.database_url)
 _async_db_url = _clean_dsn_for_asyncpg(settings.async_database_url)
 
-logger.info(f"Database URL: {_db_url}")
+logger.info(f"Database URL (cleaned for sync): {_db_url}")
 logger.info(f"Async Database URL (cleaned): {_async_db_url}")
 
 # Synchronous Engine (Legacy/Background)

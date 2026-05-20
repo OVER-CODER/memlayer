@@ -62,11 +62,10 @@ async def test_tenant_isolation(base_url: str) -> TestResult:
             # Add memories unique to this tenant
             for i in range(3):
                 await client.post(
-                    f"{base_url}/api/memories",
-                    params={
-                        "workspace_id": ws_id,
-                        "content": f"CONFIDENTIAL {tenant_id} data {i}",
-                        "memory_type": "conversation",
+                    f"{base_url}/api/workspaces/{ws_id}/memories",
+                    json={
+                        "raw_content": f"CONFIDENTIAL {tenant_id} data {i}",
+                        "source_type": "conversation",
                     },
                     headers=get_auth_headers(tenant_id),
                 )

@@ -35,11 +35,10 @@ async def create_memory(
 ) -> Dict[str, Any]:
     """Create a memory in a workspace."""
     response = await client.post(
-        f"{base_url}/api/memories",
-        params={
-            "workspace_id": workspace_id,
-            "content": content,
-            "memory_type": "conversation",
+        f"{base_url}/api/workspaces/{workspace_id}/memories",
+        json={
+            "raw_content": content,
+            "source_type": "conversation",
         },
         headers=get_auth_headers(tenant_id),
     )

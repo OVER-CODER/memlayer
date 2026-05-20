@@ -59,11 +59,10 @@ async def test_async_ordering(base_url: str) -> TestResult:
             content = f"Order test message {i}"
 
             response = await client.post(
-                f"{base_url}/api/memories",
-                params={
-                    "workspace_id": workspace_id,
-                    "content": content,
-                    "memory_type": "conversation",
+                f"{base_url}/api/workspaces/{workspace_id}/memories",
+                json={
+                    "raw_content": content,
+                    "source_type": "conversation",
                 },
                 headers=get_auth_headers(tenant_id),
             )
@@ -94,11 +93,10 @@ async def test_async_ordering(base_url: str) -> TestResult:
             content = f"Concurrent message {index}"
             try:
                 response = await client.post(
-                    f"{base_url}/api/memories",
-                    params={
-                        "workspace_id": workspace_id,
-                        "content": content,
-                        "memory_type": "conversation",
+                    f"{base_url}/api/workspaces/{workspace_id}/memories",
+                    json={
+                        "raw_content": content,
+                        "source_type": "conversation",
                     },
                     headers=get_auth_headers(tenant_id),
                 )

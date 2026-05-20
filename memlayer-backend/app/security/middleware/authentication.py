@@ -43,9 +43,10 @@ class AuthenticationMiddleware(BaseHTTPMiddleware):
             token = auth_header.split(" ")[1]
             payload = get_jwt_manager().decode_token(token)
             if payload:
+                tenant_id = request.headers.get("X-Tenant-ID") or payload.get("tenant_id", "default")
                 auth_context = AuthContext(
                     subject=payload["sub"],
-                    tenant_id=payload["tenant_id"],
+                    tenant_id=tenant_id,
                     role=payload["role"],
                     auth_type="jwt",
                 )
@@ -55,9 +56,10 @@ class AuthenticationMiddleware(BaseHTTPMiddleware):
             # Placeholder: In production, verify against SQLAuditRepository or a dedicated APIKey store
             # For now, we simulate a valid key if it matches a development pattern
             if api_key_header.startswith("ml_dev_"):
+                tenant_id = request.headers.get("X-Tenant-ID") or "default"
                 auth_context = AuthContext(
                     subject="dev_agent",
-                    tenant_id="default",
+                    tenant_id=tenant_id,
                     role="developer",
                     auth_type="api_key",
                 )

@@ -58,11 +58,10 @@ async def test_partial_failure_recovery(base_url: str) -> TestResult:
         for i in range(10):
             try:
                 response = await client.post(
-                    f"{base_url}/api/memories",
-                    params={
-                        "workspace_id": workspace_id,
-                        "content": f"Batch message {i}",
-                        "memory_type": "conversation",
+                    f"{base_url}/api/workspaces/{workspace_id}/memories",
+                    json={
+                        "raw_content": f"Batch message {i}",
+                        "source_type": "conversation",
                     },
                     headers=get_auth_headers(tenant_id),
                 )

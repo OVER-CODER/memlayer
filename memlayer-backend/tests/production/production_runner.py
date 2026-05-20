@@ -39,7 +39,7 @@ REPORT_DIR = Path(__file__).parent.parent.parent / "docs" / "production_validati
 
 # JWT Token for authenticated API requests (generated with production secret key)
 # Production uses the default dev secret key from config
-JWT_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0LXVzZXIiLCJ0ZW5hbnRfaWQiOiJ0ZXN0LXRlbmFudCIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTc3ODcwMDQ4NCwiaWF0IjoxNzc4NjE0MDg0fQ.7zoUZ8STuwHJ4maF_ZNAXFAW1euDT0SGc74_TVdCSOI"
+JWT_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0LXVzZXIiLCJ0ZW5hbnRfaWQiOiJ0ZXN0LXRlbmFudCIsInJvbGUiOiJhZG1pbiIsImV4cCI6MjA5NDYzMzE1NCwiaWF0IjoxNzc5MjczMTU0fQ.0KwSe9CiiTQAC8txJ0-MIxVitkfoLzv_duzFdJnvHG8"
 
 # Ensure report directory exists
 REPORT_DIR.mkdir(parents=True, exist_ok=True)

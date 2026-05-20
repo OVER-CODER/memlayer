@@ -31,7 +31,7 @@ class Settings(BaseSettings):
 
     # Database - Support both SQLite (dev) and PostgreSQL (prod)
     database_url: str = os.getenv(
-        "DATABASE_URL", "postgresql+asyncpg://memlayer:memlayer@localhost:5432/memlayer"
+        "DATABASE_URL", "postgresql://memlayer:memlayer@localhost:5432/memlayer"
     )
     async_database_url: str = os.getenv(
         "ASYNC_DATABASE_URL",

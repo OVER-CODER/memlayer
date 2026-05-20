@@ -25,7 +25,7 @@ class SecretManager:
         self.sensitive_values = [
             settings.secret_key,
             settings.anthropic_api_key,
-            settings.google_api_key,
+            settings.gemini_api_key,
             settings.s3_secret_key,
             settings.redis_password
         ]

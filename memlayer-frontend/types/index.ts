@@ -1,7 +1,11 @@
 export interface Workspace {
   id: string;
+  workspace_id?: string; // For Console API compatibility
   name: string;
   description?: string;
+  provider?: string;
+  token_budget?: number;
+  memory_count?: number;
   created_at: string;
   updated_at: string;
 }

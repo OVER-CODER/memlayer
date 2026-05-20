@@ -60,11 +60,10 @@ async def test_high_volume_replay(base_url: str) -> TestResult:
             start = time.time()
 
             response = await client.post(
-                f"{base_url}/api/memories",
-                params={
-                    "workspace_id": workspace_id,
-                    "content": f"High volume memory {i} with some additional content to make each memory distinct and test the system's ability to handle large volumes of data efficiently",
-                    "memory_type": "conversation",
+                f"{base_url}/api/workspaces/{workspace_id}/memories",
+                json={
+                    "raw_content": f"High volume memory {i} with some additional content to make each memory distinct and test the system's ability to handle large volumes of data efficiently",
+                    "source_type": "conversation",
                 },
                 headers=get_auth_headers(tenant_id),
             )

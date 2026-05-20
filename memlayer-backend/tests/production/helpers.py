@@ -10,7 +10,7 @@ from typing import List, Any
 
 # JWT Token for authenticated API requests (generated with production secret key)
 # Production uses the default dev secret key from config
-JWT_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0LXVzZXIiLCJ0ZW5hbnRfaWQiOiJ0ZXN0LXRlbmFudCIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTc3OTIxOTgzOCwiaWF0IjoxNzc4NjE1MDM4fQ.zPEiUAsoAexJMvWEMCJS_Bw1ukevnjFCAMiFRGfmeow"
+JWT_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0LXVzZXIiLCJ0ZW5hbnRfaWQiOiJ0ZXN0LXRlbmFudCIsInJvbGUiOiJhZG1pbiIsImV4cCI6MjA5NDYzMzE1NCwiaWF0IjoxNzc5MjczMTU0fQ.0KwSe9CiiTQAC8txJ0-MIxVitkfoLzv_duzFdJnvHG8"
 
 
 @dataclass
@@ -77,13 +77,12 @@ async def create_memory(
     memory_type: str = "conversation",
     tenant_id: str = "test-tenant",
 ) -> Dict:
-    """Create a memory via API."""
+    """Create a memory via API (tenant-scoped)."""
     response = await client.post(
-        f"{base_url}/api/memories",
-        params={
-            "workspace_id": workspace_id,
-            "content": content,
-            "memory_type": memory_type,
+        f"{base_url}/api/workspaces/{workspace_id}/memories",
+        json={
+            "raw_content": content,
+            "source_type": memory_type,
         },
         headers=get_auth_headers(tenant_id),
     )

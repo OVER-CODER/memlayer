@@ -1,27 +1,35 @@
 import axios from 'axios';
 
 export const apiClient = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000',
   headers: {
     'Content-Type': 'application/json',
+    'Authorization': `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0LXVzZXIiLCJ0ZW5hbnRfaWQiOiJ0ZXN0LXRlbmFudCIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTc3OTIxOTgzOCwiaWF0IjoxNzc4NjE1MDM4fQ.zPEiUAsoAexJMvWEMCJS_Bw1ukevnjFCAMiFRGfmeow'}`,
+    'X-Tenant-ID': process.env.NEXT_PUBLIC_TENANT_ID || 'test-tenant'
   },
 });
 
 export const api = {
   console: {
-    getWorkspaces: () => apiClient.get('/console/workspaces').then(res => res.data),
-    getWorkspaceDiagnostics: (id: string) => apiClient.get(`/console/workspaces/${id}/diagnostics`).then(res => res.data),
-    coordinate: (id: string, query: string) => apiClient.post(`/console/workspaces/${id}/coordinate`, { query }).then(res => res.data),
-    getTelemetry: () => apiClient.get('/console/telemetry').then(res => res.data),
-    getDiagnostics: () => apiClient.get('/console/diagnostics').then(res => res.data),
-    getAuditTrail: () => apiClient.get('/console/governance/audit-trail').then(res => res.data),
-    getGovernanceHealth: () => apiClient.get('/console/governance/health').then(res => res.data),
-    getPolicyDecisions: () => apiClient.get('/console/governance/policy').then(res => res.data),
-    getLineage: (id?: string) => apiClient.get('/console/governance/lineage', { params: { workspace_id: id } }).then(res => res.data),
-    getCompilerPipeline: () => apiClient.get('/console/compiler/pipeline').then(res => res.data),
-    getCoordinationTraces: () => apiClient.get('/console/telemetry/coordination-traces').then(res => res.data),
-    getCachedViews: () => apiClient.get('/console/views/cached').then(res => res.data),
-    seedMockData: () => apiClient.post('/console/seed-mock-data').then(res => res.data),
+    getWorkspaces: () => apiClient.get('/api/console/workspaces').then(res => res.data),
+    getWorkspaceDiagnostics: (id: string) => apiClient.get(`/api/console/workspaces/${id}/diagnostics`).then(res => res.data),
+    coordinate: (id: string, query: string) => apiClient.post(`/api/console/workspaces/${id}/coordinate`, { query }).then(res => res.data),
+    getTelemetry: () => apiClient.get('/api/console/telemetry').then(res => res.data),
+    getDiagnostics: () => apiClient.get('/api/console/diagnostics').then(res => res.data),
+    getAuditTrail: () => apiClient.get('/api/console/governance/audit-trail').then(res => res.data),
+    getGovernanceHealth: () => apiClient.get('/api/console/governance/health').then(res => res.data),
+    getPolicyDecisions: () => apiClient.get('/api/console/governance/policy').then(res => res.data),
+    getLineage: (id?: string) => apiClient.get('/api/console/governance/lineage', { params: { workspace_id: id } }).then(res => res.data),
+    getCompilerPipeline: () => apiClient.get('/api/console/compiler/pipeline').then(res => res.data),
+    getCoordinationTraces: () => apiClient.get('/api/console/telemetry/coordination-traces').then(res => res.data),
+    getCachedViews: () => apiClient.get('/api/console/views/cached').then(res => res.data),
+    seedMockData: () => apiClient.post('/api/console/seed-mock-data').then(res => res.data),
+    ingestLocomo: (path?: string, prefix?: string, samples?: number) => 
+      apiClient.post('/api/console/ingest-locomo', { 
+        dataset_path: path, 
+        workspace_prefix: prefix, 
+        num_samples: samples 
+      }).then(res => res.data),
   }
 };
 

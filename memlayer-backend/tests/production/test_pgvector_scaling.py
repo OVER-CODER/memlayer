@@ -56,11 +56,10 @@ async def test_pgvector_scaling(base_url: str) -> TestResult:
                 start = time.time()
 
                 response = await client.post(
-                    f"{base_url}/api/memories",
-                    params={
-                        "workspace_id": workspace_id,
-                        "content": f"Vector test memory number {i} with some additional context for embedding",
-                        "memory_type": "conversation",
+                    f"{base_url}/api/workspaces/{workspace_id}/memories",
+                    json={
+                        "raw_content": f"Vector test memory number {i} with some additional context for embedding",
+                        "source_type": "conversation",
                     },
                     headers=get_auth_headers(tenant_id),
                 )
@@ -111,11 +110,10 @@ async def test_pgvector_scaling(base_url: str) -> TestResult:
 
         for content in test_memories:
             await client.post(
-                f"{base_url}/api/memories",
-                params={
-                    "workspace_id": workspace_id,
-                    "content": content,
-                    "memory_type": "conversation",
+                f"{base_url}/api/workspaces/{workspace_id}/memories",
+                json={
+                    "raw_content": content,
+                    "source_type": "conversation",
                 },
                 headers=get_auth_headers(tenant_id),
             )

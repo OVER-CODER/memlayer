@@ -73,11 +73,10 @@ async def test_replay_integrity(base_url: str) -> TestResult:
 
         for msg in test_messages:
             await client.post(
-                f"{base_url}/api/memories",
-                params={
-                    "workspace_id": workspace_id,
-                    "content": msg,
-                    "memory_type": "conversation",
+                f"{base_url}/api/workspaces/{workspace_id}/memories",
+                json={
+                    "raw_content": msg,
+                    "source_type": "conversation",
                 },
                 headers=get_auth_headers(tenant_id),
             )

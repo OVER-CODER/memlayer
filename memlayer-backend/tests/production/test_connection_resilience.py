@@ -75,11 +75,10 @@ async def test_connection_resilience(base_url: str) -> TestResult:
         for i in range(10):
             if workspace_id:
                 await client.post(
-                    f"{base_url}/api/memories",
-                    params={
-                        "workspace_id": workspace_id,
-                        "content": f"Long connection test {i}",
-                        "memory_type": "conversation",
+                    f"{base_url}/api/workspaces/{workspace_id}/memories",
+                    json={
+                        "raw_content": f"Long connection test {i}",
+                        "source_type": "conversation",
                     },
                     headers=get_auth_headers(tenant_id),
                 )
